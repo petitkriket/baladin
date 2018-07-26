@@ -11,6 +11,9 @@
 #   stripe_publishable_key: pk_live_9lcthxpSIHbGwmdO941O1XVU
 
 development:
+  ADMIN_NAME: "Admin"
+  ADMIN_EMAIL: "bouaroua.samuel@gmail.com"
+  ADMIN_PASSWORD: "821000"
   GMAIL_USERNAME: "bouaroua.samuel@gmail.com"
   GMAIL_PASSWORD: "jcinrwyelnhtvkwc"
   GMAPS_API_KEY: "AIzaSyCJIVW2xEGdMhhNNBnwoSAtzehRpbaSMMg"
@@ -21,6 +24,9 @@ development:
   DOMAIN_NAME: "pssgrsv2.herokuapp.com"
 
 production:
+  ADMIN_NAME: "Admin"
+  ADMIN_EMAIL: "bouaroua.samuel@gmail.com"
+  ADMIN_PASSWORD: "821000"
   GMAIL_USERNAME: "bouaroua.samuel@gmail.com"
   GMAIL_PASSWORD: "jcinrwyelnhtvkwc"
   GMAPS_API_KEY: "AIzaSyCJIVW2xEGdMhhNNBnwoSAtzehRpbaSMMg"
