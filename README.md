@@ -57,6 +57,7 @@ heroku config:set GMAIL_PASSWORD=jcinrwyelnhtvkwc
 #config figaro, poser toutes les variables du fichier cfg
 figaro heroku:set -e production
 heroku rake db:migrate
+heroku run rake db:seed
 
 Tools
 -------
