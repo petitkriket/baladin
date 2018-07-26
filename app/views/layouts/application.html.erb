@@ -1,15 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= I18n.locale %>">
   <head>
-    <title>Pssgrs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <% metamagic site: t('site_title'), title: [:title, :site], separator: " | " %>
+    <%= metamagic %>
+    <meta name="description" content="<%= t('social_desc') %>">
+    <meta name="keywords" content="<%= t('keywords') %>">
+    <meta name="url" content="<%= request.original_url %>">
+    <meta property="og:title" content="<%= t('site_title') %>" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="<%= request.original_url %>" />
+    <meta property="og:description" content="<%= t('social_desc') %>" />
+    <meta property="og:site_name" content="<%= t('site_title') %>" />
+    <meta property="fb:app_id" content="<%= ENV['FB_APPID'] %>" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="<%= ENV['TW_APPID'] %>">
+    <meta name="twitter:title" content="<%= t('site_title') %>">
+    <meta name="twitter:description" content="<%= t('social_desc') %>">
+    <meta name="twitter:creator" content="<%= ENV['TW_APPID'] %>">
+    <meta name="theme-color" content="#181818">
+    <meta name="msapplication-navbutton-color" content="#181818">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=<%= ENV['GMAPSJS_API_KEY'] %>"></script>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= include_gon %>
+    <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag "jquery.validate.localization/messages_#{I18n.locale}" %>
     <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+  <% if Rails.env.production? %>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha256-NuCn4IvuZXdBaFKJOAcsU2Q3ZpwbdFisd5dux4jkQ5w=" crossorigin="anonymous" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=<%= ENV['GA_ID'] %>"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  <body>
-    <%= yield %>
+      gtag('config', '<%= ENV['GA_ID'] %>');
+    </script>
+  <% end %>
+
+  <body class="<%= controller_name %> <%= action_name %>">
+    <header>
+      <%= render 'layouts/navigation' %>
+    </header>
+    <main role="main">
+       <%= render 'layouts/messages' %>
+       <%= yield %>
+    </main>
+    <%= render 'layouts/navigation_map' if @map_nav %>
+    <%= render :template => 'contacts/new' if @user_contact_form %>
+    <%= render :template => 'passengers/list' %>
   </body>
 </html>

@@ -1,0 +1,11 @@
+<div class="authform">
+  <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :role => 'form'}) do |f| %>
+    <h3><%= t('forgot_password') %></h3>
+    <p><%= t('password_recovery') %></p>
+    <%= devise_error_messages! %>
+    <div class="form-group">
+      <%= f.email_field :email, :autofocus => true, class: 'form-control', placeholder: true %>
+    </div>
+      <%= f.submit t('send'), :class => 'button btn btn-primary' %>
+  <% end %>
+</div>

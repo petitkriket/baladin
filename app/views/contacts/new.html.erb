@@ -1,0 +1,96 @@
+<% unless @passenger.events.last.nil? || current_user == @passenger.events.last.user %>
+
+<div class="modal fade modal-contact" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><%= image_tag("close.svg", :alt => "close", class: "") %></span>
+        </button>
+        <h4 class="modal-title" id="exampleModalLabel"><%= t('contact') %> <%= @passenger.events.last.user.name %></h4>
+      </div>
+      <div class="modal-body">
+        <p class="help-block"><%= t('contact_hint') %></p>
+        <%= simple_form_for (@contact), :url => {:action => "create", :id => params[:id], :controller => "contacts"} do |f| %>
+        <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+          <%= f.input :name, required: true, :minlength=>"3", placeholder: t('name'), label: false %>
+          <%= f.input :email, required: true, placeholder: t('email'), label: false %>
+          <%= f.input :message, as: :text, placeholder: t('message'), label: false ,  :input_html => {:rows => 5}%>
+          <%= f.input :nickname, hint: 'leave this field blank', as: :hidden %>
+
+      <div class="modal-footer">
+        <button type="button" class="btn" data-dismiss="modal"><%= t('close') %></button>
+  <%= button_tag type: 'submit', class: "btn btn-primary", id: "send-email" do %>
+    <i class="fa fa-check" aria-hidden="true"></i> <%= t('send') %>
+  <% end %>
+      </div>
+              <% end %>
+      </div>
+
+
+       <script>
+       jQuery.validator.setDefaults({
+         success: "valid",
+         errorElement: "span",
+   errorClass: "help-block",
+   highlight: function (element, errorClass, validClass) {
+       // Only validation controls
+       if (!$(element).hasClass('novalidation')) {
+           $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+       }
+   },
+   unhighlight: function (element, errorClass, validClass) {
+       // Only validation controls
+       if (!$(element).hasClass('novalidation')) {
+           $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+       }
+   },
+   errorPlacement: function (error, element) {
+       if (element.parent('.input-group').length) {
+           error.insertAfter(element.parent());
+       }
+       else if (element.prop('type') === 'radio' && element.parent('.radio-inline').length) {
+           error.insertAfter(element.parent().parent());
+       }
+       else if (element.prop('type') === 'checkbox' || element.prop('type') === 'radio') {
+           error.appendTo(element.parent().parent());
+       }
+       else {
+           error.insertAfter(element);
+       }
+   }
+       });
+
+
+ $( "#new_contact" ).validate({
+   lang: '<%= I18n.locale %>',
+   rules: {
+     field: {
+       required: true,
+       email: true
+     }
+   }
+ });
+//      var submitButton = $("#new_contact input[type='submit']").attr("disabled", true);
+        var submitButton = $("#send-email").attr("disabled", true);
+       $("#new_contact input.required").change(function () {
+        var valid = true;
+
+    $.each($("#new_contact input.required"), function (index, value) {
+        if(!$(value).val()){
+           valid = false;
+        }
+    });
+    if(valid){
+        $(submitButton).attr("disabled", false);
+    }
+    else{
+        $(submitButton).attr("disabled", true);
+    }
+});
+       </script>
+
+    </div>
+  </div>
+</div>
+<% end %>

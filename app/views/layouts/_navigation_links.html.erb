@@ -1,0 +1,22 @@
+<!--<li><%#= link_to t('about'), page_path('about') %></li>-->
+<% if I18n.locale == :en %>
+    <li>
+      <%= link_to url_for({:locale => 'fr', t: params[:t]}) do %>
+      <%= image_tag("fr.svg", :alt => "Voir cette page en français", class: "wiggle default-shadow") %>
+      <% end %>
+    </li>
+<% end %>
+
+<% if I18n.locale == :fr %>
+    <li>
+      <%= link_to url_for({:locale => 'en', t: params[:t]}) do %>
+      <%= image_tag("en.svg", :alt => "View this page in english", class: "wiggle default-shadow") %>
+      <% end %>
+    </li>
+<% end %>
+
+    <li>
+      <%= link_to "#", "data-toggle" => "modal", 'data-target' => '#myModal2', 'data-backdrop' => 'false' do %>
+      <%= image_tag("info.svg", :alt => "rss feed", class: "info-btn wiggle default-shadow") %>
+      <% end %>
+    </li>

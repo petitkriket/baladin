@@ -1,0 +1,66 @@
+
+<%= simple_form_for(@passenger, html: { id: 'edit_passenger_form' }) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :name, required: true %>
+    <%= f.input :shortcut, required: true, :minlength=>"2" %>
+  <% if @passenger.new_record? %>
+    <%= f.input :photo, required: true %>
+  <% else %>
+    <%= f.input :photo %>
+  <% end %>
+
+    <%= f.hidden_field :photo_cache %>
+  <% if passenger.photo? %>
+    <%= image_tag passenger.photo.thumb.url %>
+  <% end %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn-primary" %>
+    <%= link_to(t('back'), passengers_path, class: "btn btn-default") %>
+  </div>
+<% end %>
+
+<script>
+jQuery.validator.setDefaults({
+  success: "valid",
+  errorElement: "span",
+errorClass: "help-block",
+highlight: function (element, errorClass, validClass) {
+// Only validation controls
+if (!$(element).hasClass('novalidation')) {
+    $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+}
+},
+unhighlight: function (element, errorClass, validClass) {
+// Only validation controls
+if (!$(element).hasClass('novalidation')) {
+    $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+}
+},
+errorPlacement: function (error, element) {
+if (element.parent('.input-group').length) {
+    error.insertAfter(element.parent());
+}
+else if (element.prop('type') === 'radio' && element.parent('.radio-inline').length) {
+    error.insertAfter(element.parent().parent());
+}
+else if (element.prop('type') === 'checkbox' || element.prop('type') === 'radio') {
+    error.appendTo(element.parent().parent());
+}
+else {
+    error.insertAfter(element);
+}
+}
+});
+
+
+$( "#edit_passenger_form" ).validate({
+lang: '<%= I18n.locale %>',
+rules: { field: { required: true } }
+});
+
+</script>

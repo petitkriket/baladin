@@ -10,7 +10,40 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery
 //= require rails-ujs
-//= require activestorage
-//= require turbolinks
+//= require bootstrap
+//= require leaflet
+//= require leaflet.markercluster
+//= require gmaps-auto-complete
+//= require jquery.validate
+//= require jquery.validate.additional-methods
+//= require bootstrap-notify
+//= require datetime_picker_input
+//= require jquery.validate.localization/messages_en.js
+//= require jquery.validate.localization/messages_fr.js
 //= require_tree .
+
+//toggle passenger image
+function showImage() {
+  $('#passenger_image').toggle();
+  $('#photo').toggleClass('btn-default btn-primary');
+}
+
+// toggle contact form
+function showContact() {
+$('#basicExampleModal').modal({
+    backdrop: true,
+    keyboard: false,
+  });
+
+  // toggle contact button style
+  $("#basicExampleModal").on("shown.bs.modal", function () {
+    document.getElementById("contact").classList.add("btn-primary");
+  });
+
+  $("#basicExampleModal").on("hidden.bs.modal", function () {
+    document.getElementById("contact").classList.remove("btn-primary");
+  });
+
+}

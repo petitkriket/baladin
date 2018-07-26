@@ -1,0 +1,266 @@
+fr:
+  hello: "Bonjour"
+  home: "Accueil"
+  site_title: "Les Passagers"
+  new: "Nouveau"
+  show: "Voir"
+  edit: "Modifier"
+  editing: "Edition"
+  destroy: "Détruire"
+  back: "Revenir"
+  contact: "Contacter"
+  email:  "E-mail*"
+  name: "Nom*"
+  message:  "Message*"
+  send: "Envoyer"
+  close: "Fermer"
+  user: "Utilisateur"
+  users: "Utilisateurs"
+  passenger: "Passager"
+  hash: "n°"
+  passengers: "Liste des Passagers"
+  new_passenger: "Nouveau Passager"
+  editing_passager: "Edition Passager"
+  engraving: "Gravure"
+  place: "Lieu"
+  event: "Etape"
+  saved:  "Enregistré :"
+  waiting_confirmation  : "Votre contribution est en attente de validation."
+  waiting_confirmation_admin  : "Contribution en attente de validation."
+  contribution_published: "Votre contribution est publiée et visible par tous."
+  contribution_published_admin: "Contribution publiée."
+  add_photo:  "Ajoutez votre photo du Passager"
+  edit_photo:  "Modifier la photo"
+  download_photo:  "Télécharger"
+  events: "Etapes"
+  events_conditional: "Etape(s)"
+  new_event: "Nouvelle Etape"
+  editing_event: "Edition Etape"
+  departure: "Départ"
+  current_position: "Etape actuelle"
+  last_known_position: "Dernière position connue"
+  host: "Accueillir"
+  photo: "Photo"
+  contact_hint: "Envoyez un message à la personne qui détient le Passager pour qu’elle vous le transmette."
+  about: "A Propos"
+  sign_up: "S'enregistrer"
+  sign_up_participation: "Enregistrer votre participation"
+  sign_in: "Connexion"
+  edit_account: "Editer profil"
+  sign_out: "Se déconnecter"
+  forgot_password: "Mot de passe oublié?"
+  forgot_password_short:  "oublié?"
+  password_change: "Changer votre mot de passe"
+  password_recovery:  "Nous vous enverrons un e-mail pour réinitialisatier votre mot de passe."
+  remember_me:  "Se souvenir de moi"
+  change_pass:  "Laissez ces champs vides si vous ne souhaitez pas modifier votre mot de passe."
+  must_pass:  "Vous devez entrer votre mot de passe actuel pour apporter des modifications."
+  update: "Mettre à jour"
+  language_hint: "Langue préférée pour le site et les courriels que vous recevrez de notre part."
+  cancel_account:  "Supprimer le compte"
+  cancel_sad:  "Mécontent? Nous serons tristes de vous voir partir."
+  cancel_button:  "Supprimer"
+  sure: "Êtes-vous sûr(e)? Votre participation sera effacée du site."
+  passenger_marker_text: "Passager n°%{name}"
+  location: "actuellement à"
+  exlocation: "était à"
+  holder: "avec"
+  since: "il y à %{date}."
+  welcome:  "Bienvenue"
+  welcome_msg:  "Cet objet qui vous a été transmis est un Passager. Il n'appartient à personne et ne peut appartenir à personne. Il circule, transmis de la main à la main. L'historique de son parcours est publié sur cette plateforme. Pour enregistrer votre participation, merci de remplir le formulaire qui suit."
+  begin:  "Commencer"
+  version: "English version"
+  geolocate: "Trouver votre position"
+  geolocate_failure: "Pas de résultat, merci de recommencer."
+  photo_hint: "Ajoutez votre photo du Passager (facultatif)"
+  email_hint: "Votre e-mail ne sera pas partagée à des tiers"
+  no_file_chosen: "Aucun fichier choisi"
+  file_size:  "La taille du fichier doit être inférieure à 10mo"
+  already_in: "Vous avez deja participé avec un autre Passager ?"
+  click_here: "Cliquez ici"
+  share_fb: "Partager sur Facebook"
+  share_tw: "Partager sur Twitter"
+  share_wa: "Partager sur WhatsApp"
+  share_li: "Partager sur LinkedIn"
+  social_desc: "Les Passagers sont des objets spécifiques dont la vocation est d’être transmis de la main à la main. Cette plateforme permet de suivre leurs déplacements et de participer à leurs transmissions."
+  keywords: "art, travail artistique, object spécifique, peinture, gratuit, voyage, main à la main"
+  passenger_created:  "Le Passager a été créé avec succès"
+  passenger_updated: "Le Passager a été mis à jour avec succès."
+  passenger_destroyed:  "Passenger a été détruit avec succès."
+  passenger_empty:  "Ce Passager n'a pas encore voyagé !"
+  passenger_not_found:  "Ce Passager est introuvable."
+  event_created:  "La contribution a été crée avec succès."
+  event_updated: "Contribution mise à jour avec succès."
+  event_destroyed:  "La contribution a été détruite avec succès."
+  event_wrong_shortcut: "L'adresse saisie est incorrecte. Merci de vérifier l'adresse gravée sur le Passager."
+  event_already_registred: "Vous avez déja enregistré ce Passager."
+  event_already_registred_admin: "Cet utilisateur à déjà été en possession de ce Passager."
+  check_google_api: "Merci de vérifier l'API Google Geocoder. Vous pouvez toujours entrer latitude et longitude manuellement."
+  invalid_url: "L'URL saisie est incorrecte."
+  message_sent:  "Message envoyé avec succès."
+  reach_passenger_holder:  "Quelqu'un vous à envoyé un message à propos de votre Passager."
+  admin_only:  "Access restreint."
+  simple_form:
+    labels:
+      event:
+        address: 'Adresse'
+        city: 'Ville'
+        country: 'Pays'
+        latitude: 'Latitude'
+        longitude: 'Longitude'
+        photo: 'Photo'
+        passenger: 'Passager'
+        user: 'Utilisateur'
+        published: 'Publié'
+      contact:
+        name: 'Nom'
+        email: 'E-mail '
+        message: 'Message'
+    error_notification:
+      default_message: "Merci examiner les problèmes ci-dessous:"
+  activerecord:
+    attributes:
+      user:
+        name: "Nom"
+        email: "E-mail"
+        password: "Mot de passe"
+        password_confirmation: "Confirmation mot de passe"
+        locale: "Langue du site"
+      event:
+        address: "Addresse"
+        photo: "Photo"
+    errors:
+      messages:
+        taken:  ": un compte est dejà enregistré à cet e-mail."
+  helpers:
+    placeholder:
+      event:
+        address: "Votre position*"
+      user:
+        name: "Nom*"
+        email: "E-Mail*"
+        password: "Mot de passe*"
+        password_confirmation: "Confirmation mot de passe*"
+    submit:
+      create: "Créer %{model}"
+      update: "Modifier %{model}"
+      user:
+        create: "Créer mon compte"
+        update: "Mettre à jour mon compte"
+      passenger:
+        create: "Créer le Passager"
+        update: "Modifier le Passager"
+      event:
+        create: "Créer"
+        update: "Modifier"
+      session:
+        create: "Se connecter"
+  notif_mailer:
+    registration_email:
+      subject:  'Une nouvelle contribution attend votre validation'
+      greeting: "Bonjour,"
+      event_registration: "Une nouvelle étape à été soumise par %{name}."
+      event_edit: "Vous pouvez la publier en cliquant "
+      event_here: "ici"
+    event_activation_email:
+      subject:  'Votre participation est en ligne !'
+      greeting: 'Bonjour %{name},'
+      thank_you: 'Merci %{name},'
+      participation: 'Votre participation au parcours du Passager n°%{passenger_name} est en ligne !'
+      view: "Vous pouvez la voir en cliquant sur ce "
+      link: 'lien.'
+      action_call_photo: "Vous pouvez encore ajouter la photo de votre passager à votre contribution via votre"
+      personal_space: "espace personnel"
+      hint_photo: "Cette photo sera alors ajoutée aux images sur la carte du parcours de votre Passager."
+      online_photo: "Thank you again for participating."
+      sharing: 'Vous pouvez la partager en cliquant sur les liens ci dessous:'
+      twitter:  "J'ai donné le Passenger %{passenger_name}à quelqu'un !"
+    event_activation_previous_user_email:
+      subject: "Des nouvelles du Passager %{passenger_name}"
+      greeting: 'Bonjour,'
+      participation: "Merci d'avoir transmis le Passager %{passenger_name} à %{name}  !"
+      twitter:  "J'ai donné le Passager %{passenger_name} à quelqu'un !"
+      view: "Vous pouvez voir sa nouvelle étape en cliquant sur ce "
+      link: 'lien'
+  errors:
+    messages:
+      carrierwave_processing_error: "Impossible de resize image."
+      carrierwave_integrity_error: "Nest pas une image."
+      carrierwave_download_error: "Impossible de télécharger limage."
+      extension_whitelist_error: "Vous netes pas autoisé à envoyer  des fichiers %{extension} , les formats autorisés sont: %{allowed_types}"
+      extension_blacklist_error: "Vous netes pas autoisé à envoyer  des fichiers %{extension}, les formats %{prohibited_types} ne sont pas autorisés"
+  devise:
+    confirmations:
+      confirmed: "Votre adresse e-mail à bien été confirmée."
+      send_instructions: "Vous recevrez un email avec les instructions pour confirmer votre adresse email dans quelques minutes."
+      send_paranoid_instructions: "Si votre adresse e-mail existe dans notre base de données, vous recevrez un e-mail avec les instructions pour confirmer votre adresse e-mail dans quelques minutes."
+    failure:
+      already_authenticated: "Vous êtes déjà connecté."
+      inactive: "Votre compte n'est pas encore activé."
+      invalid: "Clé d'authentification ou mot de passe non valide %{authentication_keys}."
+      locked: "Your account is locked."
+      last_attempt: "Vous avez encore une tentative avant que votre compte soit verrouillé."
+      not_found_in_database: "Clé d'authentification ou mot de passe non valide %{authentication_keys}."
+      timeout: "Votre session a expiré. Veuillez vous connecter à nouveau pour continuer."
+      unauthenticated: "Vous devez vous connecter ou vous inscrire avant de continuer."
+      unconfirmed: "Vous devez confirmer votre adresse e-mail avant de pouvoir continuer."
+    mailer:
+      confirmation_instructions:
+        subject: "Instructions de confirmation | Les Passagers"
+        welcome_user: "Bonjour %{name},"
+        confirmation_call: "Merci de confirmer votre adresse e-mail en cliquant sur le lien ci dessous :"
+        contribution: "Votre contribution est en attente de validation et vous recevrez un e-mail dès qu'elle sera en ligne."
+        call_action: "Si vous n'avez pas encore ajouté votre photo du Passager, vous pourrez l'ajouter via votre espace personnel."
+        call_action2: "Si vous avez déjà proposé votre photo du Passager, vous pouvez la modifier à tout moment."
+        call_action3: "Cette photo sera ajoutée au parcours du Passager avec celle des autres participants."
+        thanks: "Merci pour votre participation."
+        signature: "L'équipe des Passagers<br> Une oeuvre de François Maurin réalisée en collaboration avec Samuel Bouaroua."
+        confirm_button: "Confirmer mon compte et acceder à mon espace personnel."
+      reset_password_instructions:
+        subject: "Réinitialiser votre mot de passe | Les Passagers"
+        welcome_user: "Bonjour %{name} !"
+        request:  "Quelqu'un a demandé un lien pour changer votre mot de passe. Vous pouvez le faire via le lien ci-dessous."
+        change: "Changer mon mot de passe"
+        notme: "Si vous ne l'avez pas demandé, veuillez ignorer cet email."
+        nochange: "Votre mot de passe ne changera pas si vous ne cliquez pas sur le lien ci-dessus pour en créer un nouveau."
+      unlock_instructions:
+        subject: "Instructions pour débloquer votre compte"
+      email_changed:
+        subject: "Email modifié"
+      password_change:
+        subject: "Mot de passe modifié"
+    omniauth_callbacks:
+      failure: "Impossible de vous authentifier à partir de %{kind} car \"%{reason}\"."
+      success: "Authentifié avec succès depuis le compte %{kind}."
+    passwords:
+      no_token: "Vous ne pouvez pas accéder à cette page sans provenir d'un email de réinitialisation de mot de passe. Si vous venez d'un courrier électronique de réinitialisation de mot de passe, assurez-vous d'avoir utilisé l'URL complète fournie."
+      send_instructions: "Vous recevrez un e-mail avec les instructions pour réinitialiser votre mot de passe en quelques minutes."
+      send_paranoid_instructions: "Si votre adresse e-mail existe dans notre base de données, vous recevrez un lien de récupération de mot de passe à votre adresse e-mail dans quelques minutes."
+      updated: "Votre mot de passe a été changé avec succès. Vous êtes maintenant inscrit."
+      updated_not_active: "Votre mot de passe a été changé avec succès."
+    registrations:
+      destroyed: "Au revoir! Votre compte a été annulé avec succès. Nous espérons te revoir bientôt."
+      signed_up: "Bienvenue! Vous vous êtes inscrit avec succès."
+      signed_up_but_inactive: "Vous vous êtes inscrit avec succès. Cependant, nous ne pouvons pas vous connecter car votre compte n'est pas encore activé."
+      signed_up_but_locked: "Vous vous êtes inscrit avec succès. Cependant, nous ne pouvons pas vous connecter car votre compte est verrouillé."
+      signed_up_but_unconfirmed: "Un message avec un lien de confirmation a été envoyé à votre adresse e-mail. Veuillez suivre le lien pour activer votre compte."
+      update_needs_confirmation: "Vous avez mis à jour votre compte avec succès, mais nous devons vérifier votre nouvelle adresse e-mail. S'il vous plaît vérifier votre email et suivez le lien de confirmation pour confirmer votre nouvelle adresse e-mail."
+      updated: "Votre compte a été mis à jour avec succès."
+    sessions:
+      signed_in: "Vous êtes connecté."
+      signed_out: "Vous êtes déconnecté"
+      already_signed_out: "Vous êtes connecté avec succès."
+    unlocks:
+      send_instructions: "Vous recevrez un email avec des instructions pour débloquer votre compte dans quelques minutes."
+      send_paranoid_instructions: "Si votre compte existe, vous recevrez un email avec des instructions pour le débloquer en quelques minutes."
+      unlocked: "Your account has been unlocked successfully. Please sign in to continue."
+  errors:
+    messages:
+      already_confirmed: "était déjà confirmé, s'il vous plaît essayez de vous connecter"
+      confirmation_period_expired: "ndoit être confirmé dans %{period}, veuillez en demander un nouveau"
+      expired: "a expiré, s'il vous plaît demander un nouveau"
+      not_found: "pas trouvé"
+      not_locked: "n'était pas verrouillé"
+      not_saved:
+        one: "1 erreur empèche cette %{resource} d'être enregistré:"
+        other: "%{count} erreurs empèchent cette %{resource} d'être enregistré:"

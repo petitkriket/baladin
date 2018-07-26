@@ -1,0 +1,42 @@
+<% meta title: t('home') %>
+<% meta og: { image: URI.join(root_url, image_path("banner.jpg")) } %>
+<% meta og: { image:  { width: "1200", height: "630" } } %>
+<% if user_signed_in? && current_user.try(:admin?) %>
+<div class="col-md-4 passenger-admin-list">
+  <h1><%= t('passengers') %></h1> <%= link_to fa_icon('plus-circle', text: "#{t('new')} #{t('passenger')}"), new_passenger_path, class: "btn btn-default" %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th><%= t('passenger') %></th>
+              <th><%= t('engraving') %></th>
+              <th><%= t('events_conditional') %></th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @passengers.each do |passenger| %>
+              <tr>
+                <td><%= passenger.name %></td>
+                <td><%= passenger.shortcut %></td>
+                <td><%= passenger.events.size %></td>
+                <td>
+                <%= link_to(edit_passenger_path(passenger), :class => 'btn btn-primary btn-xs') do %>
+                <i class="fa fa-edit"> </i> <%= t('edit') %>
+                <% end %>
+
+                <%= link_to(passenger, method: :delete, data: { confirm: 'Are you sure?'}, :class => 'btn btn-danger btn-xs') do %>
+                <i class="fa fa-times"> </i> <%= t('destroy') %>
+                </td>
+                <% end %>
+          </tr>
+          <% end %>
+          </tbody>
+        </table>
+</div>
+<% end %>
+
+<div id="map">
+  <a href="http://mapbox.com/about/maps" class='mapbox-wordmark' target="_blank">Mapbox</a>
+</div>
+<script>
+</script>

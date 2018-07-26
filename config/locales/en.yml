@@ -1,33 +1,261 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  hello: "Hello"
+  home: "Home"
+  site_title: "Passengers"
+  new: "New"
+  show: "Show"
+  edit: "Edit"
+  editing: "Editing"
+  destroy: "Destroy"
+  back: "Back"
+  contact: "Contact"
+  email:  "E-mail*"
+  name: "Name*"
+  message:  "Message*"
+  close: "Close"
+  send: "Send"
+  user: "User"
+  users: "Users"
+  passenger: "Passenger"
+  hash: "#"
+  passengers: "Passengers List"
+  new_passenger: "New Passenger"
+  editing_passager: "Editing Passenger"
+  engraving: "Engraving"
+  place:  "Place"
+  event: "Event"
+  saved:  "Saved on:"
+  waiting_confirmation  : "Your contribution is pending validation."
+  waiting_confirmation_admin  : "Contribution is pending validation."
+  contribution_published: "Your contribution is published and visible to all."
+  contribution_published_admin: "Contribution published."
+  add_photo:  "Add your Passenger's photo"
+  edit_photo:  "Edit photo"
+  download_photo:  "Download"
+  events: "Events"
+  events_conditional: "Event(s)"
+  new_event: "New Event"
+  editing_event: "Editing Event"
+  about: "About"
+  departure: "Departure"
+  current_position: "Current step"
+  last_known_position: "Last known position"
+  host: "Host"
+  photo: "Photo"
+  contact_hint: "Send a message to the person who bears the Passenger so she can hand it down to you."
+  sign_up: "Sign up"
+  sign_up_participation: "Register your participation"
+  sign_in: "Sign in"
+  edit_account: "Edit profile"
+  sign_out: "Sign out"
+  forgot_password: "Forgot your password?"
+  forgot_password_short:  "forgotten?"
+  password_change: "Change your password"
+  password_recovery:  "We'll send password reset instructions."
+  remember_me:  "Remember me"
+  change_pass:  "Leave these fields blank if you don't want to change your password."
+  must_pass:  "You must enter your current password to make changes."
+  update: "Update"
+  language_hint: "Preferred language for the website and e-mails you will receive from us."
+  cancel_account:  "Cancel Account"
+  cancel_sad:  "Unhappy? We'll be sad to see you go."
+  cancel_button:  "Cancel"
+  sure: "Are you sure? Your participation will be deleted from the site."
+  passenger_marker_text: "Passenger #%{name}"
+  location: "is currently at"
+  exlocation: "was at"
+  holder: "with"
+  since: "%{date} ago."
+  welcome: "Welcome"
+  welcome_msg:  "The object given to you is a Passenger. It belongs to no one et cannot be owned It circulates and is transmitted from hand to hand. Its course is published on this plateform. To register your participation on this plateform, please fill in the form below."
+  begin:  "Begin"
+  version: "Version française"
+  geolocate: "Find your position"
+  geolocate_failure: "No result found, please try again."
+  photo_hint: "Add your Passenger photo (optional)"
+  email_hint: "Your e-mail will not be shared with other parties"
+  no_file_chosen: "No file chosen"
+  file_size:  "File size must be less than 10mo"
+  already_in: "Already participated with another Passenger?"
+  click_here: "Click here"
+  share_fb: "Share on Facebook"
+  share_tw: "Share on Twitter"
+  share_wa: "Share on WhatsApp"
+  share_li: "Share on LinkedIn"
+  social_desc: "Passengers are specific objects whose vocation is to be transmitted from hand to hand. This platform makes it possible to follow their movements and to participate in their transmissions."
+  keywords: "art, artwork, specific object, painting, free, travel, hand to hand"
+  passenger_created:  "Passenger was successfully created."
+  passenger_updated: "Passenger was successfully updated."
+  passenger_destroyed:  "Passenger was successfully destroyed."
+  passenger_empty:  "This passenger has not traveled yet !"
+  passenger_not_found:  "This Passenger was not found."
+  event_created:  "Contribution was successfully created."
+  event_updated: "Contribution was successfully updated"
+  event_destroyed:  "Contribution was successfully destroyed"
+  event_wrong_shortcut: "The address entered is incorrect. Please check the address engraved on the Passenger."
+  event_already_registred: "You have already registred this Passenger."
+  event_already_registred_admin: "This user has already been in possession of this Passenger"
+  check_google_api: "Please check Geocoder Google API. You can still enter latitude and longitude manually."
+  invalid_url: "Entered URL is wrong."
+  message_sent:  "Message sent successfully."
+  reach_passenger_holder:  "Someone sent you a message about your passenger."
+  admin_only:  "Restricted access."
+  simple_form:
+    labels:
+      event:
+        address: 'Address'
+        city: 'City'
+        country: 'Country'
+        latitude: 'Latitude'
+        longitude: 'Longitude'
+        photo: 'Photo'
+        passenger: 'Passenger'
+        user: 'User'
+        published: 'Published'
+      contact:
+        name: 'Name'
+        email: 'E-mail'
+        message: 'Message'
+    error_notification:
+      default_message: "Please review the problems below:"
+  activerecord:
+    attributes:
+      user:
+        name: "Name"
+        email: "E-mail"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+        locale: "Default language"
+      event:
+        address: "Address"
+        photo: "Photo"
+    errors:
+      messages:
+        taken:  ": an account is already registred with this e-mail."
+  helpers:
+    placeholder:
+      event:
+        address: "Your position*"
+      user:
+        name: "Name*"
+        email: "E-Mail*"
+        password: "Password*"
+        password_confirmation: "Password confirmation*"
+    submit:
+      create: "Create %{model}"
+      update: "Update %{model}"
+      passenger:
+        create: "Crate Passenger"
+        update: "Update Passenger"
+      event:
+        create: "Create"
+        update: "Update"
+  notif_mailer:
+    registration_email:
+      subject:  "New user's event registration is waiting your approbation"
+      greeting: "Hello,"
+      event_registration: "A new event registration has been made by %{name}."
+      event_edit: "You can publish it by clicking "
+      event_here: "here"
+    event_activation_email:
+      subject:  'Your participation is online !'
+      greeting: 'Hello %{name},'
+      thank_you: 'Thank you %{name},'
+      participation: "Your participation in the Passenger's #%{passenger_name} journey is online !"
+      view: "You can see it by clicking on this "
+      action_call_photo: "You can still add a photo of your passenger to your contribution via your"
+      personal_space: "personnal space"
+      hint_photo: "This photo will be then added to the images on the Passenger's route map page."
+      online_photo: "Thank you for adding a photo to the Passenger's route."
+      link: 'link'
+      sharing: 'You can share it by clicking on the links below:'
+      twitter:  "I've given the Passenger %{passenger_name} to someone !"
+    event_activation_previous_user_email:
+      subject: "Some news from Passenger %{passenger_name}"
+      greeting: 'Hello,'
+      participation: "Thank you for giving the Passenger %{passenger_name} to %{name} !"
+      twitter:  "I've given the Passenger %{passenger_name} to someone !"
+      view: "You can see it's last stop by clicking on this "
+      link: 'link'
+  errors:
+    messages:
+      carrierwave_processing_error: "Cannot resize image."
+      carrierwave_integrity_error: "Not an image."
+      carrierwave_download_error: "Couldn't download image."
+      extension_whitelist_error: "You are not allowed to upload %{extension} files, allowed types: %{allowed_types}"
+      extension_blacklist_error: "You are not allowed to upload %{extension} files, prohibited types: %{prohibited_types}"
+  devise:
+    confirmations:
+      confirmed: "Your email address has been successfully confirmed."
+      send_instructions: "You will receive an email with instructions for how to confirm your email address in a few minutes."
+      send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
+    failure:
+      already_authenticated: "You are already signed in."
+      inactive: "Your account is not activated yet."
+      invalid: "Invalid %{authentication_keys} or password."
+      locked: "Your account is locked."
+      last_attempt: "You have one more attempt before your account is locked."
+      not_found_in_database: "Invalid %{authentication_keys} or password."
+      timeout: "Your session expired. Please sign in again to continue."
+      unauthenticated: "You need to sign in or sign up before continuing."
+      unconfirmed: "You have to confirm your email address before continuing."
+    mailer:
+      confirmation_instructions:
+        subject: "Confirmation instructions"
+        welcome_user: "Hello %{name},"
+        confirmation_call: "Please confirm your account email through the link below :"
+        contribution: "Your contribution is pending validation and you will receive an e-mail as soon as it is validated and live."
+        call_action: "If you have not added your Passenger photo yet, you can add it via your personal space."
+        call_action2: "If you have already submitted your Passenger photo, you can change it at any time."
+        call_action3: "This photo will be added to the Passenger's itinerary with the other participants photos once your contribution has been validated."
+        thanks: "Thank you for your participation."
+        signature: "The Passenger Team <br> A work by François Maurin made in collaboration with Samuel Bouaroua."
+        confirm_button: "Confirm your account and access your personal space"
+      reset_password_instructions:
+        subject: "Reset your password | The Passengers"
+        welcome_user: "Bonjour %{name} !"
+        request:  "Someone has requested a link to change your password. You can do this through the link below."
+        change: "Change my password"
+        notme: "If you didn't request this, please ignore this email."
+        nochange: "Your password won't change until you access the link above and create a new one."
+      unlock_instructions:
+        subject: "Unlock instructions"
+      email_changed:
+        subject: "Email Changed"
+      password_change:
+        subject: "Password Changed"
+    omniauth_callbacks:
+      failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
+      success: "Successfully authenticated from %{kind} account."
+    passwords:
+      no_token: "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided."
+      send_instructions: "You will receive an email with instructions on how to reset your password in a few minutes."
+      send_paranoid_instructions: "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes."
+      updated: "Your password has been changed successfully. You are now signed in."
+      updated_not_active: "Your password has been changed successfully."
+    registrations:
+      destroyed: "Bye! Your account has been successfully cancelled. We hope to see you again soon."
+      signed_up: "Welcome! You have signed up successfully."
+      signed_up_but_inactive: "You have signed up successfully. However, we could not sign you in because your account is not yet activated."
+      signed_up_but_locked: "You have signed up successfully. However, we could not sign you in because your account is locked."
+      signed_up_but_unconfirmed: "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account."
+      update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and follow the confirm link to confirm your new email address."
+      updated: "Your account has been updated successfully."
+    sessions:
+      signed_in: "Signed in successfully."
+      signed_out: "Signed out successfully."
+      already_signed_out: "Signed out successfully."
+    unlocks:
+      send_instructions: "You will receive an email with instructions for how to unlock your account in a few minutes."
+      send_paranoid_instructions: "If your account exists, you will receive an email with instructions for how to unlock it in a few minutes."
+      unlocked: "Your account has been unlocked successfully. Please sign in to continue."
+  errors:
+    messages:
+      already_confirmed: "was already confirmed, please try signing in"
+      confirmation_period_expired: "needs to be confirmed within %{period}, please request a new one"
+      expired: "has expired, please request a new one"
+      not_found: "not found"
+      not_locked: "was not locked"
+      not_saved:
+        one: "1 error prohibited this %{resource} from being saved:"
+        other: "%{count} errors prohibited this %{resource} from being saved:"
