@@ -17,7 +17,7 @@
     <% @passengers.each do |passenger| %>
       <tr>
         <td><%= passenger.name %></td>
-        <td><%= passenger.photo %></td>
+        <td><%= image_tag(passenger.photo_url(:marker), alt: 'Image'.to_s) if passenger.photo? %></td>
         <td><%= passenger.shortcut %></td>
         <td><%= passenger.token %></td>
         <td><%= link_to 'Show', passenger %></td>
@@ -31,3 +31,56 @@
 <br>
 
 <%= link_to 'New Passenger', new_passenger_path %>
+
+<div id="map" style="height: 400px"></div>
+<script>
+(function() {
+  var $, cupcakeTiles;
+  $ = jQuery;
+  cupcakeTiles = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png', {
+//cupcakeTiles = L.tileLayer('https://api.mapbox.com/styles/v1/samuelbou/cjh9mpubz18jx2rth7jgw3x1k/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic2FtdWVsYm91IiwiYSI6ImNpbDgzcDVkcTAwMWx2eWtxMWp3OHpza2MifQ.T_fsD2s2uIXgioqzMINhkg', {
+    minZoom: 2,
+    maxZoom: 18,
+  });
+
+  $.getJSON('passengers.json', function(data) {
+    var geojson, map;
+geojson = L.geoJson(data, {
+    onEachFeature: function(feature, layer) {
+        //layer.bindPopup(feature.properties.popupContent);
+        //layer.bindTooltip(feature.properties.passenger, { permanent: true, interactive: true, direction: 'bottom' });
+
+        if (layer.feature.properties.markerurl == null){
+        layer.setIcon(new L.DivIcon({
+        iconSize: new L.Point(82, 32),
+        //iconAnchor:[50, 50],
+        className: "divicon",
+        html:'<a href="passengers/'+layer.feature.properties.id+'"><p class="text-center small text-muted"><i class="fa fa-circle fa-3x" aria-hidden="true"></i><code>'+feature.properties.passenger+'</code></p></a>'
+        //html:'<a href="passengers/'+layer.feature.properties.id+'"><p class="text-center small text-muted"><svg width="32" height="32"><rect width="32" height="32" style="fill:rgb(102,102,102);" /></svg><code>'+feature.properties.passenger+'</code></p></a>'
+
+        }));
+
+
+       } else {
+          console.log('picture presente');
+          layer.setIcon(new L.DivIcon({
+          iconSize: new L.Point(82, 32),
+          //iconAnchor:[50, 50],
+          className: "divicon",
+          html:'<a href="passengers/'+layer.feature.properties.id+'"><img src="'+layer.feature.properties.markerurl+'" class="img-marker img-circle" alt="Image"><p class="text-center"><code>'+feature.properties.passenger+'</code></p></a>'
+          }));
+            }
+  }
+});
+
+    map = L.map('map').fitBounds(geojson.getBounds());
+    map.zoomControl.setPosition('bottomright');
+    cupcakeTiles.addTo(map);
+    var markers = L.markerClusterGroup();
+    markers.addLayer(geojson);
+    markers.addTo(map);
+
+  });
+
+}).call(this);
+</script>

@@ -1,0 +1,46 @@
+fr:
+  hello: "Bonjour"
+  site_title: "Les Passagers"
+  new: "Nouveau"
+  show: "Voir"
+  edit: "Modifier"
+  editing: "Edition"
+  destroy: "Détruire"
+  back: "Revenir"
+  user: "Utilisateur"
+  users: "Utilisateurs"
+  passenger: "Passager"
+  passengers: "Liste des Passagers"
+  editing_passager: "Edition Passager"
+  event: "Etape"
+  events: "Etapes"
+  new_event: "Nouvelle Etape"
+  editing_event: "Edition Etape"
+  about: "A Propos"
+  sign_up: "S'enregistrer"
+  sign_in: "Connexion"
+  edit_account: "Editer son compte"
+  sign_out: "Se déconnecter"
+  passenger_number: "Passenger n°"
+  location: "en ce moment à"
+  exlocation: "était à"
+  holder: "avec"
+  simple_form:
+    labels:
+      event:
+        address: 'Addresse'
+        city: 'Ville'
+        country: 'Pays'
+        latitude: 'Latitude'
+        longitude: 'Longitude'
+        photo: 'Photo'
+        passenger: 'Passager'
+        user: 'Utilisateur'
+        published: 'Publié'
+  errors:
+    messages:
+      carrierwave_processing_error: "Impossible de resize image."
+      carrierwave_integrity_error: "Nest pas une image."
+      carrierwave_download_error: "Impossible de télécharger limage."
+      extension_whitelist_error: "Vous netes pas autoisé à envoyer  des fichiers %{extension} , les formats autorisés sont: %{allowed_types}"
+      extension_blacklist_error: "Vous netes pas autoisé à envoyer  des fichiers %{extension}, les formats %{prohibited_types} ne sont pas autorisés"

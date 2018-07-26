@@ -7,7 +7,7 @@
 
 <p>
   <strong>Photo:</strong>
-  <%= image_tag(@passenger.photo.url, alt: 'Image') if @passenger.photo? %>
+  <%= image_tag(@passenger.photo_url(:thumb), alt: 'Image'.to_s) if @passenger.photo? %>
 </p>
 
 <p>
@@ -22,3 +22,52 @@
 
 <%= link_to 'Edit', edit_passenger_path(@passenger) %> |
 <%= link_to 'Back', passengers_path %>
+<div id="map" style="height: 400px"></div>
+<script>
+(function() {
+  var $, cupcakeTiles;
+  $ = jQuery;
+  cupcakeTiles = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png', {
+    minZoom: 2,
+    maxZoom: 18,
+  });
+
+  $.getJSON('<%= @passenger.id %>.json', function(data) {
+    var geojson, map;
+geojson = L.geoJson(data, {
+    onEachFeature: function(feature, layer) {
+        layer.bindPopup(feature.properties.popupContent);
+
+        if (layer.feature.properties.markerurl == null){
+        layer.setIcon(new L.DivIcon({
+        iconSize: new L.Point(82, 32),
+        //iconAnchor:[50, 50],
+        className: "divicon",
+        html:'<p class="text-center small text-muted"><i class="fa fa-circle fa-3x" aria-hidden="true"></i>'
+        //html:'<a href="passengers/'+layer.feature.properties.id+'"><p class="text-center small text-muted"><svg width="32" height="32"><rect width="32" height="32" style="fill:rgb(102,102,102);" /></svg><code>'+feature.properties.passenger+'</code></p></a>'
+
+        }));
+
+
+       } else {
+          console.log('picture presente');
+          layer.setIcon(new L.DivIcon({
+          iconSize: new L.Point(82, 32),
+          //iconAnchor:[50, 50],
+          className: "divicon",
+          html:'<img src="'+layer.feature.properties.markerurl+'" class="img-marker">'
+          }));
+            }
+  }
+});
+
+    map = L.map('map').fitBounds(geojson.getBounds());
+    cupcakeTiles.addTo(map);
+    var markers = L.markerClusterGroup();
+    markers.addLayer(geojson);
+    markers.addTo(map);
+
+  });
+
+}).call(this);
+</script>

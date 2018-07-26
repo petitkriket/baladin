@@ -37,9 +37,8 @@ gem 'mini_magick'
 gem 'fog-aws'
 gem 'aws-sdk-s3', require: false
 gem 'font-awesome-rails'
-#gem 'leaflet-rails', git: "git://github.com/MartinHinz/leaflet-rails.git", branch: "fix_icon_paths"
-#gem 'rails-assets-leaflet', source: 'https://rails-assets.org'
-#gem 'rails-assets-leaflet.markercluster', source: 'https://rails-assets.org'
+gem 'rails-assets-leaflet', source: 'https://rails-assets.org'
+gem 'rails-assets-leaflet.markercluster', source: 'https://rails-assets.org'
 gem 'gmaps-autocomplete-rails'
 group :development do
   gem 'rails_layout'
