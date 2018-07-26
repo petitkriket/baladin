@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Passengers</h1>
+<h1><%= t('passengers') %></h1>
 
 <table>
   <thead>
@@ -20,9 +20,9 @@
         <td><%= image_tag(passenger.photo_url(:marker), alt: 'Image'.to_s) if passenger.photo? %></td>
         <td><%= passenger.shortcut %></td>
         <td><%= passenger.token %></td>
-        <td><%= link_to 'Show', passenger %></td>
-        <td><%= link_to 'Edit', edit_passenger_path(passenger) %></td>
-        <td><%= link_to 'Destroy', passenger, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to t('show'), passenger %></td>
+        <td><%= link_to t('edit'), edit_passenger_path(passenger) %></td>
+        <td><%= link_to t('destroy'), passenger, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
