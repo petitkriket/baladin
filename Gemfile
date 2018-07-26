@@ -28,6 +28,7 @@ gem 'devise'
 gem 'high_voltage'
 gem 'jquery-rails'
 gem 'pg'
+gem 'figaro'
 gem 'simple_form'
 group :development do
   gem 'rails_layout'
