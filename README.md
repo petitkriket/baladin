@@ -48,3 +48,5 @@ Credits
 
 License
 -------
+
+ rails g devise:views
