@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  address: MyString
+  city: MyString
+  country: MyString
+  latitude: 1.5
+  longitude: 1.5
+  photo: MyString
+  passenger: one
+  user: one
+  published: false
+
+two:
+  address: MyString
+  city: MyString
+  country: MyString
+  latitude: 1.5
+  longitude: 1.5
+  photo: MyString
+  passenger: two
+  user: two
+  published: false
