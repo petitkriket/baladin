@@ -18,7 +18,7 @@ development:
   AWS_SECRET_ACCESS_KEY: "RE7AdkdcmHKT9raetXZR/sMoYmAKW6NyfmVXJS9y"
   S3_BUCKET: "lespassagers"
   S3_REGION: "eu-west-1"
-  DOMAIN_NAME: "pssgrs.com"
+  DOMAIN_NAME: "pssgrsv2.herokuapp.com"
 
 production:
   GMAIL_USERNAME: "bouaroua.samuel@gmail.com"
@@ -28,4 +28,4 @@ production:
   AWS_SECRET_ACCESS_KEY: "RE7AdkdcmHKT9raetXZR/sMoYmAKW6NyfmVXJS9y"
   S3_BUCKET: "lespassagers"
   S3_REGION: "eu-west-1"
-  DOMAIN_NAME: "pssgrs.com"
+  DOMAIN_NAME: "pssgrsv2.herokuapp.com"

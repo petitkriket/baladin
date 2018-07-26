@@ -54,7 +54,9 @@ Variables
 heroku config:set DOMAIN_NAME=pssgrs.com
 heroku config:set GMAIL_USERNAME=bouaroua.samuel@gmail.com
 heroku config:set GMAIL_PASSWORD=jcinrwyelnhtvkwc
+#config figaro, poser toutes les variables du fichier cfg
 figaro heroku:set -e production
+heroku rake db:migrate
 
 Tools
 -------
