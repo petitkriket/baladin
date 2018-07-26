@@ -27,7 +27,7 @@
 
 <p>
   <strong>Photo:</strong>
-  <%= @event.photo %>
+  <%= image_tag(@event.photo.url, alt: 'Image') if @event.photo? %>
 </p>
 
 <p>

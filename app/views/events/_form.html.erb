@@ -10,6 +10,16 @@
     <%= f.input :latitude, :readonly => true %>
     <%= f.input :longitude, :readonly => true %>
     <%= f.input :photo %>
+    <%= f.hidden_field :photo_cache %>
+              <% if event.photo? %>
+                  <%= image_tag event.photo.thumb.url %>
+                  <div>
+                    <%= label_tag :remove_image do %>
+                      Remove image
+                      <%= f.check_box :remove_photo %>
+                    <% end %>
+                  </div>
+              <% end %>
     <%= f.association :passenger, include_blank: false, include_hidden: false %>
     <%= f.association :user, include_blank: false, include_hidden: false %>
     <%= f.input :published %>

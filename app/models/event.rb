@@ -2,6 +2,10 @@ class Event < ApplicationRecord
   belongs_to :passenger
   belongs_to :user
   #
+  mount_uploader :photo, EventUploader
+  #
+  validates_integrity_of :photo
+  #
   geocoded_by :address
       reverse_geocoded_by :latitude, :longitude do |obj,results|
       if geo = results.first

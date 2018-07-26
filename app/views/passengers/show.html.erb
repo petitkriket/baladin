@@ -7,7 +7,7 @@
 
 <p>
   <strong>Photo:</strong>
-  <%= @passenger.photo %>
+  <%= image_tag(@passenger.photo.url, alt: 'Image') if @passenger.photo? %>
 </p>
 
 <p>

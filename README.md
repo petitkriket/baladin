@@ -69,3 +69,12 @@ rails g devise:views
 rails g scaffold Passenger name:string photo:string shortcut:string token:string
 
 rails g scaffold Event address:string city:string country:string latitude:float longitude:float photo:string passenger:references user:references published:boolean
+
+
+#Generer le controlleur devise
+https://github.com/plataformatec/devise/wiki/Tool:-Generate-and-customize-controllers
+https://stackoverflow.com/questions/10596238/get-nested-params
+$ rails g devise:controllers users -c=registrations #=> `/controllers/users/registrations_controller`.rb`
+
+#Generer la config geocoder
+rails generate geocoder:config

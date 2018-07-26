@@ -6,6 +6,16 @@
   <div class="form-inputs">
     <%= f.input :name %>
     <%= f.input :photo %>
+    <%= f.hidden_field :photo_cache %>
+              <% if passenger.photo? %>
+                  <%= image_tag passenger.photo.thumb.url %>
+                  <div>
+                    <%= label_tag :remove_image do %>
+                      Remove image
+                      <%= f.check_box :remove_photo %>
+                    <% end %>
+                  </div>
+              <% end %>
     <%= f.input :shortcut %>
     <%= f.input :token %>
   </div>
