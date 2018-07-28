@@ -25,6 +25,7 @@ fr:
   location: "en ce moment à"
   exlocation: "était à"
   holder: "avec"
+  geolocate: "Trouver votre position"
   simple_form:
     labels:
       event:
