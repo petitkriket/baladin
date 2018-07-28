@@ -15,6 +15,12 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
+    #
+    if params[:shortcut]
+    @passenger = Passenger.find_by(shortcut: params[:shortcut]).id
+    Rails.logger.debug("DEBUG: #{@passenger}")
+    @event.passenger_id = @passenger
+    end
   end
 
   # GET /events/1/edit

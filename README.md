@@ -78,3 +78,9 @@ $ rails g devise:controllers users -c=registrations #=> `/controllers/users/regi
 
 #Generer la config geocoder
 rails generate geocoder:config
+
+#routing via attributs
+https://stackoverflow.com/questions/22236619/dynamic-rails-routes-based-on-database-models
+
+#prefill valeurs via controlleur
+https://stackoverflow.com/questions/30736114/how-to-set-default-value-for-association-with-simple-form
