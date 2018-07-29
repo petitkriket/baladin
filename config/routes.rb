@@ -5,7 +5,8 @@ Rails.application.routes.draw do
     root to: 'passengers#index'
     devise_for :users, controllers: { registrations: 'users/registrations' }
     resources :users
-    #get ":language" => redirect("/users/sign_up"), constraints: lambda { |request| Passenger.where(shortcut: request[:language]).any? }
-    get ':shortcut', to: 'events#new', constraints: lambda { |request| Passenger.where(shortcut: request[:shortcut]).any? }
+    get ":shortcut" => redirect("/users/sign_up?t=%{shortcut}"), constraints: lambda { |request| Passenger.where(shortcut: request[:shortcut]).any? },  id: :shortcut
+    #ok#get ':shortcut', to: 'events#new', constraints: lambda { |request| Passenger.where(shortcut: request[:shortcut]).any? }
+    #get ':shortcut', to: 'devise/registrations#new', constraints: lambda { |request| Passenger.where(shortcut: request[:shortcut]).any? }
   end
 end

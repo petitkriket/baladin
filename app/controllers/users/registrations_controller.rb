@@ -8,6 +8,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/sign_up
    def new
      super
+     if params[:t]
+    #@passenger = Passenger.find_by(shortcut: params[:shortcut]).id
+    Rails.logger.debug("DEBUG: param passe ")
+    #@event.passenger_id = @passenger
+    end
+
      #if params[:q].blank?
        #redirect_to root_path and return
        #redirect_to(root_path, :notice => "Restricted access") and return
