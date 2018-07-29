@@ -82,5 +82,8 @@ rails generate geocoder:config
 #routing via attributs
 https://stackoverflow.com/questions/22236619/dynamic-rails-routes-based-on-database-models
 
+#nested forms
+https://stackoverflow.com/questions/35140956/rails-nested-attributes-with-devise-signup-form
+
 #prefill valeurs via controlleur
 https://stackoverflow.com/questions/30736114/how-to-set-default-value-for-association-with-simple-form

@@ -1,6 +1,6 @@
 class Event < ApplicationRecord
   belongs_to :passenger
-  belongs_to :user
+  belongs_to :user, optional: true
   #
   mount_uploader :photo, EventUploader
   #

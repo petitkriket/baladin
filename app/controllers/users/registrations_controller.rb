@@ -1,40 +1,22 @@
 class Users::RegistrationsController < Devise::RegistrationsController
    before_action :configure_sign_up_params, only: [:create]
    before_action :configure_account_update_params, only: [:update]
-   #before_action :check_has_access, only: [:new]
-   #before_action :check_shortcut, only: [:new]
+   before_action :check_shortcut, only: [:new]
    rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   # GET /resource/sign_up
    def new
-     super
-     if params[:t]
-    #@passenger = Passenger.find_by(shortcut: params[:shortcut]).id
-    Rails.logger.debug("DEBUG: param passe ")
-    #@event.passenger_id = @passenger
-    end
-
-     #if params[:q].blank?
-       #redirect_to root_path and return
-       #redirect_to(root_path, :notice => "Restricted access") and return
-      #format.html { redirect_to action: :index, notice: 'Todo item was successfully created.' }
-     #end
+     if  Passenger.where(shortcut: params[:t]).any?
+       @passenger = Passenger.where(shortcut: params[:t]).first.id
+     end
+   build_resource({})
+   resource.events.build
+   respond_with self.resource
    end
 
   # POST /resource
    def create
      super
-      # if resource.save
-      #    @event = Event.new
-      #    @event.user_id = resource.id
-      #    @event.passenger_id = params[:user][:event][:passenger_id]
-      #    @event.address = params[:user][:event][:address]
-      #    @event.photo = params[:user][:event][:photo]
-      #    ##Rails.logger.debug("My object: #{@event.address.inspect}")
-      #    @event.published = false
-      #    @event.save
-      #  end
-
    end
 
   # GET /resource/edit
@@ -65,15 +47,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
    def configure_sign_up_params
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, event_attributes: [:address, :user_id, :published, :photo]])
+      #devise_parameter_sanitizer.permit(:sign_up, keys: [:name, event_attributes: [:user_id, :passenger_id, :address, :photo, :published]])
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, events_attributes: [:passenger_id, :address, :photo]])
    end
 
   # If you have extra params to permit, append them to the sanitizer.
    def configure_account_update_params
-     #devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
-     attributes = [:name, :email, :avatar]
-     devise_parameter_sanitizer.permit(:sign_up, keys: attributes)
-     devise_parameter_sanitizer.permit(:account_update, keys: attributes)
+     devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
+   #attributes = [:name, :email, :avatar]
+   #devise_parameter_sanitizer.permit(:sign_up, keys: attributes)
+   #devise_parameter_sanitizer.permit(:account_update, keys: attributes)
 
    end
 
@@ -86,26 +69,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
    def after_inactive_sign_up_path_for(resource)
      super(resource)
    end
-   # a supprimer
-   def check_has_access
-     @passenger = Passenger.find(params[:q])
-    # redirect_to(root_path) if params[:q].blank? || @passenger.blank?
-      if params[:q].blank? && @passenger.blank? || params[:t].blank? || @passenger.token != params[:t]
-        redirect_to(root_path)
-        flash[:alert] = 'Accès restreint'
-      end
-   #Rails.logger.debug("My object: #{@passenger.token.inspect}")
-  end
 
-  # a supprimer
+
   def check_shortcut
-    @passenger = Passenger.where(shortcut: params[:q]).any?
-    Rails.logger.debug("My object: #{@passenger}")
+  #@passenger = Passenger.where(shortcut: params[:q]).any?
+  #passenger = Passenger.where(shortcut: params[:t]).any?
+  #@passenger = Passenger.where(shortcut: params[:t]).first.id
 
-     unless @passenger == true
-       redirect_to(root_path)
-       flash[:alert] = 'Accès restreint'
-     end
+  #   unless passenger == true
+       #redirect_to(root_path)
+       #flash[:alert] = 'Accès restreint'
+  #   end
  end
 
   def record_not_found
