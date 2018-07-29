@@ -10,7 +10,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
        @passenger = Passenger.where(shortcut: params[:t]).first.id
      end
    build_resource({})
+   build_resource
    resource.events.build
+#   Rails.logger.debug("My object: #{resource.events.build.passenger_id}")
    respond_with self.resource
    end
 
@@ -73,13 +75,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def check_shortcut
   #@passenger = Passenger.where(shortcut: params[:q]).any?
-  #passenger = Passenger.where(shortcut: params[:t]).any?
+  passenger = Passenger.where(shortcut: params[:t]).any?
   #@passenger = Passenger.where(shortcut: params[:t]).first.id
 
-  #   unless passenger == true
-       #redirect_to(root_path)
-       #flash[:alert] = 'Accès restreint'
-  #   end
+     unless passenger == true
+       redirect_to(root_path)
+       flash[:alert] = 'Vous devez avoir recu un Passager pour participer.'
+    end
  end
 
   def record_not_found
