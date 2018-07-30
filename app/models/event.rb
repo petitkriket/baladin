@@ -1,6 +1,7 @@
 class Event < ApplicationRecord
   belongs_to :passenger
   belongs_to :user, optional: true
+  scope :published, -> { where(:published => true)}
   #
   mount_uploader :photo, EventUploader
   #

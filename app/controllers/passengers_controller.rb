@@ -5,7 +5,7 @@ class PassengersController < ApplicationController
   # GET /passengers.json
   def index
     @passengers = Passenger.all
-    @events  = Passenger.all.map { |u| u.events.last }
+    @events  = Passenger.all.map { |u| u.events.published.last }
     @geojson = Array.new
     @events.each do |event|
           #if event.published?
@@ -35,7 +35,7 @@ end
   # GET /passengers/1
   # GET /passengers/1.json
   def show
-    @events  = Passenger.find(params[:id]).events
+    @events  = Passenger.find(params[:id]).events.published
     @geojson = Array.new
     @events.each_with_index do |event, index|
       if index == 0

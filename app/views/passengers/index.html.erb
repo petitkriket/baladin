@@ -55,7 +55,7 @@ geojson = L.geoJson(data, {
         iconSize: new L.Point(82, 32),
         //iconAnchor:[50, 50],
         className: "divicon",
-        html:'<a href="passengers/'+layer.feature.properties.id+'"><p class="text-center small text-muted"><i class="fa fa-circle fa-3x" aria-hidden="true"></i><code>'+feature.properties.passenger+'</code></p></a>'
+        html:'<a href="passengers/'+layer.feature.properties.id+'"><p class="text-center small text-muted"><i class="fa fa-circle fa-3x fa-marker" aria-hidden="true"></i><code>'+feature.properties.passenger+'</code></p></a>'
         //html:'<a href="passengers/'+layer.feature.properties.id+'"><p class="text-center small text-muted"><svg width="32" height="32"><rect width="32" height="32" style="fill:rgb(102,102,102);" /></svg><code>'+feature.properties.passenger+'</code></p></a>'
 
         }));
