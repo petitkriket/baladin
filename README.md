@@ -87,3 +87,6 @@ https://stackoverflow.com/questions/35140956/rails-nested-attributes-with-devise
 
 #prefill valeurs via controlleur
 https://stackoverflow.com/questions/30736114/how-to-set-default-value-for-association-with-simple-form
+
+#redirection du nouveau participant vers ses contributions
+https://stackoverflow.com/questions/25253039/automatically-sign-in-after-confirm-with-devise

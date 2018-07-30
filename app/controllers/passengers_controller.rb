@@ -1,5 +1,7 @@
 class PassengersController < ApplicationController
   before_action :set_passenger, only: [:show, :edit, :update, :destroy]
+#  before_action :admin_only, except: [:new, :edit, :delete, :create, :destroy]
+ before_action :admin_only, :except => [:index, :show]
 
   # GET /passengers
   # GET /passengers.json
@@ -145,4 +147,11 @@ end
     def passenger_params
       params.require(:passenger).permit(:name, :shortcut, :token, :photo, :photo_cache,:remove_photo)
     end
+
+    def admin_only
+      unless user_signed_in? && current_user.admin?
+        redirect_to root_path, :alert => "Access denied. Seulement admin"
+      end
+    end
+
 end

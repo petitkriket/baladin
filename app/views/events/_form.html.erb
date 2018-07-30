@@ -28,9 +28,11 @@
                     <% end %>
                   </div>
               <% end %>
+    <% if current_user.try(:admin?) %>
     <%= f.association :passenger, include_blank: false, include_hidden: false %>
     <%= f.association :user, include_blank: false, include_hidden: false %>
     <%= f.input :published %>
+    <% end %>
   </div>
 
   <div class="form-actions">
@@ -52,9 +54,9 @@
     maxZoom: 18,
   });
   var counter = 0;
-  var Passenger = document.getElementById("event_passenger_id").value;
+  //var Passenger = document.getElementById("event_passenger_id").value;
   //$.getJSON('<%= root_url %>/passengers/<%= params[:passenger] %>.json', function(data) {
-  $.getJSON("<%= root_url %>/passengers/" + Passenger + ".json", function(data) {
+  $.getJSON("<%= root_url %>/passengers/<%= @event.passenger_id %>.json", function(data) {
 
     var geojson, map;
     var pointlist = [];

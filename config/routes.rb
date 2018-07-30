@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     resources :events
     resources :passengers
     root to: 'passengers#index'
-    devise_for :users, controllers: { registrations: 'users/registrations' }
+    devise_for :users, controllers: { registrations: 'users/registrations', confirmations: 'users/confirmations' }
     resources :users
     get ":shortcut" => redirect("/users/sign_up?t=%{shortcut}"), constraints: lambda { |request| Passenger.where(shortcut: request[:shortcut]).any? },  id: :shortcut
     #ok#get ':shortcut', to: 'events#new', constraints: lambda { |request| Passenger.where(shortcut: request[:shortcut]).any? }
