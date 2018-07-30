@@ -22,3 +22,15 @@
   max-width: 84%;
   display: inline-block;
 }
+
+.fa-marker {
+    margin: 0 10px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0.6; transform: scale(1.3); }
+}
+
+.animate-flicker {
+    animation: fadeIn 750ms infinite alternate;
+}

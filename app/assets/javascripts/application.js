@@ -29,7 +29,11 @@ function initializeAutocomplete(id) {
 function onPlaceChanged() {
   var place = this.getPlace();
 
-  // console.log(place);  // Uncomment this line to view the full object returned by Google API.
+   console.log(place);  // Uncomment this line to view the full object returned by Google API.
+   console.log(place.geometry.location.lat());
+   console.log(place.geometry.location.lng());
+
+  PlaceFirefox(place.geometry.location.lat(), place.geometry.location.lng())
 
   for (var i in place.address_components) {
     var component = place.address_components[i];
@@ -44,4 +48,5 @@ function onPlaceChanged() {
 
 google.maps.event.addDomListener(window, 'load', function() {
   initializeAutocomplete('event_address');
+  initializeAutocomplete('user_events_attributes_0_address');
 });
