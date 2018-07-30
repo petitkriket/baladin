@@ -86,6 +86,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
  end
 
+ def already_registred
+ if current_user.try(:admin?)
+      redirect_to(events_path)
+      flash[:info] = 'Coucou.'
+   end
+end
+
   def record_not_found
     redirect_to(root_path)
   end

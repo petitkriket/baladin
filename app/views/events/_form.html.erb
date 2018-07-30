@@ -28,6 +28,16 @@
                     <% end %>
                   </div>
               <% end %>
+
+
+            <% if @event.new_record? && !current_user.try(:admin?) %>
+            <%= text_field_tag :shortcut, "", class: 'form-control', placeholder: 'Code gravé sur le Passager' %>
+
+            <% end %>
+
+
+
+
     <% if current_user.try(:admin?) %>
     <%= f.association :passenger, include_blank: false, include_hidden: false %>
     <%= f.association :user, include_blank: false, include_hidden: false %>

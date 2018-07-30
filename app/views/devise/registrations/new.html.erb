@@ -1,7 +1,7 @@
 <div class="col-md-3">
 <div class="authform">
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :role => 'form'}) do |f| %>
-    <h3>Sign up</h3>
+    <h3><%= t('sign_up') %></h3>
     <%= devise_error_messages! %>
 
     <%= f.simple_fields_for :events do |f| %>
@@ -34,7 +34,7 @@
     </div>
      <%= f.submit 'Sign up', :class => 'button right' %>
 
-     <p>Vous avez deja participé avec un autre Passager ? <a href="#">Cliquez ici.</a></p>
+     <p>Vous avez deja participé avec un autre Passager ? <%= link_to "Cliquer ici", new_event_path %></p>
   <% end %>
 </div>
 </div>

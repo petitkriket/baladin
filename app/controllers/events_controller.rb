@@ -25,7 +25,7 @@ end
     #
     if params[:shortcut]
     @passenger = Passenger.find_by(shortcut: params[:shortcut]).id
-    Rails.logger.debug("DEBUG: #{@passenger}")
+    #Rails.logger.debug("DEBUG 1: #{@passenger}")
     @event.passenger_id = @passenger
     end
     #
@@ -39,7 +39,14 @@ end
   # POST /events.json
   def create
     @event = Event.new(event_params)
-    @event.user_id = current_user
+    @event.user_id = current_user.id
+
+    if params[:shortcut]
+    @passenger = Passenger.find_by(shortcut: params[:shortcut]).id
+    #Rails.logger.debug("DEBUG 2: #{@passenger}")
+    @event.passenger_id = @passenger
+    end
+
     respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
