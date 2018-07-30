@@ -38,6 +38,7 @@ end
   # GET /passengers/1.json
   def show
     @events  = Passenger.find(params[:id]).events.published
+    @event  = Passenger.find(params[:id]).events.published.last
     @geojson = Array.new
     @events.each_with_index do |event, index|
       if index == 0

@@ -42,6 +42,8 @@ gem 'font-awesome-rails'
 gem 'rails-assets-leaflet', source: 'https://rails-assets.org'
 gem 'rails-assets-leaflet.markercluster', source: 'https://rails-assets.org'
 gem 'gmaps-autocomplete-rails'
+gem 'metamagic'
+
 group :development do
   gem 'rails_layout'
 end

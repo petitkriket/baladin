@@ -42,8 +42,8 @@ class PassengerUploader < CarrierWave::Uploader::Base
      process resize_to_fit: [400, 400]
    end
 
-   version :medium do
-     process resize_to_fit: [800, 800]
+   version :facebook do
+     process resize_to_fit: [1200, 630]
    end
 
   # Add a white list of extensions which are allowed to be uploaded.
