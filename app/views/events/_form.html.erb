@@ -31,7 +31,7 @@
 
 
             <% if @event.new_record? && !current_user.try(:admin?) %>
-            <%= text_field_tag :shortcut, "", class: 'form-control', placeholder: 'Code gravé sur le Passager' %>
+            <%= hidden_field_tag :shortcut, params[:shortcut] %>
 
             <% end %>
 

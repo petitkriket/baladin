@@ -90,3 +90,5 @@ https://stackoverflow.com/questions/30736114/how-to-set-default-value-for-associ
 
 #redirection du nouveau participant vers ses contributions
 https://stackoverflow.com/questions/25253039/automatically-sign-in-after-confirm-with-devise
+#Keep params after a submit
+https://stackoverflow.com/questions/3401671/rails-keep-params-after-a-submit

@@ -18,7 +18,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
    def create
-     super
+     super do
+       @passenger = Passenger.where(shortcut: params[:t]).first.id
+     end
    end
 
   # GET /resource/edit

@@ -10,10 +10,9 @@
       <%= f.text_field :address, class: 'form-control', :autofocus => true, placeholder: t('geolocate') %>
       <div class="btn btn-primary demo" onclick="getLocation()"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
 
-      <%#= f.input :passenger_id, as: :select, collection: Passenger.all, :label_method => lambda { |passenger| "#{passenger.id} | #{passenger.name}" }, selected: @passenger %>
       <%= f.hidden_field :passenger_id, value: @passenger %>
       <%= f.input :photo %>
-      <%#= @passenger %>
+      <%= hidden_field_tag :t, params[:t] %>
     <% end %>
   <!---->
     <div class="form-group">
@@ -34,7 +33,7 @@
     </div>
      <%= f.submit 'Sign up', :class => 'button right' %>
 
-     <p>Vous avez deja participé avec un autre Passager ? <%= link_to "Cliquer ici", new_event_path %></p>
+     <p>Vous avez deja participé avec un autre Passager ? <%= link_to "Cliquez ici.", new_event_path(shortcut: params[:t]) %>
   <% end %>
 </div>
 </div>
