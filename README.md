@@ -92,3 +92,9 @@ https://stackoverflow.com/questions/30736114/how-to-set-default-value-for-associ
 https://stackoverflow.com/questions/25253039/automatically-sign-in-after-confirm-with-devise
 #Keep params after a submit
 https://stackoverflow.com/questions/3401671/rails-keep-params-after-a-submit
+
+#envoyer une notif aux admins à la creation d'un users
+https://stackoverflow.com/questions/17479864/rails-devise-send-user-email-after-sign-up-create
+https://launchschool.com/blog/handling-emails-in-rails
+#si publié
+https://blog.toshima.ru/2017/04/06/saved-change-to-attribute.html

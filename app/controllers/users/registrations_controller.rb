@@ -21,6 +21,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
      super do
        @passenger = Passenger.where(shortcut: params[:t]).first.id
      end
+
+     if @user.persisted?
+        @admins = User.where(role: 'admin')
+        @admins.each do |admin|
+        NotifMailer.sample_email(@user, admin).deliver
+        end
+
+      end
    end
 
   # GET /resource/edit
