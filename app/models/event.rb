@@ -16,5 +16,14 @@ class Event < ApplicationRecord
       end
   end
   after_validation :geocode, :reverse_geocode ,:if => :address_changed?
+  after_validation :update_fired, :if => :published_changed?
+
+  def update_fired
+    NotifMailer.event_activation_email(self.user).deliver if self.published
+    @previous_user = User.includes(:events).where(events: { passenger_id: self[:passenger_id], published: true }).order(created_at: :desc).first
+    NotifMailer.event_activation_previous_user_email(@previous_user).deliver if self.published
+    #Rails.logger.debug("mail envoyé au porteur précedent #{@previous_user.name}")
+    #Rails.logger.debug("concernant le passager #{self[:passenger_id]}")
+  end
 
   end

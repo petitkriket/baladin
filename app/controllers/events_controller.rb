@@ -6,7 +6,7 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     if current_user.try(:admin?)
-    @events = Event.all
+    @events = Event.all.order('created_at')
   else
     @events = Event.where(:user_id => current_user.id)
 end
@@ -33,6 +33,10 @@ end
 
   # GET /events/1/edit
   def edit
+    #@bordel2 = User.includes(:events).where(events: { passenger_id: @event.passenger_id, published: true })[-2].name
+    #@bordel2 = User.includes(:events).where(events: { passenger_id: @event.passenger_id, published: true }).first.name
+    #  Rails.logger.debug("prop 2 #{@bordel2}")
+
   end
 
   # POST /events
