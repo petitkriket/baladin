@@ -20,9 +20,14 @@ class Event < ApplicationRecord
 
   def update_fired
     NotifMailer.event_activation_email(self.user).deliver if self.published
+
     @previous_user = User.includes(:events).where(events: { passenger_id: self[:passenger_id], published: true }).order(created_at: :desc).first
-    NotifMailer.event_activation_previous_user_email(@previous_user).deliver if self.published
-    #Rails.logger.debug("mail envoyé au porteur précedent #{@previous_user.name}")
+
+    unless @previous_user.nil?
+      NotifMailer.event_activation_previous_user_email(@previous_user).deliver if self.published
+    end
+
+    #Rails.logger.debug("mail envoyé au porteur précedent #{@previous_user.name}") unless @previous_user.nil?
     #Rails.logger.debug("concernant le passager #{self[:passenger_id]}")
   end
 

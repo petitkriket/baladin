@@ -43,7 +43,10 @@ end
   # POST /events.json
   def create
     @event = Event.new(event_params)
-    @event.user_id = current_user.id
+
+    unless current_user.try(:admin?)
+      @event.user_id = current_user.id
+    end
 
     if params[:shortcut]
     @passenger = Passenger.find_by(shortcut: params[:shortcut]).id

@@ -1,11 +1,4 @@
-<%
-if @event.photo?
-meta og: {
-  image: @event.photo_url(:facebook)
-}
-end
-%>
-
+<% meta og: { image: @event.photo_url(:facebook) } unless @event.nil? %>
 <p id="notice"><%= notice %></p>
 
 <p>
