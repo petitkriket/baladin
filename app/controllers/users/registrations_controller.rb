@@ -25,7 +25,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
      if @user.persisted?
         @admins = User.where(role: 'admin')
         @admins.each do |admin|
-        NotifMailer.sample_email(@user, admin).deliver
+        NotifMailer.registration_email(@user, admin).deliver
         end
 
       end

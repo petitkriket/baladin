@@ -98,3 +98,7 @@ https://stackoverflow.com/questions/17479864/rails-devise-send-user-email-after-
 https://launchschool.com/blog/handling-emails-in-rails
 #si publié
 https://blog.toshima.ru/2017/04/06/saved-change-to-attribute.html
+
+# email et localization
+https://launchschool.com/blog/handling-emails-in-rails
+https://niallburkley.com/blog/localize-rails-emails/

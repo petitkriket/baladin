@@ -26,6 +26,10 @@ en:
   exlocation: "was at"
   holder: "with"
   geolocate: "Find your position"
+  share_fb: "Share on Facebook"
+  share_tw: "Share on Twitter"
+  share_wa: "Share on WhatsApp"
+  share_li: "Share on LinkedIn"
   simple_form:
     labels:
       event:
@@ -38,6 +42,28 @@ en:
         passenger: 'Passenger'
         user: 'User'
         published: 'Published'
+  notif_mailer:
+    registration_email:
+      subject:  "New user's event registration is waiting your approbation"
+      greeting: "Hello,"
+      event_registration: "A new event registration has been made by %{name}"
+      event_edit: "You can publish it by clicking "
+      event_here: "here"
+    event_activation_email:
+      subject:  'Your participation is online !'
+      greeting: 'Hello %{name},'
+      participation: "Your participation in the Passenger's %{passenger_name} journey is online."
+      view: "You can see it by clicking on this "
+      link: 'link'
+      sharing: 'You can share it by clicking on the links below:'
+      twitter:  "I've given the Passenger %{passenger_name} to someone !"
+    event_activation_previous_user_email:
+      subject: "Some news from Passenger %{passenger_name}"
+      greeting: 'Hello,'
+      participation: "Thank you for giving the Passenger %{passenger_name} to %{name} !"
+      twitter:  "I've given the Passenger %{passenger_name} to someone !"
+      view: "You can see it's last stop by clicking on this "
+      link: 'link'
   errors:
     messages:
       carrierwave_processing_error: "Cannot resize image."

@@ -1,4 +1,16 @@
-<% meta og: { image: @event.photo_url(:facebook) } unless @event.nil? %>
+<% unless @event.nil? %>
+<% meta og: { image: @event.photo_url(:facebook) } %>
+<%
+meta og: {
+  image:  {
+    width: "1200",
+    height: "630"
+  }
+}
+%>
+<% end %>
+
+
 <p id="notice"><%= notice %></p>
 
 <p>

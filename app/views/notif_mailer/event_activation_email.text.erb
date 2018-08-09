@@ -1,1 +1,5 @@
-Bonjour <%= @user.name %>, votre participation est en ligne.
+<%= t('.greeting', name: @user.name) %>
+<%= t('.participation', passenger_name: @passenger.name) %>
+<%= t('.view') %> <%= t('.link') %>:
+
+<%= url_for(passenger_url(locale, @event.passenger_id)) %>

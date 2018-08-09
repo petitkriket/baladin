@@ -26,6 +26,10 @@ fr:
   exlocation: "était à"
   holder: "avec"
   geolocate: "Trouver votre position"
+  share_fb: "Partager sur Facebook"
+  share_tw: "Partager sur Twitter"
+  share_wa: "Partager sur WhatsApp"
+  share_li: "Partager sur LinkedIn"
   simple_form:
     labels:
       event:
@@ -38,6 +42,28 @@ fr:
         passenger: 'Passager'
         user: 'Utilisateur'
         published: 'Publié'
+  notif_mailer:
+    registration_email:
+      subject:  'Une nouvelle contribution utilisateur attend votre validation'
+      greeting: "Bonjour,"
+      event_registration: "Une nouvelle étape à été soumise par %{name}"
+      event_edit: "Vous pouvez la publier en cliquant "
+      event_here: "ici"
+    event_activation_email:
+      subject:  'Votre participation est en ligne !'
+      greeting: 'Bonjour %{name},'
+      participation: 'Votre participation au parcours du Passager %{passenger_name} est en ligne.'
+      view: "Vous pouvez la voir en cliquant sur ce "
+      link: 'lien.'
+      sharing: 'Vous pouvez la partager en cliquant sur les liens ci dessous:'
+      twitter:  "J'ai donné le Passenger %{passenger_name}à quelqu'un !"
+    event_activation_previous_user_email:
+      subject: "Des nouvelles du Passager %{passenger_name}"
+      greeting: 'Bonjour,'
+      participation: "Merci d'avoir transmis le Passager %{passenger_name} à %{name}  !"
+      twitter:  "J'ai donné le Passager %{passenger_name} à quelqu'un !"
+      view: "Vous pouvez voir sa nouvelle étape en cliquant sur ce "
+      link: 'lien'
   errors:
     messages:
       carrierwave_processing_error: "Impossible de resize image."

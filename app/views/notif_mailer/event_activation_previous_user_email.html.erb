@@ -4,8 +4,27 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Des nouvelles du Passager ...</h1>
-Le Passager a bien ete transmis a <%= @user.name %>
+    <%= t('.greeting', name: @user.name) %>
+    <br>
+    <br>
+    <%= t('.participation', passenger_name: @passenger.name, name: @user.name) %>
+
+    <%= t('.view') %><%= link_to t(".link"), passenger_url(locale, @event.passenger_id), target: "_blank" %>
+    <br><br>
+    <%= image_tag(@event.photo_url(:thumb), alt: 'Image'.to_s) if @event.photo? %>
+    <br>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v3.1';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <div class="fb-share-button" data-href="<%= url_for(passenger_url(locale, @event.passenger_id)) %>" data-layout="box_count" data-size="small" data-mobile-iframe="true" style="display:inline;"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<%= url_for(passenger_url(locale, @event.passenger_id)) %>&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"><%= t('share_fb') %></a></div>
+    <br><a href="https://twitter.com/intent/tweet?text=<%= t('.twitter', passenger_name: @passenger.name) %> <%= url_for(passenger_url(locale, @event.passenger_id)) %>" target="_blank"><span class="fa fa-twitter"></span><%= t('share_tw') %></a>
+    <br><a href="whatsapp://send" data-text="<%= t('.twitter', passenger_name: @passenger.name) %>" data-href="<%= url_for(passenger_url(locale, @event.passenger_id)) %>" class="wa_btn wa_btn_s"><%= t('share_wa') %></a>
+    <br><a href="https://www.linkedin.com/shareArticle?mini=true&url=<%= url_for(passenger_url(locale, @event.passenger_id)) %>&title=Les%20Passagers&summary=<%= t('.twitter', passenger_name: @passenger.name) %>&source=<%= url_for(passenger_url(locale, @event.passenger_id)) %>"><%= t('share_li') %></a>
 
   </body>
 </html>
