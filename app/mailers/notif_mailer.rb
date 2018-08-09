@@ -4,7 +4,7 @@ class NotifMailer < ApplicationMailer
   def registration_email(user, admin)
     @user = user
     #mail(to: admin.email, subject: I18n.t('notif_mailer.registration_email.subject'))
-    I18n.with_locale(@user.locale) do
+    I18n.with_locale(admin.locale) do
     mail(
      to: admin.email,
      subject: I18n.t('notif_mailer.registration_email.subject')
