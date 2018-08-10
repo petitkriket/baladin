@@ -7,6 +7,10 @@ class User < ApplicationRecord
     self.role ||= :user
   end
 
+  def send_devise_notification(notification, *args)
+    I18n.with_locale(self.locale) { super(notification, *args) }
+  end
+  
   private #ajout du private ??
 
 

@@ -31,6 +31,8 @@
       <%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation, class: 'form-control' %>
     </div>
+      <%= f.hidden_field :locale, value: I18n.locale %>
+
      <%= f.submit 'Sign up', :class => 'button right' %>
 
      <p>Vous avez deja participé avec un autre Passager ? <%= link_to "Cliquez ici.", new_event_path(shortcut: params[:t]) %>
