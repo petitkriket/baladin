@@ -1,0 +1,11 @@
+<%= simple_form_for(@contact) do |f| %>
+<%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <%= f.input :name, required: true %>
+  <%= f.input :email, required: true %>
+  <%= f.input :message, as: :text %>
+  <%= f.input :nickname, hint: 'leave this field blank' %>
+
+  <%#= f.submit 'Send Message', class: "button" %>
+  <%= f.button :submit %>
+
+<% end %>

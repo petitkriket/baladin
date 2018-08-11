@@ -102,3 +102,8 @@ https://blog.toshima.ru/2017/04/06/saved-change-to-attribute.html
 # email et localization
 https://launchschool.com/blog/handling-emails-in-rails
 https://niallburkley.com/blog/localize-rails-emails/
+
+#contactform
+https://www.codementor.io/simi736/send-email-using-mailform-gem-and-sendgrid-on-heroku-using-rails-5-eyy4zuwnl
+https://stackoverflow.com/questions/11093848/rails-undefined-method-model-name-for-nilclassclass
+https://mdbootstrap.com/javascript/modals/

@@ -34,7 +34,9 @@ meta og: {
 </p>
 <%#= image_tag(@event.photo_url(:thumb), alt: 'Image'.to_s) if @event.photo? %>
 <%#= @event.photo_url(:facebook) if @event.photo? %>
-
+<p>
+  <%= render :file => 'contacts/new' %>
+</p>
 <%= link_to 'Edit', edit_passenger_path(@passenger) %> |
 <%= link_to 'Back', passengers_path %>
 <div id="map" style="height: 400px"></div>

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   scope "(:locale)", locale: /en|fr/ do
     resources :events
+    resources :contacts, only: [:new, :create]
     resources :passengers
     root to: 'passengers#index'
     devise_for :users, controllers: { registrations: 'users/registrations', confirmations: 'users/confirmations' }
