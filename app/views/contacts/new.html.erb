@@ -12,15 +12,12 @@
         </button>
       </div>
       <div class="modal-body">
-        <%= simple_form_for(@contact) do |f| %>
+        <%= simple_form_for (@contact), :url => {:action => "create", :id => params[:id], :controller => "contacts"} do |f| %>
         <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
           <%= f.input :name, required: true %>
           <%= f.input :email, required: true %>
           <%= f.input :message, as: :text %>
-          <%= f.input :user, :input_html => { :value => @event.user_id } %>
           <%= f.input :nickname, hint: 'leave this field blank' %>
-          <% @event.user_id %>
-          <%= debug(@event.user_id) %>
 
       </div>
       <div class="modal-footer">

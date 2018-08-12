@@ -107,3 +107,6 @@ https://niallburkley.com/blog/localize-rails-emails/
 https://www.codementor.io/simi736/send-email-using-mailform-gem-and-sendgrid-on-heroku-using-rails-5-eyy4zuwnl
 https://stackoverflow.com/questions/11093848/rails-undefined-method-model-name-for-nilclassclass
 https://mdbootstrap.com/javascript/modals/
+
+#conserver les params changement de preferred_language
+https://stackoverflow.com/questions/29002068/rails-i18n-passed-params-get-lost

@@ -2,8 +2,17 @@
 <li><%= link_to t('about'), page_path('about') %></li>
 <% if I18n.locale == :en %>
 <li><%= link_to 'FR', url_for(:locale => 'fr') %></li>
+<li><%= link_text = "fr"
+link_to_unless_current link_text, {locale: "fr", t: params[:t]}, {class: 'html_class'} %></li>
 <% end %>
 
 <% if I18n.locale == :fr %>
 <li><%= link_to 'EN', url_for(:locale => 'en') %></li>
+<li><%= link_text = "en"
+link_to_unless_current link_text, {locale: "en", t: params[:t]}, {class: 'html_class'} %></li>
+<% end %>
+
+<% if controller_name == 'passengers' && action_name == 'show' %>
+<li><a href="#" data-toggle="modal" data-target="#basicExampleModal">Mail</a></li>
+
 <% end %>
