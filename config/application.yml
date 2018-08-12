@@ -16,7 +16,7 @@ development:
   ADMIN_PASSWORD: "821000"
   GMAIL_USERNAME: "bouaroua.samuel@gmail.com"
   GMAIL_PASSWORD: "mhesmueigfewbrhm"
-  GMAPS_API_KEY: "AIzaSyA14-TBCewFE3UdUPTJH2TusmXe7WHmqzE"
+  GMAPS_API_KEY: "AIzaSyD8u5Q-Ih61ySje3OtuWDLyWOkMXTo6qJ8"
   AWS_ACCESS_KEY_ID: "AKIAIQHL7MWX4WWKECWA"
   AWS_SECRET_ACCESS_KEY: "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"
   S3_BUCKET: "lespassagers"
