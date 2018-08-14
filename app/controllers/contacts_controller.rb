@@ -2,8 +2,6 @@ class ContactsController < ApplicationController
 
   def new
     @contact = Contact.new
-    Rails.logger.debug("DEBUG 1: #{@event.user_id}")
-
   end
 
   def create
@@ -14,15 +12,18 @@ class ContactsController < ApplicationController
     Rails.logger.debug("DEBUG self pssgrs: #{@contact.user}")
     Rails.logger.debug("DEBUG id: #{params[:id]}")
 
-    #self.user_id =
     if @contact.deliver
   #    flash.now[:error] = nil
-  redirect_to root_path, notice: 'Message sent successfully'
-  #redirect_to passenger_url, notice: 'Message sent successfully'
+  #redirect_to root_path, notice: 'Message sent successfully'
+  redirect_to passenger_path( id: params[:id]), :notice => "message fine a traduire"
     else
       #flash.now[:error] = 'Cannot send message'
       #render :new
-      redirect_to passenger_url(params[:id]), alert: 'nazzzzz'
+      #redirect_to passenger_url(params[:id]), alert: 'Merci de remplir tous les champs'
+      #redirect_to passenger_url(params[:id]), alert: @contact.errors.full_messages
+      redirect_to passenger_url(params[:id]), alert: @contact.errors.full_messages.join(', ')
+      Rails.logger.debug("DEBUG id: #{@contact.errors.full_messages}")
+
     end
   end
 

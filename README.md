@@ -110,3 +110,5 @@ https://mdbootstrap.com/javascript/modals/
 
 #conserver les params changement de preferred_language
 https://stackoverflow.com/questions/29002068/rails-i18n-passed-params-get-lost
+
+#redirect to en conservant les messages https://stackoverflow.com/questions/20368717/rails-i-cant-pass-a-validation-error-in-a-redirect
