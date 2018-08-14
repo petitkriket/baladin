@@ -11,6 +11,7 @@ en:
   users: "Users"
   passenger: "Passenger"
   passengers: "Passengers List"
+  new_passenger: "New Passenger"
   editing_passager: "Editing Passenger"
   event: "Event"
   events: "Events"
@@ -21,7 +22,7 @@ en:
   sign_in: "Sign in"
   edit_account: "Edit Account"
   sign_out: "Sign out"
-  passenger_number: "Passenger #"
+  passenger_marker_text: "Passenger %{name}"
   location: "currently at"
   exlocation: "was at"
   holder: "with"
@@ -42,6 +43,16 @@ en:
         passenger: 'Passenger'
         user: 'User'
         published: 'Published'
+  helpers:
+    submit:
+      create: "Create %{model}"
+      update: "Update %{model}"
+      passenger:
+        create: "Crate Passenger"
+        update: "Update Passenger"
+      event:
+        create: "Create Passenger's step"
+        update: "Update Passenger's step"
   notif_mailer:
     registration_email:
       subject:  "New user's event registration is waiting your approbation"

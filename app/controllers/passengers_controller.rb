@@ -1,7 +1,7 @@
 class PassengersController < ApplicationController
   before_action :set_passenger, only: [:show, :edit, :update, :destroy]
-#  before_action :admin_only, except: [:new, :edit, :delete, :create, :destroy]
- before_action :admin_only, :except => [:index, :show]
+  before_action :admin_only, :except => [:index, :show]
+  before_action :events_empty, :only => [:show]
 
   # GET /passengers
   # GET /passengers.json
@@ -10,8 +10,9 @@ class PassengersController < ApplicationController
     @events  = Passenger.all.map { |u| u.events.published.last }
     @geojson = Array.new
     @events.each do |event|
-          #if event.published?
-          unless event.blank?
+
+      unless event.blank?
+        marker_name = t('passenger_marker_text', name: event.passenger.name )
         @geojson << {
           type: 'Feature',
           geometry: {
@@ -20,9 +21,9 @@ class PassengersController < ApplicationController
           },
           properties: {
             markerurl: event.photo.marker.url,
+            markerurl_fallback: event.passenger.photo.marker.url,
             id: event.passenger.id,
-            passenger: "#{t('passenger_number')}#{event.passenger.name}",
-            popupContent: "<img src='#{event.photo.medium.url}' alt='#{event.passenger.name}'><br> #{t('passenger_number')}#{event.passenger.name} #{t('location')} #{event.city},#{event.country}"
+            passenger: "#{marker_name}",
             }
           }
       end
@@ -41,7 +42,8 @@ end
     @event  = Passenger.find(params[:id]).events.published.last
     @geojson = Array.new
     @events.each_with_index do |event, index|
-      if index == 0
+      marker_name = t('passenger_marker_text', name: event.passenger.name )
+      if index == 0 && @events.size == 1
         # this is the first item
         @geojson << {
           type: 'Feature',
@@ -51,7 +53,8 @@ end
           },
           properties: {
             markerurl: event.photo.marker.url,
-            popupContent: "<img src='#{event.photo.medium.url}'><br> #{t('passenger_number')}#{event.passenger.name} #{t('exlocation')} #{event.city} #{event.country} #{t('holder')} #{event.user.name}"
+            markerurl_fallback: event.passenger.photo.marker.url,
+            popupContent: "<img src='#{event.photo.medium.url}'><br> #{marker_name} #{t('location')} #{event.city} #{event.country} #{t('holder')} #{event.user.name}"
           }
         }
       elsif index == @events.size - 1
@@ -64,7 +67,8 @@ end
           },
           properties: {
             markerurl: event.photo.marker.url,
-            popupContent: "<img src='#{event.photo.medium.url}'><br> #{t('passenger_number')}#{event.passenger.name} #{t('location')} #{event.city} #{event.country} #{t('holder')} #{event.user.name}"
+            markerurl_fallback: event.passenger.photo.marker.url,
+            popupContent: "<img src='#{event.photo.medium.url}'><br> #{marker_name} #{t('location')} #{event.city} #{event.country} #{t('holder')} #{event.user.name}"
           }
         }
       else
@@ -77,7 +81,9 @@ end
           },
           properties: {
             markerurl: event.photo.marker.url,
-            popupContent: "<img src='#{event.photo.medium.url}'><br> #{t('passenger_number')}#{event.passenger.name} #{t('exlocation')} #{event.city} #{event.country} #{t('holder')} #{event.user.name}"
+            markerurl_fallback: event.passenger.photo.marker.url,
+            popupContent: "<img src='#{event.photo.medium.url}'><br> #{marker_name} #{t('exlocation')} #{event.city} #{event.country} #{t('holder')} #{event.user.name}"
+
           }
         }
       end
@@ -146,12 +152,21 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def passenger_params
-      params.require(:passenger).permit(:name, :shortcut, :token, :photo, :photo_cache,:remove_photo)
+      params.require(:passenger).permit(:name, :shortcut, :photo, :photo_cache,:remove_photo)
     end
 
     def admin_only
       unless user_signed_in? && current_user.admin?
-        redirect_to root_path, :alert => "Access denied. Seulement admin"
+        #redirect_to root_path, :alert => "Access denied. Seulement admin"
+        redirect_to new_user_session_path, :alert => "Merci de vous connecter."
+      end
+    end
+ # rediriger vers root si pas admin et vide
+    def events_empty
+      @events = Passenger.find(params[:id]).events.published.last
+      if @events.nil?
+        #redirect_to root_path, :alert => "Pas de passager ici" unless user_signed_in? && current_user.admin?
+        redirect_to root_path unless user_signed_in? && current_user.admin?
       end
     end
 

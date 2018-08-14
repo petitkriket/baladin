@@ -9,10 +9,8 @@ meta og: {
 }
 %>
 <% end %>
-
-
-<p id="notice"><%= notice %></p>
-
+<% if user_signed_in? %>
+<% if current_user.try(:admin?) %>
 <p>
   <strong>Name:</strong>
   <%= @passenger.name %>
@@ -28,18 +26,18 @@ meta og: {
   <%= @passenger.shortcut %>
 </p>
 
-<p>
-  <strong>Token:</strong>
-  <%= @passenger.token %>
-</p>
 <%#= image_tag(@event.photo_url(:thumb), alt: 'Image'.to_s) if @event.photo? %>
 <%#= @event.photo_url(:facebook) if @event.photo? %>
+
+<%= link_to 'Edit', edit_passenger_path(@passenger) %> |
+<%= link_to 'Back', passengers_path %>
+<% end %>
+<% end %>
 <p>
   <%= render :file => 'contacts/new' %>
 </p>
-<%= link_to 'Edit', edit_passenger_path(@passenger) %> |
-<%= link_to 'Back', passengers_path %>
-<div id="map" style="height: 400px"></div>
+
+<div id="map" style="height: 75vh"></div>
 <script>
 (function() {
   var $, cupcakeTiles;
@@ -51,28 +49,40 @@ meta og: {
 
   $.getJSON('<%= @passenger.id %>.json', function(data) {
     var geojson, map;
-geojson = L.geoJson(data, {
+    var counter = 0;
+    var pointlist = [];
+
+    geojson = L.geoJson(data, {
     onEachFeature: function(feature, layer) {
-        layer.bindPopup(feature.properties.popupContent);
+        layer.bindPopup(feature.properties.popupContent, {offset: new L.Point(0, -20), keepInView: true});
+
+        counter++;
+        var x = feature.geometry.coordinates[1];
+        var y = feature.geometry.coordinates[0];
+        pointlist.push([x, y]);
 
         if (layer.feature.properties.markerurl == null){
         layer.setIcon(new L.DivIcon({
-        iconSize: new L.Point(82, 32),
-        //iconAnchor:[50, 50],
+        iconSize: new L.Point(64, 64),
+        //iconAnchor:[50, 300],
         className: "divicon",
-        html:'<p class="text-center small text-muted"><i class="fa fa-circle fa-3x" aria-hidden="true"></i>'
+        html:'<p class="text-center small text-muted"> <img src="'+layer.feature.properties.markerurl_fallback+'" class="img-marker img-circle"><code>Etape '+counter+'</code></p>'
+        //html:'<p class="text-center small text-muted"><i class="fa fa-circle fa-3x" aria-hidden="true"></i>'
         //html:'<a href="passengers/'+layer.feature.properties.id+'"><p class="text-center small text-muted"><svg width="32" height="32"><rect width="32" height="32" style="fill:rgb(102,102,102);" /></svg><code>'+feature.properties.passenger+'</code></p></a>'
 
+        //html:'<p class="text-center small text-muted"><i class="fa fa-circle fa-3x" aria-hidden="true"></i><code>Etape '+counter+'</code></p>'
         }));
 
 
        } else {
           console.log('picture presente');
           layer.setIcon(new L.DivIcon({
-          iconSize: new L.Point(82, 32),
-          //iconAnchor:[50, 50],
+          iconSize: new L.Point(64, 64),
+          //iconAnchor:[50, 300],
           className: "divicon",
-          html:'<img src="'+layer.feature.properties.markerurl+'" class="img-marker">'
+          //html:'<img src="'+layer.feature.properties.markerurl+'" class="img-marker img-circle">'
+          html:'<p class="text-center small text-muted"> <img src="'+layer.feature.properties.markerurl+'" class="img-marker img-circle"><code>Etape '+counter+'</code></p>'
+
           }));
             }
   }
@@ -81,6 +91,7 @@ geojson = L.geoJson(data, {
     map = L.map('map').fitBounds(geojson.getBounds());
     cupcakeTiles.addTo(map);
     var markers = L.markerClusterGroup();
+    var pathLine = L.polyline(pointlist, { dashArray: '1,5', color: '#000', weight: 1.3, opacity: 1, lineCap: 'square'}).addTo(map)
     markers.addLayer(geojson);
     markers.addTo(map);
 

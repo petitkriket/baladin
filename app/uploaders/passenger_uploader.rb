@@ -27,11 +27,11 @@ class PassengerUploader < CarrierWave::Uploader::Base
   # def scale(width, height)
   #   # do something
   def size_range
-    800.kilobytes..8.megabytes
+    1.megabytes..8.megabytes
   end
   # Create different versions of your uploaded files:
   version :marker do
-    process resize_to_fill: [32, 32]
+    process resize_to_fill: [36, 36]
   end
 
    version :thumb do

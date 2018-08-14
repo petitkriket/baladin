@@ -112,3 +112,6 @@ https://mdbootstrap.com/javascript/modals/
 https://stackoverflow.com/questions/29002068/rails-i18n-passed-params-get-lost
 
 #redirect to en conservant les messages https://stackoverflow.com/questions/20368717/rails-i-cant-pass-a-validation-error-in-a-redirect
+
+#trad helpers submit buttons
+https://stackoverflow.com/questions/16977371/submit-button-helper-with-i18n-t

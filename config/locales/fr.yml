@@ -11,6 +11,7 @@ fr:
   users: "Utilisateurs"
   passenger: "Passager"
   passengers: "Liste des Passagers"
+  new_passenger: "Nouveau Passager"
   editing_passager: "Edition Passager"
   event: "Etape"
   events: "Etapes"
@@ -21,7 +22,7 @@ fr:
   sign_in: "Connexion"
   edit_account: "Editer son compte"
   sign_out: "Se déconnecter"
-  passenger_number: "Passenger n°"
+  passenger_marker_text: "Passager %{name}"
   location: "en ce moment à"
   exlocation: "était à"
   holder: "avec"
@@ -42,6 +43,21 @@ fr:
         passenger: 'Passager'
         user: 'Utilisateur'
         published: 'Publié'
+  helpers:
+    submit:
+      create: "Créer %{model}"
+      update: "Modifier %{model}"
+      user:
+        create: "Créer mon compte"
+        update: "Mettre à jour mon compte"
+      passenger:
+        create: "Créer le Passager"
+        update: "Modifier le Passager"
+      event:
+        create: "Créer l'étape du Passager"
+        update: "Modifier l'étape du Passager"
+      session:
+        create: "Se connecter"
   notif_mailer:
     registration_email:
       subject:  'Une nouvelle contribution utilisateur attend votre validation'

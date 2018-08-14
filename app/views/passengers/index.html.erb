@@ -1,14 +1,13 @@
-<p id="notice"><%= notice %></p>
 
-<h1><%= t('passengers') %></h1>
-
+<% if user_signed_in? %>
+  <% if current_user.try(:admin?) %>
+  <h1><%= t('passengers') %></h1>
 <table>
   <thead>
     <tr>
       <th>Name</th>
       <th>Photo</th>
       <th>Shortcut</th>
-      <th>Token</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -19,7 +18,6 @@
         <td><%= passenger.name %></td>
         <td><%= image_tag(passenger.photo_url(:marker), alt: 'Image'.to_s) if passenger.photo? %></td>
         <td><%= passenger.shortcut %></td>
-        <td><%= passenger.token %></td>
         <td><%= link_to t('show'), passenger %></td>
         <td><%= link_to t('edit'), edit_passenger_path(passenger) %></td>
         <td><%= link_to t('destroy'), passenger, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -31,6 +29,8 @@
 <br>
 
 <%= link_to 'New Passenger', new_passenger_path %>
+<% end %>
+<% end %>
 
 <div id="map" style="height: 400px"></div>
 <script>
@@ -55,7 +55,8 @@ geojson = L.geoJson(data, {
         iconSize: new L.Point(82, 32),
         //iconAnchor:[50, 50],
         className: "divicon",
-        html:'<a href="passengers/'+layer.feature.properties.id+'"><p class="text-center small text-muted"><i class="fa fa-circle fa-3x fa-marker" aria-hidden="true"></i><code>'+feature.properties.passenger+'</code></p></a>'
+        html:'<a href="passengers/'+layer.feature.properties.id+'"><img src="'+layer.feature.properties.markerurl_fallback+'" class="img-marker" alt="Image"><p class="text-center"><code>'+feature.properties.passenger+'</code></p></a>'
+        //html:'<a href="passengers/'+layer.feature.properties.id+'"><p class="text-center small text-muted"><i class="fa fa-circle fa-3x fa-marker" aria-hidden="true"></i><code>'+feature.properties.passenger+'</code></p></a>'
         //html:'<a href="passengers/'+layer.feature.properties.id+'"><p class="text-center small text-muted"><svg width="32" height="32"><rect width="32" height="32" style="fill:rgb(102,102,102);" /></svg><code>'+feature.properties.passenger+'</code></p></a>'
 
         }));
@@ -67,14 +68,40 @@ geojson = L.geoJson(data, {
           iconSize: new L.Point(82, 32),
           //iconAnchor:[50, 50],
           className: "divicon",
-          html:'<a href="passengers/'+layer.feature.properties.id+'"><img src="'+layer.feature.properties.markerurl+'" class="img-marker img-circle" alt="Image"><p class="text-center"><code>'+feature.properties.passenger+'</code></p></a>'
+          html:'<a href="passengers/'+layer.feature.properties.id+'"><img src="'+layer.feature.properties.markerurl+'" class="img-marker" alt="Image"><p class="text-center"><code>'+feature.properties.passenger+'</code></p></a>'
           }));
             }
   }
 });
 
-    map = L.map('map').fitBounds(geojson.getBounds());
-    map.zoomControl.setPosition('bottomright');
+function isEmpty(obj) {
+    for(var key in obj) {
+        if(obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+}
+
+if(isEmpty(geojson._layers)) {
+  //console.log('layers sont vides');
+  map = L.map('map').setView([30, 0], 2);
+} else {
+  //console.log('markers existent');
+  map = L.map('map').fitBounds(geojson.getBounds());
+}
+
+    // map.on('dragend', function onDragEnd(){
+    //     var width = map.getBounds().getEast() - map.getBounds().getWest();
+    //     var height = map.getBounds().getNorth() - map.getBounds().getSouth();
+    //
+    //     alert (
+    //         'center:' + map.getCenter() +'\n'+
+    //         'width:' + width +'\n'+
+    //         'height:' + height +'\n'+
+    //         'size in pixels:' + map.getSize()
+    //     )});
+
+    map.zoomControl.setPosition('bottomleft');
     cupcakeTiles.addTo(map);
     var markers = L.markerClusterGroup();
     markers.addLayer(geojson);
