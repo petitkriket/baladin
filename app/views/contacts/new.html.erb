@@ -6,26 +6,66 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
+        <h3 class="modal-title" id="exampleModalLabel">Send an Email to <%= @passenger.events.last.user.name %></h3>
       </div>
       <div class="modal-body">
         <%= simple_form_for (@contact), :url => {:action => "create", :id => params[:id], :controller => "contacts"} do |f| %>
         <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+          <%#= f.input :name, required: true, :minlength=>"5" %>
           <%= f.input :name, required: true %>
           <%= f.input :email, required: true %>
           <%= f.input :message, as: :text %>
-          <%= f.input :nickname, hint: 'leave this field blank' %>
+          <%= f.input :nickname, hint: 'leave this field blank', as: :hidden %>
 
-      </div>
+
+
+
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <%= f.button :submit %>
+<!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+  <%= f.button :submit %>
+      </div>
+              <% end %>
       </div>
 
-              <% end %>
+
+       <script>
+
+       jQuery.validator.setDefaults({
+         //debug: true,
+         success: "valid"
+       });
+
+
+       $( "#new_contact" ).validate({
+         lang: '<%= I18n.locale %>',
+         rules: {
+           field: {
+             required: true,
+             email: true
+           }
+         }
+       });
+//        var submitButton = $("#new_contact input[type='submit']").attr("disabled", true);
+//        $("#new_contact input.required").change(function () {
+//         var valid = true;
+//
+//     $.each($("#new_contact input.required"), function (index, value) {
+//         if(!$(value).val()){
+//            valid = false;
+//         }
+//     });
+//     if(valid){
+//         $(submitButton).attr("disabled", false);
+//     }
+//     else{
+//         $(submitButton).attr("disabled", true);
+//     }
+// });
+       </script>
+
     </div>
   </div>
 </div>

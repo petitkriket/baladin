@@ -44,7 +44,7 @@ gem 'rails-assets-leaflet.markercluster', source: 'https://rails-assets.org'
 gem 'gmaps-autocomplete-rails'
 gem 'metamagic'
 gem 'mail_form'
-
+gem "jquery-validation-rails"
 group :development do
   gem 'rails_layout'
 end

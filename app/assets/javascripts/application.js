@@ -16,6 +16,8 @@
 //= require leaflet
 //= require leaflet.markercluster
 //= require gmaps-auto-complete
+//= require jquery.validate
+//= require jquery.validate.additional-methods
 //= require_tree .
 
 function initializeAutocomplete(id) {

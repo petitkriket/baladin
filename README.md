@@ -115,3 +115,10 @@ https://stackoverflow.com/questions/29002068/rails-i18n-passed-params-get-lost
 
 #trad helpers submit buttons
 https://stackoverflow.com/questions/16977371/submit-button-helper-with-i18n-t
+
+#form validation clientside
+https://stackoverflow.com/questions/19116306/javascript-jquery-validation-on-required-fields
+http://jsfiddle.net/bradleytrager/4puBy/
+
+http://codkal.com/add-jquery-validation-rails-5-forms-without-gem/
+https://jqueryvalidation.org/email-method/
