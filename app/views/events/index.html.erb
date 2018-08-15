@@ -1,60 +1,55 @@
-<h1>Events</h1>
+  <div class="container">
+<h1><%= t('events') %></h1>
+<%= link_to 'New Event', new_event_path, class: 'btn btn-default' %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Address</th>
-      <% if user_signed_in? && current_user.try(:admin?) %>
-      <th>City</th>
-      <th>Country</th>
-      <th>User</th>
-      <% end %>
-      <th>created at</th>
-      <th>Photo</th>
-      <th>Passenger</th>
-      <th>Published</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
     <% @events.each do |event| %>
-      <tr>
-        <td><%= event.address %></td>
-        <% if user_signed_in? && current_user.try(:admin?) %>
-        <td><%= event.city %></td>
-        <td><%= event.country %></td>
-        <td><%= event.user.name %></td>
+  <div class="product">
+      <div class="img-container">
+        <% if event.photo? %>
+        <%= image_tag(event.photo_url(:medium), alt: 'Image'.to_s)  %>
+        <% else %>
+        <p class="vcenter">
+          <i class="fa fa-plus fa-3x text-muted"></i><br>
+          <span class="add_user_img"><%= link_to 'Ajoutez votre photo du Passager', edit_event_path(event), class: 'text-muted' %></span>
+        </p>
         <% end %>
+      </div>
+      <div class="product-info">
+        <div class="product-content">
+          <%= image_tag(event.passenger.photo_url(:marker), alt: 'Image'.to_s, class: 'passenger_thumb img-circle pull-left')  %>
+          <h4><%= t('passenger') %><%= event.passenger.name %></h4>
+            <p><%= t('address') %>: <%= event.address %></p>
+            <p><%= t('saved') %>: <%= event.created_at.strftime("%d/%m/%Y") %></p>
+            <% if user_signed_in? && current_user.try(:admin?) %>
+            <p><%= t('passenger') %>: <%= event.user.name %></p>
+            <p>Coordonées : <%= event.latitude %> <%= event.longitude %> </p>
+            <% end %>
+          <div class="buttons">
+            <%= link_to 'Show', event.passenger, class: "btn btn-default" %>
+            <%= link_to 'Edit', edit_event_path(event), class: 'btn btn-primary' %>
+          <% if user_signed_in? && current_user.try(:admin?) %>
+              <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+            <% end %>
 
-        <td><%= event.created_at %></td>
-        <td><%= image_tag(event.photo_url(:marker), alt: 'Image'.to_s) if event.photo? %></td>
-        <td><%= event.passenger.name %></td>
-        <td><% if event.published %>
-          <i class="fa fa-check-circle fa-2x text-success" aria-hidden="true"></i>
-          <% else %>
-          <i class="fa fa-times-circle fa-2x text-danger" aria-hidden="true"></i>
-          <% end %>
-        </td>
-        <td><%= link_to 'Show', event.passenger %></td>
-        <td><%= link_to 'Edit', edit_event_path(event) %></td>
+            <% if event.published && current_user.try(:user?) %>
+            <div id="share">
+              <a class="fa fa-facebook" href="https://www.facebook.com/share.php?u=<%= url_for(passenger_url(locale, event.passenger_id)) %>&title=<%= event.passenger.name %>" target="blank"></a>
+              <a class="fa fa-twitter" href="https://twitter.com/intent/tweet?status=<%= event.passenger.name %>+<%= url_for(passenger_url(locale, event.passenger_id)) %>" target="blank"></a>
+              <a class="fa fa-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=<%= url_for(passenger_url(locale, event.passenger_id)) %>&title=<%= event.passenger.name %>&source=<%= url_for(root_url) %>" target="blank"></a>
+            </div>
+              <% end %>
 
-        <% if user_signed_in? && current_user.try(:admin?) %>
-          <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
+              <% if event.published == false && current_user.try(:admin?) %>
+              <p class="text-danger"><i class="fa fa-times-circle fa-2x" aria-hidden="true"></i> En attente de validation.</p>
+              <% elsif current_user.try(:admin?) %>
+              <p class="text-success"><i class="fa fa-check-circle fa-2x" aria-hidden="true"></i>Publié<p>
 
-        <td>
-          <div id="share">
-            <a class="facebook" href="https://www.facebook.com/share.php?u=<%= url_for(passenger_url(locale, event.passenger_id)) %>&title=<%= event.passenger.name %>" target="blank"><i class="fa fa-facebook fa-2x"></i></a>
-            <a class="twitter" href="https://twitter.com/intent/tweet?status=<%= event.passenger.name %>+<%= url_for(passenger_url(locale, event.passenger_id)) %>" target="blank"><i class="fa fa-twitter fa-2x"></i></a>
-            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=<%= url_for(passenger_url(locale, event.passenger_id)) %>&title=<%= event.passenger.name %>&source=<%= url_for(root_url) %>" target="blank"><i class="fa fa-linkedin fa-2x"></i></a>
+              <% end %>
+
           </div>
-        </td>
-      </tr>
+        </div>
+      </div>
+    </div>
+
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Event', new_event_path %>
+      </div>

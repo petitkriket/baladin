@@ -1,9 +1,8 @@
 class Users::RegistrationsController < Devise::RegistrationsController
    before_action :configure_sign_up_params, only: [:create]
    before_action :configure_account_update_params, only: [:update]
-   before_action :check_shortcut, only: [:new]
+   prepend_before_action :check_shortcut, only: [:new]
    rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-
   # GET /resource/sign_up
    def new
      if  Passenger.where(shortcut: params[:t]).any?
@@ -86,22 +85,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
 
   def check_shortcut
-  #@passenger = Passenger.where(shortcut: params[:q]).any?
   passenger = Passenger.where(shortcut: params[:t]).any?
-  #@passenger = Passenger.where(shortcut: params[:t]).first.id
+  if user_signed_in? && passenger == true
+    redirect_to new_event_path(shortcut: params[:t])
+    flash[:notice] = "Merci d'enregistrer votre nouveau Passager."
+ end
 
      unless passenger == true
        redirect_to(root_path)
        flash[:alert] = 'Vous devez avoir recu un Passager pour participer.'
     end
  end
-
- def already_registred
- if current_user.try(:admin?)
-      redirect_to(events_path)
-      flash[:info] = 'Coucou.'
-   end
-end
 
   def record_not_found
     redirect_to(root_path)

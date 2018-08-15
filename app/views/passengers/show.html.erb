@@ -58,7 +58,7 @@
         iconSize: new L.Point(64, 64),
         //iconAnchor:[50, 300],
         className: "divicon",
-        html:'<p class="text-center small text-muted"> <img src="'+layer.feature.properties.markerurl_fallback+'" class="img-marker img-circle"><code>Etape '+counter+'</code></p>'
+        html:'<p class="text-center small text-muted"> <img src="'+layer.feature.properties.markerurl_fallback+'" class="img-marker img-circle"><code><%= t('event') %> '+counter+'</code></p>'
         //html:'<p class="text-center small text-muted"><i class="fa fa-circle fa-3x" aria-hidden="true"></i>'
         //html:'<a href="passengers/'+layer.feature.properties.id+'"><p class="text-center small text-muted"><svg width="32" height="32"><rect width="32" height="32" style="fill:rgb(102,102,102);" /></svg><code>'+feature.properties.passenger+'</code></p></a>'
 

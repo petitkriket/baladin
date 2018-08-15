@@ -2,6 +2,7 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   before_action :admin_only, only: [:show, :destroy]
+  before_action :check_shortcut, only: [:new]
 
   # GET /events
   # GET /events.json
@@ -21,12 +22,9 @@ end
   # GET /events/new
   def new
     @event = Event.new
-
-
     #
     if params[:shortcut]
     @passenger = Passenger.find_by(shortcut: params[:shortcut]).id
-    #Rails.logger.debug("DEBUG 1: #{@passenger}")
     @event.passenger_id = @passenger
     end
     #
@@ -100,6 +98,14 @@ end
     def admin_only
       unless user_signed_in? && current_user.admin?
         redirect_to passenger_path(id: @event.passenger_id)
+      end
+    end
+
+    def check_shortcut
+    passenger = Passenger.where(shortcut: params[:shortcut]).any?
+       unless passenger == true || current_user.admin?
+         redirect_to(events_path)
+         flash[:alert] = "L'adresse saisie sur le Passager est incorrecte. Merci de saisir l'adresse gravée sur le Passager pour inscrire votre nouvelle participation."
       end
     end
 
