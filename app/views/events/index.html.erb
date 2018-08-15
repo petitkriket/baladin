@@ -4,12 +4,14 @@
   <thead>
     <tr>
       <th>Address</th>
+      <% if user_signed_in? && current_user.try(:admin?) %>
       <th>City</th>
       <th>Country</th>
+      <th>User</th>
+      <% end %>
       <th>created at</th>
       <th>Photo</th>
       <th>Passenger</th>
-      <th>User</th>
       <th>Published</th>
       <th colspan="3"></th>
     </tr>
@@ -19,26 +21,33 @@
     <% @events.each do |event| %>
       <tr>
         <td><%= event.address %></td>
+        <% if user_signed_in? && current_user.try(:admin?) %>
         <td><%= event.city %></td>
         <td><%= event.country %></td>
-        <td><%= event.created_at %></td>
-        <td><%= event.photo %></td>
-        <td><%= event.passenger.name %></td>
         <td><%= event.user.name %></td>
-        <td><%= event.published %></td>
-        <td><%= link_to 'Show', event %></td>
+        <% end %>
+
+        <td><%= event.created_at %></td>
+        <td><%= image_tag(event.photo_url(:marker), alt: 'Image'.to_s) if event.photo? %></td>
+        <td><%= event.passenger.name %></td>
+        <td><% if event.published %>
+          <i class="fa fa-check-circle fa-2x text-success" aria-hidden="true"></i>
+          <% else %>
+          <i class="fa fa-times-circle fa-2x text-danger" aria-hidden="true"></i>
+          <% end %>
+        </td>
+        <td><%= link_to 'Show', event.passenger %></td>
         <td><%= link_to 'Edit', edit_event_path(event) %></td>
 
-        <% if user_signed_in? %>
-          <% if current_user.try(:admin?) %>
+        <% if user_signed_in? && current_user.try(:admin?) %>
           <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <% end %>
         <% end %>
+
         <td>
           <div id="share">
-            <a class="facebook" href="https://www.facebook.com/share.php?u={{url}}&title={{title}}" target="blank"><i class="fa fa-facebook fa-2x"></i></a>
-            <a class="twitter" href="https://twitter.com/intent/tweet?status={{title}}+{{url}}" target="blank"><i class="fa fa-twitter fa-2x"></i></a>
-            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url={{url}}&title={{title}}&source={{source}}" target="blank"><i class="fa fa-linkedin fa-2x"></i></a>
+            <a class="facebook" href="https://www.facebook.com/share.php?u=<%= url_for(passenger_url(locale, event.passenger_id)) %>&title=<%= event.passenger.name %>" target="blank"><i class="fa fa-facebook fa-2x"></i></a>
+            <a class="twitter" href="https://twitter.com/intent/tweet?status=<%= event.passenger.name %>+<%= url_for(passenger_url(locale, event.passenger_id)) %>" target="blank"><i class="fa fa-twitter fa-2x"></i></a>
+            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=<%= url_for(passenger_url(locale, event.passenger_id)) %>&title=<%= event.passenger.name %>&source=<%= url_for(root_url) %>" target="blank"><i class="fa fa-linkedin fa-2x"></i></a>
           </div>
         </td>
       </tr>

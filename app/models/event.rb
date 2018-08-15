@@ -2,6 +2,7 @@ class Event < ApplicationRecord
   belongs_to :passenger
   belongs_to :user, optional: true
   validates :address, presence: true
+  validates :passenger_id, :uniqueness => {:scope=>:user_id}
   scope :published, -> { where(:published => true)}
   #
   mount_uploader :photo, EventUploader
@@ -31,8 +32,6 @@ class Event < ApplicationRecord
     NotifMailer.event_activation_previous_user_email(@previous_user, @passenger, @event).deliver if self.published
     end
 
-    #Rails.logger.debug("mail envoyé au porteur précedent #{@previous_user.name}") unless @previous_user.nil?
-    #Rails.logger.debug("concernant le passager #{self[:passenger_id]}")
   end
 
   end

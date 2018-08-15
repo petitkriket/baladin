@@ -9,28 +9,22 @@ meta og: {
 }
 %>
 <% end %>
+
 <% if user_signed_in? %>
 <% if current_user.try(:admin?) %>
-<p>
-  <strong>Name:</strong>
-  <%= @passenger.name %>
-</p>
-
-<p>
-  <strong>Photo:</strong>
+<p></p>
+<div class="col-sm-2">
   <%= image_tag(@passenger.photo_url(:thumb), alt: 'Image'.to_s) if @passenger.photo? %>
-</p>
-
-<p>
-  <strong>Shortcut:</strong>
-  <%= @passenger.shortcut %>
-</p>
+  <strong>Name:</strong> <%= @passenger.name %>
+  <strong>Shortcut:</strong> <%= @passenger.shortcut %>
+  <br>
+  <%= link_to 'Edit', edit_passenger_path(@passenger), class: "btn btn-primary" %> |
+  <%= link_to(t('back'), passengers_path, class: "btn btn-default") %>
+</div>
 
 <%#= image_tag(@event.photo_url(:thumb), alt: 'Image'.to_s) if @event.photo? %>
 <%#= @event.photo_url(:facebook) if @event.photo? %>
 
-<%= link_to 'Edit', edit_passenger_path(@passenger) %> |
-<%= link_to 'Back', passengers_path %>
 <% end %>
 <% end %>
 <p>
@@ -81,14 +75,30 @@ meta og: {
           //iconAnchor:[50, 300],
           className: "divicon",
           //html:'<img src="'+layer.feature.properties.markerurl+'" class="img-marker img-circle">'
-          html:'<p class="text-center small text-muted"> <img src="'+layer.feature.properties.markerurl+'" class="img-marker img-circle"><code>Etape '+counter+'</code></p>'
+          html:'<p class="text-center small text-muted"> <img src="'+layer.feature.properties.markerurl+'" class="img-marker img-circle"><code><%= t('event') %> '+counter+'</code></p>'
 
           }));
             }
   }
 });
 
-    map = L.map('map').fitBounds(geojson.getBounds());
+function isEmpty(obj) {
+    for(var key in obj) {
+        if(obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+}
+
+if(isEmpty(geojson._layers)) {
+  //console.log('layers sont vides');
+  map = L.map('map').setView([30, 0], 2);
+} else {
+  //console.log('markers existent');
+  map = L.map('map').fitBounds(geojson.getBounds());
+}
+
+    map.zoomControl.setPosition('bottomleft');
     cupcakeTiles.addTo(map);
     var markers = L.markerClusterGroup();
     var pathLine = L.polyline(pointlist, { dashArray: '1,5', color: '#000', weight: 1.3, opacity: 1, lineCap: 'square'}).addTo(map)

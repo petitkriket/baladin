@@ -122,3 +122,6 @@ http://jsfiddle.net/bradleytrager/4puBy/
 
 http://codkal.com/add-jquery-validation-rails-5-forms-without-gem/
 https://jqueryvalidation.org/email-method/
+
+#font awesome links
+https://stackoverflow.com/questions/34077072/referencing-font-awesome-icons-in-rails-link-to-statements

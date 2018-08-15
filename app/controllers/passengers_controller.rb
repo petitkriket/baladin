@@ -23,7 +23,7 @@ class PassengersController < ApplicationController
             markerurl: event.photo.marker.url,
             markerurl_fallback: event.passenger.photo.marker.url,
             id: event.passenger.id,
-            passenger: "#{marker_name}",
+            passenger: "#{marker_name}"
             }
           }
       end
@@ -111,7 +111,7 @@ end
 
     respond_to do |format|
       if @passenger.save
-        format.html { redirect_to @passenger, notice: 'Passenger was successfully created.' }
+        format.html { redirect_to passengers_path, notice: 'Passenger was successfully created.' }
         format.json { render :show, status: :created, location: @passenger }
       else
         format.html { render :new }

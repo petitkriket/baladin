@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :admin_only, only: [:show, :destroy]
 
   # GET /events
   # GET /events.json
@@ -33,10 +34,6 @@ end
 
   # GET /events/1/edit
   def edit
-    #@bordel2 = User.includes(:events).where(events: { passenger_id: @event.passenger_id, published: true })[-2].name
-    #@bordel2 = User.includes(:events).where(events: { passenger_id: @event.passenger_id, published: true }).first.name
-    #  Rails.logger.debug("prop 2 #{@bordel2}")
-
   end
 
   # POST /events
@@ -56,7 +53,7 @@ end
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
+        format.html { redirect_to passenger_path(id: @event.passenger_id), notice: "Event was successfully created" }
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new }
@@ -70,7 +67,7 @@ end
   def update
     respond_to do |format|
       if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+        format.html { redirect_to passenger_path(id: @event.passenger_id), notice: "Event was successfully updated" }
         format.json { render :show, status: :ok, location: @event }
       else
         format.html { render :edit }
@@ -99,4 +96,11 @@ end
     def event_params
       params.require(:event).permit(:address, :city, :country, :latitude, :longitude, :photo, :photo_cache,:remove_photo, :published, :passenger_id, :user_id)
     end
+
+    def admin_only
+      unless user_signed_in? && current_user.admin?
+        redirect_to passenger_path(id: @event.passenger_id)
+      end
+    end
+
 end
