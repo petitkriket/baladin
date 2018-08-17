@@ -131,3 +131,8 @@ http://ionrails.com/2014/12/21/using-actionmailerpreview-with-devise-mailers-in-
 
 #img upload
 https://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-uploaded
+
+$ heroku buildpacks:add -i 1 https://github.com/heroku/heroku-buildpack-activestorage-preview
+$heroku run bash
+homebrew update yarn
+bundle gem update
