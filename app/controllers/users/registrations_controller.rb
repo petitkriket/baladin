@@ -3,6 +3,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
    before_action :configure_account_update_params, only: [:update]
    prepend_before_action :check_shortcut, only: [:new]
    rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+   invisible_captcha only: [:create]
+
   # GET /resource/sign_up
    def new
      if  Passenger.where(shortcut: params[:t]).any?

@@ -128,3 +128,6 @@ https://stackoverflow.com/questions/34077072/referencing-font-awesome-icons-in-r
 
 #devise email tester
 http://ionrails.com/2014/12/21/using-actionmailerpreview-with-devise-mailers-in-rails-4-1/
+
+#img upload
+https://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-uploaded

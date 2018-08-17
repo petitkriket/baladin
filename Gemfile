@@ -45,6 +45,8 @@ gem 'gmaps-autocomplete-rails'
 gem 'metamagic'
 gem 'mail_form'
 gem "jquery-validation-rails"
+gem 'invisible_captcha'
+
 group :development do
   gem 'rails_layout'
 end

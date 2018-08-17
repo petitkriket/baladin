@@ -16,7 +16,10 @@
       </div>
 
 
-      <%= f.input :photo %>
+      <%#= f.input :photo %>
+      <%= f.input :photo, :as => :file, :input_html => {:onchange => "loadFile(event)"} %>
+      <img id="output"/>
+
       <%= f.hidden_field :passenger_id, value: @passenger %>
       <%= hidden_field_tag :t, params[:t] %>
     <% end %>
@@ -38,6 +41,7 @@
       <%= f.password_field :password_confirmation, class: 'form-control' %>
     </div>
       <%= f.hidden_field :locale, value: I18n.locale %>
+      <%= invisible_captcha sentence_for_humans: "who is it?" %>
 
      <%= f.submit 'Sign up', :class => 'button right' %>
 
@@ -247,5 +251,17 @@ PlaceFirefox(position.coords.latitude, position.coords.longitude)
 placeMarker(position.coords.latitude)
 });
 }
+
+var loadFile = function(event) {
+  var output = document.getElementById('output');
+  output.src = URL.createObjectURL(event.target.files[0]);
+
+  output.onload = function (e) {
+           $('#output')
+              .attr('src', e.target.result)
+              .width(50)
+              .height(50);
+          };
+};
 
 </script>
