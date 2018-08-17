@@ -6,11 +6,11 @@ class Contact < MailForm::Base
   attribute :nickname,  :captcha  => true
 
   def headers
+    Rails.logger.debug("nom fourni: #{self.name}")
+    Rails.logger.debug("email fourni: #{self.email}")
+    Rails.logger.debug("message: #{self.message}")
+    Rails.logger.debug("Email destination: #{self.user}")
 
-
-    Rails.logger.debug("transmis model: #{@user}")
-    Rails.logger.debug("transmis model: #{@event}")
-    Rails.logger.debug("transmis model: #{self.user}")
     {
       :subject => "Contact Form",
       :to => self.user,

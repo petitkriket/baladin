@@ -1,55 +1,80 @@
-  <div class="container">
-<h1><%= t('events') %></h1>
-<%= link_to 'New Event', new_event_path, class: 'btn btn-default' %>
+<div class="container">
+  <h1><%= t('events') %></h1>
+  <% if user_signed_in? && current_user.try(:admin?) %>
+    <%= link_to 'New Event', new_event_path, class: 'btn btn-default' %>
+  <% end %>
+  <%= link_to t('edit_account'), edit_user_registration_path, class: 'btn btn-default' %>
 
-    <% @events.each do |event| %>
-  <div class="product">
+  <% @events.each do |event| %>
+    <div class="product">
       <div class="img-container">
         <% if event.photo? %>
-        <%= image_tag(event.photo_url(:medium), alt: 'Image'.to_s)  %>
+          <%= image_tag(event.photo_url(:medium), alt: 'Image'.to_s) %>
         <% else %>
-        <p class="vcenter">
-          <i class="fa fa-plus fa-3x text-muted"></i><br>
-          <span class="add_user_img"><%= link_to 'Ajoutez votre photo du Passager', edit_event_path(event), class: 'text-muted' %></span>
-        </p>
+          <p class="vcenter">
+            <i class="fa fa-plus fa-3x text-muted"></i><br>
+            <span class="add_user_img"><%= link_to 'Ajoutez votre photo du Passager', edit_event_path(event), class: 'text-muted' %></span>
+          </p>
         <% end %>
       </div>
       <div class="product-info">
         <div class="product-content">
-          <%= image_tag(event.passenger.photo_url(:marker), alt: 'Image'.to_s, class: 'passenger_thumb img-circle pull-left')  %>
-          <h4><%= t('passenger') %><%= event.passenger.name %></h4>
-            <p><%= t('address') %>: <%= event.address %></p>
-            <p><%= t('saved') %>: <%= event.created_at.strftime("%d/%m/%Y") %></p>
-            <% if user_signed_in? && current_user.try(:admin?) %>
-            <p><%= t('passenger') %>: <%= event.user.name %></p>
-            <p>Coordonées : <%= event.latitude %> <%= event.longitude %> </p>
-            <% end %>
-          <div class="buttons">
-            <%= link_to 'Show', event.passenger, class: "btn btn-default" %>
-            <%= link_to 'Edit', edit_event_path(event), class: 'btn btn-primary' %>
+          <%= image_tag(event.passenger.photo_url(:marker), alt: 'Image'.to_s, class: 'passenger_thumb img-circle pull-left') %>
+          <h4><%= link_to "#{t('passenger')} #{event.passenger.name}", passenger_path(event.passenger) %></h4>
+          <p><%= t('address') %>:
+            <%= event.address %></p>
+          <p><%= t('saved') %>:
+            <%= event.created_at.strftime("%d/%m/%Y") %></p>
           <% if user_signed_in? && current_user.try(:admin?) %>
+            <p><%= t('passenger') %>:
+              <%= event.user.name %></p>
+            <p>Coordonées :
+              <%= event.latitude %>
+              <%= event.longitude %>
+            </p>
+          <% end %>
+
+          <div class="buttons">
+            <% unless event.photo.blank? %>
+              <%= link_to 'Modifier photo', edit_event_path(event), class: 'btn btn-primary' %>
+            <% end %>
+            <% if user_signed_in? && current_user.try(:admin?) %>
               <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
             <% end %>
 
-            <% if event.published && current_user.try(:user?) %>
-            <div id="share">
-              <a class="fa fa-facebook" href="https://www.facebook.com/share.php?u=<%= url_for(passenger_url(locale, event.passenger_id)) %>&title=<%= event.passenger.name %>" target="blank"></a>
-              <a class="fa fa-twitter" href="https://twitter.com/intent/tweet?status=<%= event.passenger.name %>+<%= url_for(passenger_url(locale, event.passenger_id)) %>" target="blank"></a>
-              <a class="fa fa-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=<%= url_for(passenger_url(locale, event.passenger_id)) %>&title=<%= event.passenger.name %>&source=<%= url_for(root_url) %>" target="blank"></a>
-            </div>
+            <% if event.published.blank? %>
+              <% if current_user.try(:admin?) %>
+                <p class="text-danger">
+                  <i class="fa fa-times-circle fa-2x" aria-hidden="true"></i>
+                  Contribution en attente de validation.</p>
+              <% else %>
+                <p class="text-danger">
+                  <i class="fa fa-times-circle fa-2x" aria-hidden="true"></i>
+                  Votre contribution est en attente de validation.</p>
               <% end %>
 
-              <% if event.published == false && current_user.try(:admin?) %>
-              <p class="text-danger"><i class="fa fa-times-circle fa-2x" aria-hidden="true"></i> En attente de validation.</p>
-              <% elsif current_user.try(:admin?) %>
-              <p class="text-success"><i class="fa fa-check-circle fa-2x" aria-hidden="true"></i>Publié<p>
+              <% elsif current_user.try(:admin?) && event.published %>
+                <p class="text-success">
+                  <i class="fa fa-check-circle fa-2x" aria-hidden="true"></i>
+                  Contribution publiée<p>
+                  <% else %>
+                    <p class="text-success">
+                      <i class="fa fa-check-circle fa-2x" aria-hidden="true"></i>
+                      Votre contribution est publiée et visible par tous<p>
+                      <% end %>
 
-              <% end %>
+                      <% if event.published && current_user.try(:user?) %>
+                        <div id="share">
+                          <a class="fa fa-facebook" href="https://www.facebook.com/share.php?u=<%= url_for(passenger_url(locale, event.passenger_id)) %>&title=<%= event.passenger.name %>" target="blank"></a>
+                          <a class="fa fa-twitter" href="https://twitter.com/intent/tweet?status=<%= event.passenger.name %>+<%= url_for(passenger_url(locale, event.passenger_id)) %>" target="blank"></a>
+                          <a class="fa fa-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=<%= url_for(passenger_url(locale, event.passenger_id)) %>&title=<%= event.passenger.name %>&source=<%= url_for(root_url) %>" target="blank"></a>
+                        </div>
+                      <% end %>
 
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            <% end %>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <% end %>
-      </div>

@@ -7,7 +7,8 @@
     <%= t('.greeting', name: @user.name) %>
     <br>
     <br>
-    <%= t('.participation', passenger_name: @passenger.name, name: @user.name) %>
+    <%= t('.participation', passenger_name: @passenger.name, name: @passenger.events.last.user.name) %>
+
 
     <%= t('.view') %><%= link_to t(".link"), passenger_url(locale, @event.passenger_id), target: "_blank" %>
     <br><br>

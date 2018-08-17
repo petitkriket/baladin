@@ -51,7 +51,7 @@ geojson = L.geoJson(data, {
         iconSize: new L.Point(82, 32),
         //iconAnchor:[50, 50],
         className: "divicon",
-        html:'<a href="passengers/'+layer.feature.properties.id+'"><img src="'+layer.feature.properties.markerurl_fallback+'" class="img-marker" alt="Image"><p class="text-center"><code>'+feature.properties.passenger+'</code></p></a>'
+        html:'<a href="'+layer.feature.properties.link+'"><img src="'+layer.feature.properties.markerurl_fallback+'" class="img-marker" alt="Image"><p class="text-center"><code>'+feature.properties.passenger+'</code></p></a>'
 
         }));
 
@@ -62,7 +62,7 @@ geojson = L.geoJson(data, {
           iconSize: new L.Point(82, 32),
           //iconAnchor:[50, 50],
           className: "divicon",
-          html:'<a href="passengers/'+layer.feature.properties.id+'"><img src="'+layer.feature.properties.markerurl+'" class="img-marker" alt="Image"><p class="text-center"><code>'+feature.properties.passenger+'</code></p></a>'
+          html:'<a href="'+layer.feature.properties.link+'"><img src="'+layer.feature.properties.markerurl+'" class="img-marker" alt="Image"><p class="text-center"><code>'+feature.properties.passenger+'</code></p></a>'
           }));
             }
   }

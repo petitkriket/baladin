@@ -1,4 +1,5 @@
-<% unless @passenger.events.last.nil? %>
+<% unless @passenger.events.last.nil? || current_user == @passenger.events.last.user %>
+
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal">
   Contacter porteur
 </button>
@@ -26,7 +27,7 @@
 
       <div class="modal-footer">
 <!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-  <%= f.button :submit %>
+  <%= f.button :submit, class: "btn-primary" %>
       </div>
               <% end %>
       </div>
@@ -40,31 +41,31 @@
        });
 
 
-       $( "#new_contact" ).validate({
-         lang: '<%= I18n.locale %>',
-         rules: {
-           field: {
-             required: true,
-             email: true
-           }
-         }
-       });
-//        var submitButton = $("#new_contact input[type='submit']").attr("disabled", true);
-//        $("#new_contact input.required").change(function () {
-//         var valid = true;
-//
-//     $.each($("#new_contact input.required"), function (index, value) {
-//         if(!$(value).val()){
-//            valid = false;
-//         }
-//     });
-//     if(valid){
-//         $(submitButton).attr("disabled", false);
-//     }
-//     else{
-//         $(submitButton).attr("disabled", true);
-//     }
-// });
+ $( "#new_contact" ).validate({
+   lang: '<%= I18n.locale %>',
+   rules: {
+     field: {
+       required: true,
+       email: true
+     }
+   }
+ });
+       var submitButton = $("#new_contact input[type='submit']").attr("disabled", true);
+       $("#new_contact input.required").change(function () {
+        var valid = true;
+
+    $.each($("#new_contact input.required"), function (index, value) {
+        if(!$(value).val()){
+           valid = false;
+        }
+    });
+    if(valid){
+        $(submitButton).attr("disabled", false);
+    }
+    else{
+        $(submitButton).attr("disabled", true);
+    }
+});
        </script>
 
     </div>

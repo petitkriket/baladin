@@ -9,6 +9,6 @@ class NotifMailerPreview < ActionMailer::Preview
   end
 
   def event_previous_mail_preview
-    NotifMailer.event_activation_previous_user_email(User.last, Passenger.first, Event.last)
+    NotifMailer.event_activation_previous_user_email(User.first, Passenger.first, Event.last)
   end
 end

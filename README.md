@@ -125,3 +125,6 @@ https://jqueryvalidation.org/email-method/
 
 #font awesome links
 https://stackoverflow.com/questions/34077072/referencing-font-awesome-icons-in-rails-link-to-statements
+
+#devise email tester
+http://ionrails.com/2014/12/21/using-actionmailerpreview-with-devise-mailers-in-rails-4-1/

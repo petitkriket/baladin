@@ -68,9 +68,13 @@ fr:
     event_activation_email:
       subject:  'Votre participation est en ligne !'
       greeting: 'Bonjour %{name},'
-      participation: 'Votre participation au parcours du Passager %{passenger_name} est en ligne.'
+      participation: 'Votre participation au parcours du Passager %{passenger_name} est en ligne !'
       view: "Vous pouvez la voir en cliquant sur ce "
       link: 'lien.'
+      action_call_photo: "Si vous n'avez pas attaché de photo à votre contribution, vous pouvez encore le faire en vous connectant à votre"
+      personal_space: "espace personnel"
+      hint_photo: "Cette photo sera alors ajoutée aux images sur la carte du parcours de votre Passager."
+      online_photo: "Merci d'avoir ajouté une photo au parcours du Passager."
       sharing: 'Vous pouvez la partager en cliquant sur les liens ci dessous:'
       twitter:  "J'ai donné le Passenger %{passenger_name}à quelqu'un !"
     event_activation_previous_user_email:
@@ -104,9 +108,20 @@ fr:
       unconfirmed: "Vous devez confirmer votre adresse e-mail avant de pouvoir continuer."
     mailer:
       confirmation_instructions:
-        subject: "Instructions de confirmation"
+        subject: "Instructions de confirmation | Les Passagers"
+        welcome_user: "Bienvenue %{name} !"
+        confirmation_call: "Merci de confirmer votre adresse e-mail en cliquant sur le lien ci dessous"
+        contribution: "Votre contribution est en attente de validation et vous recevrez un e-mail dès qu'elle sera en ligne."
+        call_action: "En attendant vous pouvez prendre votre photo du Passager et l'ajouter via votre espace personnel. Cette photo sera ajoutée au parcours du Passager avec celle des autres contributeurs une fois votre contribution validée."
+        call_action2: "Si vous avez déjà proposé votre image du Passager, sachez que vous pouvez la modifier à tout moment via votre espace personnel."
+        confirm_button: "Confirmer mon compte et acceder à votre espace personnel."
       reset_password_instructions:
-        subject: "Instructions pour réinitialiser votre mot de passe"
+        subject: "Réinitialiser votre mot de passe | Les Passagers"
+        welcome_user: "Bonjour %{name} !"
+        request:  "Quelqu'un a demandé un lien pour changer votre mot de passe. Vous pouvez le faire via le lien ci-dessous."
+        change: "Changer mon mot de passe"
+        notme: "Si vous ne l'avez pas demandé, veuillez ignorer cet email."
+        nochange: "Votre mot de passe ne changera pas si vous ne cliquez pas sur le lien ci-dessus pour en créer un nouveau."
       unlock_instructions:
         subject: "Instructions pour débloquer votre compte"
       email_changed:

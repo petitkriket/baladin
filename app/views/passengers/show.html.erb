@@ -1,5 +1,5 @@
 <% unless @event.nil? %>
-<% meta og: { image: @event.photo_url(:facebook) } %>
+<% meta og: { image: @event.passenger.photo_url(:facebook) } %>
 <%
  meta og: {
    image:  {
@@ -9,6 +9,7 @@
  }
 %>
 <%#= image_tag(@event.photo_url(:thumb), alt: 'Image'.to_s) if @event.photo? %>
+<%#= image_tag(@event.passenger.photo_url(:thumb), alt: 'Image'.to_s) if @event.passenger.photo? %>
 <%#= @event.photo_url(:facebook) if @event.photo? %>
 
 <% end %>

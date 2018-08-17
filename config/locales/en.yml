@@ -63,8 +63,12 @@ en:
     event_activation_email:
       subject:  'Your participation is online !'
       greeting: 'Hello %{name},'
-      participation: "Your participation in the Passenger's %{passenger_name} journey is online."
+      participation: "Your participation in the Passenger's %{passenger_name} journey is online !"
       view: "You can see it by clicking on this "
+      action_call_photo: "If you have not attached a photo to your contribution, you can still do it by connecting to your"
+      personal_space: "personnal space"
+      hint_photo: "This photo will be then added to the images on the Passenger's route map page."
+      online_photo: "Thank you for adding a photo to the Passenger's route."
       link: 'link'
       sharing: 'You can share it by clicking on the links below:'
       twitter:  "I've given the Passenger %{passenger_name} to someone !"
@@ -100,8 +104,19 @@ en:
     mailer:
       confirmation_instructions:
         subject: "Confirmation instructions"
+        welcome_user: "Welcome %{name} !"
+        confirmation_call: "Please confirm your account email through the link below:"
+        contribution: "Your contribution is pending validation and you will receive an e-mail as soon as it is validated and live."
+        call_action: "In the meantime you can take your photo of the Passenger and add it via your personal space. This photo will be added to the Passenger's itinerary with the other contributors photos once your contribution has been validated."
+        call_action2: "If you have already submitted your Passenger image, please note that you can change it at any time via your personal space"
+        confirm_button: "Confirm my account and access your personal space"
       reset_password_instructions:
-        subject: "Reset password instructions"
+        subject: "Reset your password | The Passengers"
+        welcome_user: "Bonjour %{name} !"
+        request:  "Someone has requested a link to change your password. You can do this through the link below."
+        change: "Change my password"
+        notme: "If you didn't request this, please ignore this email."
+        nochange: "Your password won't change until you access the link above and create a new one."
       unlock_instructions:
         subject: "Unlock instructions"
       email_changed:

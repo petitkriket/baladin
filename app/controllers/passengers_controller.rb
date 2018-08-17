@@ -1,7 +1,6 @@
 class PassengersController < ApplicationController
   before_action :set_passenger, only: [:show, :edit, :update, :destroy]
   before_action :admin_only, :except => [:index, :show]
-  before_action :events_empty, :only => [:show]
 
   # GET /passengers
   # GET /passengers.json
@@ -13,6 +12,7 @@ class PassengersController < ApplicationController
 
       unless event.blank?
         marker_name = t('passenger_marker_text', name: event.passenger.name )
+        marker_url = url_for(passenger_path(event.passenger))
         @geojson << {
           type: 'Feature',
           geometry: {
@@ -23,6 +23,7 @@ class PassengersController < ApplicationController
             markerurl: event.photo.marker.url,
             markerurl_fallback: event.passenger.photo.marker.url,
             id: event.passenger.id,
+            link: "#{marker_url}",
             passenger: "#{marker_name}"
             }
           }
@@ -43,6 +44,12 @@ end
     @geojson = Array.new
     @events.each_with_index do |event, index|
       marker_name = t('passenger_marker_text', name: event.passenger.name )
+
+      popup_photo = ""
+      unless event.photo.medium.url.nil?
+        popup_photo = "<img src='#{event.photo.medium.url}'>"
+      end
+
       if index == 0 && @events.size == 1
         # this is the first item
         @geojson << {
@@ -54,7 +61,7 @@ end
           properties: {
             markerurl: event.photo.marker.url,
             markerurl_fallback: event.passenger.photo.marker.url,
-            popupContent: "<img src='#{event.photo.medium.url}'><br> #{marker_name} #{t('location')} #{event.city} #{event.country} #{t('holder')} #{event.user.name}"
+            popupContent: "#{popup_photo}<br> #{marker_name} #{t('location')} #{event.city} #{event.country} #{t('holder')} #{event.user.name}"
           }
         }
       elsif index == @events.size - 1
@@ -68,7 +75,7 @@ end
           properties: {
             markerurl: event.photo.marker.url,
             markerurl_fallback: event.passenger.photo.marker.url,
-            popupContent: "<img src='#{event.photo.medium.url}'><br> #{marker_name} #{t('location')} #{event.city} #{event.country} #{t('holder')} #{event.user.name}"
+            popupContent: "#{popup_photo}<br> #{marker_name} #{t('location')} #{event.city} #{event.country} #{t('holder')} #{event.user.name}"
           }
         }
       else
@@ -82,7 +89,7 @@ end
           properties: {
             markerurl: event.photo.marker.url,
             markerurl_fallback: event.passenger.photo.marker.url,
-            popupContent: "<img src='#{event.photo.medium.url}'><br> #{marker_name} #{t('exlocation')} #{event.city} #{event.country} #{t('holder')} #{event.user.name}"
+            popupContent: "#{popup_photo}<br> #{marker_name} #{t('exlocation')} #{event.city} #{event.country} #{t('holder')} #{event.user.name}"
 
           }
         }
@@ -90,7 +97,11 @@ end
     end
 
     respond_to do |format|
+      if @event.blank?
+      format.html { redirect_to passengers_path, alert: "Ce Passager n'a pas encore de Parcours" }
+      elsif
       format.html
+      end
       format.json { render json: @geojson }  # respond with the created JSON object
     end
   end
