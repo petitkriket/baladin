@@ -14,23 +14,15 @@
 
 <% end %>
 
-<% if user_signed_in? && current_user.try(:admin?) %>
-<p></p>
-<div class="col-sm-2">
-  <%= image_tag(@passenger.photo_url(:thumb), alt: 'Image'.to_s) if @passenger.photo? %>
-  <strong>Name:</strong> <%= @passenger.name %>
-  <strong>Shortcut:</strong> <%= @passenger.shortcut %>
+<div class="col-sm-4 ui-topleft">
+  <%= image_tag(@passenger.photo_url(:large), alt: 'Image'.to_s, id: 'passenger_image', style: 'display:none;') if @passenger.photo? %>
+<h3><%= t('passenger') %> <%= @passenger.name %> </h3>
   <br>
-  <%= link_to 'Edit', edit_passenger_path(@passenger), class: "btn btn-primary" %> |
-  <%= link_to(t('back'), passengers_path, class: "btn btn-default") %>
+  <%= render :file => 'contacts/new' %>
+  <%= link_to("PHOTO", "#", class: 'btn-default btn', onclick: 'showImage();') %>
 </div>
 
-<% end %>
-<p>
-  <%= render :file => 'contacts/new' %>
-</p>
-
-<div id="map" style="height: 75vh"></div>
+<div id="map" style=""></div>
 <script>
 (function() {
   var $, cupcakeTiles;
@@ -97,7 +89,7 @@ if(isEmpty(geojson._layers)) {
   map = L.map('map').fitBounds(geojson.getBounds());
 }
 
-    map.zoomControl.setPosition('bottomleft');
+    map.zoomControl.setPosition('bottomright');
     cupcakeTiles.addTo(map);
     var markers = L.markerClusterGroup();
     var pathLine = L.polyline(pointlist, { dashArray: '1,5', color: '#000', weight: 1.3, opacity: 1, lineCap: 'square'}).addTo(map)

@@ -17,6 +17,24 @@
  *= require leaflet.markercluster.default
  *= require font-awesome
  */
+/***** UI *****/
+
+#map {
+  margin-left: -15px;
+  margin-right: -15px;
+  height: calc(100vh - 51px);
+}
+.ui-topleft{
+  z-index: 401;
+  position: absolute;
+  bottom: 0px;
+  padding-bottom:21px;
+  left: 0;
+}
+
+.modal-backdrop {
+    z-index: 400;
+}
 
  .vcenter {
    text-align: center;

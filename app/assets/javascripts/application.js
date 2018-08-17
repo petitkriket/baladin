@@ -52,3 +52,7 @@ google.maps.event.addDomListener(window, 'load', function() {
   initializeAutocomplete('event_address');
   initializeAutocomplete('user_events_attributes_0_address');
 });
+
+function showImage(){
+$("#passenger_image").toggle();
+}
