@@ -16,16 +16,17 @@
  *= require leaflet.markercluster
  *= require leaflet.markercluster.default
  *= require font-awesome
+ *= require animate
  */
 /***** MAP *****/
 .last-marker, .first-marker {
-  animation: shake 4s infinite cubic-bezier(.36,.07,.19,.97) both;
+  animation: shakemarker 4s infinite cubic-bezier(.36,.07,.19,.97) both;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   perspective: 1000px;
 }
 
-@keyframes shake {
+@keyframes shakemarker {
     0% { transform: translate(1px, 1px) rotate(0deg); }
     10% { transform: translate(-1px, -2px) rotate(-1deg); }
     20% { transform: translate(-1px, 0px) rotate(1deg); }

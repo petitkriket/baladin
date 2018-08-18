@@ -1,9 +1,32 @@
 <%# Rails flash messages styled for Bootstrap 3.0 %>
-<% flash.each do |name, msg| %>
+<!-- <% flash.each do |name, msg| %>
   <% if msg.is_a?(String) %>
     <div class="alert alert-dismissible alert-<%= name.to_s == 'notice' ? 'success' : 'danger' %>">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       <%= content_tag :div, msg, :id => "flash_#{name}" %>
     </div>
+  <% end %>
+<% end %> -->
+
+<% flash.each do |name, msg| %>
+  <% if msg.is_a?(String) %>
+<script>
+$.notify({
+// options
+message: "<%= msg %>"
+},{
+// settings
+type: "<%= name.to_s == 'notice' ? 'success' : 'danger' %>",
+//offset: 100,
+placement: {
+align: "right",
+//from: "bottom"
+},
+animate: {
+  enter: 'animated fadeInRight',
+  exit: 'animated fadeOutRight'
+}
+});
+</script>
   <% end %>
 <% end %>

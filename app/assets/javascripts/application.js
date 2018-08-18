@@ -18,6 +18,7 @@
 //= require gmaps-auto-complete
 //= require jquery.validate
 //= require jquery.validate.additional-methods
+//= require bootstrap-notify
 //= require_tree .
 
 function initializeAutocomplete(id) {

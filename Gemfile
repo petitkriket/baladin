@@ -46,6 +46,7 @@ gem 'metamagic'
 gem 'mail_form'
 gem "jquery-validation-rails"
 gem 'invisible_captcha'
+gem 'bootstrap-growl-rails'
 
 group :development do
   gem 'rails_layout'
