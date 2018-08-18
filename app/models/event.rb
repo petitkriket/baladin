@@ -20,18 +20,16 @@ class Event < ApplicationRecord
   after_validation :update_fired, :if => :published_changed?
 
   def update_fired
+  if self.id.any?
     @passenger = Passenger.find(self[:passenger_id])
     @event = self
     @previous_user = User.includes(:events).where(events: { passenger_id: self[:passenger_id], published: true }).order(created_at: :desc).first
-    #Rails.logger.debug("Object complet #{@passenger}") unless @passenger.nil?
-    #Rails.logger.debug("Object nom #{@passenger.name}") unless @passenger.nil?
-
     NotifMailer.event_activation_email(self.user, @passenger, @event).deliver if self.published
 
     unless @previous_user.nil?
     NotifMailer.event_activation_previous_user_email(@previous_user, @passenger, @event).deliver if self.published
     end
-
+  end
   end
 
   end

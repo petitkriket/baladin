@@ -1,6 +1,8 @@
 class PassengersController < ApplicationController
-  before_action :set_passenger, only: [:show, :edit, :update, :destroy]
-  before_action :admin_only, :except => [:index, :show]
+  before_action :set_passenger, only: [:show, :edit, :list, :update, :destroy]
+  before_action :admin_only, :except => [:index, :show, :list]
+  before_action :enable_map_nav, only: [:index, :show]
+  before_action :user_contact_form, only: [:show]
 
   # GET /passengers
   # GET /passengers.json
@@ -42,9 +44,11 @@ end
     @events  = Passenger.find(params[:id]).events.published
     @event  = Passenger.find(params[:id]).events.published.last
     @geojson = Array.new
+    counter = -1
+
     @events.each_with_index do |event, index|
       marker_name = t('passenger_marker_text', name: event.passenger.name )
-
+      counter =+ 1
       popup_photo = ""
       unless event.photo.medium.url.nil?
         popup_photo = "<img src='#{event.photo.medium.url}'>"
@@ -61,6 +65,8 @@ end
           properties: {
             markerurl: event.photo.marker.url,
             markerurl_fallback: event.passenger.photo.marker.url,
+            title: "#{t('departure')}",
+            divclass: "first-marker",
             popupContent: "#{popup_photo}<br> #{marker_name} #{t('location')} #{event.city} #{event.country} #{t('holder')} #{event.user.name}"
           }
         }
@@ -75,6 +81,8 @@ end
           properties: {
             markerurl: event.photo.marker.url,
             markerurl_fallback: event.passenger.photo.marker.url,
+            title: "<mark>#{t('current_position')}</mark>",
+            divclass: "last-marker",
             popupContent: "#{popup_photo}<br> #{marker_name} #{t('location')} #{event.city} #{event.country} #{t('holder')} #{event.user.name}"
           }
         }
@@ -89,6 +97,8 @@ end
           properties: {
             markerurl: event.photo.marker.url,
             markerurl_fallback: event.passenger.photo.marker.url,
+            title: "#{t('event')} #{counter}",
+            divclass: "marker",
             popupContent: "#{popup_photo}<br> #{marker_name} #{t('exlocation')} #{event.city} #{event.country} #{t('holder')} #{event.user.name}"
 
           }
@@ -104,6 +114,10 @@ end
       end
       format.json { render json: @geojson }  # respond with the created JSON object
     end
+  end
+
+  def list
+    @passengers = Passenger.all
   end
 
   # GET /passengers/new
@@ -156,6 +170,7 @@ end
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_passenger
       @passenger = Passenger.find(params[:id])
@@ -172,13 +187,22 @@ end
         redirect_to new_user_session_path, :alert => "Merci de vous connecter."
       end
     end
- # rediriger vers root si pas admin et vide
+
+    # rediriger vers root si pas admin et vide
     def events_empty
       @events = Passenger.find(params[:id]).events.published.last
       if @events.nil?
         #redirect_to root_path, :alert => "Pas de passager ici" unless user_signed_in? && current_user.admin?
         redirect_to root_path unless user_signed_in? && current_user.admin?
       end
+    end
+
+    def enable_map_nav
+      @map_nav = true
+    end
+
+    def user_contact_form
+      @user_contact_form = true
     end
 
 end

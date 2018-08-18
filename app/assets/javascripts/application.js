@@ -55,4 +55,5 @@ google.maps.event.addDomListener(window, 'load', function() {
 
 function showImage(){
 $("#passenger_image").toggle();
+$("#photo").toggleClass('btn-default btn-primary');
 }

@@ -8,3 +8,10 @@
 <li><%= link_to 'EN', url_for({:locale => 'en', t: params[:t]}) %></li>
 <% end %>
 <% end %>
+
+<li>
+  <%#= link_to "?", "#", "data-toggle" => "modal", 'data-target' => '#myModal2' %>
+  <%= link_to "#", "data-toggle" => "modal", 'data-target' => '#myModal2' do %>
+  <%= image_tag("info.svg", :alt => "rss feed", class: "info-btn") %>
+  <% end %>
+</li>

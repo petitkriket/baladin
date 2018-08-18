@@ -18,5 +18,8 @@
        <%= render 'layouts/messages' %>
        <%= yield %>
     </main>
+    <%= render 'layouts/navigation_map' if @map_nav %>
+    <%= render :template => 'contacts/new' if @user_contact_form %>
+    <%= render :template => 'passengers/list' %>
   </body>
 </html>

@@ -1,0 +1,84 @@
+<div class="modal right fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+        <section class="col-right">
+                <%= link_to "#", class: 'pull-right', "data-dismiss" => "modal" do %>
+                <%= image_tag("close.svg", :alt => "close", class: "info-btn") %>
+                <% end %>
+
+
+          <h3 class="text-uppercase">index</h3>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Passager</th>
+                <th>Lieu</th>
+                <th>Etape(s)</th>
+                <th colspan="3"></th>
+              </tr>
+            </thead>
+            <tbody>
+
+            <% @passengers.each do |passenger| %>
+              <tr>
+                <td><%= passenger.name %></td>
+                <td><%= passenger.events.last.city unless passenger.events.last.nil? %></td>
+                <td><%= passenger.events.size %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        </section>
+
+        <section class="col-left">
+          <h3 class="text-uppercase">à propos</h3>
+          <p>
+            Les Passagers sont des objets spécifiques nomades transmis de la main à la main et dont le parcours est traçable sur internet. De petites tailles, pensés pour inviter à la préhension, ce sont des pièces uniques sculptées manuellement en bois et en résine. Leurs formes s’inspirent à la fois des bifaces du paléolithique, des premières statuettes anthropomorphes et de l’esthétique contemporaine de nos smart-objects.
+          </p>
+          <p>
+            Mis à jour et rendus public par les participants eux-mêmes grâce à une adresse internet gravée sur chaque Passager, leurs actualités respectives (situation géographique et identité du détenteur) sont consultables sur cette plateforme.
+          </p>
+          <p>
+            Via cette plateforme toute personne le souhaitant peut accueillir le Passager de son choix en prenant contact avec son détenteur actuel et ainsi participer à sa transmission.
+          </p>
+          <p>
+            Les Passagers est un projet de <a href="#">François&nbsp;Maurin</a> réalisé en collaboration avec <a href="#">Samuel&nbsp;Bouaroua</a>.
+          </p>          <p>
+                      Les Passagers sont des objets spécifiques nomades transmis de la main à la main et dont le parcours est traçable sur internet. De petites tailles, pensés pour inviter à la préhension, ce sont des pièces uniques sculptées manuellement en bois et en résine. Leurs formes s’inspirent à la fois des bifaces du paléolithique, des premières statuettes anthropomorphes et de l’esthétique contemporaine de nos smart-objects.
+                    </p>
+                    <p>
+                      Mis à jour et rendus public par les participants eux-mêmes grâce à une adresse internet gravée sur chaque Passager, leurs actualités respectives (situation géographique et identité du détenteur) sont consultables sur cette plateforme.
+                    </p>
+                    <p>
+                      Via cette plateforme toute personne le souhaitant peut accueillir le Passager de son choix en prenant contact avec son détenteur actuel et ainsi participer à sa transmission.
+                    </p>
+                    <p>
+                      Les Passagers est un projet de <a href="#">François&nbsp;Maurin</a> réalisé en collaboration avec <a href="#">Samuel&nbsp;Bouaroua</a>.
+                    </p>          <p>
+                                Les Passagers sont des objets spécifiques nomades transmis de la main à la main et dont le parcours est traçable sur internet. De petites tailles, pensés pour inviter à la préhension, ce sont des pièces uniques sculptées manuellement en bois et en résine. Leurs formes s’inspirent à la fois des bifaces du paléolithique, des premières statuettes anthropomorphes et de l’esthétique contemporaine de nos smart-objects.
+                              </p>
+                              <p>
+                                Mis à jour et rendus public par les participants eux-mêmes grâce à une adresse internet gravée sur chaque Passager, leurs actualités respectives (situation géographique et identité du détenteur) sont consultables sur cette plateforme.
+                              </p>
+                              <p>
+                                Via cette plateforme toute personne le souhaitant peut accueillir le Passager de son choix en prenant contact avec son détenteur actuel et ainsi participer à sa transmission.
+                              </p>
+                              <p>
+                                Les Passagers est un projet de <a href="#">François&nbsp;Maurin</a> réalisé en collaboration avec <a href="#">Samuel&nbsp;Bouaroua</a>.
+                              </p>
+          <h3>colophon</h3>
+          <ul class="imprint">
+            <li><a href="#">Télécharger le dossier et les visuels</a></li>
+            <li>Outils : <a href="#">Map Box</a>, <a href="#">Leaflet</a>, <a href="#">OpenStreetMap</a></li>
+            <li>Caractères : <a class="gap" href="#">Gap Sans</a>, <a href="">Happy Times at the IKOB</a></li>
+            <li>Licenses : <a href="">CC BY-SA 3.0</a></li>
+            <li>Webdesign : <a href="#">Jules Vaulont</a></li>
+          </ul>
+        </section>
+      </div>
+
+<!-- fin-->
+    </div>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 en:
   hello: "Hello"
-  site_title: "The Passengers"
+  site_title: "Passengers"
   new: "New"
   show: "Show"
   edit: "Edit"
@@ -18,6 +18,10 @@ en:
   new_event: "New Event"
   editing_event: "Editing Event"
   about: "About"
+  departure: "Departure"
+  current_position: "Current step"
+  host: "Host"
+  photo: "Photo"
   sign_up: "Sign up"
   sign_in: "Sign in"
   edit_account: "Edit Account"

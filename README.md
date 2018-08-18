@@ -136,3 +136,6 @@ $ heroku buildpacks:add -i 1 https://github.com/heroku/heroku-buildpack-activest
 $heroku run bash
 homebrew update yarn
 bundle gem update
+
+# afficher une partiale si action
+https://stackoverflow.com/questions/13395153/how-to-render-partial-on-everything-except-a-certain-action

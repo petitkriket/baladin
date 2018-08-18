@@ -1,11 +1,16 @@
 class ApplicationController < ActionController::Base
   before_action :set_locale
   before_action :initialize_user
+  before_action :passenger_list
 
   def initialize_user
       @contact = Contact.new
   end
-  
+
+  def passenger_list
+    @passengers = Passenger.all
+  end
+
   def set_locale
      if user_signed_in? && !current_user.locale.blank?
          I18n.locale = current_user.locale
