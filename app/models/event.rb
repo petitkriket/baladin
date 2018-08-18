@@ -20,7 +20,7 @@ class Event < ApplicationRecord
   after_validation :update_fired, :if => :published_changed?
 
   def update_fired
-  if self.id.any?
+  if self.id
     @passenger = Passenger.find(self[:passenger_id])
     @event = self
     @previous_user = User.includes(:events).where(events: { passenger_id: self[:passenger_id], published: true }).order(created_at: :desc).first

@@ -6,7 +6,7 @@ class ContactsController < ApplicationController
 
   def create
     @contact = Contact.new(params[:contact])
-    @contact.user = Passenger.find(params[:id]).events.published.last.user.email
+    @contact.user = Passenger.find(params[:id]).events.published.first.user.email
     @contact.request = request
 
     Rails.logger.debug("DEBUG self pssgrs: #{@contact.user}")
