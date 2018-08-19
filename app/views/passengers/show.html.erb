@@ -18,7 +18,8 @@
 (function() {
   var $, cupcakeTiles;
   $ = jQuery;
-  cupcakeTiles = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png', {
+  cupcakeTiles = L.tileLayer('https://api.mapbox.com/styles/v1/julesvau/cjkh85uud2eh22qruz2ylt7zq/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoianVsZXN2YXUiLCJhIjoiY2prNDd6NW5yMGFtOTNrbzQ5bWEweDgzbSJ9.-RD762orQSENzQ_f7TKU9g', {
+  //cupcakeTiles = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png', {
     minZoom: 2,
     maxZoom: 18,
   });

@@ -15,9 +15,11 @@
  *= require leaflet
  *= require leaflet.markercluster
  *= require leaflet.markercluster.default
+ *= require theme/bootstrap
  *= require font-awesome
  *= require animate
  */
+
 /***** MAP *****/
 .last-marker, .first-marker {
   animation: shakemarker 4s infinite cubic-bezier(.36,.07,.19,.97) both;
@@ -48,11 +50,15 @@
 }
 
 /***** UI *****/
+.btn {
+   /* border-width: 2px !important; **/
+}
+
 .ui-topleft{
   z-index: 401;
-  position: absolute;
+  position: absolute !important;
   bottom: 0px;
-  padding-bottom:21px;
+  padding-bottom:22px;
   left: 0;
 }
 
@@ -115,24 +121,23 @@
 }
 
 .navbar-header {
-    margin: 22px;
-    margin-left: 22px !important;
+    padding: 22px;
+    padding-left:22px;
+
 }
 
 .navbar-brand {
-    height: 56px;
-    padding: 11px;
-    background: white;
-    border: 2px solid #000000;
-    font-size: 30px;
-    line-height: 1em;
-    font-family: 'gap_sansregular', 'Poppins', monospace,'arial', sans-serif;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
+  padding: 11px !important;
+  border: 2px solid #000000;
+  background-color: #FFFFFF;
+  font-size: 30px !important;
+  font-family: 'gap_sansregular', 'Poppins', monospace,'arial', sans-serif;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 
@@ -294,7 +299,11 @@ padding-top: 10px;
   background: #007bb5;
   color: white;
 }
-
+/*PASSENGER SHOW */
+#passenger_image {
+max-height: 75vh;
+max-width: 75vh;
+}
 /* EVENTS INDEX */
 .container .product {
   height: 250px;

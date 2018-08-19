@@ -1,9 +1,10 @@
 <div class="container">
   <h1><%= t('events') %></h1>
-  <% if user_signed_in? && current_user.try(:admin?) %>
-    <%= link_to 'New Event', new_event_path, class: 'btn btn-default' %>
-  <% end %>
   <%= link_to t('edit_account'), edit_user_registration_path, class: 'btn btn-default' %>
+  <% if user_signed_in? && current_user.try(:admin?) %>
+  <%= link_to t('new_event'), new_event_path, class: 'btn btn-default' %>
+  <%= link_to t('users'), users_path, class: 'btn btn-default' %>
+  <% end %>
 
   <% @events.each do |event| %>
     <div class="product">

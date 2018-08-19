@@ -1,17 +1,25 @@
 <!--<li><%#= link_to t('about'), page_path('about') %></li>-->
 <% if !user_signed_in? %>
 <% if I18n.locale == :en %>
-<li><%= link_to 'FR', url_for({:locale => 'fr', t: params[:t]}) %></li>
+    <li>
+      <%= link_to url_for({:locale => 'fr', t: params[:t]}) do %>
+      <%= image_tag("en.svg", :alt => "Voir cette page en français") %>
+      <% end %>
+    </li>
 <% end %>
 
 <% if I18n.locale == :fr %>
-<li><%= link_to 'EN', url_for({:locale => 'en', t: params[:t]}) %></li>
-<% end %>
+    <li>
+      <%= link_to url_for({:locale => 'en', t: params[:t]}) do %>
+      <%= image_tag("en.svg", :alt => "View this page in english") %>
+      <% end %>
+    </li>
 <% end %>
 
-<li>
-  <%#= link_to "?", "#", "data-toggle" => "modal", 'data-target' => '#myModal2' %>
-  <%= link_to "#", "data-toggle" => "modal", 'data-target' => '#myModal2' do %>
-  <%= image_tag("info.svg", :alt => "rss feed", class: "info-btn") %>
-  <% end %>
-</li>
+<% end %>
+
+    <li>
+      <%= link_to "#", "data-toggle" => "modal", 'data-target' => '#myModal2' do %>
+      <%= image_tag("info.svg", :alt => "rss feed", class: "info-btn") %>
+      <% end %>
+    </li>

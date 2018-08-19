@@ -39,9 +39,9 @@
 (function() {
   var $, cupcakeTiles;
   $ = jQuery;
-  cupcakeTiles = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png', {
-//cupcakeTiles = L.tileLayer('https://api.mapbox.com/styles/v1/samuelbou/cjh9mpubz18jx2rth7jgw3x1k/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic2FtdWVsYm91IiwiYSI6ImNpbDgzcDVkcTAwMWx2eWtxMWp3OHpza2MifQ.T_fsD2s2uIXgioqzMINhkg', {
-    minZoom: 2,
+    //cupcakeTiles = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png', {
+    cupcakeTiles = L.tileLayer('https://api.mapbox.com/styles/v1/julesvau/cjkh85uud2eh22qruz2ylt7zq/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoianVsZXN2YXUiLCJhIjoiY2prNDd6NW5yMGFtOTNrbzQ5bWEweDgzbSJ9.-RD762orQSENzQ_f7TKU9g', {
+    //attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
   });
 
@@ -57,7 +57,7 @@ geojson = L.geoJson(data, {
         iconSize: new L.Point(82, 32),
         //iconAnchor:[50, 50],
         className: "divicon",
-        html:'<a href="'+layer.feature.properties.link+'"><img src="'+layer.feature.properties.markerurl_fallback+'" class="img-marker" alt="Image"><p class="text-center"><code>'+feature.properties.passenger+'</code></p></a>'
+        html:'<a href="'+layer.feature.properties.link+'"><img src="'+layer.feature.properties.markerurl_fallback+'" class="img-marker" alt="Image"><p class="text-center"><mark>'+feature.properties.passenger+'</mark></p></a>'
 
         }));
 
@@ -68,7 +68,7 @@ geojson = L.geoJson(data, {
           iconSize: new L.Point(82, 32),
           //iconAnchor:[50, 50],
           className: "divicon",
-          html:'<a href="'+layer.feature.properties.link+'"><img src="'+layer.feature.properties.markerurl+'" class="img-marker" alt="Image"><p class="text-center"><code>'+feature.properties.passenger+'</code></p></a>'
+          html:'<a href="'+layer.feature.properties.link+'"><img src="'+layer.feature.properties.markerurl+'" class="img-marker" alt="Image"><p class="text-center"><mark>'+feature.properties.passenger+'</mark></p></a>'
           }));
             }
   }
