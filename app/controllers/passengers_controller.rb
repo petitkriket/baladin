@@ -44,11 +44,11 @@ end
     @events  = Passenger.find(params[:id]).events.published
     @event  = Passenger.find(params[:id]).events.published.last
     @geojson = Array.new
-    counter = -1
+    counter = 0
 
     @events.each_with_index do |event, index|
       marker_name = t('passenger_marker_text', name: event.passenger.name )
-      counter =+ 1
+      counter = counter + 1
       popup_photo = ""
       unless event.photo.medium.url.nil?
         popup_photo = "<img src='#{event.photo.medium.url}'>"
