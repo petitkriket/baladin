@@ -9,14 +9,12 @@
       <div class="input-group">
         <%= f.text_field :address, class: 'form-control', :autofocus => true, placeholder: t('geolocate') %>
         <span class="input-group-btn">
-          <a href="#" class="btn btn-default demo" onclick="getLocation()" type="submit">
+          <a href="#" class="btn btn-default geolocate" onclick="getLocation()" type="submit">
               <i class="fa fa-map-marker"></i>
           </a>
         </span>
       </div>
 
-
-      <%#= f.input :photo %>
       <%= f.input :photo, :as => :file, :input_html => {:onchange => "loadFile(event)"} %>
       <img id="output"/>
 
@@ -43,7 +41,7 @@
       <%= f.hidden_field :locale, value: I18n.locale %>
       <%= invisible_captcha sentence_for_humans: "who is it?" %>
 
-     <%= f.submit 'Sign up', :class => 'button right' %>
+     <%= f.submit 'Sign up', :class => 'button right btn btn-primary' %>
 
      <p>Vous avez deja participé avec un autre Passager ? <%= link_to "Cliquez ici.", new_event_path(shortcut: params[:t]) %>
   <% end %>
@@ -196,7 +194,7 @@ if(isEmpty(geojson._layers)) {
 }).call(this);
 
 $(function(){
-		$('.demo').on("click", function () {
+		$('.geolocate').on("click", function () {
 		$('.fa-map-marker').addClass("animate-flicker");
 		setTimeout(RemoveClass, 3500);
 		});
@@ -205,7 +203,7 @@ $(function(){
 		}
 		});
 
-var x = document.getElementById("demo");
+var x = document.getElementById("geolocate");
 var geocoder = new google.maps.Geocoder();
 
 function getAddress(location, callback){

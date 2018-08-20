@@ -1,12 +1,16 @@
   <% if user_signed_in? %>
 <li><%= link_to t('events'), events_path %></li>
 
-  <% if current_user.try(:admin?) %>
-<li><%= link_to t('users'), users_path %></li>
+<li>
+<%= link_to destroy_user_session_path, :method=>'delete' do %>
+<%= image_tag("logoff.svg", :alt => "Log off", class: "wiggle") %>
 <% end %>
+</li>
 
-<li><%= link_to t('sign_out'), destroy_user_session_path, :method=>'delete' %></li>
   <% else %>
-
-<li><%= link_to t('sign_in'), new_user_session_path %></li>
+      <li>
+      <%= link_to new_user_session_path do %>
+      <%= image_tag("login.svg", :alt => "Log in", class: "wiggle") %>
+      <% end %>
+      </li>
   <% end %>

@@ -4,10 +4,10 @@
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-    <% if user_signed_in? && current_user.try(:admin?) %>
+    <% if user_signed_in? && current_user.try(:admin?) || @event.new_record? %>
       <div class="form-inputs">
         <%= f.text_field :address, class: 'form-control', :autofocus => true, placeholder: t('geolocate') %>
-        <div class="btn btn-primary demo" onclick="getLocation()"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+        <div class="btn btn-primary geolocate" onclick="getLocation()"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
     <% end %>
 
     <%= f.input :photo, :style=> 'margin-top:15px !important;' %>
@@ -115,7 +115,7 @@ geojson = L.geoJson(data, {
 }).call(this);
 </script>
 <script>
-var x = document.getElementById("demo");
+var x = document.getElementById("geolocate");
 var geocoder = new google.maps.Geocoder();
 
 function getAddress(location, callback){

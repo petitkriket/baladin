@@ -7,10 +7,7 @@ img {
   @extend .img-responsive;
   margin: 0 auto;
   }
-// override for the 'Home' navigation link
-.navbar-brand {
-  font-size: inherit;
-  }
+
 
 // THESE ARE EXAMPLES YOU CAN MODIFY
 // create your own classes
@@ -26,18 +23,17 @@ img {
   @extend .col-md-6;
   @extend .text-center;
   }
-.submit {
-  @extend .btn;
-  @extend .btn-primary;
-  @extend .btn-lg;
-  }
+// .submit {
+//   @extend .btn;
+//   @extend .btn-primary;
+//   @extend .btn-lg;
+//   }
 // apply styles to HTML elements
 // to make views framework-neutral
 main {
   @extend .container;
-  background-color: #eee;
+  //background-color: #eee;
   width: 100%;
-  margin-top: 100px; // accommodate the navbar
   }
 
 
@@ -58,8 +54,8 @@ main {
   float: right !important;
 }
 .authform .button {
-  @extend .btn;
-  @extend .btn-primary;
+  // @extend .btn;
+  // @extend .btn-primary;
 }
 .authform fieldset {
   @extend .well;

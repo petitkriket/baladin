@@ -17,15 +17,16 @@ message: "<%= msg %>"
 },{
 // settings
 type: "<%= name.to_s == 'notice' ? 'success' : 'danger' %>",
-//offset: 100,
+offset:68,
 placement: {
 align: "right",
 //from: "bottom"
 },
 animate: {
-  enter: 'animated fadeInRight',
-//  exit: 'animated fadeOutRight'
-  exit: 'animated fadeOutUp'
+ // enter: 'animated fadeInRight',
+ // exit: 'animated fadeOutRight'
+  enter: 'animated bounceIn',
+  exit: 'animated bounceOut'
 }
 });
 </script>
