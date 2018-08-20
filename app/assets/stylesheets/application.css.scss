@@ -214,6 +214,23 @@ th {
   text-transform: uppercase;
 }
 
+.navbar-right {
+    margin-right: 0px !important;
+}
+
+.navbar-toggle {
+    background-color: #ffffff !important;
+    border: 2px solid #181818 !important;
+}
+
+.navbar-toggle .icon-bar {
+    background-color: #181818;
+}
+
+.navbar-collapse.collapse.in > img {
+  margin-left: auto !important;
+  padding-right: 45px;
+}
 
 /** MODALE **/
 

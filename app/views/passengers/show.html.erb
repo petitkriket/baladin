@@ -98,6 +98,17 @@ if(isEmpty(geojson._layers)) {
     markers.addLayer(geojson);
     markers.addTo(map);
     //console.log(markers._featureGroup._layers);
+
+    // zoom in function
+    $('.zoomin').click(function(){
+      map.setZoom(map.getZoom() + 1)
+    });
+
+    // zoom out function
+    $('.zoomout').click(function(){
+      map.setZoom(map.getZoom() - 1)
+    });
+
   });
 
 }).call(this);
