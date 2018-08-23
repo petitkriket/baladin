@@ -35,6 +35,8 @@ en:
   share_tw: "Share on Twitter"
   share_wa: "Share on WhatsApp"
   share_li: "Share on LinkedIn"
+  social_desc: "Passengers are specific objects whose vocation is to be transmitted from hand to hand. This platform makes it possible to follow their movements and to participate in their transmissions."
+  keywords: "art, artwork, specific object, painting, free, travel, hand to hand"
   simple_form:
     labels:
       event:

@@ -2,9 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Les Passagers" %></title>
-    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Les Passagers" %>">
-    <%= metamagic %>
+    <%= metamagic title: t('site_title'), description: t('social_desc'), keywords: t('keywords'), image: asset_path("banner.jpg"), url: request.original_url, og: { title: t('site_title'), site_name: t('site_title'), type: 'website', description: t('social_desc') }, twitter: { title: t('site_title'),description: t('social_desc'), creator: "@pssgrs", site: "@pssgrs", img: { src: asset_path("banner.jpg") } } %>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=<%= ENV['GMAPSJS_API_KEY'] %>"></script>
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>

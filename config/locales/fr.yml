@@ -35,6 +35,8 @@ fr:
   share_tw: "Partager sur Twitter"
   share_wa: "Partager sur WhatsApp"
   share_li: "Partager sur LinkedIn"
+  social_desc: "Les Passagers sont des objets spécifiques dont la vocation est d’être transmis de la main à la main. Cette plateforme permet de suivre leurs déplacements et de participer à leurs transmissions."
+  keywords: "art, travail artistique, object spécifique, peinture, gratuit, voyage, main à la main"
   simple_form:
     labels:
       event:
