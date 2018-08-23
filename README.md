@@ -144,3 +144,5 @@ https://stackoverflow.com/questions/13395153/how-to-render-partial-on-everything
 https://stackoverflow.com/questions/23413512/fonts-are-not-found-404-on-heroku
 https://dzone.com/articles/practical-rails-adding-a-bootstrap-theme
 https://css-tricks.com/snippets/css/using-font-face/
+
+rails g migration RemoveTokenFromPassengers token:string
