@@ -9,8 +9,10 @@
         <%= f.text_field :address, class: 'form-control', :autofocus => true, placeholder: t('geolocate') %>
         <div class="btn btn-primary geolocate" onclick="getLocation()"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
     <% end %>
-
-    <%= f.input :photo, :style=> 'margin-top:15px !important;' %>
+    <% if (@event.latitude.blank? || @event.longitude.blank?) && current_user.try(:admin?) %>
+      <%= f.input :latitude %>
+      <%= f.input :longitude %>
+    <% end %>
     <%= f.hidden_field :photo_cache %>
               <% if event.photo? %>
                   <%= image_tag event.photo.thumb.url %>

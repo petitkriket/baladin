@@ -146,3 +146,9 @@ https://dzone.com/articles/practical-rails-adding-a-bootstrap-theme
 https://css-tricks.com/snippets/css/using-font-face/
 
 rails g migration RemoveTokenFromPassengers token:string
+
+#flash message model
+https://gorails.com/forum/how-to-raise-a-warning-message-from-the-model
+
+#remove backdrop
+https://stackoverflow.com/questions/32459337/how-to-remove-bootstrap-modal-overlay
