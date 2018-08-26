@@ -18,6 +18,7 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=<%= ENV['GMAPSJS_API_KEY'] %>"></script>
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag "jquery.validate.localization/messages_#{I18n.locale}" %>
     <%= csrf_meta_tags %>
   </head>
   <% if Rails.env.production? %>
