@@ -17,6 +17,8 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'rails-erd'
+  gem 'i18n-tasks', '~> 0.9.24'
+  gem 'rails_layout'
 end
 group :test do
   gem 'capybara', '>= 2.15', '< 4.0'
@@ -47,7 +49,3 @@ gem 'mail_form'
 gem "jquery-validation-rails"
 gem 'invisible_captcha'
 gem 'bootstrap-growl-rails'
-
-group :development do
-  gem 'rails_layout'
-end
