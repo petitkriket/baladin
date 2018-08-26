@@ -8,17 +8,30 @@
     <meta property="og:url" content="<%= request.original_url %>" />
     <meta property="og:description" content="<%= t('social_desc') %>" />
     <meta property="og:site_name" content="<%= t('site_title') %>" />
+    <meta property="fb:app_id" content="<%= ENV['FB_APPID'] %>" />
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@pssgrs">
+    <meta name="twitter:site" content="<%= ENV['TW_APPID'] %>">
     <meta name="twitter:title" content="<%= t('site_title') %>">
     <meta name="twitter:description" content="<%= t('social_desc') %>">
-    <meta name="twitter:creator" content="@pssgrs">
+    <meta name="twitter:creator" content="<%= ENV['TW_APPID'] %>">
     <%= metamagic %>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=<%= ENV['GMAPSJS_API_KEY'] %>"></script>
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
   </head>
+  <% if Rails.env.production? %>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=<%= ENV['GA_ID'] %>"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', '<%= ENV['GA_ID'] %>');
+    </script>
+  <% end %>
+
   <body>
     <header>
       <%= render 'layouts/navigation' %>
