@@ -7,23 +7,22 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h3 class="modal-title" id="exampleModalLabel">Send an Email to <%= @passenger.events.last.user.name %></h3>
+        <h4 class="modal-title" id="exampleModalLabel"><%= t('contact') %> <%= @passenger.events.last.user.name %></h4>
       </div>
       <div class="modal-body">
         <%= simple_form_for (@contact), :url => {:action => "create", :id => params[:id], :controller => "contacts"} do |f| %>
         <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-          <%#= f.input :name, required: true, :minlength=>"5" %>
-          <%= f.input :name, required: true %>
+          <%= f.input :name, required: true, :minlength=>"3" %>
           <%= f.input :email, required: true %>
           <%= f.input :message, as: :text %>
           <%= f.input :nickname, hint: 'leave this field blank', as: :hidden %>
 
-
-
-
       <div class="modal-footer">
-<!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-  <%= f.button :submit, class: "btn-primary" %>
+        <button type="button" class="btn" data-dismiss="modal"><%= t('close') %></button>
+  <%#= f.button :submit, "Send", class: "btn-primary" %>
+  <%= button_tag type: 'submit', class: "btn btn-primary", id: "send-email" do %>
+    <i class="fa fa-check" aria-hidden="true"></i> <%= t('send') %>
+  <% end %>
       </div>
               <% end %>
       </div>
@@ -33,7 +32,35 @@
 
        jQuery.validator.setDefaults({
          //debug: true,
-         success: "valid"
+         success: "valid",
+         errorElement: "span",
+   errorClass: "help-block",
+   highlight: function (element, errorClass, validClass) {
+       // Only validation controls
+       if (!$(element).hasClass('novalidation')) {
+           $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+       }
+   },
+   unhighlight: function (element, errorClass, validClass) {
+       // Only validation controls
+       if (!$(element).hasClass('novalidation')) {
+           $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+       }
+   },
+   errorPlacement: function (error, element) {
+       if (element.parent('.input-group').length) {
+           error.insertAfter(element.parent());
+       }
+       else if (element.prop('type') === 'radio' && element.parent('.radio-inline').length) {
+           error.insertAfter(element.parent().parent());
+       }
+       else if (element.prop('type') === 'checkbox' || element.prop('type') === 'radio') {
+           error.appendTo(element.parent().parent());
+       }
+       else {
+           error.insertAfter(element);
+       }
+   }
        });
 
 
@@ -46,7 +73,8 @@
      }
    }
  });
-       var submitButton = $("#new_contact input[type='submit']").attr("disabled", true);
+//      var submitButton = $("#new_contact input[type='submit']").attr("disabled", true);
+        var submitButton = $("#send-email").attr("disabled", true);
        $("#new_contact input.required").change(function () {
         var valid = true;
 

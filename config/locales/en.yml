@@ -7,6 +7,9 @@ en:
   editing: "Editing"
   destroy: "Destroy"
   back: "Back"
+  contact: "Contact"
+  close: "Close"
+  send: "Send"
   user: "User"
   users: "Users"
   passenger: "Passenger"
@@ -49,6 +52,20 @@ en:
         passenger: 'Passenger'
         user: 'User'
         published: 'Published'
+      contact:
+        name: 'Nom'
+        email: 'E-mail '
+        message: 'Message'
+  activerecord:
+    attributes:
+      user:
+        name: "Name"
+        email: "E-mail"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+      event:
+        address: "Address"
+        photo: "Photo"
   helpers:
     submit:
       create: "Create %{model}"

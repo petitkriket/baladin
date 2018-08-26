@@ -157,3 +157,6 @@ https://stackoverflow.com/questions/32459337/how-to-remove-bootstrap-modal-overl
 https://www.netguru.co/codestories/til-2-how-to-include-language-code-in-rails-app
 https://stackoverflow.com/questions/14823773/rails-i18n-not-working-properly-on-heroku
 https://lingohub.com/frameworks-file-formats/rails5-i18n-ruby-on-rails/#
+
+# validation form color
+https://stackoverflow.com/questions/18754020/bootstrap-with-jquery-validation-plugin

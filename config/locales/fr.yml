@@ -7,6 +7,9 @@ fr:
   editing: "Edition"
   destroy: "Détruire"
   back: "Revenir"
+  contact: "Contacter"
+  send: "Envoyer"
+  close: "Fermer"
   user: "Utilisateur"
   users: "Utilisateurs"
   passenger: "Passager"
@@ -40,7 +43,7 @@ fr:
   simple_form:
     labels:
       event:
-        address: 'Addresse'
+        address: 'Adresse'
         city: 'Ville'
         country: 'Pays'
         latitude: 'Latitude'
@@ -49,6 +52,20 @@ fr:
         passenger: 'Passager'
         user: 'Utilisateur'
         published: 'Publié'
+      contact:
+        name: 'Nom'
+        email: 'E-mail '
+        message: 'Message'
+  activerecord:
+    attributes:
+      user:
+        name: "Nom"
+        email: "E-mail"
+        password: "Mot de passe"
+        password_confirmation: "Confirmation mot de passe"
+      event:
+        address: "Addresse"
+        photo: "Photo"
   helpers:
     submit:
       create: "Créer %{model}"

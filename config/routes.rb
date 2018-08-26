@@ -7,7 +7,7 @@ scope "/:locale", locale: /#{I18n.available_locales.join("|")}/ do
     root to: 'passengers#index'
     devise_for :users, controllers: { registrations: 'users/registrations', confirmations: 'users/confirmations' }
     resources :users
-    get ":shortcut" => redirect("#{I18n.locale}/users/sign_up?t=%{shortcut}"), constraints: lambda { |request| Passenger.where(shortcut: request[:shortcut]).any? },  id: :shortcut
+    get ":shortcut" => redirect("%{locale}/users/sign_up?t=%{shortcut}"), constraints: lambda { |request| Passenger.where(shortcut: request[:shortcut]).any? },  id: :shortcut
     #ok#get ':shortcut', to: 'events#new', constraints: lambda { |request| Passenger.where(shortcut: request[:shortcut]).any? }
   end
 

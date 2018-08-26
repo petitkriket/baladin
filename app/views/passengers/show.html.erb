@@ -8,7 +8,8 @@
 
 <h3 class="text-uppercase wiggle" id="passenger_title"><%= t('passenger') %> <%= @passenger.name %> </h3>
 <% unless @passenger.events.last.nil? || current_user == @passenger.events.last.user %>
-  <%= submit_tag t('host'), :type => 'button', class: 'btn-default btn text-uppercase wiggle', id: 'contact', data: { toggle: 'modal', target: '#basicExampleModal', backdrop: 'false' } %>
+  <%#= submit_tag t('host'), :type => 'button', class: 'btn-default btn text-uppercase wiggle', id: 'contact', data: { toggle: 'modal', target: '#basicExampleModal', backdrop: 'false' } %>
+  <%= submit_tag t('host'), :type => 'button', class: 'btn-default btn text-uppercase wiggle', id: 'contact', data: { toggle: 'modal', target: '#basicExampleModal' } %>
 <% end %>
   <%= submit_tag t('photo'), :type => 'button', class: 'btn-default btn text-uppercase wiggle', id: 'photo', onclick: 'showImage();' %>
 </div>
