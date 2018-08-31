@@ -88,15 +88,22 @@ if(isEmpty(geojson._layers)) {
   map = L.map('map').setView([30, 0], 2);
 } else {
   //console.log('markers existent');
-  map = L.map('map').fitBounds(geojson.getBounds(), {maxZoom: 4});
+  map = L.map('map').fitBounds(geojson.getBounds(), {maxZoom: 10});
 }
 
-    map.removeControl( map.zoomControl );
+    map.removeControl( map.zoomControl);
     cupcakeTiles.addTo(map);
-    var markers = L.markerClusterGroup();
+    var markers = L.markerClusterGroup(
+
+      { disableClusteringAtZoom: 10,
+        maxClusterRadius: 80,
+        spiderfyOnMaxZoom: true,
+        showCoverageOnHover: true,
+        zoomToBoundsOnClick: true }
+    );
     markers.addLayer(geojson);
     markers.addTo(map);
-    map.options.maxZoom = 8;
+    map.options.maxZoom = 10;
     map.options.minZoom = 3;
     map.fire('zoomend');
 
