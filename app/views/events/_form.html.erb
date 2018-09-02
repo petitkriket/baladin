@@ -3,25 +3,48 @@
 <%= simple_form_for (@event), html: { multipart: true, role: "form" } do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
     <% if user_signed_in? && current_user.try(:admin?) || @event.new_record? %>
-      <div class="form-inputs">
-        <%= f.text_field :address, class: 'form-control', :autofocus => true, placeholder: t('geolocate') %>
-        <div class="btn btn-primary geolocate" onclick="getLocation()"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+        <div class="input-group">
+          <%= f.text_field :address, class: 'form-control', :autofocus => true, placeholder: true, required: true %>
+          <span class="input-group-btn">
+            <a href="#" class="btn btn-default geolocate" onclick="getLocation()" type="submit">
+                <i class="fa fa-map-marker"></i>
+            </a>
+          </span>
+        </div>
+        <div id="error-address"></div>
     <% end %>
     <% if (@event.latitude.blank? || @event.longitude.blank?) && current_user.try(:admin?) %>
       <%= f.input :latitude %>
       <%= f.input :longitude %>
     <% end %>
+    <div class="form-group">
+            <label></label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="input-url-image" readonly placeholder="<%= t('no_file_chosen') %>">
+                <span class="input-group-btn">
+                    <span class="btn btn-default btn-file">
+                        <i class="fa fa-camera"></i>
+                        <%= f.input :photo, :as => :file, label: false %>
+                    </span>
+                </span>
+            </div>
+            <div id="error-photo" class="text-danger"></div>
+            <small class="form-text text-muted hint-photo">Ajoutez votre photo du Passager (facultatif)</small>
+            <img id='img-upload'/>
+        </div>
+
     <%= f.hidden_field :photo_cache %>
               <% if event.photo? %>
                   <%= image_tag event.photo.thumb.url %>
+                  <% if user_signed_in? && current_user.try(:admin?) || @event.new_record? %>
                   <div>
                     <%= label_tag :remove_image do %>
                       Remove image
                       <%= f.check_box :remove_photo %>
                     <% end %>
                   </div>
+                  <% end %>
               <% end %>
 
 
@@ -35,7 +58,6 @@
     <%= f.association :user, include_blank: false, include_hidden: false %>
     <%= f.input :published %>
     <% end %>
-  </div>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>
@@ -51,16 +73,14 @@
 (function() {
   var $, cupcakeTiles;
   $ = jQuery;
-  cupcakeTiles = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png', {
-    minZoom: 2,
-    maxZoom: 18,
+  cupcakeTiles = L.tileLayer('https://api.mapbox.com/styles/v1/julesvau/cjl26w2ce4t8u2sohaa3uec8d/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoianVsZXN2YXUiLCJhIjoiY2prNDd6NW5yMGFtOTNrbzQ5bWEweDgzbSJ9.-RD762orQSENzQ_f7TKU9g', {
+    minZoom: 0,
+    maxZoom: 14,
   });
   var counter = 0;
   <% unless params[:action] == "new" %>
-  //var Passenger = document.getElementById("event_passenger_id").value;
-  //$.getJSON('<%= root_url %>/passengers/<%= params[:passenger] %>.json', function(data) {
   $.getJSON("<%= root_url %>/passengers/<%= @event.passenger_id %>.json", function(data) {
-
+// edit form
     var geojson, map;
     var pointlist = [];
 geojson = L.geoJson(data, {
@@ -96,8 +116,13 @@ geojson = L.geoJson(data, {
             }
   }
 });
-
+// si aucun event precedent, afficher carte vide
+if (jQuery.isEmptyObject( geojson._layers )){
+  map = L.map('map').setView([30, 0], 2);
+}
+else{
     map = L.map('map').fitBounds(geojson.getBounds());
+}
     map.zoomControl.setPosition('bottomright');
     var pathLine = L.polyline(pointlist, { dashArray: '1,5', color: '#000', weight: 1.3, opacity: 1, lineCap: 'square'}).addTo(map)
     cupcakeTiles.addTo(map);
@@ -108,7 +133,7 @@ geojson = L.geoJson(data, {
   });
 
   <% else %>
-
+//new form
   map = L.map('map').setView([30, 0], 2);
   map.zoomControl.setPosition('bottomright');
   cupcakeTiles.addTo(map);
@@ -116,7 +141,9 @@ geojson = L.geoJson(data, {
 <% end %>
 }).call(this);
 </script>
+
 <script>
+//lancer geolocate si clic sur bouton
 var x = document.getElementById("geolocate");
 var geocoder = new google.maps.Geocoder();
 
@@ -139,21 +166,67 @@ if (navigator.geolocation) {
 }
 }
 
+// animation loading coordonnées qd clic
+$(function(){
+		$('.geolocate').on("click", function () {
+		$('.fa-map-marker').addClass("animate-flicker");
+		setTimeout(RemoveClass, 3500);
+		});
+		function RemoveClass() {
+		$('.fa-map-marker').removeClass("animate-flicker");
+		}
+		});
+
+// entrer l'adresse geocodée dans le champ
 function showPosition(position) {
-// x.innerHTML = "Latitude: " + position.coords.latitude +
-// "<br>Longitude: " + position.coords.longitude;
-
-//document.getElementById('user_event_address').value=position.coords.latitude +
-//" " + position.coords.longitude;
-
 var location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 getAddress(location, function(address)
 {
-    console.log(address);
     document.getElementById('event_address').value=address;
 });
 }
+</script>
 
+<script>
+// charger le nom du fichier
+$(document).on('change', '.btn-file :file', function() {
+		var input = $(this),
+			label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+		input.trigger('fileselect', [label]);
+		});
 
+		$('.btn-file :file').on('fileselect', function(event, label) {
 
+		    var input = $(this).parents('.input-group').find(':text'),
+		        log = label;
+
+		    if( input.length ) {
+		        input.val(log);
+		    } else {
+		        if( log ) alert(log);
+		    }
+
+		});
+		function readURL(input) {
+		    if (input.files && input.files[0]) {
+		        var reader = new FileReader();
+
+		        reader.onload = function (e) {
+		            $('#img-upload').attr('src', e.target.result);
+                $('#img-upload').css('padding','15px');
+                $('.hint-photo').addClass('hidden');
+
+		        }
+
+		        reader.readAsDataURL(input.files[0]);
+		    }
+		}
+
+		$("#event_photo").change(function(){
+		    readURL(this);
+		});
+// proposer de charger fichier si clic sur l'input
+    $('#input-url-image').on('click', function() {
+        $('#event_photo').click();
+    });
 </script>

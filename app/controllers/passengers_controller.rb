@@ -108,7 +108,7 @@ end
 
     respond_to do |format|
       if @event.blank?
-      format.html { redirect_to passengers_path, alert: "Ce Passager n'a pas encore de Parcours" }
+      format.html { redirect_to passengers_path, alert: t(:passenger_empty) }
       elsif
       format.html
       end
@@ -136,7 +136,7 @@ end
 
     respond_to do |format|
       if @passenger.save
-        format.html { redirect_to passengers_path, notice: 'Passenger was successfully created.' }
+        format.html { redirect_to passengers_path, notice: t(:passenger_created) }
         format.json { render :show, status: :created, location: @passenger }
       else
         format.html { render :new }
@@ -150,7 +150,7 @@ end
   def update
     respond_to do |format|
       if @passenger.update(passenger_params)
-        format.html { redirect_to passengers_path, notice: 'Passenger was successfully updated.' }
+        format.html { redirect_to passengers_path, notice: t(:passenger_updated) }
         format.json { render :show, status: :ok, location: @passenger }
       else
         format.html { render :edit }
@@ -164,7 +164,7 @@ end
   def destroy
     @passenger.destroy
     respond_to do |format|
-      format.html { redirect_to passengers_url, notice: 'Passenger was successfully destroyed.' }
+      format.html { redirect_to passengers_url, notice: t(:passenger_destroyed) }
       format.json { head :no_content }
     end
   end
@@ -183,8 +183,7 @@ end
 
     def admin_only
       unless user_signed_in? && current_user.admin?
-        #redirect_to root_path, :alert => "Access denied. Seulement admin"
-        redirect_to new_user_session_path, :alert => "Merci de vous connecter."
+        redirect_to new_user_session_path, :alert => t(:admin_only)
       end
     end
 
@@ -192,7 +191,6 @@ end
     def events_empty
       @events = Passenger.find(params[:id]).events.published.last
       if @events.nil?
-        #redirect_to root_path, :alert => "Pas de passager ici" unless user_signed_in? && current_user.admin?
         redirect_to root_path unless user_signed_in? && current_user.admin?
       end
     end

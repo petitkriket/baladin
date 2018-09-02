@@ -1,5 +1,5 @@
 class NotifMailer < ApplicationMailer
-  default from: "from@example.com"
+  default from: ENV["EMAIL_USERNAME"] 
 
   def registration_email(user, admin)
     @user = user

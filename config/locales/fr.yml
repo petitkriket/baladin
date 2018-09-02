@@ -16,8 +16,11 @@ fr:
   passengers: "Liste des Passagers"
   new_passenger: "Nouveau Passager"
   editing_passager: "Edition Passager"
+  engraving: "Gravure"
+  place: "Lieu"
   event: "Etape"
   events: "Etapes"
+  events_conditional: "Etape(s)"
   new_event: "Nouvelle Etape"
   editing_event: "Edition Etape"
   departure: "Départ"
@@ -29,17 +32,35 @@ fr:
   sign_in: "Connexion"
   edit_account: "Editer son compte"
   sign_out: "Se déconnecter"
+  forgot_password: "Mot de passe oublié?"
+  forgot_password_short:  "oublié?"
+  password_recovery:  "Nous vous enverrons un e-mail pour réinitialisatier votre mot de passe."
+  remember_me:  "Se souvenir de moi"
   passenger_marker_text: "Passager %{name}"
   location: "en ce moment à"
   exlocation: "était à"
   holder: "avec"
   geolocate: "Trouver votre position"
+  geolocate_failure: "Pas de résultat. Merci de recommencer ou de cliquer sur le bouton de geolocalisation."
+  no_file_chosen: "Aucun fichier choisi"
+  file_size:  "La taille du fichier doit être inférieure à 10mo"
+  already_in: "Vous avez deja participé avec un autre Passager ?"
+  click_here: "Cliquez ici"
   share_fb: "Partager sur Facebook"
   share_tw: "Partager sur Twitter"
   share_wa: "Partager sur WhatsApp"
   share_li: "Partager sur LinkedIn"
   social_desc: "Les Passagers sont des objets spécifiques dont la vocation est d’être transmis de la main à la main. Cette plateforme permet de suivre leurs déplacements et de participer à leurs transmissions."
   keywords: "art, travail artistique, object spécifique, peinture, gratuit, voyage, main à la main"
+  passenger_created:  "Passager a été créé avec succès"
+  passenger_updated: "Passenger a été mis à jour avec succès"
+  passenger_destroyed:  "Passenger a été détruit avec succès"
+  passenger_empty:  "Ce Passager n'a pas encore voyagé"
+  event_created:  "Event a été crée avec succès"
+  event_updated: "Event a été mis à jour avec succès"
+  event_destroyed:  "Event a été détruit avec succès"
+  message_sent:  "Message envoyé avec succès"
+  admin_only:  "Access restreint"
   simple_form:
     labels:
       event:
@@ -66,7 +87,18 @@ fr:
       event:
         address: "Addresse"
         photo: "Photo"
+    errors:
+      messages:
+        taken:  ": un compte est dejà enregistré à cet e-mail."
   helpers:
+    placeholder:
+      event:
+        address: "Votre position*"
+      user:
+        name: "Nom*"
+        email: "E-Mail*"
+        password: "Mot de passe*"
+        password_confirmation: "Confirmation mot de passe*"
     submit:
       create: "Créer %{model}"
       update: "Modifier %{model}"

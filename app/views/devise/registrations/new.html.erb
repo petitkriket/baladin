@@ -5,45 +5,53 @@
     <%= devise_error_messages! %>
 
     <%= f.simple_fields_for :events do |f| %>
-      <%= f.label :address %>
       <div class="input-group">
-        <%= f.text_field :address, class: 'form-control', :autofocus => true, placeholder: t('geolocate') %>
+        <%= f.text_field :address, class: 'form-control', :autofocus => true, placeholder: true, required: true %>
         <span class="input-group-btn">
           <a href="#" class="btn btn-default geolocate" onclick="getLocation()" type="submit">
               <i class="fa fa-map-marker"></i>
           </a>
         </span>
       </div>
+      <div id="error-address"></div>
 
-      <%= f.input :photo, :as => :file, :input_html => {:onchange => "loadFile(event)"} %>
-      <img id="output"/>
-
+      <div class="form-group">
+              <label></label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="input-url-image" readonly placeholder="<%= t('no_file_chosen') %>">
+                  <span class="input-group-btn">
+                      <span class="btn btn-default btn-file">
+                          <i class="fa fa-camera"></i>
+                          <%= f.input :photo, :as => :file, label: false %>
+                      </span>
+                  </span>
+              </div>
+              <div id="error-photo" class="text-danger"></div>
+              <small class="form-text text-muted hint-photo">Ajoutez votre photo du Passager (facultatif)</small>
+              <img id='img-upload'/>
+          </div>
       <%= f.hidden_field :passenger_id, value: @passenger %>
       <%= hidden_field_tag :t, params[:t] %>
     <% end %>
 
     <div class="form-group">
-      <%= f.label :name %>
-      <%= f.text_field :name, class: 'form-control' %>
+      <%= f.text_field :name, class: 'form-control', required: true, :minlength=>"3", placeholder: true  %>
     </div>
     <div class="form-group">
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
+      <%= f.email_field :email, class: 'form-control', required: true, placeholder: true %>
     </div>
     <div class="form-group">
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
+      <%= f.password_field :password, class: 'form-control', required: true, placeholder: true %>
     </div>
     <div class="form-group">
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
+      <%= f.password_field :password_confirmation, class: 'form-control', required: true, placeholder: true %>
     </div>
+
       <%= f.hidden_field :locale, value: I18n.locale %>
       <%= invisible_captcha sentence_for_humans: "who is it?" %>
+      <%= f.submit t('sign_up'),:id => 'submit-user', :class => 'button left btn btn-primary' %>
+      <p><%= t('already_in') %> <%= link_to t('click_here'), new_event_path(shortcut: params[:t]) %>.
 
-     <%= f.submit 'Sign up', :class => 'button right btn btn-primary' %>
-
-     <p>Vous avez deja participé avec un autre Passager ? <%= link_to "Cliquez ici.", new_event_path(shortcut: params[:t]) %>
   <% end %>
 </div>
 </div>
@@ -55,13 +63,12 @@
 (function() {
   var $, cupcakeTiles;
   $ = jQuery;
-  cupcakeTiles = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png', {
+    cupcakeTiles = L.tileLayer('https://api.mapbox.com/styles/v1/julesvau/cjl26w2ce4t8u2sohaa3uec8d/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoianVsZXN2YXUiLCJhIjoiY2prNDd6NW5yMGFtOTNrbzQ5bWEweDgzbSJ9.-RD762orQSENzQ_f7TKU9g', {
     minZoom: 2,
     maxZoom: 18,
   });
 
   var Passenger = document.getElementById("user_events_attributes_0_passenger_id").value;
-  //$.getJSON('<%= root_url %>/passengers/<%= params[:passenger] %>.json', function(data) {
   $.getJSON("<%= root_url %>/passengers/" + Passenger + ".json", function(data) {
 
     var geojson, map;
@@ -76,7 +83,12 @@ geojson = L.geoJson(data, {
           var y = feature.geometry.coordinates[0];
           pointlist.push([x, y]);
 
-        layer.bindPopup(feature.properties.popupContent);
+          layer.bindPopup(feature.properties.popupContent, {
+          offset: new L.Point(10, -20),
+          keepInView: true,
+          showOnMouseOver: true,
+          maxWidth: 400
+          });
         layer.on('mouseover', function (e) {
               this.openPopup();
           });
@@ -85,20 +97,22 @@ geojson = L.geoJson(data, {
           });
 
         if (layer.feature.properties.markerurl == null){
-        layer.setIcon(new L.DivIcon({
-        iconSize: new L.Point(82, 32),
-        className: "divicon",
-        html:'<p class="text-center small text-muted"><i class="fa fa-circle fa-3x" aria-hidden="true"></i><code>Etape '+counter+'</code></p>'
+          layer.setIcon(new L.DivIcon({
+          iconSize: new L.Point(64, 64),
+          iconAnchor:[24, 24],
+          className: "",
+          html:'<p class="text-center"> <img src="'+layer.feature.properties.markerurl_fallback+'" class="img-marker img-circle '+layer.feature.properties.divclass+'">'+layer.feature.properties.title+'</p>'
         }));
 
 
        } else {
-          layer.setIcon(new L.DivIcon({
-          iconSize: new L.Point(82, 32),
-          className: "divicon",
-          html:'<img src="'+layer.feature.properties.markerurl+'" class="img-marker"><p class="text-center"><code>Etape '+counter+'</code></p>'
+         layer.setIcon(new L.DivIcon({
+         iconSize: new L.Point(64, 64),
+         iconAnchor:[24, 24],
+         className: "",
+         html:'<p class="text-center"> <img src="'+layer.feature.properties.markerurl+'" class="img-marker img-circle '+layer.feature.properties.divclass+'">'+layer.feature.properties.title+'</p>'
           }));
-            }
+        }
   }
 
 });
@@ -112,10 +126,8 @@ function isEmpty(obj) {
 }
 
 if(isEmpty(geojson._layers)) {
-  //console.log('layers sont vides');
   map = L.map('map').setView([30, 0], 2);
 } else {
-  //console.log('markers existent');
   map = L.map('map').fitBounds(geojson.getBounds());
 }
 
@@ -125,6 +137,7 @@ if(isEmpty(geojson._layers)) {
     var pathLine = L.polyline(pointlist, { dashArray: '1,5', color: '#000', weight: 1.3, opacity: 1, lineCap: 'square'}).addTo(map)
     markers.addLayer(geojson);
     markers.addTo(map);
+
     // var firefoxIcon = L.icon({
     //        iconUrl: 'http://joshuafrazier.info/images/firefox.svg',
     //        iconSize: [38, 95], // size of the icon
@@ -148,20 +161,52 @@ if(isEmpty(geojson._layers)) {
                  geocoder.geocode({'location': latlng}, function(results, status) {
                    if (status === 'OK') {
                      if (results[0]) {
-                      // window.alert(results[0].formatted_address);
                        document.getElementById('user_events_attributes_0_address').value=results[0].formatted_address;
 
                      } else {
-                       window.alert('No results found');
+                       //
+                       $.notify({
+                       message: "<%= t('geolocate_failure') %>"
+                       },{
+                       type: "danger",
+                       offset: {
+                         x: 25,
+                         y: 80
+                       },
+                       placement: {
+                       align: "right",
+                       },
+                       animate: {
+                         enter: 'animated bounceIn',
+                         exit: 'animated bounceOut'
+                       }
+                       });
+                       //
+
                      }
                    } else {
-                     window.alert('No results found');
-                    // window.alert('Geocoder failed due to: ' + status);
+                     //
+                     $.notify({
+                     message: "<%= t('geolocate_failure') %>"
+                     },{
+                     type: "danger",
+                     offset: {
+                       x: 25,
+                       y: 80
+                     },
+                     placement: {
+                     align: "right",
+                     },
+                     animate: {
+                       enter: 'animated bounceIn',
+                       exit: 'animated bounceOut'
+                     }
+                     });
+                     //
                    }
                  });
                }
                geocodeLatLng(geocoder, lati, longi);
-           console.log("You clicked the map at LAT: "+ lati+" and LONG: "+longi );
                //Clear existing marker,
 
                if (theMarker != undefined) {
@@ -175,8 +220,6 @@ if(isEmpty(geojson._layers)) {
 
        window.PlaceFirefox = function(lati, longi){
         //function PlaceFirefox(lati, longi){
-           console.log("You clicked the map at LAT: "+ lati+" and LONG: "+longi );
-
                //Clear existing marker,
 
                if (theMarker != undefined) {
@@ -193,6 +236,7 @@ if(isEmpty(geojson._layers)) {
 
 }).call(this);
 
+// animation loading coordonnées qd clic
 $(function(){
 		$('.geolocate').on("click", function () {
 		$('.fa-map-marker').addClass("animate-flicker");
@@ -233,33 +277,125 @@ function showPosition(position) {
 var location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 getAddress(location, function(address)
 {
-  console.log(address);
-  console.log(position.coords.latitude);
-  console.log(position.coords.longitude);
     document.getElementById('user_events_attributes_0_address').value=address;
  var personne = {};
  	function placeMarker(){
 		var lat = position.coords.latitude;
 		var lng = position.coords.longitude;
-		//alert("You clicked the map at LAT: " + lat + " and LONG: " + lng);
-		//L.marker(e.latlng).addTo(map);
       var person = L.marker([lat,lng])
 	};
 PlaceFirefox(position.coords.latitude, position.coords.longitude)
 placeMarker(position.coords.latitude)
 });
 }
+</script>
 
-var loadFile = function(event) {
-  var output = document.getElementById('output');
-  output.src = URL.createObjectURL(event.target.files[0]);
+<script>
+jQuery.validator.setDefaults({
+  success: "valid",
+  errorElement: "span",
+  errorClass: "help-block",
+highlight: function (element, errorClass, validClass) {
+if (!$(element).hasClass('novalidation')) {
+    $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+}
+},
+unhighlight: function (element, errorClass, validClass) {
+if (!$(element).hasClass('novalidation')) {
+    $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+}
+},
+errorPlacement: function (error, element) {
+if (element.parent('.input-group').length) {
+    error.insertAfter(element.parent());
+}
+else if (element.prop('type') === 'radio' && element.parent('.radio-inline').length) {
+    error.insertAfter(element.parent().parent());
+}
+else if (element.prop('type') === 'checkbox' || element.prop('type') === 'radio') {
+    error.appendTo(element.parent().parent());
+}
+else { error.insertAfter(element); }
+}
+});
 
-  output.onload = function (e) {
-           $('#output')
-              .attr('src', e.target.result)
-              .width(50)
-              .height(50);
-          };
-};
+$.validator.addMethod('filesize', function (value, element, param) {
+    return this.optional(element) || (element.files[0].size <= param)
+  }, '<%= t('file_size') %>');
 
+$( "#new_user" ).validate({
+lang: '<%= I18n.locale %>',
+rules: {
+      "user_events_attributes_0_address": "required",
+      "user_name": "required",
+      "user_email": {
+        required: true,
+        email: true
+       },
+       "user[events_attributes][0][photo]": {
+                required: false,
+                extension: "jpg|jpeg|png",
+                filesize:11000000
+            },
+      "user[password]": {
+        minlength: 6
+               },
+       "user[password_confirmation]": {
+         minlength: 6,
+         equalTo : "#user_password"
+       }
+},
+errorPlacement: function(error, element) {
+     if (element.attr("name") == "user[events_attributes][0][photo]") {
+         $("#error-photo").html( error );
+     } else if (element.attr("name") == "user[events_attributes][0][address]") {
+         $("#error-address").html( error );
+     } else {
+         error.insertAfter(element);
+     }
+   }
+});
+
+</script>
+<script>
+$(document).on('change', '.btn-file :file', function() {
+		var input = $(this),
+			label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+		input.trigger('fileselect', [label]);
+		});
+
+		$('.btn-file :file').on('fileselect', function(event, label) {
+
+		    var input = $(this).parents('.input-group').find(':text'),
+		        log = label;
+
+		    if( input.length ) {
+		        input.val(log);
+		    } else {
+		        if( log ) alert(log);
+		    }
+
+		});
+		function readURL(input) {
+		    if (input.files && input.files[0]) {
+		        var reader = new FileReader();
+
+		        reader.onload = function (e) {
+		            $('#img-upload').attr('src', e.target.result);
+                $('#img-upload').css('padding','15px');
+                $('.hint-photo').addClass('hidden');
+
+		        }
+
+		        reader.readAsDataURL(input.files[0]);
+		    }
+		}
+
+		$("#user_events_attributes_0_photo").change(function(){
+		    readURL(this);
+		});
+
+    $('#input-url-image').on('click', function() {
+        $('#user_events_attributes_0_photo').click();
+    });
 </script>

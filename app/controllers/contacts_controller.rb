@@ -13,10 +13,8 @@ class ContactsController < ApplicationController
     Rails.logger.debug("DEBUG id: #{params[:id]}")
 
     if @contact.deliver
-      redirect_to passenger_path( id: params[:id]), :notice => "Message sent successfully TODO trad"
+      redirect_to passenger_path( id: params[:id]), :notice => t(:message_sent)
     else
-      #flash.now[:error] = 'Cannot send message'
-      #render :new
       redirect_to passenger_url(params[:id]), alert: @contact.errors.full_messages.join(', ')
 
     end

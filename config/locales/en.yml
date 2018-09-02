@@ -16,8 +16,11 @@ en:
   passengers: "Passengers List"
   new_passenger: "New Passenger"
   editing_passager: "Editing Passenger"
+  engraving: "Engraving"
+  place:  "Place"
   event: "Event"
   events: "Events"
+  events_conditional: "Event(s)"
   new_event: "New Event"
   editing_event: "Editing Event"
   about: "About"
@@ -29,17 +32,35 @@ en:
   sign_in: "Sign in"
   edit_account: "Edit Account"
   sign_out: "Sign out"
+  forgot_password: "Forgot your password?"
+  forgot_password_short:  "forgotten?"
+  password_recovery:  "We'll send password reset instructions."
+  remember_me:  "Remember me"
   passenger_marker_text: "Passenger %{name}"
   location: "currently at"
   exlocation: "was at"
   holder: "with"
   geolocate: "Find your position"
+  geolocate_failure: "No result found. Please try again or click on the geolocate button."
+  no_file_chosen: "No file chosen"
+  file_size:  "File size must be less than 10mo"
+  already_in: "Already participated with another Passenger?"
+  click_here: "Click here"
   share_fb: "Share on Facebook"
   share_tw: "Share on Twitter"
   share_wa: "Share on WhatsApp"
   share_li: "Share on LinkedIn"
   social_desc: "Passengers are specific objects whose vocation is to be transmitted from hand to hand. This platform makes it possible to follow their movements and to participate in their transmissions."
   keywords: "art, artwork, specific object, painting, free, travel, hand to hand"
+  passenger_created:  "Passenger was successfully created"
+  passenger_updated: "Passenger was successfully updated"
+  passenger_destroyed:  "Passenger was successfully destroyed"
+  passenger_empty:  "This passenger has not traveled yet"
+  event_created:  "Event was successfully created"
+  event_updated: "Event was successfully updated"
+  event_destroyed:  "Event was successfully destroyed"
+  message_sent:  "Message sent successfully"
+  admin_only:  "Restricted access"
   simple_form:
     labels:
       event:
@@ -66,7 +87,18 @@ en:
       event:
         address: "Address"
         photo: "Photo"
+    errors:
+      messages:
+        taken:  ": an account is already registred with this e-mail."
   helpers:
+    placeholder:
+      event:
+        address: "Your position*"
+      user:
+        name: "Name*"
+        email: "E-Mail*"
+        password: "Password*"
+        password_confirmation: "Password confirmation*"
     submit:
       create: "Create %{model}"
       update: "Update %{model}"
@@ -132,7 +164,7 @@ en:
         contribution: "Your contribution is pending validation and you will receive an e-mail as soon as it is validated and live."
         call_action: "In the meantime you can take your photo of the Passenger and add it via your personal space. This photo will be added to the Passenger's itinerary with the other contributors photos once your contribution has been validated."
         call_action2: "If you have already submitted your Passenger image, please note that you can change it at any time via your personal space"
-        confirm_button: "Confirm my account and access your personal space"
+        confirm_button: "Confirm your account and access your personal space"
       reset_password_instructions:
         subject: "Reset your password | The Passengers"
         welcome_user: "Bonjour %{name} !"

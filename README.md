@@ -160,3 +160,12 @@ https://lingohub.com/frameworks-file-formats/rails5-i18n-ruby-on-rails/#
 
 # validation form color
 https://stackoverflow.com/questions/18754020/bootstrap-with-jquery-validation-plugin
+
+#file upload bootstrap
+https://bootsnipp.com/snippets/eNbOa
+
+#placement erreurs et filesize
+https://stackoverflow.com/questions/13200659/custom-error-label-placement-using-jquery-validate-for-all-or-some-of-your-erro
+https://stackoverflow.com/questions/26175483/jquery-validate-file-size
+#clusters
+https://esri.github.io/esri-leaflet/examples/styling-clusters.html

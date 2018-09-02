@@ -6,9 +6,9 @@
         <table class="table">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Shortcut</th>
-              <th>Steps</th>
+              <th><%= t('passenger') %></th>
+              <th><%= t('engraving') %></th>
+              <th><%= t('events_conditional') %></th>
               <th colspan="3"></th>
             </tr>
           </thead>
@@ -35,43 +35,53 @@
 <% end %>
 
 <div id="map"></div>
-
 <script>
 (function() {
   var $, cupcakeTiles;
   $ = jQuery;
     //cupcakeTiles = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png', {
-    cupcakeTiles = L.tileLayer('https://api.mapbox.com/styles/v1/julesvau/cjkh85uud2eh22qruz2ylt7zq/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoianVsZXN2YXUiLCJhIjoiY2prNDd6NW5yMGFtOTNrbzQ5bWEweDgzbSJ9.-RD762orQSENzQ_f7TKU9g', {
+    //cupcakeTiles = L.tileLayer('https://api.mapbox.com/styles/v1/julesvau/cjkh85uud2eh22qruz2ylt7zq/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoianVsZXN2YXUiLCJhIjoiY2prNDd6NW5yMGFtOTNrbzQ5bWEweDgzbSJ9.-RD762orQSENzQ_f7TKU9g', {
+    cupcakeTiles = L.tileLayer('https://api.mapbox.com/styles/v1/julesvau/cjl26w2ce4t8u2sohaa3uec8d/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoianVsZXN2YXUiLCJhIjoiY2prNDd6NW5yMGFtOTNrbzQ5bWEweDgzbSJ9.-RD762orQSENzQ_f7TKU9g', {
     //attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 18,
+    maxZoom: 14,
+    minZoom: 0
   });
 
   $.getJSON('passengers.json', function(data) {
     var geojson, map;
 geojson = L.geoJson(data, {
     onEachFeature: function(feature, layer) {
-        //layer.bindPopup(feature.properties.popupContent);
         //layer.bindTooltip(feature.properties.passenger, { permanent: true, interactive: true, direction: 'bottom' });
-
         if (layer.feature.properties.markerurl == null){
         layer.setIcon(new L.DivIcon({
         iconSize: new L.Point(82, 32),
-        //iconAnchor:[50, 50],
         className: "divicon",
         html:'<a href="'+layer.feature.properties.link+'"><img src="'+layer.feature.properties.markerurl_fallback+'" class="img-marker" alt="Image"><p class="text-center"><mark>'+feature.properties.passenger+'</mark></p></a>'
-
         }));
 
-
        } else {
-          console.log('picture presente');
           layer.setIcon(new L.DivIcon({
           iconSize: new L.Point(82, 32),
-          //iconAnchor:[50, 50],
           className: "divicon",
           html:'<a href="'+layer.feature.properties.link+'"><img src="'+layer.feature.properties.markerurl+'" class="img-marker" alt="Image"><p class="text-center"><mark>'+feature.properties.passenger+'</mark></p></a>'
           }));
             }
+            // layer.on('mouseover tap', function (e) {
+            //     this.openPopup();
+            //     //Change icon
+            //     //e.target.setIcon(exampleiconHover);
+            //     e.target.getElement().addClass("active wiggle");
+            //     console.log("Hello in!");
+            //
+            // });
+            //
+            // layer.on('mouseout', function (e) {
+            //   //  this.closePopup()
+            //     //Change Icon
+            //     //e.target.setIcon(exampleIcon);
+            //     console.log("Hello out!");
+            //
+            // });
   }
 });
 
@@ -83,40 +93,41 @@ function isEmpty(obj) {
     return true;
 }
 
-if(isEmpty(geojson._layers)) {
-  //console.log('layers sont vides');
-  map = L.map('map').setView([30, 0], 2);
-} else {
-  //console.log('markers existent');
-  map = L.map('map').fitBounds(geojson.getBounds(), {maxZoom: 10});
-}
+    if(isEmpty(geojson._layers)) {
+      map = L.map('map').setView([30, 0], 2);
+    }
+     else {
+      map = L.map('map').fitBounds(geojson.getBounds(), {maxZoom: 14, padding: [180, 180]});
+    }
 
     map.removeControl( map.zoomControl);
     cupcakeTiles.addTo(map);
-    var markers = L.markerClusterGroup(
 
-      { disableClusteringAtZoom: 10,
+    var markers = L.markerClusterGroup({
+        //disableClusteringAtZoom: 10,
         maxClusterRadius: 80,
         spiderfyOnMaxZoom: true,
         showCoverageOnHover: true,
-        zoomToBoundsOnClick: true }
-    );
+        zoomToBoundsOnClick: true,
+        spiderfyDistanceMultiplier: 3.5,
+        spiderLegPolylineOptions: { weight: 2, color: '#181818', opacity: 0.75 },
+        polygonOptions: { color: '#2d84c8', weight: 4, opacity: 1, fillOpacity: 0.5 },
+        iconCreateFunction: function(cluster) {
+          var count = cluster.getChildCount();
+          var digits = (count+'').length;
+          return new L.divIcon({
+            html: count,
+            className:'cluster digits-'+digits,
+            iconSize: null
+            });
+          }
+    });
+
     markers.addLayer(geojson);
     markers.addTo(map);
-    map.options.maxZoom = 10;
-    map.options.minZoom = 3;
-    map.fire('zoomend');
 
-    // zoom in function
-          $('.zoomin').click(function(){
-            map.setZoom(map.getZoom() + 1)
-          });
-
-
-          // zoom out function
-          $('.zoomout').click(function(){
-            map.setZoom(map.getZoom() - 1)
-          });
+  $('.zoomin').click(function(){ map.setZoom(map.getZoom() + 1)  });
+  $('.zoomout').click(function(){ map.setZoom(map.getZoom() - 1) });
 
 
 
