@@ -90,7 +90,9 @@
         zoomToBoundsOnClick: true,
         spiderfyDistanceMultiplier: 3.5,
         spiderLegPolylineOptions: { weight: 2, color: '#181818', opacity: 0.75 },
-        polygonOptions: { color: '#2d84c8', weight: 4, opacity: 1, fillOpacity: 0.5 },
+        //polygonOptions: { color: '#fff000', weight: 4, opacity: 1, fillOpacity: 0.5 },
+        polygonOptions: { color: '#222', opacity: 1 },
+        //weight: 1.5, color: '#222', opacity: initialLegOpacity
         iconCreateFunction: function(cluster) {
           var count = cluster.getChildCount();
           var digits = (count+'').length;

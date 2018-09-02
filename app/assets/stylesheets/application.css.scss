@@ -490,6 +490,12 @@ top: 24px;
     color: #a94442;
 }
 
+/*INDEX */
+.passenger-admin-list {
+    height: 75vh;
+    overflow-y: scroll;
+}
+
 /*PASSENGER SHOW */
 #passenger_image {
   display: inherit;

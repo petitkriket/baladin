@@ -1,7 +1,7 @@
 <% meta og: { image: URI.join(root_url, image_path("banner.jpg")) } %>
 <% meta og: { image:  { width: "1200", height: "630" } } %>
 <% if user_signed_in? && current_user.try(:admin?) %>
-<div class="col-md-4">
+<div class="col-md-4 passenger-admin-list">
   <h1><%= t('passengers') %></h1> <%= link_to fa_icon('plus-circle', text: "#{t('new')} #{t('passenger')}"), new_passenger_path, class: "btn btn-default" %>
         <table class="table">
           <thead>
