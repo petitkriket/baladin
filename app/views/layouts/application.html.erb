@@ -2,7 +2,11 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <%#= metamagic title: t('site_title'), description: t('social_desc'), keywords: t('keywords'), image: asset_path("banner.jpg"), url: request.original_url, og: { title: t('site_title'), site_name: t('site_title'), type: 'website', description: t('social_desc') }, twitter: { title: t('site_title'),description: t('social_desc'), creator: "@pssgrs", site: "@pssgrs", img: { src: asset_path("banner.jpg") } } %>
+    <% metamagic site: t('site_title'), title: [:title, :site], separator: " | " %>
+    <%= metamagic %>
+    <meta name="description" content="<%= t('social_desc') %>">
+    <meta name="keywords" content="<%= t('keywords') %>">
+    <meta name="url" content="<%= request.original_url %>">
     <meta property="og:title" content="<%= t('site_title') %>" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="<%= request.original_url %>" />
@@ -14,7 +18,10 @@
     <meta name="twitter:title" content="<%= t('site_title') %>">
     <meta name="twitter:description" content="<%= t('social_desc') %>">
     <meta name="twitter:creator" content="<%= ENV['TW_APPID'] %>">
-    <%= metamagic %>
+    <meta name="theme-color" content="#181818">
+    <meta name="msapplication-navbutton-color" content="#181818">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=<%= ENV['GMAPSJS_API_KEY'] %>"></script>
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
@@ -22,7 +29,6 @@
     <%= csrf_meta_tags %>
   </head>
   <% if Rails.env.production? %>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=<%= ENV['GA_ID'] %>"></script>
     <script>
       window.dataLayer = window.dataLayer || [];

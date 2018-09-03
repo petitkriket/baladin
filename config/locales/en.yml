@@ -1,5 +1,6 @@
 en:
   hello: "Hello"
+  home: "Home"
   site_title: "Passengers"
   new: "New"
   show: "Show"
@@ -36,6 +37,13 @@ en:
   forgot_password_short:  "forgotten?"
   password_recovery:  "We'll send password reset instructions."
   remember_me:  "Remember me"
+  change_pass:  "Leave these fields blank if you don't want to change your password."
+  must_pass:  "You must enter your current password to make changes."
+  update: "Update"
+  cancel_account:  "Cancel Account"
+  cancel_sad:  "Unhappy? We'll be sad to see you go."
+  cancel_button:  "Cancel"
+  sure: "Are you sure?"
   passenger_marker_text: "Passenger %{name}"
   location: "currently at"
   exlocation: "was at"
@@ -84,6 +92,7 @@ en:
         email: "E-mail"
         password: "Password"
         password_confirmation: "Password confirmation"
+        locale: "Site language"
       event:
         address: "Address"
         photo: "Photo"

@@ -1,3 +1,4 @@
+<% meta title: t('home') %>
 <% meta og: { image: URI.join(root_url, image_path("banner.jpg")) } %>
 <% meta og: { image:  { width: "1200", height: "630" } } %>
 <% if user_signed_in? && current_user.try(:admin?) %>

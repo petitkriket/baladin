@@ -1,5 +1,6 @@
 fr:
   hello: "Bonjour"
+  home: "Accueil"
   site_title: "Les Passagers"
   new: "Nouveau"
   show: "Voir"
@@ -36,6 +37,13 @@ fr:
   forgot_password_short:  "oublié?"
   password_recovery:  "Nous vous enverrons un e-mail pour réinitialisatier votre mot de passe."
   remember_me:  "Se souvenir de moi"
+  change_pass:  "Laissez ces champs vides si vous ne souhaitez pas modifier votre mot de passe."
+  must_pass:  "Vous devez entrer votre mot de passe actuel pour apporter des modifications."
+  update: "Mettre à jour"
+  cancel_account:  "Supprimer le compte"
+  cancel_sad:  "Mécontent? Nous serons tristes de vous voir partir."
+  cancel_button:  "Supprimer"
+  sure: "Êtes-vous sûr(e)?"
   passenger_marker_text: "Passager %{name}"
   location: "en ce moment à"
   exlocation: "était à"
@@ -84,6 +92,7 @@ fr:
         email: "E-mail"
         password: "Mot de passe"
         password_confirmation: "Confirmation mot de passe"
+        locale: "Langue du site"
       event:
         address: "Addresse"
         photo: "Photo"
