@@ -22,7 +22,10 @@
           <% @passengers.each do |passenger| %>
           <% if passenger.events.size > 0 %>
             <tr>
-              <td><%= passenger.name %></td>
+
+              <td><%#= t('hash') %><%#= passenger.name %>
+                <%= link_to "#{t('hash')} #{passenger.name}", passenger_path(passenger) %>
+              </td>
               <td><%= passenger.events.last.city unless passenger.events.last.nil? %></td>
               <td><%= passenger.events.size %></td>
             </tr>

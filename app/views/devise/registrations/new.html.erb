@@ -1,7 +1,7 @@
 <div class="col-md-4">
 <div class="authform">
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :role => 'form'}) do |f| %>
-    <h3><%= t('sign_up') %></h3>
+    <h3><%= t('sign_up_participation') %></h3>
     <%= devise_error_messages! %>
 
     <%= f.simple_fields_for :events do |f| %>
@@ -27,7 +27,7 @@
                   </span>
               </div>
               <div id="error-photo" class="text-danger"></div>
-              <small class="form-text text-muted hint-photo">Ajoutez votre photo du Passager (facultatif)</small>
+              <small class="form-text text-muted hint-photo"><%= t('photo_hint') %></small>
               <img id='img-upload'/>
           </div>
       <%= f.hidden_field :passenger_id, value: @passenger %>
@@ -49,7 +49,7 @@
 
       <%= f.hidden_field :locale, value: I18n.locale %>
       <%= invisible_captcha sentence_for_humans: "who is it?" %>
-      <%= f.submit t('sign_up'),:id => 'submit-user', :class => 'button left btn btn-primary' %>
+      <%= f.submit t('sign_up'),:id => 'submit-user', :class => 'button right btn btn-primary' %>
       <p><%= t('already_in') %> <%= link_to t('click_here'), new_event_path(shortcut: params[:t]) %>.
 
   <% end %>
@@ -58,6 +58,39 @@
 <div class="col-md-8" style="margin-top:30px;">
 <div id="map" style="height: 600px;"></div>
 </div>
+<!-- Modal -->
+<div id="langModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"><%= t('welcome') %>,</h4>
+      </div>
+      <div class="modal-body">
+        <p><%= t('welcome_msg') %></div>
+      <div class="modal-footer">
+        <p class="pull-left">
+          <% if I18n.locale == :fr %>
+          <%= link_to t('version'), url_for({:locale => 'en', t: params[:t]}) %>
+          <% end %>
+          <% if I18n.locale == :en %>
+          <%= link_to t('version'), url_for({:locale => 'fr', t: params[:t]}) %>
+          <% end %>
+        </p>
+
+        <button type="button" class="btn btn-primary" data-dismiss="modal"><%= t('begin') %></button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script type="text/javascript">
+    $(window).on('load',function(){
+        $('#langModal').modal('show');
+    });
+</script>
 
 <script>
 (function() {

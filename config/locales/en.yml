@@ -14,12 +14,20 @@ en:
   user: "User"
   users: "Users"
   passenger: "Passenger"
+  hash: "#"
   passengers: "Passengers List"
   new_passenger: "New Passenger"
   editing_passager: "Editing Passenger"
   engraving: "Engraving"
   place:  "Place"
   event: "Event"
+  saved:  "Saved :"
+  waiting_confirmation  : "Your contribution is pending validation."
+  waiting_confirmation_admin  : "Contribution is pending validation."
+  contribution_published: "Your contribution is published and visible to all."
+  contribution_published_admin: "Contribution published."
+  add_photo:  "Add your Passenger's photo"
+  edit_photo:  "Edit photo"
   events: "Events"
   events_conditional: "Event(s)"
   new_event: "New Event"
@@ -29,9 +37,11 @@ en:
   current_position: "Current step"
   host: "Host"
   photo: "Photo"
+  contact_hint: "Send a message to the person who bears the Passenger so she can hand it down to you."
   sign_up: "Sign up"
+  sign_up_participation: "Register your participation"
   sign_in: "Sign in"
-  edit_account: "Edit Account"
+  edit_account: "Edit profile"
   sign_out: "Sign out"
   forgot_password: "Forgot your password?"
   forgot_password_short:  "forgotten?"
@@ -43,13 +53,18 @@ en:
   cancel_account:  "Cancel Account"
   cancel_sad:  "Unhappy? We'll be sad to see you go."
   cancel_button:  "Cancel"
-  sure: "Are you sure?"
-  passenger_marker_text: "Passenger %{name}"
+  sure: "Are you sure? Your participation will be deleted from the site."
+  passenger_marker_text: "Passenger #%{name}"
   location: "currently at"
   exlocation: "was at"
   holder: "with"
+  welcome: "Welcome"
+  welcome_msg:  "The object given to you is a Passenger. It belongs to no one et cannot be owned It circulates and is transmitted from hand to hand. Its course is published on this plateform. To register your participation on this plateform, please fill in the form below."
+  begin:  "Begin"
+  version: "Version française"
   geolocate: "Find your position"
   geolocate_failure: "No result found. Please try again or click on the geolocate button."
+  photo_hint: "Add your Passenger photo (optional)"
   no_file_chosen: "No file chosen"
   file_size:  "File size must be less than 10mo"
   already_in: "Already participated with another Passenger?"
@@ -60,15 +75,15 @@ en:
   share_li: "Share on LinkedIn"
   social_desc: "Passengers are specific objects whose vocation is to be transmitted from hand to hand. This platform makes it possible to follow their movements and to participate in their transmissions."
   keywords: "art, artwork, specific object, painting, free, travel, hand to hand"
-  passenger_created:  "Passenger was successfully created"
-  passenger_updated: "Passenger was successfully updated"
-  passenger_destroyed:  "Passenger was successfully destroyed"
-  passenger_empty:  "This passenger has not traveled yet"
-  event_created:  "Event was successfully created"
-  event_updated: "Event was successfully updated"
-  event_destroyed:  "Event was successfully destroyed"
-  message_sent:  "Message sent successfully"
-  admin_only:  "Restricted access"
+  passenger_created:  "Passenger was successfully created."
+  passenger_updated: "Passenger was successfully updated."
+  passenger_destroyed:  "Passenger was successfully destroyed."
+  passenger_empty:  "This passenger has not traveled yet !"
+  event_created:  "Contribution was successfully created."
+  event_updated: "Contribution was successfully updated"
+  event_destroyed:  "Contribution was successfully destroyed"
+  message_sent:  "Message sent successfully."
+  admin_only:  "Restricted access."
   simple_form:
     labels:
       event:
@@ -82,8 +97,8 @@ en:
         user: 'User'
         published: 'Published'
       contact:
-        name: 'Nom'
-        email: 'E-mail '
+        name: 'Name'
+        email: 'E-mail'
         message: 'Message'
   activerecord:
     attributes:
@@ -115,8 +130,8 @@ en:
         create: "Crate Passenger"
         update: "Update Passenger"
       event:
-        create: "Create Passenger's step"
-        update: "Update Passenger's step"
+        create: "Create"
+        update: "Update"
   notif_mailer:
     registration_email:
       subject:  "New user's event registration is waiting your approbation"
@@ -127,9 +142,10 @@ en:
     event_activation_email:
       subject:  'Your participation is online !'
       greeting: 'Hello %{name},'
-      participation: "Your participation in the Passenger's %{passenger_name} journey is online !"
+      thank_you: 'Thank you %{name},'
+      participation: "Your participation in the Passenger's #%{passenger_name} journey is online !"
       view: "You can see it by clicking on this "
-      action_call_photo: "If you have not attached a photo to your contribution, you can still do it by connecting to your"
+      action_call_photo: "You can still add a photo of your passenger to your contribution via your"
       personal_space: "personnal space"
       hint_photo: "This photo will be then added to the images on the Passenger's route map page."
       online_photo: "Thank you for adding a photo to the Passenger's route."
@@ -168,11 +184,14 @@ en:
     mailer:
       confirmation_instructions:
         subject: "Confirmation instructions"
-        welcome_user: "Welcome %{name} !"
-        confirmation_call: "Please confirm your account email through the link below:"
+        welcome_user: "Hello %{name},"
+        confirmation_call: "Please confirm your account email through the link below :"
         contribution: "Your contribution is pending validation and you will receive an e-mail as soon as it is validated and live."
-        call_action: "In the meantime you can take your photo of the Passenger and add it via your personal space. This photo will be added to the Passenger's itinerary with the other contributors photos once your contribution has been validated."
-        call_action2: "If you have already submitted your Passenger image, please note that you can change it at any time via your personal space"
+        call_action: "If you have not added your Passenger photo yet, you can add it via your personal space."
+        call_action2: "If you have already submitted your Passenger photo, you can change it at any time."
+        call_action3: "This photo will be added to the Passenger's itinerary with the other participants photos once your contribution has been validated."
+        thanks: "Thank you for your participation."
+        signature: "François Maurin & Samuel Bouaroua."
         confirm_button: "Confirm your account and access your personal space"
       reset_password_instructions:
         subject: "Reset your password | The Passengers"

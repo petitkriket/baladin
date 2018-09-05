@@ -10,6 +10,7 @@
         <h4 class="modal-title" id="exampleModalLabel"><%= t('contact') %> <%= @passenger.events.last.user.name %></h4>
       </div>
       <div class="modal-body">
+        <p class="help-block"><%= t('contact_hint') %></p>
         <%= simple_form_for (@contact), :url => {:action => "create", :id => params[:id], :controller => "contacts"} do |f| %>
         <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
           <%= f.input :name, required: true, :minlength=>"3" %>
@@ -19,7 +20,6 @@
 
       <div class="modal-footer">
         <button type="button" class="btn" data-dismiss="modal"><%= t('close') %></button>
-  <%#= f.button :submit, "Send", class: "btn-primary" %>
   <%= button_tag type: 'submit', class: "btn btn-primary", id: "send-email" do %>
     <i class="fa fa-check" aria-hidden="true"></i> <%= t('send') %>
   <% end %>

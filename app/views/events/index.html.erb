@@ -14,30 +14,26 @@
         <% else %>
           <p class="vcenter">
             <i class="fa fa-plus fa-3x text-muted"></i><br>
-            <span class="add_user_img"><%= link_to 'Ajoutez votre photo du Passager', edit_event_path(event), class: 'text-muted' %></span>
+            <span class="add_user_img"><%= link_to t('add_photo'), edit_event_path(event), class: 'text-muted' %></span>
           </p>
         <% end %>
       </div>
       <div class="product-info">
         <div class="product-content">
-          <%= image_tag(event.passenger.photo_url(:marker), alt: 'Image'.to_s, class: 'passenger_thumb img-circle pull-left') rescue "<p>Image</p>" %>
+          <%= image_tag(event.passenger.photo_url(:marker), alt: 'Image'.to_s, class: 'passenger_thumb img-circle pull-left') rescue "" %>
           <h4><%= link_to "#{t('passenger')} #{event.passenger.name}", passenger_path(event.passenger) %></h4>
-          <p><%= t('address') %>:
-            <%= event.address %></p>
-          <p><%= t('saved') %>:
-            <%= event.created_at.strftime("%d/%m/%Y") %></p>
+          <p><%= t('saved') %> <%= event.created_at.strftime("%d/%m/%Y") %>
           <% if user_signed_in? && current_user.try(:admin?) %>
-            <p><%= t('passenger') %>:
-              <%= event.user.name %></p>
-            <p>Coordonées :
-              <%= event.latitude %>
-              <%= event.longitude %>
-            </p>
+           | <%= event.user.name %>
+          <% end %>
+          </p>
+          <% if user_signed_in? && current_user.try(:admin?) %>
+            <p class="small"><%= t('address') %>: <%= event.address %>(<%= event.latitude %>,<%= event.longitude %>)</p>
           <% end %>
 
           <div class="buttons">
             <% unless event.photo.blank? %>
-              <%= link_to 'Modifier photo', edit_event_path(event), class: 'btn btn-primary' %>
+              <%= link_to t('edit_photo'), edit_event_path(event), class: 'btn btn-primary' %>
             <% end %>
             <% if user_signed_in? && current_user.try(:admin?) %>
               <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
@@ -45,23 +41,23 @@
 
             <% if event.published.blank? %>
               <% if current_user.try(:admin?) %>
-                <p class="text-danger">
+                <span class="text-danger">
                   <i class="fa fa-times-circle fa-2x" aria-hidden="true"></i>
-                  Contribution en attente de validation.</p>
+                  <%= t('waiting_confirmation_admin') %></span>
               <% else %>
-                <p class="text-danger">
+                <span class="text-danger">
                   <i class="fa fa-times-circle fa-2x" aria-hidden="true"></i>
-                  Votre contribution est en attente de validation.</p>
+                  <%= t('waiting_confirmation') %></span>
               <% end %>
 
               <% elsif current_user.try(:admin?) && event.published %>
-                <p class="text-success">
+                <span class="text-success">
                   <i class="fa fa-check-circle fa-2x" aria-hidden="true"></i>
-                  Contribution publiée<p>
+                  <%= t('contribution_published_admin') %></span>
                   <% else %>
-                    <p class="text-success">
+                    <span class="text-success">
                       <i class="fa fa-check-circle fa-2x" aria-hidden="true"></i>
-                      Votre contribution est publiée et visible par tous<p>
+                      <%= t('contribution_published') %></span>
                       <% end %>
 
                       <% if event.published && current_user.try(:user?) %>

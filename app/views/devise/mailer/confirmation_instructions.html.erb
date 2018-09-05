@@ -2,7 +2,9 @@
 
 <p><%= t('.contribution') %></p>
 <p><%= t('.confirmation_call') %></p>
+<p><%= link_to t('.confirm_button'), confirmation_url(@resource, confirmation_token: @token) %></p>
 <p><%= t('.call_action') %></p>
 <p><%= t('.call_action2') %></p>
-
-<p><%= link_to t('.confirm_button'), confirmation_url(@resource, confirmation_token: @token) %></p>
+<p><%= t('.call_action3') %></p>
+<p><%= t('.thanks') %></p>
+<p><%#= t('.signature') %></p>

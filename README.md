@@ -169,3 +169,6 @@ https://stackoverflow.com/questions/13200659/custom-error-label-placement-using-
 https://stackoverflow.com/questions/26175483/jquery-validate-file-size
 #clusters
 https://esri.github.io/esri-leaflet/examples/styling-clusters.html
+
+#rediriger vers espace sauf si ressource protégée
+https://stackoverflow.com/questions/28253024/redirecting-after-sign-in-with-devise
