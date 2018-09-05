@@ -44,7 +44,7 @@ end
     @events  = Passenger.find(params[:id]).events.published
     @event  = Passenger.find(params[:id]).events.published.last
     @geojson = Array.new
-    counter = 0
+    counter = -1
 
     @events.each_with_index do |event, index|
       marker_name = t('passenger_marker_text', name: event.passenger.name )
@@ -54,7 +54,7 @@ end
         popup_photo = "<img src='#{event.photo.medium.url}'>"
       end
 
-      if index == 0 && @events.size == 1
+      if index == 0 #&& @events.size == 1
         # this is the first item
         @geojson << {
           type: 'Feature',

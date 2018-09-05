@@ -17,23 +17,3 @@ styliser la croix de fermeture du pop up
 
 version mobile virer la partie droite avec la liste de Passagers
 conserver le bouton fermer popup volet
-
-depart
-#
-
-depart
-etape actuelle
-
-#
-
-depart
-etape 1
-etape actuelle
-
-#
-
-depart
-etape 1
-etape 2
-etape n
-etape actuelle
