@@ -355,7 +355,6 @@ DEPENDENCIES
   mail_form
   metamagic
   mini_magick
-  momentjs-rails
   pg
   puma (~> 3.11)
   rails (~> 5.2.0)
