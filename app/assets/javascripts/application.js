@@ -19,6 +19,7 @@
 //= require jquery.validate
 //= require jquery.validate.additional-methods
 //= require bootstrap-notify
+//= require datetime_picker_input
 //= require_tree .
 
 function initializeAutocomplete(id) {

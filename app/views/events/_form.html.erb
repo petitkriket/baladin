@@ -30,7 +30,6 @@
                 </span>
             </div>
             <div id="error-photo" class="text-danger"></div>
-            <small class="form-text text-muted hint-photo">Ajoutez votre photo du Passager (facultatif)</small>
             <img id='img-upload'/>
         </div>
 
@@ -56,6 +55,7 @@
     <% if current_user.try(:admin?) %>
     <%= f.association :passenger, include_blank: false, include_hidden: false %>
     <%= f.association :user, include_blank: false, include_hidden: false %>
+    <%= f.input :created_at, as: :date_time_picker, input_html: { data: { locale: I18n.locale } } %>
     <%= f.input :published %>
     <% end %>
 
@@ -229,4 +229,45 @@ $(document).on('change', '.btn-file :file', function() {
     $('#input-url-image').on('click', function() {
         $('#event_photo').click();
     });
+</script>
+
+<script>
+jQuery.validator.setDefaults({
+  success: "valid",
+  errorElement: "span",
+errorClass: "help-block",
+highlight: function (element, errorClass, validClass) {
+// Only validation controls
+if (!$(element).hasClass('novalidation')) {
+    $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+}
+},
+unhighlight: function (element, errorClass, validClass) {
+// Only validation controls
+if (!$(element).hasClass('novalidation')) {
+    $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+}
+},
+errorPlacement: function (error, element) {
+if (element.parent('.input-group').length) {
+    error.insertAfter(element.parent());
+}
+else if (element.prop('type') === 'radio' && element.parent('.radio-inline').length) {
+    error.insertAfter(element.parent().parent());
+}
+else if (element.prop('type') === 'checkbox' || element.prop('type') === 'radio') {
+    error.appendTo(element.parent().parent());
+}
+else {
+    error.insertAfter(element);
+}
+}
+});
+
+
+$( "#new_event" ).validate({
+lang: '<%= I18n.locale %>',
+rules: { field: { required: true } }
+});
+
 </script>

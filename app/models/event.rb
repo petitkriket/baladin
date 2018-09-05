@@ -4,6 +4,8 @@ class Event < ApplicationRecord
   validates :address, presence: true
   validates :passenger_id, :uniqueness => {:scope=>:user_id, :message => "Title already exists."}
   scope :published, -> { where(:published => true)}
+  default_scope { order(created_at: :asc) }
+
   #
   mount_uploader :photo, EventUploader
   #

@@ -19,6 +19,7 @@
  *= require font-awesome
  *= require animate
  */
+ @import 'datetime_picker_input';
 
  /***** MAP *****/
 
@@ -183,6 +184,10 @@
 
 .geolocate {
   border-width: 1px !important;
+}
+
+.datetime_picker .btn {
+    border-width: 1px !important;
 }
 
 .ui-topleft{

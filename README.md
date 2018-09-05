@@ -172,3 +172,6 @@ https://esri.github.io/esri-leaflet/examples/styling-clusters.html
 
 #rediriger vers espace sauf si ressource protégée
 https://stackoverflow.com/questions/28253024/redirecting-after-sign-in-with-devise
+
+#calendar
+http://datetime-picker-input.herokuapp.com/
