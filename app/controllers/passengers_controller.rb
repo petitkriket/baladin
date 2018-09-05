@@ -54,7 +54,7 @@ end
         popup_photo = "<img src='#{event.photo.medium.url}'>"
       end
 
-      if index == 0 #&& @events.size == 1
+      if index == 0 && @events.size == 1
         # this is the first item
         @geojson << {
           type: 'Feature',
@@ -70,6 +70,22 @@ end
             popupContent: "#{popup_photo}<br> #{marker_name} #{t('location')} #{event.city} #{event.country} #{t('holder')} #{event.user.name}"
           }
         }
+      elsif index == 0 && @events.size != 1
+          # this is the first item
+          @geojson << {
+            type: 'Feature',
+            geometry: {
+              type: 'Point',
+              coordinates: [event.longitude, event.latitude]
+            },
+            properties: {
+              markerurl: event.photo.marker.url,
+              markerurl_fallback: event.passenger.photo.marker.url,
+              title: "#{t('departure')}",
+              divclass: "first-marker",
+              popupContent: "#{popup_photo}<br> #{marker_name} #{t('exlocation')} #{event.city} #{event.country} #{t('holder')} #{event.user.name}"
+            }
+          }
       elsif index == @events.size - 1
         # this is the last item
         @geojson << {
