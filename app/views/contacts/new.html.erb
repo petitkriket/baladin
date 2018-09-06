@@ -1,11 +1,11 @@
 <% unless @passenger.events.last.nil? || current_user == @passenger.events.last.user %>
 
 <div class="modal fade modal-contact" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true"><%= image_tag("close.svg", :alt => "close", class: "") %></span>
         </button>
         <h4 class="modal-title" id="exampleModalLabel"><%= t('contact') %> <%= @passenger.events.last.user.name %></h4>
       </div>
@@ -13,9 +13,9 @@
         <p class="help-block"><%= t('contact_hint') %></p>
         <%= simple_form_for (@contact), :url => {:action => "create", :id => params[:id], :controller => "contacts"} do |f| %>
         <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-          <%= f.input :name, required: true, :minlength=>"3" %>
-          <%= f.input :email, required: true %>
-          <%= f.input :message, as: :text %>
+          <%= f.input :name, required: true, :minlength=>"3", placeholder: t('name'), label: false %>
+          <%= f.input :email, required: true, placeholder: t('email'), label: false %>
+          <%= f.input :message, as: :text, placeholder: t('message'), label: false ,  :input_html => {:rows => 5}%>
           <%= f.input :nickname, hint: 'leave this field blank', as: :hidden %>
 
       <div class="modal-footer">

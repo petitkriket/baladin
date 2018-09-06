@@ -1,11 +1,4 @@
-<div class="container">
-  <h1><%= t('events') %></h1>
-  <%= link_to t('edit_account'), edit_user_registration_path, class: 'btn btn-default' %>
-  <% if user_signed_in? && current_user.try(:admin?) %>
-  <%= link_to t('new_event'), new_event_path, class: 'btn btn-default' %>
-  <%= link_to t('users'), users_path, class: 'btn btn-default' %>
-  <% end %>
-
+<div class="container contributions-list">
   <% @events.each do |event| %>
     <div class="product">
       <div class="img-container">
@@ -33,41 +26,40 @@
 
           <div class="buttons">
             <% unless event.photo.blank? %>
-              <%= link_to t('edit_photo'), edit_event_path(event), class: 'btn btn-primary' %>
+              <%= link_to t('edit_photo'), edit_event_path(event), class: 'btn btn-default' %>
             <% end %>
             <% if user_signed_in? && current_user.try(:admin?) %>
               <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
             <% end %>
 
-            <% if event.published.blank? %>
-              <% if current_user.try(:admin?) %>
-                <span class="text-danger">
-                  <i class="fa fa-times-circle fa-2x" aria-hidden="true"></i>
-                  <%= t('waiting_confirmation_admin') %></span>
-              <% else %>
-                <span class="text-danger">
-                  <i class="fa fa-times-circle fa-2x" aria-hidden="true"></i>
-                  <%= t('waiting_confirmation') %></span>
-              <% end %>
-
-              <% elsif current_user.try(:admin?) && event.published %>
-                <span class="text-success">
-                  <i class="fa fa-check-circle fa-2x" aria-hidden="true"></i>
-                  <%= t('contribution_published_admin') %></span>
-                  <% else %>
-                    <span class="text-success">
-                      <i class="fa fa-check-circle fa-2x" aria-hidden="true"></i>
-                      <%= t('contribution_published') %></span>
-                      <% end %>
-
                       <% if event.published && current_user.try(:user?) %>
                         <div id="share">
-                          <a class="fa fa-facebook" href="https://www.facebook.com/share.php?u=<%= url_for(passenger_url(locale, event.passenger_id)) %>&title=<%= event.passenger.name %>" target="blank"></a>
-                          <a class="fa fa-twitter" href="https://twitter.com/intent/tweet?status=<%= event.passenger.name %>+<%= url_for(passenger_url(locale, event.passenger_id)) %>" target="blank"></a>
-                          <a class="fa fa-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=<%= url_for(passenger_url(locale, event.passenger_id)) %>&title=<%= event.passenger.name %>&source=<%= url_for(root_url) %>" target="blank"></a>
+                          <a class="" href="https://www.facebook.com/share.php?u=<%= url_for(passenger_url(locale, event.passenger_id)) %>&title=<%= event.passenger.name %>" target="blank">Facebook</a> |
+                          <a class="" href="https://twitter.com/intent/tweet?status=<%= event.passenger.name %>+<%= url_for(passenger_url(locale, event.passenger_id)) %>" target="blank">Twitter</a> |
+                          <a class="" href="https://www.linkedin.com/shareArticle?mini=true&url=<%= url_for(passenger_url(locale, event.passenger_id)) %>&title=<%= event.passenger.name %>&source=<%= url_for(root_url) %>" target="blank">LinkedIn</a>
                         </div>
                       <% end %>
 
+                      <% if event.published.blank? %>
+                        <% if current_user.try(:admin?) %>
+                          <span class="text-danger">
+                            <i class="fa fa-times-circle fa-2x" aria-hidden="true"></i>
+                            <%= t('waiting_confirmation_admin') %></span>
+                        <% else %>
+                          <span class="text-danger">
+                            <i class="fa fa-times-circle fa-2x" aria-hidden="true"></i>
+                            <%= t('waiting_confirmation') %></span>
+                        <% end %>
+
+                        <% elsif current_user.try(:admin?) && event.published %>
+                          <span class="text-success">
+                            <i class="fa fa-check-circle fa-2x" aria-hidden="true"></i>
+                            <%= t('contribution_published_admin') %></span>
+                            <%# else %>
+                              <!-- <span class="text-success">
+                                <i class="fa fa-check-circle fa-2x" aria-hidden="true"></i>
+                                <%#= t('contribution_published') %></span> -->
+                                <% end %>
                     </div>
                   </div>
                 </div>

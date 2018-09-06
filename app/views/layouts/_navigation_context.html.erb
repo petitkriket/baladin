@@ -1,0 +1,29 @@
+<% if user_signed_in? %>
+    <li>
+    <% if controller_name == 'events' && action_name == 'index' %>
+    <%= link_to t('contributions'), events_path, class: 'btn btn-primary wiggle' %>
+    <% else %>
+    <%= link_to t('contributions'), events_path, class: 'btn btn-default wiggle' %>
+    <% end %>
+    </li>
+
+    <li>
+    <% if controller_name == 'registrations' && action_name == 'edit' %>
+    <%= link_to t('edit_account'), edit_user_registration_path, class: 'btn btn-primary wiggle' %>
+    <% else %>
+    <%= link_to t('edit_account'), edit_user_registration_path, class: 'btn btn-default wiggle' %>
+    <% end %>
+    </li>
+
+<% end %>
+
+<% if user_signed_in? && current_user.try(:admin?) %>
+    <li>
+      <%= link_to t('new_event'), new_event_path, class: 'btn btn-default wiggle' %>
+    </li>
+
+    <li>
+      <%= link_to t('users'), users_path, class: 'btn btn-default wiggle' %>
+    </li>
+
+<% end %>

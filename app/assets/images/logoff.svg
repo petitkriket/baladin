@@ -1,11 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="40" height="40" enable-background="new 0 0 40 40" xml:space="preserve" style=""><rect id="backgroundrect" width="100%" height="100%" x="0" y="0" fill="none" stroke="none"/>
-
-
-<g class="currentLayer" style=""><title>Layer 1</title><g id="svg_1" class="">
-	<path fill="#FFFFFF" d="M20,39C9.523,39,1,30.477,1,20S9.523,1,20,1s19,8.523,19,19S30.477,39,20,39z" id="svg_2"/>
-	<g id="svg_3">
-		<path fill="#262626" d="M20,2c9.925,0,18,8.075,18,18s-8.075,18-18,18S2,29.925,2,20S10.075,2,20,2 M20,0C8.954,0,0,8.954,0,20    s8.954,20,20,20s20-8.954,20-20S31.046,0,20,0L20,0z" id="svg_4"/>
-	</g>
-</g><g id="svg_5" class="">
-	<path fill="#262626" d="M20,6.33181738281246 c-3.063,0 -5.569,2.5060000000000002 -5.569,5.569 s2.5060000000000002,5.569 5.569,5.569 s5.569,-2.5060000000000002 5.569,-5.569 S23.063,6.33181738281246 20,6.33181738281246 zM20,8.452817382812555 c1.917,0 3.447,1.5310000000000001 3.447,3.447 c0,1.917 -1.5310000000000001,3.448 -3.447,3.448 s-3.447,-1.5310000000000001 -3.447,-3.448 C16.553,9.983817382812504 18.083,8.452817382812555 20,8.452817382812555 zM20,19.060817382812502 c-5.846,0 -10.608,4.7620000000000005 -10.608,10.608 h2.122 c0,-4.699 3.787,-8.486 8.486,-8.486 s8.486,3.787 8.486,8.486 h2.122 C30.608,23.822817382812445 25.846,19.060817382812502 20,19.060817382812502 L20,19.060817382812502 z" id="svg_6"/>
-</g><path fill="#eb1a1a" fill-opacity="1" stroke="#242424" stroke-opacity="1" stroke-width="2" stroke-dasharray="none" stroke-linejoin="round" stroke-linecap="butt" stroke-dashoffset="" fill-rule="nonzero" opacity="1" marker-start="" marker-mid="" marker-end="" d="M7.960142977860739,6.679533396787138 L32.98701188751705,32.48484768067832 " id="svg_7" class=""/></g></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="42px" height="42px" viewBox="-1.5 -1.5 42 42" enable-background="new -1.5 -1.5 42 42" xml:space="preserve">
+<rect x="-1.5" y="-1.5" fill="#FFFFFF" width="42" height="42"/>
+<circle fill="none" stroke="#000000" stroke-width="1.4" stroke-miterlimit="10" cx="19.5" cy="19.816" r="8.605"/>
+<g>
+	
+		<rect x="13.33" y="11.051" transform="matrix(-0.7071 0.7071 -0.7071 -0.7071 35.028 10.6487)" fill="#FFFFFF" width="3.956" height="3.055"/>
+	
+		<rect x="22.713" y="11.051" transform="matrix(0.7071 0.7071 -0.7071 0.7071 16.1268 -13.7752)" fill="#FFFFFF" width="3.956" height="3.055"/>
+</g>
+<rect x="14.306" y="5.165" fill="#FFFFFF" width="11.386" height="9.089"/>
+<line fill="none" stroke="#000000" stroke-width="1.4" stroke-miterlimit="10" x1="19.5" y1="10.579" x2="19.5" y2="19.816"/>
+</svg>

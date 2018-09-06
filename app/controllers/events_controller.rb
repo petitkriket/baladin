@@ -3,7 +3,7 @@ class EventsController < ApplicationController
   before_action :authenticate_user!
   before_action :admin_only, only: [:show, :destroy]
   before_action :check_shortcut, only: [:new]
-
+  before_action :user_menu, only: [:index]
   # GET /events
   # GET /events.json
   def index
@@ -107,6 +107,11 @@ end
          redirect_to(events_path)
          flash[:alert] = "L'adresse saisie sur le Passager est incorrecte. Merci de saisir l'adresse gravée sur le Passager pour inscrire votre nouvelle participation. TODO trad"
       end
+    end
+
+    # show user contextual menu
+    def user_menu
+      @user_menu = true
     end
 
 end

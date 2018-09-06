@@ -1,16 +1,20 @@
   <% if user_signed_in? %>
-<li><%= link_to t('events'), events_path %></li>
-
 <li>
 <%= link_to destroy_user_session_path, :method=>'delete' do %>
-<%= image_tag("logoff.svg", :alt => "Log off", class: "wiggle") %>
+<%= image_tag("logoff.svg", :alt => "Log off", class: "wiggle default-shadow") %>
+<% end %>
+</li>
+
+<li>
+<%= link_to events_path do %>
+<%= image_tag("login.svg", :alt => "Log in", class: "wiggle default-shadow") %>
 <% end %>
 </li>
 
   <% else %>
       <li>
       <%= link_to new_user_session_path do %>
-      <%= image_tag("login.svg", :alt => "Log in", class: "wiggle") %>
+      <%= image_tag("login.svg", :alt => "Log in", class: "wiggle default-shadow") %>
       <% end %>
       </li>
   <% end %>

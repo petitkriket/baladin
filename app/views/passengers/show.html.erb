@@ -7,11 +7,11 @@
   <%= image_tag(@passenger.photo_url(:large), alt: 'Image'.to_s, id: 'passenger_image', style: 'display:none;') if @passenger.photo? %>
   <% end %>
 
-<span class="wiggle" id="passenger_title"><%= t('passenger') %> <%= t('hash') %><%= @passenger.name %> </span>
+<span class="wiggle default-shadow" id="passenger_title"><%= t('passenger') %> <%= t('hash') %><%= @passenger.name %> </span>
 <% unless @passenger.events.last.nil? || current_user == @passenger.events.last.user %>
-  <%= submit_tag t('host'), :type => 'button', class: 'btn wiggle', id: 'contact', data: { toggle: 'modal', target: '#basicExampleModal', backdrop: false } %>
+  <%= submit_tag t('host'), :type => 'button', class: 'btn wiggle default-shadow', id: 'contact', data: { toggle: 'modal', target: '#basicExampleModal', backdrop: false } %>
 <% end %>
-  <%= submit_tag t('photo'), :type => 'button', class: 'btn wiggle', id: 'photo', onclick: 'showImage();' %>
+  <%= submit_tag t('photo'), :type => 'button', class: 'btn wiggle default-shadow', id: 'photo', onclick: 'showImage();' %>
 </div>
 
 <div id="map"></div>

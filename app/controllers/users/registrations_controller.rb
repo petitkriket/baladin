@@ -1,6 +1,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
    before_action :configure_sign_up_params, only: [:create]
    before_action :configure_account_update_params, only: [:update]
+   before_action :user_menu, only: [:edit]
    prepend_before_action :check_shortcut, only: [:new]
    rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
    invisible_captcha only: [:create]
@@ -101,5 +102,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def record_not_found
     redirect_to(root_path)
+  end
+
+  def user_menu
+    @user_menu = true
   end
 end
