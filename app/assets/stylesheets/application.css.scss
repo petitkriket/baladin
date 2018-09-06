@@ -16,9 +16,9 @@
  *= require leaflet.markercluster
  *= require leaflet.markercluster.default
  *= require theme/bootstrap
- *= require font-awesome
  *= require animate
  */
+ @import 'font-awesome';
  @import 'datetime_picker_input';
 
  /***** MAP *****/
