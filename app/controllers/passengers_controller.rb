@@ -3,6 +3,7 @@ class PassengersController < ApplicationController
   before_action :admin_only, :except => [:index, :show, :list]
   before_action :enable_map_nav, only: [:index, :show]
   before_action :user_contact_form, only: [:show]
+  include ActionView::Helpers::DateHelper
 
   # GET /passengers
   # GET /passengers.json
@@ -50,12 +51,13 @@ end
       marker_name = t('passenger_marker_text', name: event.passenger.name )
       counter = counter + 1
       popup_photo = ""
+      grabbed_on = t('since', date: time_ago_in_words(event.created_at))
       unless event.photo.medium.url.nil?
         popup_photo = "<img src='#{event.photo.medium.url}'>"
       end
 
       if index == 0 && @events.size == 1
-        # this is the first item
+        # first item alone
         @geojson << {
           type: 'Feature',
           geometry: {
@@ -67,11 +69,11 @@ end
             markerurl_fallback: event.passenger.photo.marker.url,
             title: "#{t('departure')}",
             divclass: "first-marker",
-            popupContent: "#{popup_photo}<br> #{marker_name} #{t('location')} #{event.city} #{event.country} #{t('holder')} #{event.user.name}"
+            popupContent: "#{popup_photo}<br> #{marker_name} #{t('location')} #{event.city} (#{event.country_name}) #{t('holder')} #{event.user.name}"
           }
         }
       elsif index == 0 && @events.size != 1
-          # this is the first item
+          # first item with many
           @geojson << {
             type: 'Feature',
             geometry: {
@@ -82,12 +84,12 @@ end
               markerurl: event.photo.marker.url,
               markerurl_fallback: event.passenger.photo.marker.url,
               title: "#{t('departure')}",
-              divclass: "first-marker",
-              popupContent: "#{popup_photo}<br> #{marker_name} #{t('exlocation')} #{event.city} #{event.country} #{t('holder')} #{event.user.name}"
+              divclass: "marker",
+              popupContent: "#{popup_photo}<br> #{marker_name} #{t('exlocation')} #{event.city} (#{event.country_name}) #{t('holder')} #{event.user.name} #{grabbed_on}"
             }
           }
       elsif index == @events.size - 1
-        # this is the last item
+        # last item
         @geojson << {
           type: 'Feature',
           geometry: {
@@ -99,7 +101,7 @@ end
             markerurl_fallback: event.passenger.photo.marker.url,
             title: "<mark>#{t('current_position')}</mark>",
             divclass: "last-marker",
-            popupContent: "#{popup_photo}<br> #{marker_name} #{t('location')} #{event.city} #{event.country} #{t('holder')} #{event.user.name}"
+            popupContent: "#{popup_photo}<br> #{marker_name} #{t('location')} #{event.city} (#{event.country_name}) #{t('holder')} #{event.user.name}"
           }
         }
       else
@@ -115,7 +117,7 @@ end
             markerurl_fallback: event.passenger.photo.marker.url,
             title: "#{t('event')} #{counter}",
             divclass: "marker",
-            popupContent: "#{popup_photo}<br> #{marker_name} #{t('exlocation')} #{event.city} #{event.country} #{t('holder')} #{event.user.name}"
+            popupContent: "#{popup_photo}<br> #{marker_name} #{t('exlocation')} #{event.city} (#{event.country_name}) #{t('holder')} #{event.user.name} #{grabbed_on}"
 
           }
         }
@@ -211,10 +213,12 @@ end
       end
     end
 
+    # afficher la navigation map
     def enable_map_nav
       @map_nav = true
     end
 
+    # afficher le formulaire de contact
     def user_contact_form
       @user_contact_form = true
     end

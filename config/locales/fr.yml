@@ -58,6 +58,7 @@ fr:
   location: "actuellement à"
   exlocation: "était à"
   holder: "avec"
+  since: "il y à %{date}."
   welcome:  "Bienvenue"
   welcome_msg:  "Cet objet qui vous a été transmis est un Passager. Il n'appartient à personne et ne peut appartenir à personne. Il circule, transmis de la main à la main. L'historique de son parcours est publié sur cette plateforme. Pour enregistrer votre participation, merci de remplir le formulaire qui suit."
   begin:  "Commencer"

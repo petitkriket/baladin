@@ -5,15 +5,12 @@ menu ajouter bouton deconnexion si logué.
 
 surligner tous les liens
 
-menu version mobile, aligner les icones à droite
-burger de la meme taille que titre
+#menu version mobile, aligner les icones à droite
+#burger de la meme taille que titre
 
 styliser la modale de contacter et le msg d'intro a l'enregistrement
 
-traduire pays dans dans pop up
-vers actuellement en Belgique à Shaerbek avec Daniel
-
 styliser la croix de fermeture du pop up
 
-version mobile virer la partie droite avec la liste de Passagers
+version mobile cacher la partie droite avec la liste de Passagers
 conserver le bouton fermer popup volet

@@ -48,4 +48,10 @@ class Event < ApplicationRecord
        self.errors.add(:base, "Vous avez deja enregistré une étape pour ce passager")
     end
   end
+
+  def country_name
+   c = ISO3166::Country[self.country]
+   return c.translations[I18n.locale.to_s] || c.name
+  end
+
 end

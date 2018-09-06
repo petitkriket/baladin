@@ -175,3 +175,9 @@ https://stackoverflow.com/questions/28253024/redirecting-after-sign-in-with-devi
 
 #calendar
 http://datetime-picker-input.herokuapp.com/
+
+#traduire pays
+https://stackoverflow.com/questions/35029667/how-to-convert-the-country-selects-country-code-to-country-name
+
+#relative time time_ago_in_words
+https://stackoverflow.com/questions/195740/how-do-you-do-relative-time-in-rails
