@@ -27,8 +27,8 @@ development:
   FB_APPID: "2709710669054884"
   TW_APPID: "@pssgrs"
   GA_ID: "UA-124648763-1"
-  DOMAIN_NAME: "www.pssgrs.pw"
-  DOMAIN_NAME_SHORT: "pssgrs.pw"
+  DOMAIN_NAME: "www.pssgrs.com"
+  DOMAIN_NAME_SHORT: "pssgrs.com"
 
 production:
   ADMIN_NAME: "Samuel"
@@ -47,5 +47,5 @@ production:
   FB_APPID: "2709710669054884"
   TW_APPID: "@pssgrs"
   GA_ID: "UA-124648763-1"
-  DOMAIN_NAME: "www.pssgrs.pw"
-  DOMAIN_NAME_SHORT: "pssgrs.pw"
+  DOMAIN_NAME: "www.pssgrs.com"
+  DOMAIN_NAME_SHORT: "pssgrs.com"
