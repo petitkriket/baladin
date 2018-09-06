@@ -21,7 +21,6 @@
     <meta name="theme-color" content="#181818">
     <meta name="msapplication-navbutton-color" content="#181818">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=<%= ENV['GMAPSJS_API_KEY'] %>"></script>
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
@@ -29,6 +28,7 @@
     <%= csrf_meta_tags %>
   </head>
   <% if Rails.env.production? %>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha256-NuCn4IvuZXdBaFKJOAcsU2Q3ZpwbdFisd5dux4jkQ5w=" crossorigin="anonymous" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=<%= ENV['GA_ID'] %>"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
