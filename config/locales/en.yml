@@ -195,7 +195,7 @@ en:
         call_action2: "If you have already submitted your Passenger photo, you can change it at any time."
         call_action3: "This photo will be added to the Passenger's itinerary with the other participants photos once your contribution has been validated."
         thanks: "Thank you for your participation."
-        signature: "François Maurin & Samuel Bouaroua."
+        signature: "The Passenger Team <br> A work by François Maurin made in collaboration with Samuel Bouaroua."
         confirm_button: "Confirm your account and access your personal space"
       reset_password_instructions:
         subject: "Reset your password | The Passengers"

@@ -200,8 +200,8 @@ fr:
         call_action2: "Si vous avez déjà proposé votre photo du Passager, vous pouvez la modifier à tout moment."
         call_action3: "Cette photo sera ajoutée au parcours du Passager avec celle des autres participants."
         thanks: "Merci pour votre participation."
-        signature: "François Maurin et Samuel Bouaroua."
-        confirm_button: "Confirmer mon compte et acceder à votre espace personnel."
+        signature: "L'équipe des Passagers<br> Une oeuvre de François Maurin réalisée en collaboration avec Samuel Bouaroua."
+        confirm_button: "Confirmer mon compte et acceder à mon espace personnel."
       reset_password_instructions:
         subject: "Réinitialiser votre mot de passe | Les Passagers"
         welcome_user: "Bonjour %{name} !"
