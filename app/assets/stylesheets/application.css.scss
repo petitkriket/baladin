@@ -685,3 +685,25 @@ line-height: 31px;
 .col-3 {
   text-align: right;
 }
+
+@media only screen and (max-width: 768px) {
+    .navbar-collapse {
+      margin-right: 0 !important;
+      margin-top: -35px !important;
+      float: right !important;
+    }
+}
+
+.navbar-toggle {
+    padding: 15.6px 10px !important;
+    margin-top: 0.4px !important;
+}
+
+.modal-contact.modal.in .modal-dialog {
+    position:fixed;
+    bottom:102px;
+    left:22px;
+    margin:0px;
+}
+
+//.modal-contact.in ~ .modal-backdrop.in { opacity:0; }

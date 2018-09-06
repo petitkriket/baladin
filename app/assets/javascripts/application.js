@@ -56,6 +56,17 @@ google.maps.event.addDomListener(window, 'load', function() {
 });
 
 function showImage(){
-$("#passenger_image").toggle();
-$("#photo").toggleClass('btn-default btn-primary');
+    $("#passenger_image").toggle();
+    $("#photo").toggleClass('btn-default btn-primary');
 }
+
+$(function(){
+    $('#basicExampleModal').on('hidden.bs.modal', function () {
+        $("#contact").toggleClass('btn-default btn-primary');
+    });
+
+    $("#contact").click(function(){
+        $("#contact").toggleClass('btn-default btn-primary');
+    });
+
+});
