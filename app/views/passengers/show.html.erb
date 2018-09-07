@@ -21,7 +21,7 @@
   $ = jQuery;
   cupcakeTiles = L.tileLayer('https://api.mapbox.com/styles/v1/julesvau/cjl26w2ce4t8u2sohaa3uec8d/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoianVsZXN2YXUiLCJhIjoiY2prNDd6NW5yMGFtOTNrbzQ5bWEweDgzbSJ9.-RD762orQSENzQ_f7TKU9g', {
   //cupcakeTiles = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png', {
-    minZoom: 0,
+    minZoom: 2,
     maxZoom: 14,
   });
 
@@ -77,7 +77,9 @@
     if (jQuery.isEmptyObject( geojson._layers )){
       map = L.map('map').setView([30, 0], 2);
     } else {
-    map = L.map('map').fitBounds(geojson.getBounds(), {maxZoom: 14, padding: [180, 180] });
+  map = L.map('map').fitBounds(geojson.getBounds(), {maxZoom: 14, padding: [95, 95] });
+  //  map = L.map('map').fitBounds(geojson.getBounds());
+
     }
 
     map.removeControl( map.zoomControl);
