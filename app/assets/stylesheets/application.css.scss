@@ -36,8 +36,12 @@
       margin-left: 7px;
       padding: 5px 10px 5px 10px;
       border-width: 0 !important;
-      background-color: white;
  }
+
+   html input[type="button"] {
+      background-color: white;
+      color:black;
+  }
 
  .form-control {
     -webkit-box-shadow: none !important;
