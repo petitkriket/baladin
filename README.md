@@ -181,3 +181,6 @@ https://stackoverflow.com/questions/35029667/how-to-convert-the-country-selects-
 
 #relative time time_ago_in_words
 https://stackoverflow.com/questions/195740/how-do-you-do-relative-time-in-rails
+
+#gestion erreur controller
+https://pdabrowski.com/blog/ruby-on-rails/refactoring/rescue-errors-in-a-controller

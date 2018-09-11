@@ -83,10 +83,16 @@ en:
   passenger_updated: "Passenger was successfully updated."
   passenger_destroyed:  "Passenger was successfully destroyed."
   passenger_empty:  "This passenger has not traveled yet !"
+  passenger_not_found:  "This Passenger was not found."
   event_created:  "Contribution was successfully created."
   event_updated: "Contribution was successfully updated"
   event_destroyed:  "Contribution was successfully destroyed"
+  event_wrong_shortcut: "The address entered is incorrect. Please check the address engraved on the Passenger."
+  event_already_registred: "You have already registred this Passenger."
+  event_already_registred_admin: "This user has already been in possession of this Passenger"
+  check_google_api: "Please check Geocoder Google API. You can still enter latitude and longitude manually."
   message_sent:  "Message sent successfully."
+  reach_passenger_holder:  "Someone sent you a message about your passenger."
   admin_only:  "Restricted access."
   simple_form:
     labels:

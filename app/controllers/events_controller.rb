@@ -1,9 +1,9 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :admin_only, only: [:show, :destroy]
-  before_action :check_shortcut, only: [:new]
   before_action :user_menu, only: [:index]
+
   # GET /events
   # GET /events.json
   def index
@@ -22,15 +22,25 @@ end
   # GET /events/new
   def new
     @event = Event.new
-    #
-    if params[:shortcut]
-    @passenger = Passenger.find_by(shortcut: params[:shortcut]).id
-    @event.passenger_id = @passenger
+
+  unless current_user.try(:admin?)
+    # check if shortcut exist and redirect if it does not exist
+    if params[:shortcut] && Passenger.where(shortcut: params[:shortcut]).any? && Passenger.where(shortcut: params[:shortcut]).any?
+      @passenger = Passenger.find_by(shortcut: params[:shortcut]).id
+      @event.passenger_id = @passenger
+    else
+      redirect_to events_path, :alert => t(:event_wrong_shortcut)
     end
-    #
   end
 
-  # GET /events/1/edit
+    # check if user have any history with the corresponding passenger
+    corresponding_passenger = Passenger.where(shortcut: params[:shortcut]) unless params[:shortcut].blank?
+    if Event.where(:user_id => current_user.id, :passenger_id => corresponding_passenger).any?
+      redirect_to events_path, :alert => t(:event_already_registred)
+    end
+
+  end
+
   def edit
   end
 
@@ -39,23 +49,22 @@ end
   def create
     @event = Event.new(event_params)
 
+    # new event tagged to the current user
     unless current_user.try(:admin?)
       @event.user_id = current_user.id
     end
 
+    # new event tagged to the corresponding passenger
     if params[:shortcut]
     @passenger = Passenger.find_by(shortcut: params[:shortcut]).id
-    #Rails.logger.debug("DEBUG 2: #{@passenger}")
     @event.passenger_id = @passenger
     end
 
     respond_to do |format|
       if @event.save
         format.html { redirect_to events_path, notice: t(:event_created) }
-        format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -66,10 +75,8 @@ end
     respond_to do |format|
       if @event.update(event_params)
         format.html { redirect_to events_path, notice: t(:event_updated) }
-        format.json { render :show, status: :ok, location: @event }
       else
         format.html { render :edit }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -80,7 +87,6 @@ end
     @event.destroy
     respond_to do |format|
       format.html { redirect_to events_url, notice: t(:event_destroyed) }
-      format.json { head :no_content }
     end
   end
 
@@ -95,17 +101,10 @@ end
       params.require(:event).permit(:address, :city, :country, :latitude, :longitude, :photo, :photo_cache,:remove_photo, :published, :passenger_id, :user_id, :created_at)
     end
 
+    # admin only
     def admin_only
       unless user_signed_in? && current_user.admin?
         redirect_to passenger_path(id: @event.passenger_id)
-      end
-    end
-
-    def check_shortcut
-    passenger = Passenger.where(shortcut: params[:shortcut]).any?
-       unless passenger == true || current_user.admin?
-         redirect_to(events_path)
-         flash[:alert] = "L'adresse saisie sur le Passager est incorrecte. Merci de saisir l'adresse gravée sur le Passager pour inscrire votre nouvelle participation. TODO trad"
       end
     end
 

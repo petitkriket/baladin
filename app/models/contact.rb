@@ -6,13 +6,8 @@ class Contact < MailForm::Base
   attribute :nickname,  :captcha  => true
 
   def headers
-    #Rails.logger.debug("nom fourni: #{self.name}")
-    #Rails.logger.debug("email fourni: #{self.email}")
-    #Rails.logger.debug("message: #{self.message}")
-    #Rails.logger.debug("Email destination: #{self.user}")
-
     {
-      :subject => "Contact Form",
+      :subject => I18n.t('reach_passenger_holder'),
       :to => self.user,
       :from => %("#{name}" <#{email}>)
     }

@@ -83,10 +83,16 @@ fr:
   passenger_updated: "Le Passager a été mis à jour avec succès."
   passenger_destroyed:  "Passenger a été détruit avec succès."
   passenger_empty:  "Ce Passager n'a pas encore voyagé !"
+  passenger_not_found:  "Ce Passager est introuvable."
   event_created:  "La contribution a été crée avec succès."
   event_updated: "Contribution mise à jour avec succès."
   event_destroyed:  "La contribution a été détruite avec succès."
+  event_wrong_shortcut: "L'adresse saisie est incorrecte. Merci de vérifier l'adresse gravée sur le Passager."
+  event_already_registred: "Vous avez déja enregistré ce Passager."
+  event_already_registred_admin: "Cet utilisateur à déjà été en possession de ce Passager."
+  check_google_api: "Merci de vérifier l'API Google Geocoder. Vous pouvez toujours entrer latitude et longitude manuellement."
   message_sent:  "Message envoyé avec succès."
+  reach_passenger_holder:  "Quelqu'un vous à envoyé un message à propos de votre Passager."
   admin_only:  "Access restreint."
   simple_form:
     labels:
@@ -143,7 +149,7 @@ fr:
         create: "Se connecter"
   notif_mailer:
     registration_email:
-      subject:  'Une nouvelle contribution utilisateur attend votre validation'
+      subject:  'Une nouvelle contribution attend votre validation'
       greeting: "Bonjour,"
       event_registration: "Une nouvelle étape à été soumise par %{name}."
       event_edit: "Vous pouvez la publier en cliquant "
