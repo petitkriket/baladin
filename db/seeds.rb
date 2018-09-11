@@ -8,6 +8,8 @@
 user = CreateAdminService.new.call
 puts 'CREATED ADMIN USER: ' << user.email
 
+if Rails.env.development? 
+
 Passenger.destroy_all
 
 Passenger.create!([{
@@ -351,3 +353,5 @@ Event.create!([{
 }])
 
 p "Created #{Event.count} events"
+
+end
