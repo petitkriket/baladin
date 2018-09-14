@@ -1,5 +1,4 @@
 <!--<li><%#= link_to t('about'), page_path('about') %></li>-->
-<% if !user_signed_in? %>
 <% if I18n.locale == :en %>
     <li>
       <%= link_to url_for({:locale => 'fr', t: params[:t]}) do %>
@@ -14,8 +13,6 @@
       <%= image_tag("en.svg", :alt => "View this page in english", class: "wiggle default-shadow") %>
       <% end %>
     </li>
-<% end %>
-
 <% end %>
 
     <li>

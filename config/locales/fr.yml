@@ -48,11 +48,13 @@ fr:
   sign_out: "Se déconnecter"
   forgot_password: "Mot de passe oublié?"
   forgot_password_short:  "oublié?"
+  password_change: "Changer votre mot de passe"
   password_recovery:  "Nous vous enverrons un e-mail pour réinitialisatier votre mot de passe."
   remember_me:  "Se souvenir de moi"
   change_pass:  "Laissez ces champs vides si vous ne souhaitez pas modifier votre mot de passe."
   must_pass:  "Vous devez entrer votre mot de passe actuel pour apporter des modifications."
   update: "Mettre à jour"
+  language_hint: "Langue préférée pour le site et les courriels que vous recevrez de notre part."
   cancel_account:  "Supprimer le compte"
   cancel_sad:  "Mécontent? Nous serons tristes de vous voir partir."
   cancel_button:  "Supprimer"
@@ -69,6 +71,7 @@ fr:
   geolocate: "Trouver votre position"
   geolocate_failure: "Pas de résultat. Merci de recommencer ou de cliquer sur le bouton de geolocalisation."
   photo_hint: "Ajoutez votre photo du Passager (facultatif)"
+  email_hint: "Votre e-mail ne sera pas partagée à des tiers"
   no_file_chosen: "Aucun fichier choisi"
   file_size:  "La taille du fichier doit être inférieure à 10mo"
   already_in: "Vous avez deja participé avec un autre Passager ?"
@@ -91,6 +94,7 @@ fr:
   event_already_registred: "Vous avez déja enregistré ce Passager."
   event_already_registred_admin: "Cet utilisateur à déjà été en possession de ce Passager."
   check_google_api: "Merci de vérifier l'API Google Geocoder. Vous pouvez toujours entrer latitude et longitude manuellement."
+  invalid_url: "L'URL saisie est incorrecte."
   message_sent:  "Message envoyé avec succès."
   reach_passenger_holder:  "Quelqu'un vous à envoyé un message à propos de votre Passager."
   admin_only:  "Access restreint."
@@ -110,6 +114,8 @@ fr:
         name: 'Nom'
         email: 'E-mail '
         message: 'Message'
+    error_notification:
+      default_message: "Merci examiner les problèmes ci-dessous:"
   activerecord:
     attributes:
       user:

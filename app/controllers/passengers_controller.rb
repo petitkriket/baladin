@@ -148,7 +148,7 @@ end
 
     respond_to do |format|
       if @passenger.save
-        format.html { redirect_to passengers_path, notice: t(:passenger_created) }
+        format.html { redirect_to root_path, notice: t(:passenger_created) }
       else
         format.html { render :new }
       end
@@ -160,7 +160,7 @@ end
   def update
     respond_to do |format|
       if @passenger.update(passenger_params)
-        format.html { redirect_to passengers_path, notice: t(:passenger_updated) }
+        format.html { redirect_to root_path, notice: t(:passenger_updated) }
       else
         format.html { render :edit }
       end
@@ -172,7 +172,7 @@ end
   def destroy
     @passenger.destroy
     respond_to do |format|
-      format.html { redirect_to passengers_url, notice: t(:passenger_destroyed) }
+      format.html { redirect_to root_url, notice: t(:passenger_destroyed) }
     end
   end
 

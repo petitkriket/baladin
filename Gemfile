@@ -19,6 +19,8 @@ group :development do
   gem 'rails-erd'
   gem 'i18n-tasks', '~> 0.9.24'
   gem 'rails_layout'
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 group :test do
   gem 'capybara', '>= 2.15', '< 4.0'

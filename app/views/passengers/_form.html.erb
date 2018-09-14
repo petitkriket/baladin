@@ -6,17 +6,16 @@
   <div class="form-inputs">
     <%= f.input :name, required: true %>
     <%= f.input :shortcut, required: true, :minlength=>"3" %>
+  <% if @passenger.new_record? %>
     <%= f.input :photo, required: true %>
+  <% else %>
+    <%= f.input :photo %>
+  <% end %>
+
     <%= f.hidden_field :photo_cache %>
-              <% if passenger.photo? %>
-                  <%= image_tag passenger.photo.thumb.url %>
-                  <div>
-                    <%= label_tag :remove_image do %>
-                      Remove image
-                      <%= f.check_box :remove_photo %>
-                    <% end %>
-                  </div>
-              <% end %>
+  <% if passenger.photo? %>
+    <%= image_tag passenger.photo.thumb.url %>
+  <% end %>
   </div>
 
   <div class="form-actions">

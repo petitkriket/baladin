@@ -35,20 +35,21 @@
 </div>
 <% end %>
 
-<div id="map"></div>
+<div id="map">
+  <a href="http://mapbox.com/about/maps" class='mapbox-wordmark' target="_blank">Mapbox</a>
+</div>
 <script>
 (function() {
   var $, cupcakeTiles;
   $ = jQuery;
     //cupcakeTiles = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png', {
-    //cupcakeTiles = L.tileLayer('https://api.mapbox.com/styles/v1/julesvau/cjkh85uud2eh22qruz2ylt7zq/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoianVsZXN2YXUiLCJhIjoiY2prNDd6NW5yMGFtOTNrbzQ5bWEweDgzbSJ9.-RD762orQSENzQ_f7TKU9g', {
     cupcakeTiles = L.tileLayer('https://api.mapbox.com/styles/v1/julesvau/cjl26w2ce4t8u2sohaa3uec8d/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoianVsZXN2YXUiLCJhIjoiY2prNDd6NW5yMGFtOTNrbzQ5bWEweDgzbSJ9.-RD762orQSENzQ_f7TKU9g', {
-    //attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://www.mapbox.com/about/maps">Mapbox</a>',
     maxZoom: 14,
     minZoom: 2
   });
 
-  $.getJSON('passengers.json', function(data) {
+  $.getJSON('<%= I18n.locale %>/passengers.json', function(data) {
     var geojson, map;
 geojson = L.geoJson(data, {
     onEachFeature: function(feature, layer) {

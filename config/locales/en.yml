@@ -24,7 +24,7 @@ en:
   engraving: "Engraving"
   place:  "Place"
   event: "Event"
-  saved:  "Saved :"
+  saved:  "Saved on:"
   waiting_confirmation  : "Your contribution is pending validation."
   waiting_confirmation_admin  : "Contribution is pending validation."
   contribution_published: "Your contribution is published and visible to all."
@@ -48,11 +48,13 @@ en:
   sign_out: "Sign out"
   forgot_password: "Forgot your password?"
   forgot_password_short:  "forgotten?"
+  password_change: "Change your password"
   password_recovery:  "We'll send password reset instructions."
   remember_me:  "Remember me"
   change_pass:  "Leave these fields blank if you don't want to change your password."
   must_pass:  "You must enter your current password to make changes."
   update: "Update"
+  language_hint: "Preferred language for the website and e-mails you will receive from us."
   cancel_account:  "Cancel Account"
   cancel_sad:  "Unhappy? We'll be sad to see you go."
   cancel_button:  "Cancel"
@@ -69,6 +71,7 @@ en:
   geolocate: "Find your position"
   geolocate_failure: "No result found. Please try again or click on the geolocate button."
   photo_hint: "Add your Passenger photo (optional)"
+  email_hint: "Your e-mail will not be shared with other parties"
   no_file_chosen: "No file chosen"
   file_size:  "File size must be less than 10mo"
   already_in: "Already participated with another Passenger?"
@@ -91,6 +94,7 @@ en:
   event_already_registred: "You have already registred this Passenger."
   event_already_registred_admin: "This user has already been in possession of this Passenger"
   check_google_api: "Please check Geocoder Google API. You can still enter latitude and longitude manually."
+  invalid_url: "Entered URL is wrong."
   message_sent:  "Message sent successfully."
   reach_passenger_holder:  "Someone sent you a message about your passenger."
   admin_only:  "Restricted access."
@@ -110,6 +114,8 @@ en:
         name: 'Name'
         email: 'E-mail'
         message: 'Message'
+    error_notification:
+      default_message: "Please review the problems below:"
   activerecord:
     attributes:
       user:
@@ -117,7 +123,7 @@ en:
         email: "E-mail"
         password: "Password"
         password_confirmation: "Password confirmation"
-        locale: "Site language"
+        locale: "Default language"
       event:
         address: "Address"
         photo: "Photo"
