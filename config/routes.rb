@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     devise_for :users, controllers: { registrations: 'users/registrations', confirmations: 'users/confirmations' }
     resources :users
     get ":shortcut" => redirect("/users/sign_up?t=%{shortcut}"), constraints: lambda { |request| Passenger.where(shortcut: request[:shortcut]).any? },  id: :shortcut
+    get "a9" => redirect("/users/sign_up?t=a9")
     #ok#get ':shortcut', to: 'events#new', constraints: lambda { |request| Passenger.where(shortcut: request[:shortcut]).any? }
     #get ':shortcut', to: 'devise/registrations#new', constraints: lambda { |request| Passenger.where(shortcut: request[:shortcut]).any? }
   end
