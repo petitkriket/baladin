@@ -171,5 +171,10 @@ https://github.com/Leaflet/Leaflet.markercluster/issues/72#issuecomment-9020739
 https://stackoverflow.com/posts/36604186/revisions
 
 #animation polyline TODO
-
 http://bl.ocks.org/phvaillant/f793c2519739134afb6ef69dd4e82091
+
+#fonts
+https://gist.github.com/anotheruiguy/7379570
+
+#minify
+https://coderwall.com/p/dpi9sg/heroku-assets-not-minified
