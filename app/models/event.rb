@@ -2,7 +2,7 @@ class Event < ApplicationRecord
   belongs_to :passenger
   belongs_to :user, optional: true
   validates :address, presence: true
-  validates :passenger_id, :uniqueness => {:scope=>:user_id, :message => "Title already exists."}
+  validates :passenger_id, :uniqueness => {:scope=>:user_id, :message => I18n.t('event_already_registred_admin')}
   scope :published, -> { where(:published => true)}
   default_scope { order(created_at: :asc) }
   #

@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require rails-ujs
-//= require bootstrap-sprockets
+//= require bootstrap
 //= require leaflet
 //= require leaflet.markercluster
 //= require gmaps-auto-complete
@@ -20,53 +20,24 @@
 //= require jquery.validate.additional-methods
 //= require bootstrap-notify
 //= require datetime_picker_input
+//= require jquery.validate.localization/messages_en.js
+//= require jquery.validate.localization/messages_fr.js
 //= require_tree .
 
-function initializeAutocomplete(id) {
-  var element = document.getElementById(id);
-  if (element) {
-    var autocomplete = new google.maps.places.Autocomplete(element, { types: ['geocode'] });
-    google.maps.event.addListener(autocomplete, 'place_changed', onPlaceChanged);
-  }
+//toggle passenger image
+function showImage() {
+  $('#passenger_image').toggle();
+  $('#photo').toggleClass('btn-default btn-primary');
 }
 
-function onPlaceChanged() {
-  var place = this.getPlace();
-
-   console.log(place);  // Uncomment this line to view the full object returned by Google API.
-   console.log(place.geometry.location.lat());
-   console.log(place.geometry.location.lng());
-
-  PlaceFirefox(place.geometry.location.lat(), place.geometry.location.lng())
-
-  for (var i in place.address_components) {
-    var component = place.address_components[i];
-    for (var j in component.types) {  // Some types are ["country", "political"]
-      var type_element = document.getElementById(component.types[j]);
-      if (type_element) {
-        type_element.value = component.long_name;
-      }
-    }
-  }
-}
-
-google.maps.event.addDomListener(window, 'load', function() {
-  initializeAutocomplete('event_address');
-  initializeAutocomplete('user_events_attributes_0_address');
-});
-
-function showImage(){
-    $("#passenger_image").toggle();
-    $("#photo").toggleClass('btn-default btn-primary');
-}
-
-$(function(){
+// toggle contact and info modals
+$(function () {
     $('#basicExampleModal').on('hidden.bs.modal', function () {
-        $("#contact").toggleClass('btn-default btn-primary');
-    });
+        $('#contact').toggleClass('btn-default btn-primary');
+      });
 
-    $("#contact").click(function(){
-        $("#contact").toggleClass('btn-default btn-primary');
-    });
+    $('#contact').click(function () {
+        $('#contact').toggleClass('btn-default btn-primary');
+      });
 
-});
+  });

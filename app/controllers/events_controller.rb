@@ -3,49 +3,63 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :admin_only, only: [:show, :destroy]
   before_action :user_menu, only: [:index]
+  include MapHelper
 
   # GET /events
-  # GET /events.json
   def index
+    # show every events if admin
     if current_user.try(:admin?)
-    @events = Event.all.order('created_at DESC')
-  else
-    @events = Event.where(:user_id => current_user.id)
-end
+      @events = Event.all.unscoped.order('created_at DESC')
+
+    # show only current user event(s)
+    else
+      @events = Event.where(:user_id => current_user.id)
+    end
   end
 
   # GET /events/1
-  # GET /events/1.json
   def show
   end
 
   # GET /events/new
   def new
     @event = Event.new
+    events  = Passenger.all.map { |u| u.events.published.last }
 
-  unless current_user.try(:admin?)
-    # check if shortcut exist and redirect if it does not exist
-    if params[:shortcut] && Passenger.where(shortcut: params[:shortcut]).any? && Passenger.where(shortcut: params[:shortcut]).any?
-      @passenger = Passenger.find_by(shortcut: params[:shortcut]).id
-      @event.passenger_id = @passenger
-    else
-      redirect_to events_path, :alert => t(:event_wrong_shortcut)
+    if current_user.try(:admin?)
+      # build map
+      map_index_helper(events)
     end
-  end
+
+    unless current_user.try(:admin?)
+      # check if shortcut exist and redirect if it does not exist
+      if params[:shortcut] && Passenger.where(shortcut: params[:shortcut]).any? && Passenger.where(shortcut: params[:shortcut]).any?
+        @passenger = Passenger.find_by(shortcut: params[:shortcut])
+
+        # build map
+        map_events_helper(@passenger, true)
+        # erreur vide si personne ajoute un passager sans precedent
+      else
+        redirect_to events_path, :alert => t(:event_wrong_shortcut)
+      end
+    end
 
     # check if user have any history with the corresponding passenger
     corresponding_passenger = Passenger.where(shortcut: params[:shortcut]) unless params[:shortcut].blank?
     if Event.where(:user_id => current_user.id, :passenger_id => corresponding_passenger).any?
       redirect_to events_path, :alert => t(:event_already_registred)
     end
-
   end
 
   def edit
+    #find passenger related events
+    events  = Event.find(params[:id]).passenger
+
+    # build map
+    map_events_helper(events, true)
   end
 
   # POST /events
-  # POST /events.json
   def create
     @event = Event.new(event_params)
 
@@ -70,7 +84,6 @@ end
   end
 
   # PATCH/PUT /events/1
-  # PATCH/PUT /events/1.json
   def update
     respond_to do |format|
       if @event.update(event_params)
@@ -82,7 +95,6 @@ end
   end
 
   # DELETE /events/1
-  # DELETE /events/1.json
   def destroy
     @event.destroy
     respond_to do |format|

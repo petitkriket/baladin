@@ -1,194 +1,83 @@
 <div class="col-md-4">
-<div class="authform">
-<%= simple_form_for (@event), html: { multipart: true, role: "form" } do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-    <% if user_signed_in? && current_user.try(:admin?) || @event.new_record? %>
-        <div class="input-group">
-          <%= f.text_field :address, class: 'form-control', :autofocus => true, placeholder: true, required: true %>
-          <span class="input-group-btn">
-            <a href="#" class="btn btn-default geolocate" onclick="getLocation()" type="submit">
-                <i class="fa fa-map-marker"></i>
-            </a>
-          </span>
-        </div>
-        <div id="error-address"></div>
-    <% end %>
-    <% if (@event.latitude.blank? || @event.longitude.blank?) && current_user.try(:admin?) %>
-      <%= f.input :latitude %>
-      <%= f.input :longitude %>
-    <% end %>
-    <div class="form-group">
-            <label></label>
-            <div class="input-group">
-              <input type="text" class="form-control" id="input-url-image" readonly placeholder="<%= t('no_file_chosen') %>">
-                <span class="input-group-btn">
-                    <span class="btn btn-default btn-file">
-                        <i class="fa fa-camera"></i>
-                        <%= f.input :photo, :as => :file, label: false %>
-                    </span>
-                </span>
-            </div>
-            <div id="error-photo" class="text-danger"></div>
-            <img id='img-upload'/>
-        </div>
+  <div class="authform">
+    <%= simple_form_for (@event), html: { multipart: true, role: "form" } do |f| %>
+      <%= f.error_notification %>
+      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-    <%= f.hidden_field :photo_cache %>
-              <% if event.photo? %>
-                  <%= image_tag event.photo.thumb.url %>
-                  <% if user_signed_in? && current_user.try(:admin?) || @event.new_record? %>
-                  <div>
-                    <%= label_tag :remove_image do %>
-                      Remove image
-                      <%= f.check_box :remove_photo %>
-                    <% end %>
+        <% if user_signed_in? && current_user.try(:admin?) || @event.new_record? %>
+          <div class="input-group">
+            <%= f.text_field :address, class: 'form-control', :autofocus => true, placeholder: true, required: true %>
+            <span class="input-group-btn">
+              <a href="#" class="btn btn-default geolocate" onclick="getLocation()" type="submit">
+                  <i class="fa fa-map-marker"></i>
+              </a>
+            </span>
+          </div>
+          <div id="error-address"></div>
+
+        <% end %>
+
+        <% if (@event.latitude.blank? || @event.longitude.blank?) && current_user.try(:admin?) %>
+          <%= f.input :latitude %>
+          <%= f.input :longitude %>
+        <% end %>
+
+        <div class="form-group">
+          <label></label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" id="input-url-image" readonly placeholder="<%= t('no_file_chosen') %>">
+                      <span class="input-group-btn">
+                          <span class="btn btn-default btn-file">
+                              <i class="fa fa-camera"></i>
+                              <%= f.input :photo, :as => :file, label: false %>
+                          </span>
+                      </span>
                   </div>
-                  <% end %>
+                  <div id="error-photo" class="text-danger"></div>
+                  <img id='img-upload'/>
+              </div>
+
+        <%= f.hidden_field :photo_cache %>
+
+        <% if event.photo? %>
+          <%= image_tag event.photo.thumb.url %>
+            <% if user_signed_in? && current_user.try(:admin?) || @event.new_record? %>
+            <div>
+              <%= label_tag :remove_image do %>
+              <%# TODO =%>
+                Remove image
+                <%= f.check_box :remove_photo %>
               <% end %>
-
-
-            <% if @event.new_record? && !current_user.try(:admin?) %>
-            <%= hidden_field_tag :shortcut, params[:shortcut] %>
-
+            </div>
             <% end %>
+        <% end %>
 
-    <% if current_user.try(:admin?) %>
-    <%= f.association :passenger, include_blank: false, include_hidden: false %>
-    <%= f.association :user, include_blank: false, include_hidden: false %>
-    <%= f.input :created_at, as: :date_time_picker, input_html: { data: { locale: I18n.locale } } %>
-    <%= f.input :published %>
+        <% if @event.new_record? && !current_user.try(:admin?) %>
+          <%= hidden_field_tag :shortcut, params[:shortcut] %>
+        <% end %>
+
+        <% if current_user.try(:admin?) %>
+          <%= f.association :passenger, include_blank: false, include_hidden: false %>
+          <%= f.association :user, include_blank: false, include_hidden: false %>
+          <%= f.input :created_at, as: :date_time_picker, input_html: { data: { locale: I18n.locale } } %>
+          <%= f.input :published %>
+        <% end %>
+
+        <div class="form-actions">
+          <%= f.button :submit, class: "btn-primary" %>
+        </div>
     <% end %>
 
-  <div class="form-actions">
-    <%= f.button :submit, class: "btn-primary" %>
   </div>
-<% end %>
+</div>
 
-</div>
-</div>
 <div class="col-md-8" style="margin-top:30px;">
-<div id="map" style="height: 500px"></div>
+  <div id="map" style="height: 500px"></div>
 </div>
-<script>
-(function() {
-  var $, cupcakeTiles;
-  $ = jQuery;
-  cupcakeTiles = L.tileLayer('https://api.mapbox.com/styles/v1/julesvau/cjl26w2ce4t8u2sohaa3uec8d/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoianVsZXN2YXUiLCJhIjoiY2prNDd6NW5yMGFtOTNrbzQ5bWEweDgzbSJ9.-RD762orQSENzQ_f7TKU9g', {
-    minZoom: 0,
-    maxZoom: 14,
-  });
-  var counter = 0;
-  <% unless params[:action] == "new" %>
-  $.getJSON("<%= root_url %>/passengers/<%= @event.passenger_id %>.json", function(data) {
-// edit form
-    var geojson, map;
-    var pointlist = [];
-geojson = L.geoJson(data, {
-    onEachFeature: function(feature, layer) {
-          counter++;
-
-          var x = feature.geometry.coordinates[1];
-          var y = feature.geometry.coordinates[0];
-          pointlist.push([x, y]);
-
-        layer.bindPopup(feature.properties.popupContent);
-        layer.on('mouseover', function (e) {
-              this.openPopup();
-          });
-          layer.on('mouseout', function (e) {
-              this.closePopup();
-          });
-
-        if (layer.feature.properties.markerurl == null){
-        layer.setIcon(new L.DivIcon({
-        iconSize: new L.Point(82, 32),
-        className: "divicon",
-        html:'<p class="text-center small text-muted"><i class="fa fa-circle fa-3x" aria-hidden="true"></i><code>Etape '+counter+'</code></p>'
-        }));
-
-
-       } else {
-          layer.setIcon(new L.DivIcon({
-          iconSize: new L.Point(82, 32),
-          className: "divicon",
-          html:'<img src="'+layer.feature.properties.markerurl+'" class="img-marker"><p class="text-center"><code>Etape '+counter+'</code></p>'
-          }));
-            }
-  }
-});
-// si aucun event precedent, afficher carte vide
-if (jQuery.isEmptyObject( geojson._layers )){
-  map = L.map('map').setView([30, 0], 2);
-}
-else{
-    map = L.map('map').fitBounds(geojson.getBounds());
-}
-    map.zoomControl.setPosition('bottomright');
-    var pathLine = L.polyline(pointlist, { dashArray: '1,5', color: '#000', weight: 1.3, opacity: 1, lineCap: 'square'}).addTo(map)
-    cupcakeTiles.addTo(map);
-    var markers = L.markerClusterGroup();
-    markers.addLayer(geojson);
-    markers.addTo(map);
-
-  });
-
-  <% else %>
-//new form
-  map = L.map('map').setView([30, 0], 2);
-  map.zoomControl.setPosition('bottomright');
-  cupcakeTiles.addTo(map);
-
-<% end %>
-}).call(this);
-</script>
 
 <script>
-//lancer geolocate si clic sur bouton
-var x = document.getElementById("geolocate");
-var geocoder = new google.maps.Geocoder();
 
-function getAddress(location, callback){
-    geocoder.geocode({'latLng': location}, function(results, status){
-        if(status === google.maps.GeocoderStatus.OK){
-            if(results[0]){
-                var address1 = results[0].formatted_address;
-                callback(address1);
-            }
-        }
-    });
-}
-
-function getLocation() {
-if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(showPosition);
-} else {
-  x.innerHTML = "Geolocation is not supported by this browser.";
-}
-}
-
-// animation loading coordonnées qd clic
-$(function(){
-		$('.geolocate').on("click", function () {
-		$('.fa-map-marker').addClass("animate-flicker");
-		setTimeout(RemoveClass, 3500);
-		});
-		function RemoveClass() {
-		$('.fa-map-marker').removeClass("animate-flicker");
-		}
-		});
-
-// entrer l'adresse geocodée dans le champ
-function showPosition(position) {
-var location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-getAddress(location, function(address)
-{
-    document.getElementById('event_address').value=address;
-});
-}
-</script>
-
-<script>
-// charger le nom du fichier
+// load file name into form
 $(document).on('change', '.btn-file :file', function() {
 		var input = $(this),
 			label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
@@ -207,6 +96,7 @@ $(document).on('change', '.btn-file :file', function() {
 		    }
 
 		});
+
 		function readURL(input) {
 		    if (input.files && input.files[0]) {
 		        var reader = new FileReader();
@@ -225,7 +115,7 @@ $(document).on('change', '.btn-file :file', function() {
 		$("#event_photo").change(function(){
 		    readURL(this);
 		});
-// proposer de charger fichier si clic sur l'input
+// ask for file if click on form
     $('#input-url-image').on('click', function() {
         $('#event_photo').click();
     });

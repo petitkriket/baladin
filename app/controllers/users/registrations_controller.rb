@@ -5,16 +5,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
    prepend_before_action :check_shortcut, only: [:new]
    rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
    invisible_captcha only: [:create]
+   include MapHelper
 
   # GET /resource/sign_up
    def new
+     # check if shortcut exist
      if  Passenger.where(shortcut: params[:t]).any?
-       @passenger = Passenger.where(shortcut: params[:t]).first.id
+       @passenger = Passenger.where(shortcut: params[:t]).first
+
+       # build map json
+       map_events_helper(@passenger, true)
      end
+
    build_resource({})
    build_resource
    resource.events.build
-#   Rails.logger.debug("My object: #{resource.events.build.passenger_id}")
    respond_with self.resource
    end
 
@@ -24,6 +29,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
        @passenger = Passenger.where(shortcut: params[:t]).first.id
      end
 
+     # send an email to admin(s) on user and event creation
      if @user.persisted?
         @admins = User.where(role: 'admin')
         @admins.each do |admin|
@@ -91,12 +97,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   passenger = Passenger.where(shortcut: params[:t]).any?
   if user_signed_in? && passenger == true
     redirect_to new_event_path(shortcut: params[:t])
-    flash[:notice] = "Merci d'enregistrer votre nouveau Passager."
+    flash[:notice] = "Merci d'enregistrer votre nouveau Passager. TODO"
  end
 
      unless passenger == true
        redirect_to(root_path)
-       flash[:alert] = 'Vous devez avoir recu un Passager pour participer.'
+       flash[:alert] = 'Vous devez avoir recu un Passager pour participer. TODO'
     end
  end
 

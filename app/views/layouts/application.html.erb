@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= I18n.locale %>">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <% metamagic site: t('site_title'), title: [:title, :site], separator: " | " %>
@@ -23,6 +23,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=<%= ENV['GMAPSJS_API_KEY'] %>"></script>
     <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= include_gon %>
     <%= javascript_include_tag 'application' %>
     <%= javascript_include_tag "jquery.validate.localization/messages_#{I18n.locale}" %>
     <%= csrf_meta_tags %>
@@ -39,7 +40,7 @@
     </script>
   <% end %>
 
-  <body>
+  <body class="<%= controller_name %> <%= action_name %>">
     <header>
       <%= render 'layouts/navigation' %>
     </header>

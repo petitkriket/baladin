@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include ApplicationHelper
   before_action :set_locale
   before_action :passenger_list
   before_action :initialize_user
@@ -10,6 +11,7 @@ class ApplicationController < ActionController::Base
 
   def passenger_list
     @passengers = Passenger.all.order(id: :asc)
+    jsTranslations()
   end
 
   def set_locale
