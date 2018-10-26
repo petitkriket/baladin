@@ -20,7 +20,7 @@ class PassengersController < ApplicationController
 
   # GET /passengers/1
   def show
-    @events  = Passenger.find(params[:id])
+    @events  = Passenger.friendly.find(params[:id])
 
     # build map
     map_events_helper(@events, true)
@@ -80,7 +80,7 @@ class PassengersController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_passenger
-      @passenger = Passenger.find(params[:id])
+      @passenger = Passenger.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
