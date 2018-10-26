@@ -93,6 +93,14 @@
   }
  }
 
+body.passengers.show > div.modal-backdrop.fade.in {
+  opacity: 0;
+}
+
+.transparent-modal {
+  //opacity:0 !important;
+ }
+
  #passenger_title, #contact, #photo {
       font-size: 25px;
       margin-right: 7px;
@@ -101,10 +109,7 @@
       border-width: 0 !important;
  }
 
-   html input[type="button"] {
-      background-color: white;
-      color:black;
-  }
+
 
  .form-control {
     -webkit-box-shadow: none !important;

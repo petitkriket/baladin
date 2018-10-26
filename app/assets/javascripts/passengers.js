@@ -200,12 +200,7 @@ $(document).ready(function () {
 
                     // get back to initial global passenger path and open contact form
                     setTimeout(function () {
-                      // map.setView(initialBounds);
-
-                      $('#basicExampleModal').modal({
-                        backdrop: false,
-                        keyboard: false,
-                      });
+                      showContact();
                     }, 2000);
 
                   }); // end of map ready

@@ -30,14 +30,20 @@ function showImage() {
   $('#photo').toggleClass('btn-default btn-primary');
 }
 
-// toggle contact and info modals
-$(function () {
-    $('#basicExampleModal').on('hidden.bs.modal', function () {
-        $('#contact').toggleClass('btn-default btn-primary');
-      });
-
-    $('#contact').click(function () {
-        $('#contact').toggleClass('btn-default btn-primary');
-      });
-
+// toggle contact form
+function showContact() {
+$('#basicExampleModal').modal({
+    backdrop: true,
+    keyboard: false,
   });
+
+  // toggle contact button style
+  $("#basicExampleModal").on("shown.bs.modal", function () {
+    document.getElementById("contact").classList.add("btn-primary");
+  });
+
+  $("#basicExampleModal").on("hidden.bs.modal", function () {
+    document.getElementById("contact").classList.remove("btn-primary");
+  });
+
+}

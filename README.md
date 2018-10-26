@@ -48,7 +48,8 @@ rails g scaffold Passenger name:string photo:string shortcut:string token:string
 
 rails g scaffold Event address:string city:string country:string latitude:float longitude:float photo:string passenger:references user:references published:boolean
 
-
+rake assets:clobber
+rake RAILS_ENV=production assets:precompile
 #Generer le controlleur devise
 https://github.com/plataformatec/devise/wiki/Tool:-Generate-and-customize-controllers
 https://stackoverflow.com/questions/10596238/get-nested-params
@@ -178,3 +179,12 @@ https://gist.github.com/anotheruiguy/7379570
 
 #minify
 https://coderwall.com/p/dpi9sg/heroku-assets-not-minified
+
+#friendly id
+https://www.youtube.com/watch?v=uEw3Q5nLtPI
+heroku run rake db:version --remote heroku
+heroku run rake db:migrate --remote heroku
+heroku run console --remote heroku
+Passenger.find_each(&:save)
+
+#
