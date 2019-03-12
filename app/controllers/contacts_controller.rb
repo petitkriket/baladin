@@ -9,9 +9,7 @@ class ContactsController < ApplicationController
     @contact.user = Passenger.friendly.find(params[:id]).events.published.last.user.email
     @contact.request = request
 
-  #  Rails.logger.debug("DEBUG self pssgrs: #{@contact.user}")
-  #  Rails.logger.debug("DEBUG id: #{params[:id]}")
-
+    #TODO redirect to homepage
     if @contact.deliver
       redirect_to passenger_path( id: params[:id]), :notice => t(:message_sent)
     else
