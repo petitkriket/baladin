@@ -28,7 +28,7 @@ db/*.sqlite3
 /config/master.key
 /config/storage.yml
 
- config/database.yml
+config/database.yml
 config/master.key
 config/newrelic.yml
 config/master.key
