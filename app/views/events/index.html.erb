@@ -27,12 +27,12 @@
           <div class="buttons">
             <% unless event.photo.blank? %>
               <%= link_to t('edit_photo'), edit_event_path(event), class: 'btn btn-default' %>
-            <% end %>
-            <% if user_signed_in? && current_user.try(:admin?) && event.photo.present %>
-              <%= link_to 'Download', event.photo.url, class: 'btn btn-info' %>
+                          <% if user_signed_in? && current_user.try(:admin?) %>
+                  <%= link_to 'Download', event.photo_url(:medium), class: 'btn btn-info' %>
+                        <% end %>
 
-            <% end %>
-                         <% if user_signed_in? && current_user.try(:admin?) %>
+              <% end %>
+            <% if user_signed_in? && current_user.try(:admin?) %>
               <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
               <% end %>
 
