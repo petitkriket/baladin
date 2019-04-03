@@ -31,6 +31,7 @@ fr:
   contribution_published_admin: "Contribution publiée."
   add_photo:  "Ajoutez votre photo du Passager"
   edit_photo:  "Modifier la photo"
+  download_photo:  "Télécharger"
   events: "Etapes"
   events_conditional: "Etape(s)"
   new_event: "Nouvelle Etape"

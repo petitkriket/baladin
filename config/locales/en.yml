@@ -31,6 +31,7 @@ en:
   contribution_published_admin: "Contribution published."
   add_photo:  "Add your Passenger's photo"
   edit_photo:  "Edit photo"
+  download_photo:  "Download"
   events: "Events"
   events_conditional: "Event(s)"
   new_event: "New Event"
