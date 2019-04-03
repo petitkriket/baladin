@@ -30,7 +30,8 @@
             <% end %>
             <% if user_signed_in? && current_user.try(:admin?) %>
               <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-            <% end %>
+              <%= link_to 'Download', event.photo, class: 'btn btn-info' %>
+              <% end %>
 
                       <% if event.published && current_user.try(:user?) %>
                         <div id="share">
