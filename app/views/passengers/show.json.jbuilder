@@ -1,1 +1,1 @@
-json.partial! "passengers/passenger", passenger: @passenger
+json.partial! 'passengers/passenger', passenger: @passenger

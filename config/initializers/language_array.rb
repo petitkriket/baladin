@@ -1,6 +1,6 @@
 module LanguageArray
   AVAILABLE_LANGUAGES = {
-    en: "en",
-    fr: "fr"
-}
+    en: 'en',
+    fr: 'fr'
+  }.freeze
 end

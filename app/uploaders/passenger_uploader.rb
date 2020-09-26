@@ -30,38 +30,38 @@ class PassengerUploader < CarrierWave::Uploader::Base
     1.megabytes..8.megabytes
   end
 
-  process :quality => 50
+  process quality: 50
 
   # Create different versions of your uploaded files:
   version :marker do
-    process :quality => 50
+    process quality: 50
     process resize_to_fill: [36, 36]
   end
 
-   version :thumb do
-     process :quality => 50
-     process resize_to_fit: [150, 150]
-   end
+  version :thumb do
+    process quality: 50
+    process resize_to_fit: [150, 150]
+  end
 
-   version :medium do
-     process :quality => 50
-     process resize_to_fit: [400, 400]
-   end
+  version :medium do
+    process quality: 50
+    process resize_to_fit: [400, 400]
+  end
 
-   version :large do
-     process :quality => 50
-     process resize_to_fit: [700, 700]
-   end
+  version :large do
+    process quality: 50
+    process resize_to_fit: [700, 700]
+  end
 
-   version :facebook do
-     process :quality => 50
-     process resize_to_fit: [1200, 630]
-   end
+  version :facebook do
+    process quality: 50
+    process resize_to_fit: [1200, 630]
+  end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_whitelist
-   %w(jpg jpeg gif png)
+    %w[jpg jpeg gif png]
   end
 
   # Override the filename of the uploaded files:

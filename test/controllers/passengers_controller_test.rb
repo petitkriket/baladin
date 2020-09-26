@@ -5,17 +5,17 @@ class PassengersControllerTest < ActionDispatch::IntegrationTest
     @passenger = passengers(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get passengers_url
     assert_response :success
   end
 
-  test "should get new" do
+  test 'should get new' do
     get new_passenger_url
     assert_response :success
   end
 
-  test "should create passenger" do
+  test 'should create passenger' do
     assert_difference('Passenger.count') do
       post passengers_url, params: { passenger: { name: @passenger.name, photo: @passenger.photo, shortcut: @passenger.shortcut, token: @passenger.token } }
     end
@@ -23,22 +23,22 @@ class PassengersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to passenger_url(Passenger.last)
   end
 
-  test "should show passenger" do
+  test 'should show passenger' do
     get passenger_url(@passenger)
     assert_response :success
   end
 
-  test "should get edit" do
+  test 'should get edit' do
     get edit_passenger_url(@passenger)
     assert_response :success
   end
 
-  test "should update passenger" do
+  test 'should update passenger' do
     patch passenger_url(@passenger), params: { passenger: { name: @passenger.name, photo: @passenger.photo, shortcut: @passenger.shortcut, token: @passenger.token } }
     assert_redirected_to passenger_url(@passenger)
   end
 
-  test "should destroy passenger" do
+  test 'should destroy passenger' do
     assert_difference('Passenger.count', -1) do
       delete passenger_url(@passenger)
     end
