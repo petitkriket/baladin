@@ -1,16 +1,30 @@
-Pssgrs
+
+The Passengers
 ================
 -------------
 
 This application requires:
 
-- Ruby 2.4.1
+- Ruby 2.6.5
 - Rails 5.2.0
 
 Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.html).
 
 Getting Started
 ---------------
+
+To fetch production database and get the app running locally :
+
+```shell
+$ heroku pg:pull DATABASE_URL pssgrs_development --app pssgrsv2
+# psql -U postgres
+# create role pssgrs with createdb login password 'pssgrs';
+# ALTER USER pssgrs WITH SUPERUSER;
+# \q
+$ rbenv local 2.6.5
+$ rbenv exec bundle install
+$ rbenv exec rails s
+```
 
 Documentation and Support
 -------------------------
