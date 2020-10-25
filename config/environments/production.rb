@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -23,7 +25,7 @@ Rails.application.configure do
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # Compress JavaScripts and CSS.
-  #config.assets.js_compressor = :uglifier
+  # config.assets.js_compressor = :uglifier
   config.assets.js_compressor = Uglifier.new(harmony: true)
 
   config.assets.css_compressor = :sass
@@ -56,7 +58,7 @@ Rails.application.configure do
   config.log_level = :debug
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -77,22 +79,23 @@ Rails.application.configure do
 
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
-
   config.action_mailer.smtp_settings = {
-    user_name: Rails.application.secrets.email_provider_username,
-    password: Rails.application.secrets.email_provider_password,
-    domain: Rails.application.secrets.domain_name_short,
-    address: "smtp.sendgrid.net",
-    port: 587,
-    authentication: "plain",
+    user_name: Rails.application.credentials.dig(Rails.env.to_sym, :email, :username),
+    password: Rails.application.credentials.dig(Rails.env.to_sym, :email, :password),
+    domain: Rails.application.credentials.dig(:domain_name_short),
+    address: Rails.application.credentials.dig(Rails.env.to_sym, :email, :host),
+    port: Rails.application.credentials.dig(Rails.env.to_sym, :email, :port),
+    authentication: 'plain',
     enable_starttls_auto: true
   }
+
   # ActionMailer Config
-  config.action_mailer.default_url_options = { :host => Rails.application.secrets.domain_name }
+  mailer_host = Rails.env.staging? ? ENV['HEROKU_APP_NAME'] + '.herokuapp.com' : Rails.application.credentials.dig(:domain_name_short)
+
+  config.action_mailer.default_url_options = { protocol: 'https', host: mailer_host }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
-
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
@@ -101,7 +104,7 @@ Rails.application.configure do
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-  if ENV["RAILS_LOG_TO_STDOUT"].present?
+  if ENV['RAILS_LOG_TO_STDOUT'].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)

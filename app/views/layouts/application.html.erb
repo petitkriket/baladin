@@ -12,16 +12,14 @@
     <meta property="og:url" content="<%= request.original_url %>" />
     <meta property="og:description" content="<%= t('social_desc') %>" />
     <meta property="og:site_name" content="<%= t('site_title') %>" />
-    <meta property="fb:app_id" content="<%= ENV['FB_APPID'] %>" />
+    <meta property="fb:app_id" content="<%= Rails.application.credentials.dig(:facebook_id) %>" />
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="<%= ENV['TW_APPID'] %>">
     <meta name="twitter:title" content="<%= t('site_title') %>">
     <meta name="twitter:description" content="<%= t('social_desc') %>">
-    <meta name="twitter:creator" content="<%= ENV['TW_APPID'] %>">
     <meta name="theme-color" content="#181818">
     <meta name="msapplication-navbutton-color" content="#181818">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=<%= ENV['GMAPSJS_API_KEY'] %>"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=<%= Rails.application.credentials.dig(Rails.env.to_sym, :google, :gmaps_js_api_key) %>"></script>
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= include_gon %>
     <%= javascript_include_tag 'application' %>
@@ -30,13 +28,12 @@
   </head>
   <% if Rails.env.production? %>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha256-NuCn4IvuZXdBaFKJOAcsU2Q3ZpwbdFisd5dux4jkQ5w=" crossorigin="anonymous" />
-  <script async src="https://www.googletagmanager.com/gtag/js?id=<%= ENV['GA_ID'] %>"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=<%= Rails.application.credentials.dig(Rails.env.to_sym, :google, :analytics) %>"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
-      gtag('config', '<%= ENV['GA_ID'] %>');
+      gtag('config', '<%= Rails.application.credentials.dig(Rails.env.to_sym, :google, :analytics) %>');
     </script>
   <% end %>
 

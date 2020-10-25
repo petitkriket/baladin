@@ -4,7 +4,7 @@
   <div class="authform">
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :role => 'form'}) do |f| %>
       <h3><%= t('sign_up_participation') %></h3>
-      <%= devise_error_messages! %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
       <%= f.simple_fields_for :events do |f| %>
         <div class="input-group">

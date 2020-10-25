@@ -1,13 +1,13 @@
 class PassengersController < ApplicationController
-  before_action :set_passenger, only: [:show, :edit, :update, :destroy]
-  before_action :admin_only, :only => [:edit, :update, :destroy]
-  before_action :enable_map_nav, only: [:index, :show]
+  before_action :set_passenger, only: %i[show edit update destroy]
+  before_action :admin_only, only: %i[edit update destroy]
+  before_action :enable_map_nav, only: %i[index show]
   before_action :user_contact_form, only: [:show]
   include MapHelper
 
   # GET /passengers
   def index
-    events  = Passenger.all.map { |u| u.events.published.last }
+    events = Passenger.all.map { |u| u.events.published.last }
 
     # build map
     map_index_helper(events)
@@ -20,7 +20,7 @@ class PassengersController < ApplicationController
 
   # GET /passengers/1
   def show
-    @events  = Passenger.friendly.find(params[:id])
+    @events = Passenger.friendly.find(params[:id])
 
     # build map
     map_events_helper(@events, true)
@@ -28,9 +28,9 @@ class PassengersController < ApplicationController
     # create html page or redirect if no markers, TODO RSS
     respond_to do |format|
       if @events.blank?
-      format.html { redirect_to root_path, alert: t(:passenger_empty) } # if none published
-    else
-      format.html
+        format.html { redirect_to root_path, alert: t(:passenger_empty) } # if none published
+      else
+        format.html
       end
     end
   end
@@ -41,8 +41,7 @@ class PassengersController < ApplicationController
   end
 
   # GET /passengers/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /passengers
   def create
@@ -78,36 +77,33 @@ class PassengersController < ApplicationController
 
   private
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_passenger
-      @passenger = Passenger.friendly.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_passenger
+    @passenger = Passenger.friendly.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def passenger_params
-      params.require(:passenger).permit(:name, :shortcut, :photo, :photo_cache,:remove_photo)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def passenger_params
+    params.require(:passenger).permit(:name, :shortcut, :photo, :photo_cache, :remove_photo)
+  end
 
-    # addmin only
-    def admin_only
-      unless user_signed_in? && current_user.admin?
-        redirect_to new_user_session_path, alert: t(:admin_only)
-      end
-    end
+  # addmin only
+  def admin_only
+    redirect_to new_user_session_path, alert: t(:admin_only) unless user_signed_in? && current_user.admin?
+  end
 
-    # show map navigation
-    def enable_map_nav
-      @map_nav = true
-    end
+  # show map navigation
+  def enable_map_nav
+    @map_nav = true
+  end
 
-    # show last user contact form
-    def user_contact_form
-      @user_contact_form = true
-    end
+  # show last user contact form
+  def user_contact_form
+    @user_contact_form = true
+  end
 
-    #error handling
-    rescue_from ActiveRecord::RecordNotFound do |exception|
-      redirect_to :root, alert: t(:passenger_not_found)
-    end
-
+  # error handling
+  rescue_from ActiveRecord::RecordNotFound do |_exception|
+    redirect_to :root, alert: t(:passenger_not_found)
+  end
 end
