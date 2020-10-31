@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   enum role: %i[user vip admin]
   after_initialize :set_default_role, if: :new_record?
-  has_many :events, dependent: :destroy
+  has_many :events, dependent: :nullify
   accepts_nested_attributes_for :events
   acts_as_token_authenticatable
 
