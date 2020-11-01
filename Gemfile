@@ -17,6 +17,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'bullet'
   gem 'i18n-tasks', '~> 0.9.24'
+  gem 'letter_opener_web'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'rails-erd'
   gem 'rails_layout'

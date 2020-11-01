@@ -61,3 +61,8 @@ $ heroku run rails c -a pssgrsv2-pr-1)
 ## Remove secrets from git
 
 $ git filter-branch --index-filter "git rm -rf --cached --ignore-unmatch path_to_file" HEAD
+
+## Useful gems
+
+- Bullet [git](https://github.com/flyerhzm/bullet) to kill n+1.
+- Letter Opener [git](https://github.com/fgrehm/letter_opener_web) to catch e-mails.

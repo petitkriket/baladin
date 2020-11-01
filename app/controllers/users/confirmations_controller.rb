@@ -22,11 +22,10 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   end
 
   # The path used after confirmation.
+  # Sign-in directly after confirmation and go to home page
   def after_confirmation_path_for(resource_name, resource)
     super(resource_name, resource)
-    # Sign-in directement après confirmation et aller vers ?
     sign_in(resource)
-    # new_event_path
-    events_path
+    root_path
   end
 end

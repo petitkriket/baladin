@@ -1,5 +1,6 @@
 class NotifMailer < ApplicationMailer
-  default from: Rails.application.credentials.dig(:domain_email)
+  default from: 'no-reply@' + Rails.application.credentials.dig(:domain_name_short),
+          reply_to: 'contact@' + Rails.application.credentials.dig(:domain_name_short)
 
   def registration_email(user, admin)
     @user = user

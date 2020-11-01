@@ -79,19 +79,33 @@ Rails.application.configure do
 
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
-  config.action_mailer.smtp_settings = {
-    user_name: Rails.application.credentials.dig(Rails.env.to_sym, :email, :username),
-    password: Rails.application.credentials.dig(Rails.env.to_sym, :email, :password),
-    domain: Rails.application.credentials.dig(:domain_name_short),
-    address: Rails.application.credentials.dig(Rails.env.to_sym, :email, :host),
-    port: Rails.application.credentials.dig(Rails.env.to_sym, :email, :port),
-    authentication: 'plain',
-    enable_starttls_auto: true
-  }
 
-  # ActionMailer Config
+  # Email handling for environments
+
+  if Rails.env.staging?
+    config.action_mailer.smtp_settings = {
+      user_name: Rails.application.credentials.dig(Rails.env.to_sym, :email, :username),
+      password: Rails.application.credentials.dig(Rails.env.to_sym, :email, :password),
+      domain: Rails.application.credentials.dig(Rails.env.to_sym, :email, :host),
+      address: Rails.application.credentials.dig(Rails.env.to_sym, :email, :host),
+      port: Rails.application.credentials.dig(Rails.env.to_sym, :email, :port),
+      authentication: :plain
+    }
+  end
+
+  if Rails.env.production?
+    config.action_mailer.smtp_settings = {
+      user_name: Rails.application.credentials.dig(Rails.env.to_sym, :email, :username),
+      password: Rails.application.credentials.dig(Rails.env.to_sym, :email, :password),
+      domain: Rails.application.credentials.dig(:domain_name_short),
+      address: Rails.application.credentials.dig(Rails.env.to_sym, :email, :host),
+      port: Rails.application.credentials.dig(Rails.env.to_sym, :email, :port),
+      authentication: :plain,
+      enable_starttls_auto: true
+    }
+  end
+
   mailer_host = Rails.env.staging? ? ENV['HEROKU_APP_NAME'] + '.herokuapp.com' : Rails.application.credentials.dig(:domain_name_short)
-
   config.action_mailer.default_url_options = { protocol: 'https', host: mailer_host }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
