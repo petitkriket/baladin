@@ -8,7 +8,7 @@
   <% end %>
 
 <span class="wiggle default-shadow" id="passenger_title"><%= t('passenger') %> <%= t('hash') %><%= @passenger.name %> </span>
-<% unless @passenger.events.last.nil? || current_user == @passenger.events.last.user %>
+<% unless @passenger.events.last.nil? || @passenger.events.last.user.nil? || current_user == @passenger.events.last.user %>
   <%= submit_tag t('host'), :type => 'button', class: 'btn wiggle default-shadow', id: 'contact', onclick:'showContact()' %>
 <% end %>
   <%= submit_tag t('photo'), :type => 'button', class: 'btn wiggle default-shadow', id: 'photo', onclick: 'showImage()' %>

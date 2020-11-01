@@ -70,19 +70,22 @@ module MapHelper
       if index == 0 && @events.size == 1
         marker_name = t('departure')
         marker_class = 'first_marker'
-        marker_popup = "#{popup_photo}<br> #{passenger_name} #{t('location')} #{event.city} (#{event.country_name}) #{t('holder')} #{event.user.name}"
+        user_name = event.user ? event.user.name : '-'
+        marker_popup = "#{popup_photo}<br> #{passenger_name} #{t('location')} #{event.city} (#{event.country_name}) #{t('holder')} #{user_name}"
 
       # first with many markers
       elsif index == 0 && @events.size != 1
         marker_name =  t('departure')
         marker_class = 'marker'
-        marker_popup = "#{popup_photo}<br> #{marker_name} #{t('exlocation')} #{event.city} (#{event.country_name}) #{t('holder')} #{event.user.name} #{grabbed_on}"
+        user_name = event.user ? event.user.name : '-'
+        marker_popup = "#{popup_photo}<br> #{marker_name} #{t('exlocation')} #{event.city} (#{event.country_name}) #{t('holder')} #{user_name} #{grabbed_on}"
 
       # last marker
       elsif index == @events.size - 1
         marker_name = '<mark>' + t('current_position') + '</mark>'
         marker_class = 'last-marker'
-        marker_popup = "#{popup_photo}<br> #{passenger_name} #{t('location')} #{event.city} (#{event.country_name}) #{t('holder')} #{event.user.name}"
+        user_name = event.user ? event.user.name : '-'
+        marker_popup = "#{popup_photo}<br> #{passenger_name} #{t('location')} #{event.city} (#{event.country_name}) #{t('holder')} #{user_name}"
         if controller_name == 'registrations'
           marker_name = '<mark>' + t('last_known_position') + '</mark>'
           marker_class = 'marker'
@@ -91,7 +94,8 @@ module MapHelper
       else
         marker_name = t('event') + ' ' + index.to_s
         marker_class = 'marker'
-        marker_popup = "#{popup_photo}<br> #{passenger_name} #{t('exlocation')} #{event.city} (#{event.country_name}) #{t('holder')} #{event.user.name} #{grabbed_on}"
+        user_name = event.user ? event.user.name : '-'
+        marker_popup = "#{popup_photo}<br> #{passenger_name} #{t('exlocation')} #{event.city} (#{event.country_name}) #{t('holder')} #{user_name} #{grabbed_on}"
       end
 
       # marker html

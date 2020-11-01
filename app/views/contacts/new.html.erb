@@ -1,4 +1,4 @@
-<% unless @passenger.events.last.nil? || current_user == @passenger.events.last.user %>
+<% unless @passenger.events.last.nil? || @passenger.events.last.user.nil? || current_user == @passenger.events.last.user %>
 
 <div class="modal fade modal-contact" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
