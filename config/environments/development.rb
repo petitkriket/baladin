@@ -29,21 +29,11 @@ Rails.application.configure do
   config.active_record.verbose_query_logs = true
   config.assets.debug = true
 
-  config.action_mailer.smtp_settings = {
-    user_name: Rails.application.credentials.dig(Rails.env.to_sym, :email, :username),
-    password: Rails.application.credentials.dig(Rails.env.to_sym, :email, :password),
-    domain: Rails.application.credentials.dig(:domain_name_short),
-    address: Rails.application.credentials.dig(Rails.env.to_sym, :email, :host),
-    port: Rails.application.credentials.dig(Rails.env.to_sym, :email, :port),
-    authentication: 'plain',
-    enable_starttls_auto: true
-  }
-
   # ActionMailer Config
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
-  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = :letter_opener_web
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.perform_deliveries = false
+  config.action_mailer.perform_deliveries = true
 
   config.assets.quiet = true
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
