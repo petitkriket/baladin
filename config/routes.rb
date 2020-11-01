@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
   scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
     root to: 'passengers#index'
     resources :events
