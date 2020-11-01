@@ -16,7 +16,7 @@
           <%= image_tag(event.passenger.photo_url(:marker), alt: 'Image'.to_s, class: 'passenger_thumb img-circle pull-left') rescue "" %>
           <h4><%= link_to "#{t('passenger')} #{event.passenger.name}", passenger_path(event.passenger) %></h4>
           <p><%= t('saved') %> <%= event.created_at.strftime("%d/%m/%Y") %>
-          <% if user_signed_in? && current_user.try(:admin?) %>
+          <% if user_signed_in? && current_user.try(:admin?) && event.user %>
            | <%= event.user.name %>
           <% end %>
           </p>

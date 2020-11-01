@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_10_122208) do
+ActiveRecord::Schema.define(version: 2020_10_31_150335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,5 +81,5 @@ ActiveRecord::Schema.define(version: 2020_10_10_122208) do
   end
 
   add_foreign_key "events", "passengers"
-  add_foreign_key "events", "users"
+  add_foreign_key "events", "users", on_delete: :nullify
 end

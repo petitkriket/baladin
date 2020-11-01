@@ -6,7 +6,7 @@ module Api
       attributes :id, :photo, :city, :country, :latitude, :longitude, :user, :created_at
 
       def user
-        UserSerializer.new(object.user, root: false)
+        UserSerializer.new(object.user, root: false) if object.user
       end
     end
   end

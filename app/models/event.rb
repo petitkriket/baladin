@@ -1,10 +1,14 @@
 class Event < ApplicationRecord
+  # relations
   belongs_to :passenger
   belongs_to :user, optional: true
+
+  # validations
   validates :address, presence: true
   validates :passenger_id, uniqueness: { scope: :user_id, message: I18n.t('event_already_registred_admin') }
   scope :published, -> { where(published: true) }
-  default_scope { order(created_at: :asc) }
+
+  # misc
   mount_uploader :photo, EventUploader
   validates_integrity_of :photo
   geocoded_by :address
@@ -15,6 +19,7 @@ class Event < ApplicationRecord
     end
   end
 
+  # hooks
   after_validation :geocode, :reverse_geocode, if: :address_changed?
   after_validation :update_fired, if: :published_changed?
   after_validation :coordinates_empty
