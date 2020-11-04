@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include Concerns::AuthenticateStaging
   include ApplicationHelper
   before_action :set_locale
   before_action :passenger_list

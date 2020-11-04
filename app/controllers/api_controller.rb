@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ApiController < ActionController::Base
+  include Concerns::AuthenticateStaging
   skip_before_action :verify_authenticity_token
   before_action :set_raven_context
 
