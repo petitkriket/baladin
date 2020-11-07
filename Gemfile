@@ -9,7 +9,12 @@ gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.0'
 
 group :development, :test do
-  gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'capybara'
+  gem 'database_cleaner-active_record'
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'pry'
+  gem 'rspec-rails'
 end
 
 group :development do
@@ -28,7 +33,6 @@ group :development do
 end
 
 group :test do
-  gem 'capybara', '>= 2.15', '< 4.0'
   gem 'chromedriver-helper'
   gem 'selenium-webdriver'
 end
@@ -38,14 +42,15 @@ gem 'active_model_serializers'
 gem 'aws-sdk-s3', require: false
 gem 'carrierwave', '~> 1.0'
 gem 'devise'
+gem 'devise-jwt', '~> 0.7.0'
 gem 'figaro'
 gem 'fog-aws'
 gem 'geocoder'
 gem 'mail_form'
 gem 'mini_magick'
+gem 'rack-cors'
 gem 'rails-i18n', '~> 5.1'
 gem 'sentry-raven'
-gem 'simple_token_authentication'
 
 # To be deleted
 gem 'bootstrap-growl-rails'

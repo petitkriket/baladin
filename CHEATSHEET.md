@@ -66,3 +66,19 @@ $ git filter-branch --index-filter "git rm -rf --cached --ignore-unmatch path_to
 
 - Bullet [git](https://github.com/flyerhzm/bullet) to kill n+1.
 - Letter Opener [git](https://github.com/fgrehm/letter_opener_web) to catch e-mails.
+
+## Setup tests and fixtures
+
+- [Setup](https://gist.github.com/sharvy/d63fbcb18489bef773b82c992583a972)
+- [Setup 2](https://bintlopez.gitbooks.io/rspec-wrangling/content/part-1/factory-bot-faker-setup.html)
+- [Sign in with Devise](https://github.com/heartcombo/devise/wiki/How-To:-sign-in-and-out-a-user-in-Request-type-specs-(specs-tagged-with-type:-:request))
+- [Testing emails](https://www.lucascaton.com.br/2010/10/25/how-to-test-mailers-in-rails-with-rspec/)
+- [Emails and jobs](https://coderwall.com/p/xqcq7q/how-to-test-actionmailer-activejob-with-rspec)
+
+## JWT Authentification
+
+- [devise-jwt](https://github.com/waiting-for-dev/devise-jwt)
+- [Help 1](https://jameschambers.co.uk/rails-api)
+- [Help 2](hthttps://adamnaamani.com/jwt-authentication-with-warden-and-devise/)
+- [Help 3](https://medium.com/@mazik.wyry/rails-5-api-jwt-setup-in-minutes-using-devise-71670fd4ed03)
+- [302 redirect](https://groups.google.com/g/plataformatec-devise/c/XUkVIqq2Rgc)

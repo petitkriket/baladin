@@ -9,13 +9,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
-    # check if shortcut exist
-    if Passenger.where(shortcut: params[:t]).any?
-      @passenger = Passenger.where(shortcut: params[:t]).first
-
-      # build map json
-      map_events_helper(@passenger, true)
-    end
+    @passenger = Passenger.find_by(shortcut: params[:t])
+    map_events_helper(@passenger, true) if @passenger
 
     build_resource({})
     build_resource
@@ -26,16 +21,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super do
-      @passenger = Passenger.where(shortcut: params[:t]).first.id
+      @passenger = Passenger.find_by(shortcut: params[:t])
     end
 
-    # send an email to admin(s) on user and event creation
-    if @user.persisted?
-      @admins = User.where(role: 'admin')
-      @admins.each do |admin|
-        NotifMailer.registration_email(@user, admin).deliver
-      end
+    return unless @user.persisted?
 
+    User.where(role: 'admin').each do |admin|
+      NotifMailer.registration_email(@user, admin).deliver
     end
   end
 

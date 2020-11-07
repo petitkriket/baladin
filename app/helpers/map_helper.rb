@@ -45,7 +45,7 @@ module MapHelper
   # show every location of a single passenger
   def map_events_helper(data, has_popup)
     markers_index = []
-    @events = Passenger.find(data.id).events.published
+    @events = Passenger.find(data.id).events.includes([:user]).published
     @events.each_with_index do |event, index|
       # display event photo or default as marker
       photo = if event.photo.marker.url.blank?

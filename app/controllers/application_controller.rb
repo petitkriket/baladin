@@ -31,11 +31,6 @@ class ApplicationController < ActionController::Base
         current_user.save
       end
     end
-
-    if request.format == 'application/json'
-      I18n.locale = params[:locale] if current_user.nil?
-      I18n.locale = current_user.locale if current_user
-    end
   end
 
   def default_url_options(_options = {})
