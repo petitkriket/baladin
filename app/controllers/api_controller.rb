@@ -2,7 +2,7 @@
 
 class ApiController < ActionController::Base
   include Concerns::AuthenticateStaging
-  skip_before_action :verify_authenticity_token
+  protect_from_forgery with: :null_session, only: Proc.new { |c| c.request.format.json? }
   before_action :set_raven_context
 
   private

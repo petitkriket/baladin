@@ -96,6 +96,7 @@ en:
   event_already_registred: "You have already registred this Passenger."
   event_already_registred_admin: "This user has already been in possession of this Passenger"
   check_google_api: "Please check Geocoder Google API. You can still enter latitude and longitude manually."
+  invalid_address: "The given address cannot be found, please enter another place or address"
   invalid_url: "Entered URL is wrong."
   message_sent:  "Message sent successfully."
   reach_passenger_holder:  "Someone sent you a message about your passenger."

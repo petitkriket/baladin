@@ -3,7 +3,6 @@ class User < ApplicationRecord
   after_initialize :set_default_role, if: :new_record?
   has_many :events, dependent: :nullify
   accepts_nested_attributes_for :events
-  acts_as_token_authenticatable
 
   def set_default_role
     self.role ||= :user
@@ -16,5 +15,6 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
 end
