@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
+      resources :events, only: [:create]
       resources :passengers do
         resources :events
       end
@@ -26,11 +27,7 @@ Rails.application.routes.draw do
         put    '/account',      to: 'registrations#update'
         delete '/account',      to: 'registrations#destroy'
         post   '/reset',        to: 'registrations#reset'
-        # put    '/password',     to: 'devise/passwords#update'
-        # post   '/password',     to: 'devise/passwords#create'
         # get    '/confirmation', to: 'devise/confirmations#show'
-        # post   '/unlock',       to: 'devise/unlocks#create'
-        # get    '/unlock',       to: 'devise/unlocks#show'
       end
     end
   end

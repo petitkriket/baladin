@@ -248,10 +248,25 @@ Devise.setup do |config|
   # should add them to the navigational formats lists.
   #
   # The "*/*" below is required to match Internet Explorer requests.
-  config.navigational_formats = [:json, :html]
+  # config.navigational_formats = []
+  config.navigational_formats = [:"*/*", :html, :js] 
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
+
+  # devise-jwt
+  config.jwt do |jwt|
+    jwt.secret = Rails.application.credentials.dig(:secret_key_base)
+    jwt.dispatch_requests = [
+      ['POST', %r{^/api/v1/signup$}],
+      ['POST', %r{^/api/v1/signin$}]
+    ]
+    jwt.revocation_requests = [
+      ['DELETE', %r{^/api/signout$}]
+    ]
+    jwt.request_formats = { user: [:json] }
+    jwt.expiration_time = 24 * 3600
+  end
 
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting

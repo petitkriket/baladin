@@ -1,54 +1,52 @@
+# frozen_string_literal: true
+
 class Event < ApplicationRecord
   # relations
   belongs_to :passenger
   belongs_to :user, optional: true
+  scope :published, -> { where(published: true) }
 
   # validations
   validates :address, presence: true
   validates :passenger_id, uniqueness: { scope: :user_id, message: I18n.t('event_already_registred_admin') }
-  scope :published, -> { where(published: true) }
 
   # misc
   mount_uploader :photo, EventUploader
-  validates_integrity_of :photo
+  validates_integrity_of :photo unless Rails.env.test?
   geocoded_by :address
-  reverse_geocoded_by :latitude, :longitude do |obj, results|
-    if geo = results.first
-      obj.city = geo.city
-      obj.country = geo.country_code
-    end
-  end
 
   # hooks
-  after_validation :geocode, :reverse_geocode, if: :address_changed?
-  after_validation :update_fired, if: :published_changed?
-  after_validation :coordinates_empty
-  after_validation :passenger_once, on: :create
+  unless Rails.env.test?
+    after_validation :geocode
+    after_validation :validate_coordinates
+    after_validation :fill_location_details
+  end
+  after_validation :update_fired
+
+  def validate_coordinates
+    return unless longitude.nil? || latitude.nil?
+
+    self.published = nil
+    errors.add(:base, I18n.t('invalid_address'))
+  end
+
+  def fill_location_details
+    return unless address_changed?
+
+    geo = Geocoder.search(address).first
+    return unless geo.present?
+
+    self.city = geo.city
+    self.country = geo.country_code
+  end
 
   def update_fired
-    if id
-      @passenger = Passenger.find(self[:passenger_id])
-      @event = self
-      @previous_user = User.includes(:events).where(events: { passenger_id: self[:passenger_id], published: true }).order(created_at: :desc).first
-      NotifMailer.event_activation_email(user, @passenger, @event).deliver if published
+    return unless id && published? && published_changed?
 
-      unless @previous_user.nil?
-        NotifMailer.event_activation_previous_user_email(@previous_user, @passenger, @event).deliver if published
-      end
-    end
-  end
-
-  def coordinates_empty
-    if longitude.nil? || latitude.nil?
-      self.published = nil
-      errors.add(:base, I18n.t('check_google_api'))
-    end
-  end
-
-  def passenger_once
-    if Event.where(user_id: user.id, passenger_id: passenger.id).any?
-      errors.add(:base, I18n.t('event_already_registred_admin'))
-    end
+    NotifMailer.event_activation_email(user, passenger, self).deliver
+    previous_user = User.includes(:events).where(events: { passenger_id: passenger.id, published: true })
+                        .order(created_at: :desc).first
+    NotifMailer.event_activation_previous_user_email(previous_user, passenger, self).deliver if previous_user
   end
 
   def country_name
