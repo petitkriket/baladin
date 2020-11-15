@@ -9,6 +9,9 @@
       "url": "heroku/ruby"
     },
     {
+      "url": "heroku/nodejs"
+    },
+    {
       "url": "https://github.com/heroku/heroku-buildpack-activestorage-preview"
     }
   ],
@@ -31,5 +34,8 @@
     "RAILS_SERVE_STATIC_FILES": {
       "required": true
     }
+  },
+  "scripts": {
+    "postdeploy": "bundle exec rake webpacker:compile"
   }
 }

@@ -1,5 +1,37 @@
 {
   "name": "pssgrs",
+  "version": "0.3",
   "private": true,
-  "dependencies": {}
+  "licence": "cc-by-sa-4.0",
+  "scripts": {
+    "lint": "vue-cli-service lint",
+    "webpack:analyze": "mkdir -p public/packs && node_modules/.bin/webpack --config config/webpack/production.js --profile --json > public/packs/stats.json && node_modules/.bin/webpack-bundle-analyzer public/packs/stats.json"
+  },
+  "dependencies": {
+    "@babel/preset-typescript": "^7.12.1",
+    "@rails/webpacker": "^5.2.1",
+    "@vue/compiler-sfc": "^3.0.2",
+    "fork-ts-checker-webpack-plugin": "^6.0.3",
+    "stylelint-webpack-plugin": "^2.1.1",
+    "typescript": "^4.1.2",
+    "vue": "^3.0.2",
+    "vue-loader": "^16.0.0-rc.1",
+    "webpack-bundle-analyzer": "^4.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@mapbox/stylelint-processor-arbitrary-tags": "^0.3.0",
+    "@typescript-eslint/eslint-plugin": "^4.8.1",
+    "@typescript-eslint/parser": "^4.8.1",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-service": "^4.5.9",
+    "@vue/eslint-config-airbnb": "^5.0.2",
+    "eslint": "^6.7.2",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-vue": "^7.0.0-beta.4",
+    "stylelint": "^13.8.0",
+    "stylelint-config-recess-order": "^2.3.0",
+    "stylelint-config-standard": "^20.0.0",
+    "webpack-dev-server": "^3.11.0"
+  }
 }
