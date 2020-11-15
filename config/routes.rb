@@ -2,6 +2,8 @@
 
 Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+
   scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
     root to: 'passengers#index'
     resources :events
