@@ -49,6 +49,8 @@ gem 'geocoder'
 gem 'mail_form'
 gem 'mini_magick'
 gem 'rack-cors'
+gem 'rails_admin', '~> 2.0'
+gem 'rails_admin_rollincode', '~> 1.0'
 gem 'rails-i18n', '~> 5.1'
 gem 'sentry-raven'
 
