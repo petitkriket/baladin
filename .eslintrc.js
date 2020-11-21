@@ -20,13 +20,13 @@ module.exports = {
   // TS mixed codebase configuration
   overrides: [
     {
-      files: ["**/*.ts", "**/*.tsx"],
+      files: ['**/*.ts', '**/*.tsx'],
       env: { browser: true, es6: true, node: true },
       extends: [
         'plugin:@typescript-eslint/recommended',
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
       ],
-      parser: "@typescript-eslint/parser",
+      parser: '@typescript-eslint/parser',
       plugins: ['@typescript-eslint'],
       parserOptions: {
         project: './tsconfig.json',
