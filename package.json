@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "@babel/preset-typescript": "^7.12.7",
-    "@rails/webpacker": "https://github.com/rails/webpacker.git",
+    "@rails/webpacker": "5.2.1",
     "babel-preset-typescript-vue": "^1.1.1",
     "core-js": "^3.7.0",
     "regenerator-runtime": "^0.13.7",
