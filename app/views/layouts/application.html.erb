@@ -21,7 +21,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=<%= Rails.application.credentials.dig(Rails.env.to_sym, :google, :gmaps_js_api_key) %>"></script>
     <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= include_gon %>
+    <%= include_gon nonce: content_security_policy_nonce %>
     <%= javascript_include_tag 'application' %>
     <%= javascript_include_tag "jquery.validate.localization/messages_#{I18n.locale}" %>
     <%= csrf_meta_tags %>
@@ -48,5 +48,6 @@
     <%= render 'layouts/navigation_map' if @map_nav %>
     <%= render :template => 'contacts/new' if @user_contact_form %>
     <%= render :template => 'passengers/list' %>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   </body>
 </html>
