@@ -2,7 +2,9 @@
   "name": "pssgrs",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "5.2.1",
+    "@rails/webpacker": "^5.2.1",
+    "bootstrap": "^4.5.3",
+    "css-loader": "^5.0.1",
     "vue": "^2.6.12",
     "vue-loader": "^15.9.5",
     "vue-template-compiler": "^2.6.12"
