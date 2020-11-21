@@ -6,12 +6,12 @@
 
 <script>
 export default {
-  data: function () {
+  data() {
     return {
-      message: "Hello !"
-    }
-  }
-}
+      message: 'Hello !',
+    };
+  },
+};
 </script>
 
 <style scoped>

@@ -1,0 +1,2 @@
+// typescript
+console.log('typescript..');

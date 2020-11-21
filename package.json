@@ -1,19 +1,39 @@
 {
   "name": "pssgrs",
   "private": true,
+  "scripts": {
+    "lint": "vue-cli-service lint",
+    "webpack:analyze": "mkdir -p public/packs && node_modules/.bin/webpack --config config/webpack/production.js --profile --json > public/packs/stats.json && node_modules/.bin/webpack-bundle-analyzer public/packs/stats.json"
+  },
   "dependencies": {
+    "@babel/preset-typescript": "^7.12.7",
     "@rails/webpacker": "https://github.com/rails/webpacker.git",
+    "babel-preset-typescript-vue": "^1.1.1",
     "core-js": "^3.7.0",
     "regenerator-runtime": "^0.13.7",
+    "typescript": "^4.1.2",
     "vue": "^2.6.12",
     "vue-loader": "^15.9.5",
     "vue-template-compiler": "^2.6.12"
   },
   "devDependencies": {
+    "@mapbox/stylelint-processor-arbitrary-tags": "^0.3.0",
+    "@typescript-eslint/eslint-plugin": "^4.8.1",
+    "@typescript-eslint/parser": "^4.8.1",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/eslint-config-airbnb": "^5.0.2",
     "@webpack-cli/serve": "^1.1.0",
     "css-loader": "^5.0.1",
+    "eslint": "^6.7.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-vue": "^6.2.2",
+    "fork-ts-checker-webpack-plugin": "^6.0.3",
     "postcss": "^8.1.8",
     "postcss-loader": "^4.1.0",
+    "stylelint": "^13.8.0",
+    "stylelint-config-recess-order": "^2.3.0",
+    "stylelint-config-standard": "^20.0.0",
+    "webpack-bundle-analyzer": "^4.1.0",
     "webpack-dev-server": "^3.11.0"
   },
   "babel": {
