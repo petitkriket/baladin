@@ -21,7 +21,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=<%= Rails.application.credentials.dig(Rails.env.to_sym, :google, :gmaps_js_api_key) %>"></script>
     <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= include_gon %>
+    <%= include_gon nonce: content_security_policy_nonce %>
     <%= javascript_include_tag 'application' %>
     <%= javascript_include_tag "jquery.validate.localization/messages_#{I18n.locale}" %>
     <%= csrf_meta_tags %>
