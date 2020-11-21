@@ -11,12 +11,17 @@
     "vue-template-compiler": "^2.6.12"
   },
   "devDependencies": {
+    "@mapbox/stylelint-processor-arbitrary-tags": "^0.3.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "^4.5.9",
     "@vue/eslint-config-airbnb": "^5.0.2",
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-vue": "^6.2.2",
+    "stylelint": "^13.8.0",
+    "stylelint-config-recess-order": "^2.3.0",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-webpack-plugin": "^2.1.1",
     "webpack-dev-server": "^3.11.0"
   }
 }
