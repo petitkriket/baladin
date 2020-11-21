@@ -53,6 +53,7 @@ gem 'rails_admin', '~> 2.0'
 gem 'rails_admin_rollincode', '~> 1.0'
 gem 'rails-i18n', '~> 5.1'
 gem 'sentry-raven'
+gem 'webpacker', git: 'https://github.com/rails/webpacker.git'
 
 # To be deleted
 gem 'bootstrap-growl-rails'

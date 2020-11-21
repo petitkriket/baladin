@@ -1,5 +1,27 @@
 {
   "name": "pssgrs",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "@rails/webpacker": "https://github.com/rails/webpacker.git",
+    "core-js": "^3.7.0",
+    "regenerator-runtime": "^0.13.7",
+    "vue": "^2.6.12",
+    "vue-loader": "^15.9.5",
+    "vue-template-compiler": "^2.6.12"
+  },
+  "devDependencies": {
+    "@webpack-cli/serve": "^1.1.0",
+    "css-loader": "^5.0.1",
+    "postcss": "^8.1.8",
+    "postcss-loader": "^4.1.0",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "babel": {
+    "presets": [
+      "./node_modules/@rails/webpacker/package/babel/preset.js"
+    ]
+  },
+  "browserslist": [
+    "defaults"
+  ]
 }
