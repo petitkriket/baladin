@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require rails-ujs
-//= require bootstrap
 //= require leaflet
 //= require leaflet.markercluster
 //= require gmaps-auto-complete

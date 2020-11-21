@@ -82,3 +82,19 @@ $ git filter-branch --index-filter "git rm -rf --cached --ignore-unmatch path_to
 - [Help 2](hthttps://adamnaamani.com/jwt-authentication-with-warden-and-devise/)
 - [Help 3](https://medium.com/@mazik.wyry/rails-5-api-jwt-setup-in-minutes-using-devise-71670fd4ed03)
 - [302 redirect](https://groups.google.com/g/plataformatec-devise/c/XUkVIqq2Rgc)
+
+## Vue3 and tooling
+
+- [BLOCKER HEROKU](https://stackoverflow.com/a/58631557/3468846)
+- [BLOCKER HMR](https://github.com/rails/rails/issues/31754#issuecomment-359281145)
+- [vue3](https://dev.to/vannsl/vue3-on-rails-l9d)
+- [bunldle analyzer](https://razorjack.net/visualizing-optimizing-javascript-bundle-size-rails-webpacker/)
+- [stylelint](https://medium.com/haiiro-io/stylelint-b67ab2b8e690)
+- [storybook pr](https://github.com/liip/chusho/pull/54)
+- [other libs](https://github.com/vuejs/awesome-vue/issues/3544)
+
+```bash
+$ rails s
+$ ./bin/webpack-dev-server
+$ yarn run webpack:analyze
+```
