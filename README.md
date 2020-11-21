@@ -33,11 +33,12 @@ $ psql -U postgres
 $ rake db:setup
 ```
 
-Start the app API and Webpack
+Start API, frontend and storybook
 
 ```shell
 $ rails s
 $ ./bin/webpack-dev-server
+$ yarn storybook
 ```
 
 Contributing
