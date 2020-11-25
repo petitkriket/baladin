@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <p>{{ message }}</p>
+    <BaseMap />
   </div>
 </template>
 
 <script>
+import BaseMap from '@/components/BaseMap.vue';
+
 export default {
-  data() {
-    return {
-      message: 'Hello Vue!',
-    };
+  components: {
+    BaseMap,
   },
 };
 </script>
