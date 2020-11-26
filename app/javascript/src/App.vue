@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
+      <TheLocaleSwitcher />
       <router-link to="/">
         Home
       </router-link> |
@@ -13,6 +14,11 @@
 </template>
 
 <script>
+import TheLocaleSwitcher from '@/components/TheLocaleSwitcher.vue';
 
-export default {};
+export default {
+  components: {
+    TheLocaleSwitcher,
+  },
+};
 </script>

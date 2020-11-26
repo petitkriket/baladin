@@ -1,5 +1,8 @@
 <template>
   <div class="home">
+    <h1>
+      {{ $t('project_title') }}
+    </h1>
     <BaseMap />
   </div>
 </template>
@@ -13,3 +16,8 @@ export default {
   },
 };
 </script>
+<style>
+.home {
+  padding-top: 10px;
+}
+</style>
