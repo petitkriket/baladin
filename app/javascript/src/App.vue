@@ -1,22 +1,24 @@
 <template>
   <div id="app">
-    <p>{{ message }}</p>
+    <div id="nav">
+      <TheLocaleSwitcher />
+      <router-link to="/">
+        Home
+      </router-link> |
+      <router-link to="/about">
+        About
+      </router-link>
+    </div>
+    <router-view />
   </div>
 </template>
 
 <script>
+import TheLocaleSwitcher from '@/components/TheLocaleSwitcher.vue';
+
 export default {
-  data() {
-    return {
-      message: 'Hello Vue!',
-    };
+  components: {
+    TheLocaleSwitcher,
   },
 };
 </script>
-
-<style scoped>
-p {
-  font-size: 2em;
-  text-align: center;
-}
-</style>
