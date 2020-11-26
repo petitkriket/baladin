@@ -16,7 +16,6 @@ Rails.application.routes.draw do
     get ':shortcut' => redirect('/users/sign_up?t=%{shortcut}'), constraints: ->(request) { Passenger.where(shortcut: request[:shortcut]).any? }, id: :shortcut
     get 'a9' => redirect('/users/sign_up?t=a9')
   end
-  get '/:locale' => 'passengers#index', :as => 'locale_root'
 
   # Rails API
   namespace :api, defaults: { format: :json } do
