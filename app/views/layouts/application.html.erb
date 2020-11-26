@@ -23,7 +23,8 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= include_gon nonce: content_security_policy_nonce %>
     <%= javascript_include_tag 'application' %>
-    <%= javascript_include_tag "jquery.validate.localization/messages_#{I18n.locale}" %>
+    <%= javascript_include_tag "jquery.validate.localization/messages_en" %>
+    <%= javascript_include_tag "jquery.validate.localization/messages_fr" %>
     <%= csrf_meta_tags %>
   </head>
   <% if Rails.env.production? %>

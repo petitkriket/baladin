@@ -93,6 +93,11 @@ $ git filter-branch --index-filter "git rm -rf --cached --ignore-unmatch path_to
 - [storybook pr](https://github.com/liip/chusho/pull/54)
 - [other libs](https://github.com/vuejs/awesome-vue/issues/3544)
 
+## Common packages
+
+- [vue-i18n advanced patterns](https://blog.logrocket.com/advanced-localization-techniques-vue-js/)
+- [vuex store using constants](https://medium.com/@rijk/make-your-vuex-mutation-names-friendly-7e4b53597cd0)
+
 ```bash
 $ rails s
 $ ./bin/webpack-dev-server

@@ -1,19 +1,19 @@
 module.exports = {
   root: true,
   env: {
-    node: true
+    node: true,
   },
-  'extends': [
+  extends: [
     'plugin:vue/recommended',
     '@vue/airbnb',
     'plugin:import/errors',
     'plugin:import/warnings',
   ],
   parserOptions: {
-    ecmaVersion: 2020
+    ecmaVersion: 2020,
   },
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
-  }
-}
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+  },
+};
