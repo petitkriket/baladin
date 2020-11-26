@@ -3,7 +3,9 @@ import App from '@/App.vue';
 import i18n from '@/i18n';
 import router from '@/router/index';
 import store from '@/store/index';
-import 'vue-select/dist/vue-select.css';
+
+const requireConfig = require.context('@/config', true, /\.js$/);
+requireConfig.keys().forEach(requireConfig);
 
 Vue.config.productionTip = false;
 

@@ -1,3 +1,6 @@
 {
-  "project_title": "The Passengers"
+  "project_title": "The Passengers",
+  "about": {
+    "title": "About"
+  }
 }

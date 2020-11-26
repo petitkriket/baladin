@@ -1,22 +1,16 @@
 <template>
-  <div>
-    <v-select
-      :options="availableLocales"
-      :value="currentLocale"
-      :clearable="false"
-      transition="none"
-      @input="changeLocale"
-    />
-  </div>
+  <v-select
+    id="select_locale"
+    :options="availableLocales"
+    :value="currentLocale"
+    :clearable="false"
+    transition=""
+    @input="changeLocale"
+  />
 </template>
 
 <script>
-import vSelect from 'vue-select';
-
 export default {
-  components: {
-    vSelect,
-  },
   computed: {
     currentLocale() {
       return this.locales.find((locale) => (locale.code === this.$i18n.locale));
@@ -27,7 +21,7 @@ export default {
     locales() {
       return [
         { label: 'English', code: 'en' },
-        { label: 'Francais', code: 'fr' },
+        { label: 'Français', code: 'fr' },
       ];
     },
   },
@@ -38,3 +32,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.v-select * {
+  cursor: pointer;
+}
+</style>

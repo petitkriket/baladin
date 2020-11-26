@@ -1,3 +1,6 @@
 {
-  "project_title": "Les Passagers"
+  "project_title": "Les Passagers",
+  "about": {
+    "title": "À propos"
+  }
 }

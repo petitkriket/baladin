@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # Vue frontend
-  get '/v3', to: 'home#index'
-
   # Tools
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
@@ -39,4 +36,8 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  # Vue frontend
+  get '/v3', to: 'home#index'
+  get '/v3/*path', to: 'home#index', format: false
 end
