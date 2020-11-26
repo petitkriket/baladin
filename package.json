@@ -3,8 +3,8 @@
   "private": true,
   "scripts": {
     "lint": "vue-cli-service lint",
-    "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
+    "storybook": "start-storybook -p 6006",
     "webpack:analyze": "mkdir -p public/packs && node_modules/.bin/webpack --config config/webpack/production.js --profile --json > public/packs/stats.json && node_modules/.bin/webpack-bundle-analyzer public/packs/stats.json"
   },
   "dependencies": {
@@ -12,6 +12,7 @@
     "axios": "^0.21.0",
     "vue": "^2.6.12",
     "vue-loader": "^15.9.5",
+    "vue-router": "^3.2.0",
     "vue-template-compiler": "^2.6.12",
     "vuex": "^3.5.1"
   },
@@ -23,6 +24,7 @@
     "@storybook/addon-links": "^6.1.2",
     "@storybook/vue": "^6.1.2",
     "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-service": "^4.5.9",
     "@vue/eslint-config-airbnb": "^5.0.2",
     "babel-loader": "^8.2.1",

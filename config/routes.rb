@@ -1,10 +1,15 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  # Vue frontend
   get '/v3', to: 'home#index'
+  get '/v3/*path', to: 'home#index', format: false
+
+  # Tools
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
+  # Legacy Rails frontend
   scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
     root to: 'passengers#index'
     resources :events
@@ -17,6 +22,7 @@ Rails.application.routes.draw do
   end
   get '/:locale' => 'passengers#index', :as => 'locale_root'
 
+  # Rails API
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :events, only: [:create]

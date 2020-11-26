@@ -1,22 +1,18 @@
 <template>
   <div id="app">
-    <BaseMap />
+    <div id="nav">
+      <router-link to="/">
+        Home
+      </router-link> |
+      <router-link to="/about">
+        About
+      </router-link>
+    </div>
+    <router-view />
   </div>
 </template>
 
 <script>
-import BaseMap from '@/components/BaseMap.vue';
 
-export default {
-  components: {
-    BaseMap,
-  },
-};
+export default {};
 </script>
-
-<style scoped>
-p {
-  font-size: 2em;
-  text-align: center;
-}
-</style>
