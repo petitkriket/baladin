@@ -14,4 +14,6 @@ const customConfig = {
 environment.config.merge(customConfig);
 environment.plugins.prepend('VueLoaderPlugin', new VueLoaderPlugin());
 environment.loaders.prepend('vue', vue);
+environment.loaders.delete('nodeModules');
+
 module.exports = environment;

@@ -4,7 +4,7 @@ class Passenger < ApplicationRecord
 
   # relations
   has_many :events, dependent: :destroy
-  has_one :last_validated_event, -> { order(created_at: :desc).where(published: true) }, class_name: 'Event'
+  has_one :last_validated_event, -> { order(id: :desc).where(published: true) }, class_name: 'Event'
 
   # validations
   validates :shortcut, uniqueness: true

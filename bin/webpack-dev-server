@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 
+require_relative '../config/application'
+Rails.application.initialize!
+
 ENV["RAILS_ENV"] ||= ENV["RACK_ENV"] || "development"
 ENV["NODE_ENV"]  ||= "development"
 
