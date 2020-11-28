@@ -1,12 +1,8 @@
-import * as GETTERS_TYPES from './getters-types';
+export const ARTWORKS_CURRENT_EVENTS = 'ARTWORKS_CURRENT_EVENTS';
 
-// eslint-disable-next-line import/prefer-default-export
 export const getters = {
-  [GETTERS_TYPES.ARTWORKS_CURRENT_EVENTS]: (state) => state.list.map((artwork) => {
-    const { latitude, longitude } = artwork;
-    if (latitude && longitude) {
-      return { latitude, longitude };
-    }
-    return null;
-  }),
+  [ARTWORKS_CURRENT_EVENTS]: (state) => state.artworks.map((artwork) => ({
+    ...artwork.last_validated_event,
+    currentPosition: true,
+  })),
 };

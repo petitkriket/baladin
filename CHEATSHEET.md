@@ -103,3 +103,8 @@ $ rails s
 $ ./bin/webpack-dev-server
 $ yarn run webpack:analyze
 ```
+
+### Mapbox + Leaflet
+- [use mapbox tile with vue2leaflet](https://gist.github.com/timwis/eb2c7824bc8dca1727bd1bd96ecf24f0)
+- [csp rules](https://github.com/mapbox/mapbox-gl-js/issues/4788#issuecomment-306467312)
+-   [weird js error](https://github.com/mapbox/mapbox-gl-js/issues/3422#issuecomment-577293154)

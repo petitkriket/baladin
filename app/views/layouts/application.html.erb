@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="<%= I18n.locale %>">
   <head>
+    <% if Rails.env.staging? %>
+      <meta name="robots" content="noindex" />
+    <% end %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <% metamagic site: t('site_title'), title: [:title, :site], separator: " | " %>
     <%= metamagic %>
