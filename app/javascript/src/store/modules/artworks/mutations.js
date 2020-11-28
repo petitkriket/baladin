@@ -1,8 +1,16 @@
-import * as MUTATIONS_TYPES from './mutations-types';
+export const SET_ARTWORKS = 'SET_ARTWORKS';
+export const ADD_ARTWORK_EVENTS = 'ADD_ARTWORK_EVENTS';
+export const UPDATE_ARTWORK_EVENTS = 'UPDATE_ARTWORK_EVENTS';
 
-// eslint-disable-next-line import/prefer-default-export
 export const mutations = {
-  [MUTATIONS_TYPES.SET_ARTWORKS](state, payload) {
-    state.list = payload;
+  [SET_ARTWORKS](state, payload) {
+    state.artworks = payload;
+  },
+  [ADD_ARTWORK_EVENTS](state, payload) {
+    state.events = [...state.events, payload];
+  },
+  [UPDATE_ARTWORK_EVENTS](state, payload) {
+    const index = state.events.findIndex((event) => (event.id === payload.id));
+    state.events.splice(index, 1, payload);
   },
 };

@@ -7,9 +7,10 @@ module Api
       before_action :check_admin, only: %i[create update destroy]
 
       def index
-        @passengers = Passenger.all
-                               .where.not(events: { id: nil })
+        @passengers = Passenger.left_joins(:events)
+                               .where.not(events: { id: nil, published: [nil, false] })
                                .includes(last_validated_event: [:user])
+                               .uniq
         render json: @passengers
       end
 

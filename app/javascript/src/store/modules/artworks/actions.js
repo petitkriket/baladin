@@ -1,16 +1,17 @@
 import axios from 'axios';
-import * as MUTATIONS_TYPES from './mutations-types';
-import * as ACTIONS_TYPES from './actions-types';
+import { SET_ARTWORKS, ADD_ARTWORK_EVENTS, UPDATE_ARTWORK_EVENTS } from './mutations';
 import { setErrorServer } from '../../utils';
 
-// eslint-disable-next-line import/prefer-default-export
+export const FETCH_ARTWORKS = 'FETCH_ARTWORKS';
+export const FETCH_ARTWORK_EVENTS = 'FETCH_ARTWORK_EVENTS';
+
 export const actions = {
-  [ACTIONS_TYPES.FETCH_ARTWORKS]({ commit }) {
+  [FETCH_ARTWORKS]({ commit }) {
     return new Promise((resolve, reject) => {
       const url = '/api/v1/passengers/';
       axios.get(url)
         .then((response) => {
-          commit(MUTATIONS_TYPES.SET_ARTWORKS, response.data);
+          commit(SET_ARTWORKS, response.data);
           resolve(response.data);
         }).catch((error) => {
           reject(setErrorServer(error));
@@ -18,4 +19,22 @@ export const actions = {
     });
   },
 
+  [FETCH_ARTWORK_EVENTS]({ commit, state }, artwork) {
+    return new Promise((resolve, reject) => {
+      const url = `/api/v1/passengers/${artwork.id}/events`;
+      const alreadyPresent = state.events.find((event) => (event.id === artwork.id));
+      axios.get(url)
+        .then((response) => {
+          const payload = { id: artwork.id, events: [...response.data] };
+          if (alreadyPresent) {
+            commit(UPDATE_ARTWORK_EVENTS, payload);
+          } else {
+            commit(ADD_ARTWORK_EVENTS, payload);
+          }
+          resolve(payload);
+        }).catch((error) => {
+          reject(setErrorServer(error));
+        });
+    });
+  },
 };
