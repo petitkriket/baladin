@@ -3,7 +3,7 @@ class Passenger < ApplicationRecord
   friendly_id :name, use: :slugged
 
   # relations
-  has_many :events, dependent: :destroy
+  has_many :events, -> { order(created_at: :asc)}, dependent: :destroy
   has_one :last_validated_event, -> { order(id: :desc).where(published: true) }, class_name: 'Event'
 
   # validations
