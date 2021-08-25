@@ -12,7 +12,7 @@
       </svg>
     </template>
 
-    <BDropdownItem
+s    <BDropdownItem
       v-for="{ code, label } in filteredLocales"
       :key="code"
       @click="onLocaleSelection(code)"
