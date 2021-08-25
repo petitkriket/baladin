@@ -1,33 +1,42 @@
 <template>
-  <v-select
-    id="select_locale"
-    :options="filteredLocales"
-    :value="currentLocale"
-    :clearable="false"
-    transition=""
-    @input="changeLocale"
-  />
+  <BNavItemDropdown
+    :text="$t('navbar.language')"
+    right
+  >
+    <BDropdownItem
+      v-for="{ code, label } in filteredLocales"
+      :key="code"
+      @click="onLocaleSelection(code)"
+    >
+      {{ label }}
+    </BDropdownItem>
+  </BNavItemDropdown>
 </template>
 
 <script>
-import { UPDATE_LOCALE } from '@/store/modules/user/actions-types';
 import { mapActions, mapState } from 'vuex';
+import { BNavItemDropdown, BDropdownItem } from 'bootstrap-vue';
+
+import { UPDATE_LOCALE } from '../store/modules/user/actions-types';
 
 export default {
+  components: {
+    BNavItemDropdown,
+    BDropdownItem,
+  },
   computed: {
-    ...mapState(['user', ['settings'],
-    ]),
+    ...mapState(['user', ['settings']]),
     currentLocale() {
-      return this.locales.find((locale) => (locale.code === this.user.settings.locale));
+      return this.localeOptions.find((locale) => (locale.code === this.user.settings.locale));
     },
     filteredLocales() {
-      return this.locales.filter((locale) => (locale.code !== this.user.settings.locale));
+      return this.localeOptions.filter((locale) => (locale.code !== this.user.settings.locale));
     },
-    locales() {
-      return [
-        { label: 'English', code: 'en' },
-        { label: 'Français', code: 'fr' },
-      ];
+    localeOptions() {
+      return this.$i18n.availableLocales.map((locale) => ({
+        label: locale.toUpperCase(),
+        code: locale,
+      }));
     },
   },
   created() {
@@ -38,15 +47,9 @@ export default {
   },
   methods: {
     ...mapActions('user', [UPDATE_LOCALE]),
-    changeLocale(locale) {
-      this[UPDATE_LOCALE](locale.code);
+    onLocaleSelection(localeCode) {
+      this[UPDATE_LOCALE](localeCode);
     },
   },
 };
 </script>
-
-<style>
-.v-select * {
-  cursor: pointer;
-}
-</style>

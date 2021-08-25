@@ -27,20 +27,36 @@
         :markers="historyMarkers"
         clustered
       />
+
+      <l-control position="bottomright">
+        <BButton
+          class="m-2"
+          variant="outline-info"
+          size="md"
+          pill
+          @click="findNearestContribution"
+        >
+          {{ $t('authentificationPage.findClosestArtwork') }}
+        </BButton>
+      </l-control>
     </l-map>
   </div>
 </template>
 
 <script>
 import { mapMutations, mapState } from 'vuex';
-import { LMap, LTileLayer } from 'vue2-leaflet';
+import { LMap, LTileLayer, LControl } from 'vue2-leaflet';
 import L from 'leaflet';
 import 'leaflet-swoopy';
 import 'leaflet.smoothwheelzoom';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl-leaflet';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import {
+  BButton,
+} from 'bootstrap-vue';
 import BaseMapContainerGroup from './BaseMapContainerGroup.vue';
+import findNearestContributionMixin from '../mixins/find-nearest-contribution';
 
 const accessToken = process.env.MAPBOX_TOKEN;
 window.mapboxgl = mapboxgl;
@@ -48,9 +64,12 @@ window.mapboxgl = mapboxgl;
 export default {
   components: {
     LMap,
+    LControl,
     LTileLayer,
     BaseMapContainerGroup,
+    BButton,
   },
+  mixins: [findNearestContributionMixin],
   props: {
     lastPositionMarkers: {
       type: Array,
@@ -97,7 +116,7 @@ export default {
     },
     mapStyle() {
       return {
-        height: '80vh',
+        height: 'calc(100vh - 41px)',
         width: '100%',
       };
     },
@@ -150,6 +169,9 @@ export default {
           factor: 0.8,
         }).addTo(this.map);
       });
+    },
+    onFindNearestClick() {
+      console.log('hello!');
     },
   },
 };

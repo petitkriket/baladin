@@ -1,8 +1,11 @@
 import Vue from 'vue';
-import App from '@/App.vue';
-import i18n from '@/plugins/i18n';
-import router from '@/router/index';
-import store from '@/store/index';
+
+import i18n from './plugins/i18n';
+import router from './router/index';
+import store from './store/index';
+import './theme.scss';
+
+import App from './App.vue';
 
 const requireConfig = require.context('@/plugins', true, /\.js$/);
 requireConfig.keys().forEach(requireConfig);
