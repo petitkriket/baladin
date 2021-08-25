@@ -1,16 +1,12 @@
 # frozen_string_literal: true
 
 CarrierWave.configure do |config|
+  if Rails.env.test?
 
-  # Use local storage if in development or test
-  if Rails.env.development? || Rails.env.test?
     CarrierWave.configure do |config|
       config.storage = :file
     end
-  end
 
-  # Specific folders to clean later using after(:each) spec_helper
-  if Rails.env.test?
     Dir["#{Rails.root}/app/uploaders/*.rb"].sort.each { |file| require file }
 
     CarrierWave::Uploader::Base.descendants.each do |klass|
@@ -28,8 +24,7 @@ CarrierWave.configure do |config|
     end
   end
 
-  # Use AWS storage if in production
-  if Rails.env.production? || Rails.env.staging?
+  if Rails.env.development? || Rails.env.production? || Rails.env.staging?
     config.fog_provider = 'fog/aws'
     config.fog_credentials = {
       provider: 'AWS',
@@ -37,8 +32,8 @@ CarrierWave.configure do |config|
       aws_secret_access_key: Rails.application.credentials.dig(Rails.env.to_sym, :aws, :secret_access_key),
       region: Rails.application.credentials.dig(Rails.env.to_sym, :aws, :s3_region)
     }
-    config.fog_directory  = Rails.application.credentials.dig(Rails.env.to_sym, :aws, :s3_bucket)
-    config.fog_public     = false
+    config.fog_directory = Rails.application.credentials.dig(Rails.env.to_sym, :aws, :s3_bucket)
+    config.fog_public = false
 
     CarrierWave.configure do |config|
       config.storage = :fog

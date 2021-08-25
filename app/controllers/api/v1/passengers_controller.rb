@@ -4,10 +4,11 @@ module Api
   module V1
     class PassengersController < ApiController
       before_action :set_passenger, only: %i[show update destroy]
-      before_action :check_admin, only: %i[create update destroy]
+      before_action :is_user_admin?, only: %i[create update destroy]
 
       def index
         @passengers = Passenger.left_joins(:events)
+                               .order(:id)
                                .where.not(events: { id: nil, published: [nil, false] })
                                .includes(last_validated_event: [:user])
                                .uniq

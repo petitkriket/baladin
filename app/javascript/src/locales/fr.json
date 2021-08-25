@@ -1,6 +1,85 @@
 {
-  "project_title": "Les Passagers",
-  "about": {
-    "title": "À propos"
+  "projectTitle": "Les Passagers",
+  "navbar": {
+    "about": "À propos",
+    "objects": "Objets",
+    "contributions": "Contributions",
+    "goBack": " Revenir à l'accueil",
+    "accountSettings": "Paramètres du compte",
+    "language": "Langue",
+    "signIn": "Se connecter",
+    "signOut": "Se déconnecter",
+    "menu": "Menu"
+  },
+  "homePage": {
+    "home": "Accueil"
+  },
+  "aboutPage": {
+    "about": "A Propos",
+    "photoCredit": "Crédit :",
+    "firstParagraph": "Les Passagers sont des objets spécifiques nomades transmis de la main à la main et dont le parcours est traçable sur internet. De petites tailles, pensés pour inviter à la préhension, ce sont des pièces uniques sculptées manuellement en bois et en résine. Leurs formes s’inspirent à la fois des bifaces du paléolithique, des premières statuettes anthropomorphes et de l’esthétique contemporaine de nos smart-objects.",
+    "secondParagraph": "Mis à jour et rendus public par les participants eux-mêmes grâce à une adresse internet gravée sur chaque Passager, leurs actualités respectives (situation géographique et identité du détenteur) sont consultables sur cette plateforme. Via cette plateforme toute personne le souhaitant peut accueillir le Passager de son choix en prenant contact avec son détenteur actuel et ainsi participer à sa transmission.",
+    "projectCredit": "Les Passagers est une œuvre de François Maurin.",
+    "publications": "Publications :",
+    "groupExhibitions": "Expositions collectives :",
+    "contact": "Contact",
+    "colophon": "Colophon"
+  },
+  "artworksPage": {
+    "objects": "Objets",
+    "name": "Passager n°{n}"
+  },
+  "authentificationPage": {
+    "signIn": "Se connecter",
+    "howToParticipate": "Comment participer ?",
+    "askSomeone": "Demandez a une personne en possession d'un Passager de vous le preter et fixez un rendez vous pour le récupérer.",
+    "findClosestArtwork": "Trouver le Passeger le plus proche de vous",
+    "alreadyRegistered": "Déjà inscrit ?",
+    "reservedToParticipants": "Espace réservé aux personnes ayant déjà accueilli un Passager.",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "forgottenPassword": "Mot de passe oublié ?"
+  },
+  "contributionsPage": {
+    "yourContributions": "Votre contribution | Vos contributions",
+    "edition": "Edition..",
+    "name": "Passager n°{n}",
+    "localisation": "Localisation:",
+    "registredAt": "Registré le:",
+    "edit": "Edit",
+    "pendingValidation": "Votre contribution est en attente de validation"
+  },
+  "contributionEditPage": {
+    "title": "Contribution au voyage du passager #{n}",
+    "location": "Lieu",
+    "locationPlaceholder": "Une addresse ou un lieu",
+    "locationHelp": "La position où sera localisé le Passager sur la carte du site pendant votre accueil.",
+    "photo": "Photo du Passager",
+    "photoHelp": "Elle apparaitra sur le site, sous Licence Creative Commons CC-BY-NC-SA",
+    "save": "Enregistrer",
+    "cancel": "Annuler"
+  },
+  "accountSettingsPage": {
+    "accountSettings": "Paramètres du compte",
+    "email": "E-mail",
+    "name": "Nom",
+    "nameHelp": "Visible sur le site",
+    "emailHelp": "Addresse e-mail utilisé pour vous contacter.",
+    "emailHelp2": "Elle ne sera jamais rendue publique ni partagée a des tierce parties.",
+    "editPassword": "Modifier le mot de passe",
+    "password": "Mot de passe",
+    "passwordConfirmation": "Confirmation du mot de passe",
+    "language": "Langue",
+    "preferedLanguage": "Langue préférée pour le site et les courriels que vous recevrez de notre part.",
+    "save": "Enregistrer",
+    "deleteAccount": "Supprimer mon compte",
+    "deleteAccountWarning": "Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est définitive.",
+    "confirmDelete": "Supprimer",
+    "cancelDelete": "Annuler"
+  },
+  "introductionModal": {
+    "firstParagraph": "Les Passagers sont des œuvres d’arts nomades. Transmis sans contre partie d’une personne à une autre, ces objets se déplacent à travers le monde.",
+    "secondParagraph": "Ce site rend compte de leur situation actuelle, de l’historique de leur parcours et permet de prendre part à leur transmission.",
+    "confirm": "Voir Les passagers"
   }
 }

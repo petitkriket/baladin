@@ -1,24 +1,46 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <TheLocaleSwitcher />
-      <router-link to="/">
-        Home
-      </router-link> |
-      <router-link to="/about">
-        About
-      </router-link>
-    </div>
-    <router-view />
+    <TheNavigationBar />
+    <TheMain />
+    <TheIntroductionModal
+      ref="modalComponent"
+      @consent="setVisitCookie"
+    />
   </div>
 </template>
 
 <script>
-import TheLocaleSwitcher from '@/components/TheLocaleSwitcher.vue';
+import TheNavigationBar from './components/TheNavigationBar.vue';
+import TheMain from './components/TheMain.vue';
+import TheIntroductionModal from './components/TheIntroductionModal.vue';
 
 export default {
+  name: 'App',
+  metaInfo() {
+    return {
+      titleTemplate: `%s | ${this.$t('projectTitle')}`,
+      title: '',
+    };
+  },
   components: {
-    TheLocaleSwitcher,
+    TheNavigationBar,
+    TheMain,
+    TheIntroductionModal,
+  },
+  mounted() {
+    this.checkForVisitCookie();
+  },
+  methods: {
+    checkForVisitCookie() {
+      const isFirstVisit = !this.$cookies.isKey('visited');
+      if (isFirstVisit) this.showIntroductionModal();
+    },
+    showIntroductionModal() {
+      this.$refs.modalComponent.openModal();
+    },
+    setVisitCookie() {
+      this.$cookies.set('visited', 'true', '1d');
+    },
   },
 };
 </script>

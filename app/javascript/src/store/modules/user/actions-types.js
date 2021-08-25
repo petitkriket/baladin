@@ -1,2 +1,7 @@
-// eslint-disable-next-line import/prefer-default-export
+export const SIGN_IN = 'SIGN_IN';
+export const SIGN_OUT = 'SIGN_OUT';
 export const UPDATE_LOCALE = 'UPDATE_LOCALE';
+export const UPDATE_USER_ACCOUNT = 'UPDATE_USER_ACCOUNT';
+export const DELETE_USER_ACCOUNT = 'DELETE_USER_ACCOUNT';
+export const FETCH_USER_CONTRIBUTIONS = 'FETCH_USER_CONTRIBUTIONS';
+export const UPDATE_USER_CONTRIBUTION = 'UPDATE_USER_CONTRIBUTION';

@@ -7,8 +7,12 @@ class ApiController < ActionController::Base
 
   private
 
-  def check_admin
+  def is_user_admin?
     render json: { error: 'Unauthorized' }, status: 403 unless user_signed_in? && current_user.admin?
+  end
+
+  def is_user_signed_in?
+    render json: { error: 'Unauthorized' }, status: 403 unless user_signed_in?
   end
 
   def set_raven_context
