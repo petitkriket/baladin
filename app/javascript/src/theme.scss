@@ -15,11 +15,10 @@ $font-size-sm: $font-size-base * 0.9;
 $body-bg: $gray-100;
 $enable-rounded: false;
 
-$navbar-padding-y: 0.35rem;
 $navbar-brand-font-size: $font-size-base * 1;
-
-$navbar-nav-link-padding-x: 1.25rem;
-$nav-link-padding-y: 0;
+$navbar-padding-y: 0;
+$navbar-nav-link-padding-x: 0.75rem;
+$nav-link-padding-y: 0.35rem;
 
 $navbar-light-color: rgba($blue, 1);
 $navbar-light-hover-color: desaturate(lighten($blue, 25), 50);

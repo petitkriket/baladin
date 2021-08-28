@@ -1,10 +1,13 @@
 <template>
   <BRow>
-    <b-col cols="12">
+    <BCol>
       <h1 class="py-4">
         {{ $t('artworksPage.objects') }}
       </h1>
-    </b-col>
+    </BCol>
+
+    <div class="w-100" />
+
     <BCol
       v-for="artwork in artworks.artworks"
       :key="artwork.id"

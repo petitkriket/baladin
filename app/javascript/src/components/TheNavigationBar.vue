@@ -86,6 +86,17 @@
             >
               {{ $t('navbar.signIn') }}
             </BNavItem>
+
+            <BNavForm class="ml-lg-4">
+              <BButton
+                size="sm"
+                variant="primary"
+                pill
+                @click="findNearestContribution"
+              >
+                {{ $t('navbar.participate') }}
+              </BButton>
+            </BNavForm>
           </BNavbarNav>
         </template>
       </BNavbarNav>
@@ -96,12 +107,14 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import {
-  BNavbar, BNavbarNav, BNavbarBrand, BNavbarToggle, BNavItem, BNavText, BCollapse, BAvatar,
+  BNavbar, BNavbarNav, BNavbarBrand, BNavbarToggle, BNavItem, BNavText, BCollapse, BAvatar, BNavForm, BButton
 } from 'bootstrap-vue';
 
 import TheLocaleSwitcher from './TheLocaleSwitcher.vue';
 import { IS_AUTHENTIFIED } from '../store/modules/user/getters';
 import { SIGN_OUT } from '../store/modules/user/actions-types';
+
+import findNearestContributionMixin from '../mixins/find-nearest-contribution';
 
 export default {
   components: {
@@ -113,8 +126,11 @@ export default {
     BNavText,
     BCollapse,
     BAvatar,
+    BNavForm,
+    BButton,
     TheLocaleSwitcher,
   },
+  mixins: [findNearestContributionMixin],
   computed: {
     ...mapGetters('user', [
       IS_AUTHENTIFIED,
