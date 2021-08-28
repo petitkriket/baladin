@@ -21,10 +21,17 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :events, only: [:create]
+      resources :events do
+        collection do
+          get 'find'
+        end
+      end
+
       resources :passengers do
         resources :events
       end
       devise_scope :user do
+        get    '/contributions',to: 'events#contributions'
         post   '/signin',       to: 'sessions#create'
         delete '/signout',      to: 'sessions#destroy'
         post   '/signup',       to: 'registrations#create'

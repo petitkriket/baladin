@@ -4,7 +4,8 @@ module Api
   module V1
     class EventsController < ApiController
       before_action :set_event, only: %i[show update destroy]
-      before_action :check_admin, only: %i[destroy]
+      before_action :is_user_admin?, only: %i[destroy]
+      before_action :is_user_signed_in?, only: %i[contributions]
       before_action :check_owner, only: %i[update]
 
       def index
@@ -13,12 +14,30 @@ module Api
         render json: @events
       end
 
+      def contributions
+        contributions = Event.where(user_id: current_user.id)
+                              .includes([:passenger])
+        render json: contributions, each_serializer: ContributionSerializer
+      end
+
+      def find
+        nearest_events = Event.published
+                              .includes([:user])
+                              .joins(:passenger)
+                              .select("passengers.id, count(1) as count_all")
+                              .group("passengers.id, events.id")
+                              .order('count_all desc')
+                              .near([params[:latitude], params[:longitude]], params[:radius] || 50, units: params[:units] || :km)
+                              .limit(5)
+
+        render json: nearest_events
+      end
+
       def show
         render json: @event
       end
 
       def create
-        # creates an Event for a logged user, a visitor
         passenger = Passenger.find_by(passenger_params)
         user = User.find_by(user_params)
         event = if passenger && current_user
@@ -68,7 +87,7 @@ module Api
       end
 
       def event_params_update
-        params.require(:event).permit(:photo)
+        params.require(:event).permit(:photo, :address)
       end
 
       def check_owner

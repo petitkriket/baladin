@@ -1,4 +1,4 @@
-import axios from 'axios';
+import passengerService from '../../../api/models/passenger';
 import { SET_ARTWORKS, ADD_ARTWORK_EVENTS, UPDATE_ARTWORK_EVENTS } from './mutations';
 import { setErrorServer } from '../../utils';
 
@@ -8,8 +8,7 @@ export const FETCH_ARTWORK_EVENTS = 'FETCH_ARTWORK_EVENTS';
 export const actions = {
   [FETCH_ARTWORKS]({ commit }) {
     return new Promise((resolve, reject) => {
-      const url = '/api/v1/passengers/';
-      axios.get(url)
+      passengerService.getAll()
         .then((response) => {
           commit(SET_ARTWORKS, response.data);
           resolve(response.data);
@@ -21,9 +20,8 @@ export const actions = {
 
   [FETCH_ARTWORK_EVENTS]({ commit, state }, artwork) {
     return new Promise((resolve, reject) => {
-      const url = `/api/v1/passengers/${artwork.id}/events`;
       const alreadyPresent = state.events.find((event) => (event.id === artwork.id));
-      axios.get(url)
+      passengerService.getOneEvents(artwork.id)
         .then((response) => {
           const payload = { id: artwork.id, events: [...response.data] };
           if (alreadyPresent) {

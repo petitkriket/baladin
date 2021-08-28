@@ -15,9 +15,10 @@
 <script>
 import { LMarker, LPopup } from 'vue2-leaflet';
 import { icon } from 'leaflet';
-import mapMixin from '@/mixins/mapMixin';
-import iconHistory from '@/assets/images/circle-o.svg';
-import iconPresent from '@/assets/images/circle.svg';
+
+import mapMixin from '../mixins/mapMixin';
+import iconHistory from '../assets/images/circle-o.svg';
+import iconPresent from '../assets/images/circle.svg';
 
 export default {
   components: {
@@ -50,9 +51,9 @@ export default {
     },
   },
   methods: {
-    openPath(obj) {
-      if (obj.passenger_id && obj.currentPosition) {
-        this.$router.push({ path: `/passenger/${obj.passenger_id}` });
+    openPath(event) {
+      if (event.passengerId && event.currentPosition) {
+        this.$router.push({ path: `/passenger/${event.passengerId}` });
       }
     },
   },

@@ -1,52 +1,79 @@
 # Useful commands
 
+`$ rails s`
+`$ ./bin/webpack-dev-server`
+
 ## Env stuff
 
-$ rbenv version
-$ rbenv local 0.0.0
-$ rbenv global 0.0.0
-$ rbenv rehash
+```bash
+rbenv version
+rbenv local 0.0.0
+rbenv global 0.0.0
+rbenv rehash
+```
 
 ## Database stuff
 
+```bash
 $ rbenv exec rails db:create
 $ rbenv exec rails db:migrate
 $ rbenv exec rails db:drop
 $ rbenv exec rails db:seed
-$ rbenv exec rails s
+rbenv exec rails s
+```
 
 ## Updating a project
 
 update Rubygems
-$ gem update --system
+`$ gem update --system`
 
 update bundler
-$ gem install bundler
+`$ gem install bundler`
 
 update Gemfile.lock in your project
-$ bundler update --bundler
+`$ bundler update --bundler`
 
 ## Add or update gems
 
+```bash
 $ bundle update
 $ bundle update carrierwave
 $ bundle install # after adding gem to gemfile
+```
+
+## List app endpoints
+
+\$ rails routes
 
 ## Fetch a S3 bucket
 
+```bash
 $ brew install awscli
 $ aws configure
 $ aws s3 sync s3://bucket-name destination/folder
+```
+
+## Production to development
+
+1. Get database color (nickname)
+
+`$ heroku pg:info -a app-name`
+`$ heroku pg:pull DATABASE_COLOR pssgrs_development -a app-name`
 
 ## Production to staging
 
-1. Get database colors (here DATABASE_URL)
-$ heroku pg:info -a pssgrsv2
-$ heroku pg:info -a pssgrsv2-staging
+1. Get database color (nickname)
+   `$ heroku pg:info -a app-name`
+   `$ heroku pg:info -a app-name-staging`
 
 2. Copy first database to the other
-$ heroku pg:copy appname-production::WHITE_ORIGIN_URL GOLD_DEST_DATABASE_URL -a appname-staging
-$ heroku pg:copy pssgrsv2::DATABASE_URL DATABASE_URL -a pssgrsv2-staging --confirm pssgrsv2-staging
+   `$ heroku pg:copy appname-production::WHITE_ORIGIN_URL GOLD_DEST_DATABASE_URL -a appname-staging`
+   `$ heroku pg:copy app-name::DATABASE_URL DATABASE_URL -a app-name-staging --confirm app-name-staging`
+
+## AWS
+
+Copy items to another bucket
+`aws s3 sync s3://bucket-source s3://bucket-destination`
 
 ## Connect to an app shell
 
@@ -58,9 +85,10 @@ $ heroku run rails c -a pssgrsv2-pr-1)
 > c.send_confirmation_instructions
 ```
 
-## Remove secrets from git
+## Secrets
 
-$ git filter-branch --index-filter "git rm -rf --cached --ignore-unmatch path_to_file" HEAD
+Edit secrets : `bin/rails credentials:edit`
+Edit secrets on heroku : `$ heroku config:set SECRET_KEY_BASE=`
 
 ## Useful gems
 
@@ -71,7 +99,7 @@ $ git filter-branch --index-filter "git rm -rf --cached --ignore-unmatch path_to
 
 - [Setup](https://gist.github.com/sharvy/d63fbcb18489bef773b82c992583a972)
 - [Setup 2](https://bintlopez.gitbooks.io/rspec-wrangling/content/part-1/factory-bot-faker-setup.html)
-- [Sign in with Devise](https://github.com/heartcombo/devise/wiki/How-To:-sign-in-and-out-a-user-in-Request-type-specs-(specs-tagged-with-type:-:request))
+- [Sign in with Devise](<https://github.com/heartcombo/devise/wiki/How-To:-sign-in-and-out-a-user-in-Request-type-specs-(specs-tagged-with-type:-:request)>)
 - [Testing emails](https://www.lucascaton.com.br/2010/10/25/how-to-test-mailers-in-rails-with-rspec/)
 - [Emails and jobs](https://coderwall.com/p/xqcq7q/how-to-test-actionmailer-activejob-with-rspec)
 
@@ -100,11 +128,12 @@ $ git filter-branch --index-filter "git rm -rf --cached --ignore-unmatch path_to
 
 ```bash
 $ rails s
-$ ./bin/webpack-dev-server
-$ yarn run webpack:analyze
+./bin/webpack-dev-server
+yarn run webpack:analyze
 ```
 
 ### Mapbox + Leaflet
+
 - [use mapbox tile with vue2leaflet](https://gist.github.com/timwis/eb2c7824bc8dca1727bd1bd96ecf24f0)
 - [csp rules](https://github.com/mapbox/mapbox-gl-js/issues/4788#issuecomment-306467312)
--   [weird js error](https://github.com/mapbox/mapbox-gl-js/issues/3422#issuecomment-577293154)
+- [weird js error](https://github.com/mapbox/mapbox-gl-js/issues/3422#issuecomment-577293154)

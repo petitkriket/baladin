@@ -40,6 +40,7 @@ import 'leaflet.smoothwheelzoom';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl-leaflet';
 import 'mapbox-gl/dist/mapbox-gl.css';
+
 import BaseMapContainerGroup from './BaseMapContainerGroup.vue';
 
 const accessToken = process.env.MAPBOX_TOKEN;
@@ -97,7 +98,7 @@ export default {
     },
     mapStyle() {
       return {
-        height: '80vh',
+        height: 'calc(100vh - 41px)',
         width: '100%',
       };
     },
@@ -150,6 +151,9 @@ export default {
           factor: 0.8,
         }).addTo(this.map);
       });
+    },
+    onFindNearestClick() {
+      console.log('hello!');
     },
   },
 };

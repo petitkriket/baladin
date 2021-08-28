@@ -1,6 +1,86 @@
 {
-  "project_title": "The Passengers",
-  "about": {
-    "title": "About"
+  "projectTitle": "The Passengers",
+  "navbar": {
+    "about": "About",
+    "objects": "Objects",
+    "contributions": "Contributions",
+    "goBack": "Return home",
+    "accountSettings": "Account Settings",
+    "language": "Language",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "participate": "Participate",
+    "menu": "Menu"
+  },
+  "homePage": {
+    "home": "Home"
+  },
+  "aboutPage": {
+    "about": "About",
+    "photoCredit": "Credit:",
+    "firstParagraph": "Passengers are specific nomadic objects transmitted from hand to hand and whose journey can be traced on the internet. Small sizes, designed to invite you to grasp, these are unique pieces carved manually in wood and resin. Their shapes are inspired by both Paleolithic bifaces, the first anthropomorphic statuettes and the contemporary aesthetic of our smart-objects.",
+    "secondParagraph": "Updated and made public by the participants themselves thanks to an internet address engraved on each Passenger, their respective news (geographic location and identity of the holder) can be viewed on this platform. Via this platform, anyone wishing to do so can welcome the Passenger of their choice by contacting their current holder and thus participate in their transmission.",
+    "projectCredit": "The Passengers is a work by François Maurin.",
+    "publications": "Publications:",
+    "groupExhibitions": "Group exhibitions:",
+    "contact": "Contact",
+    "colophon": "Colophon"
+  },
+  "artworksPage": {
+    "objects": "Objects",
+    "name": "Passenger #{n}"
+  },
+  "authentificationPage": {
+    "signIn": "Sign In",
+    "howToParticipate": "How to participate?",
+    "askSomeone": "Ask a person in possession of a Passenger to lend it to you and make an appointment to collect it.",
+    "findClosestArtwork": "Find the Passenger closest to you",
+    "alreadyRegistered": "Already registred ?",
+    "reservedToParticipants": "Space reserved for people who have participated.",
+    "email": "E-mail",
+    "password": "Password",
+    "forgottenPassword": "Forgotten password?"
+  },
+  "contributionsPage": {
+    "yourContributions": "Your contribution | Your contributions",
+    "edition": "Editing..",
+    "name": "Passenger #{n}",
+    "localisation": "Localisation:",
+    "registredAt": "Registred at:",
+    "edit": "Edit",
+    "pendingValidation": "Your contribution is awaiting validation"
+  },
+  "contributionEditPage": {
+    "title": "Contribution to Passenger #{n} journey",
+    "location": "Location",
+    "locationPlaceholder": "An address or a distinctive place near your location",
+    "locationHelp": "The position where the Passenger will be located on the site map during your welcome.",
+    "photo": "Passenger photo",
+    "photoHelp": "It will appear on the site, under Creative Commons License CC-BY-NC-SA",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "accountSettingsPage": {
+    "accountSettings": "Account Settings",
+    "email": "E-mail",
+    "name": "Name",
+    "nameHelp": "Visible on the website",
+    "emailHelp": "Your e-mail address will be used to contact you.",
+    "emailHelp2": "It will never be made public nor be shared to third parties.",
+    "editPassword": "Edit password",
+    "password": "Password",
+    "passwordConfirmation": "Password confirmation",
+    "language": "Language",
+    "preferedLanguage": "Preferred language for the site and the emails you will receive from us.",
+    "save": "Save",
+    "deleteAccount": "Delete account",
+    "deleteAccountWarning": "Are you sure you want to delete your account? This action cannot be undone.",
+    "confirmDelete": "Delete",
+    "cancelDelete": "Cancel"
+  },
+  "introductionModal": {
+    "firstParagraph": "The Passengers are nomadic works of art. Transmitted without counterpart from one person to another, these objects move around the world.",
+    "secondParagraph": "This site reports on their current situation, the history of their journey and allows you to take part in their transmission.",
+    "confirm": "See the Passagers"
   }
 }

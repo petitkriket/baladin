@@ -1,0 +1,40 @@
+$gray-100: #f7f7f7;
+$light: $gray-100;
+$blue: #09214a;
+
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;700&display=swap");
+
+$body-color: $blue;
+$font-family-sans-serif: "Syne", sans-serif;
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+$font-size-base: 1.2rem;
+$font-size-lg: $font-size-base * 1.5;
+$font-size-sm: $font-size-base * 0.9;
+
+$body-bg: $gray-100;
+$enable-rounded: false;
+
+$navbar-brand-font-size: $font-size-base * 1;
+$navbar-padding-y: 0;
+$navbar-nav-link-padding-x: 0.75rem;
+$nav-link-padding-y: 0.35rem;
+
+$navbar-light-color: rgba($blue, 1);
+$navbar-light-hover-color: desaturate(lighten($blue, 25), 50);
+$navbar-light-active-color: adjust_hue(saturate(lighten($blue, 50), 25), 145);
+$navbar-light-disabled-color: rgba($blue, 0.3);
+$navbar-light-toggler-border-color: rgba($blue, 0.1);
+$navbar-light-brand-color: $navbar-light-active-color;
+$navbar-light-brand-hover-color: $navbar-light-active-color;
+
+$transition-collapse: height 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+$modal-backdrop-opacity: 0.2;
+$modal-header-border-color: transparent;
+$modal-footer-border-color: transparent;
+
+$input-bg: $body-bg;
+
+@import "~bootstrap/scss/bootstrap.scss";
+@import "~bootstrap-vue/src/index.scss";
