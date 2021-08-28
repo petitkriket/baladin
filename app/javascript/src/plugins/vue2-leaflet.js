@@ -13,7 +13,3 @@ Icon.Default.mergeOptions({
   iconUrl,
   shadowUrl,
 });
-
-export default {
-
-};

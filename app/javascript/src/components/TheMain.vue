@@ -1,31 +1,18 @@
 <template>
-  <BContainer
-    :style="{ marginTop: '41px'}"
-    :class="{ 'px-0': isFullwidth }"
-    :fluid="isFullwidth"
-  >
+  <div :style="{ marginTop: '41px'}">
     <transition
       name="fade"
       mode="out-in"
     >
-      <router-view />
+      <keep-alive>
+        <router-view />
+      </keep-alive>
     </transition>
-  </BContainer>
+  </div>
 </template>
 
 <script>
-import { BContainer } from 'bootstrap-vue';
-
-export default {
-  components: {
-    BContainer,
-  },
-  computed: {
-    isFullwidth() {
-      return this.$route.meta.isFullwidth;
-    },
-  },
-};
+export default {};
 </script>
 <style lang="scss">
 .fade-enter-active,

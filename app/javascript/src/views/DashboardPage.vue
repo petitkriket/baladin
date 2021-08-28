@@ -1,22 +1,19 @@
 <template>
-  <BRow>
-    <transition
-      name="fade"
-      mode="out-in"
-    >
-      <router-view />
-    </transition>
-  </BRow>
+  <BContainer>
+    <BRow>
+      <transition
+        name="fade"
+        mode="out-in"
+      >
+        <router-view />
+      </transition>
+    </BRow>
+  </BContainer>
 </template>
 
 <script>
-import { BRow } from 'bootstrap-vue';
 
-export default {
-  components: {
-    BRow,
-  },
-};
+export default {};
 </script>
 <style lang="scss">
 .fade-enter-active,

@@ -1,38 +1,57 @@
 <template>
-  <BaseMapContainer
-    :last-position-markers="activeArtworks"
-    :history-markers="history.events"
-    :locale="user.settings.locale"
-  />
+  <BOverlay
+    :show="isLoading"
+    opacity="0.05"
+    spinner-variant="primary"
+    :z-index="555"
+    overlay-tag="samp"
+    no-fade
+  >
+    <BaseMapContainer
+      :last-position-markers="activeArtworks"
+      :history-markers="history.events"
+      :locale="$i18n.locale"
+      :center="map.center"
+      :zoom="map.zoom"
+      @center="onCenterUpdate"
+      @zoom="onZoomUpdate"
+    />
+  </BOverlay>
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from 'vuex';
-import { FETCH_ARTWORKS, FETCH_ARTWORK_EVENTS } from '@/store/modules/artworks/actions';
-import { ARTWORKS_CURRENT_EVENTS } from '@/store/modules/artworks/getters';
-import BaseMapContainer from '@/components/BaseMapContainer.vue';
+import { BOverlay } from 'bootstrap-vue';
+import {
+  mapGetters,
+  mapState,
+  mapActions,
+  mapMutations,
+} from 'vuex';
+
+import { FETCH_ARTWORKS, FETCH_ARTWORK_EVENTS } from '../store/modules/artworks/actions';
+import { ARTWORKS_CURRENT_EVENTS } from '../store/modules/artworks/getters';
+
+import BaseMapContainer from './BaseMapContainer.vue';
 
 export default {
-  components: { BaseMapContainer },
+  components: { BOverlay, BaseMapContainer },
+  data() {
+    return {
+      timeout: null,
+      isLoading: true,
+    };
+  },
   computed: {
     ...mapState([
       'artworks', ['events'],
+      'map',
       'user', ['settings'],
     ]),
     ...mapGetters('artworks', [
       ARTWORKS_CURRENT_EVENTS,
     ]),
     activeArtworks() {
-      // const { id } = this.$route.params;
-      // const activeArtwork = this[ARTWORKS_CURRENT_EVENTS]
-      //   .filter((artwork) => artwork.id === Number(id));
-      // if (id && this[ARTWORKS_CURRENT_EVENTS] && activeArtwork) {
-      //   return [activeArtwork];
-      // }
-      // if (this[ARTWORKS_CURRENT_EVENTS]) {
       return this[ARTWORKS_CURRENT_EVENTS];
-      // }
-      // return [];
     },
     history() {
       const { id } = this.$route.params;
@@ -56,8 +75,48 @@ export default {
       },
     },
   },
+  beforeMount() {
+    this.displayIntroLoader();
+  },
+  beforeDestroy() {
+    this.clearTimeout();
+  },
   methods: {
+    displayIntroLoader() {
+      this.isLoading = true;
+      this.setTimeout(() => {
+        this.isLoading = false;
+      });
+    },
+    setTimeout(callback) {
+      this.clearTimeout();
+      this.timeout = setTimeout(() => {
+        this.clearTimeout();
+        callback();
+      }, 2500);
+    },
+    clearTimeout() {
+      if (this.timeout) {
+        clearTimeout(this.timeout);
+        this.timeout = null;
+      }
+    },
     ...mapActions('artworks', [FETCH_ARTWORKS, FETCH_ARTWORK_EVENTS]),
+    ...mapMutations('map', ['setCenter', 'setZoom']),
+    onCenterUpdate(coordinates) {
+      this.setCenter(coordinates);
+    },
+    onZoomUpdate(value) {
+      this.setZoom(value);
+    },
   },
 };
 </script>
+
+<style lang="scss">
+/* used a distinctive html tag since css module is not supported */
+samp {
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+</style>

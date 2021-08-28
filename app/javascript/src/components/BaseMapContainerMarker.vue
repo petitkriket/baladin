@@ -16,7 +16,6 @@
 import { LMarker, LPopup } from 'vue2-leaflet';
 import { icon } from 'leaflet';
 
-import mapMixin from '../mixins/mapMixin';
 import iconHistory from '../assets/images/circle-o.svg';
 import iconPresent from '../assets/images/circle.svg';
 
@@ -25,7 +24,6 @@ export default {
     LMarker,
     LPopup,
   },
-  mixins: [mapMixin],
   props: {
     markerItem: {
       type: Object,
@@ -51,19 +49,26 @@ export default {
     },
   },
   methods: {
-    openPath(event) {
-      if (event.passengerId && event.currentPosition) {
-        this.$router.push({ path: `/passenger/${event.passengerId}` });
+    openPath({ passengerId, currentPosition }) {
+      if (passengerId && currentPosition) {
+        this.$router.push({ path: `/passenger/${passengerId}` });
       }
     },
   },
 };
 </script>
+
 <style>
 @import "leaflet.markercluster/dist/MarkerCluster.css";
 @import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 
-/* .marker-cluster {
+.marker-cluster-small div,
+.marker-cluster-medium div,
+.marker-cluster-large div {
+  background-color: transparent;
+}
+
+.marker-cluster {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -71,8 +76,8 @@ export default {
   font-weight: 700;
   color: white;
   text-align: center;
-  background: #2d84c8;
-  border: 1px solid #2d84c8;
+  background: #4b6187;
+  border: 1px solid #4b6187;
   border-radius: 50%;
 }
 
@@ -86,5 +91,5 @@ export default {
   content: ' ';
   border: 1px solid white;
   border-radius: 50%;
-} */
+}
 </style>

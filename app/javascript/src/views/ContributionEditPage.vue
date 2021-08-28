@@ -40,14 +40,14 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import { BCol, BCard, BButton } from 'bootstrap-vue';
+import { BCard, BButton } from 'bootstrap-vue';
 
 import { UPDATE_USER_CONTRIBUTION } from '../store/modules/user/actions-types';
 import ContributionEditForm from '../components/ContributionEditForm.vue';
 
 export default {
   components: {
-    BCol, BCard, BButton, ContributionEditForm,
+    BCard, BButton, ContributionEditForm,
   },
   metaInfo() {
     return {

@@ -46,9 +46,7 @@
 </template>
 
 <script>
-import {
-  BImgLazy, BCard, BCol, BButton,
-} from 'bootstrap-vue';
+import { BImgLazy, BCard, BButton } from 'bootstrap-vue';
 
 import { formatDate } from '../filters/format-date';
 
@@ -57,7 +55,6 @@ export default {
   components: {
     BImgLazy,
     BCard,
-    BCol,
     BButton,
   },
   props: {
