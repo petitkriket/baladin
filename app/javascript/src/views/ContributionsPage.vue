@@ -16,12 +16,11 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 
-import { BCol } from 'bootstrap-vue';
 import ContributionCard from '../components/ContributionCard.vue';
 import { FETCH_USER_CONTRIBUTIONS } from '../store/modules/user/actions-types';
 
 export default {
-  components: { BCol, ContributionCard },
+  components: { ContributionCard },
   metaInfo() {
     return {
       title: this.$tc('contributionsPage.yourContributions', this.user.contributions),

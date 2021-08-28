@@ -37,12 +37,10 @@ export default {
     markers: {
       type: Array,
       default: () => [],
-      required: false,
     },
     clustered: {
       type: Boolean,
       default: false,
-      required: false,
     },
   },
   computed: {

@@ -1,62 +1,45 @@
 <template>
-  <div :style="mapStyle">
-    <l-map
-      ref="map"
-      :zoom="zoom"
-      :center="center"
-      :options="mapOptions"
-      :style="mapStyle"
-      @update:center="centerUpdate"
-      @update:zoom="zoomUpdate"
-      @ready="onMapReady()"
-    >
-      <LTileLayer
-        ref="mapboxGlLayer"
-        :options="layerOptions"
-        :tile-layer-class="tileLayerClass"
-        :attribution="attribution"
-      />
-      <!-- current artworks position TO REFACTOR -->
-      <base-map-container-group :markers="lastPositionMarkers" />
+  <l-map
+    ref="map"
+    :options="mapOptions"
+    :center="center"
+    :zoom="zoom"
+    :style="mapStyle"
+    @update:center="$emit('center', $event)"
+    @update:zoom="$emit('zoom', $event)"
+  >
+    <LTileLayer
+      ref="mapboxGlLayer"
+      :options="layerOptions"
+      :tile-layer-class="tileLayerClass"
+      :attribution="attribution"
+      detect-retina
+      @ready="onTilesLoaded"
+    />
 
-      <!--
-        loops for an array of artworks path
-        filtered using vue router
-        -->
-      <base-map-container-group
-        :markers="historyMarkers"
-        clustered
-      />
+    <!-- artwork journey -->
+    <base-map-container-group
+      :markers="historyMarkers"
+      clustered
+    />
 
-      <l-control position="bottomright">
-        <BButton
-          class="m-2"
-          variant="outline-info"
-          size="md"
-          pill
-          @click="findNearestContribution"
-        >
-          {{ $t('authentificationPage.findClosestArtwork') }}
-        </BButton>
-      </l-control>
-    </l-map>
-  </div>
+    <!-- current artworks position TO REFACTOR -->
+    <base-map-container-group :markers="lastPositionMarkers" />
+
+    <l-control-zoom position="bottomleft" />
+  </l-map>
 </template>
 
 <script>
-import { mapMutations, mapState } from 'vuex';
-import { LMap, LTileLayer, LControl } from 'vue2-leaflet';
 import L from 'leaflet';
 import 'leaflet-swoopy';
 import 'leaflet.smoothwheelzoom';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl-leaflet';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import {
-  BButton,
-} from 'bootstrap-vue';
+
+import { LMap, LTileLayer, LControlZoom } from 'vue2-leaflet';
 import BaseMapContainerGroup from './BaseMapContainerGroup.vue';
-import findNearestContributionMixin from '../mixins/find-nearest-contribution';
 
 const accessToken = process.env.MAPBOX_TOKEN;
 window.mapboxgl = mapboxgl;
@@ -64,46 +47,44 @@ window.mapboxgl = mapboxgl;
 export default {
   components: {
     LMap,
-    LControl,
     LTileLayer,
+    LControlZoom,
     BaseMapContainerGroup,
-    BButton,
   },
-  mixins: [findNearestContributionMixin],
   props: {
+    center: {
+      type: Object,
+      default: () => {},
+    },
+    zoom: {
+      type: Number,
+      default: 3,
+    },
     lastPositionMarkers: {
       type: Array,
       default: () => [],
-      required: false,
     },
     historyMarkers: {
       type: Array,
       default: () => [],
-      required: false,
     },
     locale: {
       type: String,
-      default: 'en',
-      required: true,
+      default: null,
     },
   },
   data() {
     return {
-      map: null,
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors &copy; <a href="https://www.mapbox.com/">Mapbox</a>',
       tileLayerClass: (url, options) => L.mapboxGL(options),
       layerOptions: {
         accessToken,
-        style: 'mapbox://styles/julesvau/cjw0pvu1e0ck71cob17mqucr0',
+        style: 'mapbox://styles/julesvau/ckja5klb3i1q919qmfbiz6qxj',
       },
     };
   },
   computed: {
-    ...mapState('map', [
-      'center',
-      'zoom',
-    ]),
     mapOptions() {
       return {
         minZoom: 3,
@@ -112,6 +93,7 @@ export default {
         smoothWheelZoom: true,
         smoothSensitivity: 2,
         zoomControl: false,
+        attributionControl: false,
       };
     },
     mapStyle() {
@@ -123,36 +105,20 @@ export default {
   },
   watch: {
     locale(value) {
-      this.setMapboxGlLayerLocale(value);
+      this.changeMapboxLabelsLocale(value);
     },
-  },
-  beforeDestroy() {
-    this.setZoom(this.$refs.map.mapObject.getZoom());
-    this.setCenter(this.$refs.map.mapObject.getCenter());
+    historyMarkers() {
+      this.drawArrowPath();
+    },
   },
   methods: {
-    ...mapMutations('map', [
-      'setCenter',
-      'setZoom',
-    ]),
-    centerUpdate(value) {
-      this.setCenter(value);
+    onTilesLoaded() {
+      this.$emit('ready');
+      this.drawArrowPath();
     },
-    zoomUpdate(value) {
-      this.setZoom(value);
-    },
-    setMapboxGlLayerLocale(locale) {
-      // eslint-disable-next-line no-underscore-dangle
-      const map = this.$refs.mapboxGlLayer.mapObject._glMap;
-      map.getStyle().layers.forEach((layer) => {
-        if (layer.type === 'symbol') {
-          map.setLayoutProperty(layer.id, 'text-field', ['get', `name_${locale}`]);
-        }
-      });
-    },
-    onMapReady() {
-      // arrows..
-      this.map = this.$refs.map.mapObject;
+    drawArrowPath() {
+      this.clearArrowPath();
+
       const coords = this.historyMarkers.map((item) => ([item.latitude, item.longitude]));
       const pairs = [];
       coords.forEach((val, index) => {
@@ -161,17 +127,36 @@ export default {
         }
       });
 
-      pairs.forEach((element) => {
-        L.swoopyArrow(element[0], element[1], {
-          iconAnchor: [20, 10],
-          color: '#ffc815',
-          weight: 1.6,
-          factor: 0.8,
-        }).addTo(this.map);
+      pairs.forEach(([latitude, longitude]) => {
+        if (latitude && longitude) {
+          this.drawArrowItem(latitude, longitude);
+        }
       });
     },
-    onFindNearestClick() {
-      console.log('hello!');
+    drawArrowItem(latitude, longitude) {
+      const options = {
+        iconAnchor: [20, 10],
+        color: '#ffc815',
+        weight: 1.6,
+        factor: 0.8,
+      };
+      L.swoopyArrow(latitude, longitude, options)
+        .addTo(this.$refs.map.mapObject);
+    },
+    clearArrowPath() {
+      this.$refs.map.mapObject.eachLayer((layer) => {
+        // eslint-disable-next-line no-underscore-dangle
+        if (layer._currentPathVisible) this.$refs.map.mapObject.removeLayer(layer);
+      });
+    },
+    changeMapboxLabelsLocale(locale) {
+      const { _glMap } = this.$refs.mapboxGlLayer.mapObject;
+
+      _glMap.getStyle().layers.forEach(({ type, id }) => {
+        if (type === 'symbol') {
+          _glMap.setLayoutProperty(id, 'text-field', ['get', `name_${locale}`]);
+        }
+      });
     },
   },
 };
