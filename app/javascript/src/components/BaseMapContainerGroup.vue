@@ -1,21 +1,21 @@
 <template>
   <l-layer-group>
     <v-marker-cluster :options="clusterOptions">
-      <!-- history markers -->
+      <!-- history events -->
       <template v-if="clustered">
         <BaseMapContainerMarker
-          v-for="marker in markers"
-          :key="marker.id"
-          :marker-item="{...marker, pastMarker: true }"
+          v-for="event in events"
+          :key="event.id"
+          :event="{...event, pastMarker: true }"
         />
       </template>
 
-      <!-- current position markers -->
+      <!-- current position events -->
       <template v-else>
         <BaseMapContainerMarker
-          v-for="marker in markers"
-          :key="marker.id"
-          :marker-item="marker"
+          v-for="event in events"
+          :key="event.id"
+          :event="event"
         />
       </template>
     </v-marker-cluster>
@@ -34,7 +34,7 @@ export default {
     'v-marker-cluster': Vue2LeafletMarkerCluster,
   },
   props: {
-    markers: {
+    events: {
       type: Array,
       default: () => [],
     },
