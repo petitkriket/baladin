@@ -82,5 +82,9 @@
     "firstParagraph": "The Passengers are nomadic works of art. Transmitted without counterpart from one person to another, these objects move around the world.",
     "secondParagraph": "This site reports on their current situation, the history of their journey and allows you to take part in their transmission.",
     "confirm": "See the Passagers"
+  },
+  "map": {
+    "previousPositionDescription": "The Passenger #{n} was previously at {city} ({country}) with {username}",
+    "currentPositionDescription": "The Passenger #{n} is currently at {city} ({country}) with {username}"
   }
 }

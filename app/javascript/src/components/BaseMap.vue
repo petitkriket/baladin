@@ -43,23 +43,25 @@ export default {
   },
   computed: {
     ...mapState([
-      'artworks', ['events'],
       'map',
+      'artworks', ['events'],
       'user', ['settings'],
     ]),
     ...mapGetters('artworks', [
       ARTWORKS_CURRENT_EVENTS,
     ]),
     activeArtworks() {
-      return this[ARTWORKS_CURRENT_EVENTS];
+      const { id } = this.$route.params;
+      return this[ARTWORKS_CURRENT_EVENTS].map((obj) => {
+        const isFocused = obj.passengerId.toString() === id;
+        return { ...obj, isFocused };
+      });
     },
     history() {
       const { id } = this.$route.params;
-      if (id && this.artworks.events) {
-        return this.artworks.events
-          .find((event) => event.id === Number(id));
-      }
-      return [];
+      if (typeof id === 'undefined') return [];
+      return this.artworks.events
+        .find((event) => event.id === Number(id)) || [];
     },
   },
   watch: {

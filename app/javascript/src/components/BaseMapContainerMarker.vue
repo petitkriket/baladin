@@ -1,20 +1,20 @@
 <template>
   <l-marker
-    :lat-lng="[markerItem.latitude, markerItem.longitude]"
-    :icon="selectedMarker"
-    @click="openPath(markerItem)"
+    v-if="event"
+    :lat-lng="[event.latitude, event.longitude]"
+    :icon="icon"
+    :options="{ opacity: event.isFocused ? 1 : 0.4 }"
+    @click="focusOn(event)"
   >
-    <l-popup v-if="!markerItem.currentPosition">
-      <div>
-        {{ markerItem.id }}, {{ markerItem.city }}
-      </div>
+    <l-popup v-if="event && !event.currentPosition">
+      <small>{{ popUpText }}</small>
     </l-popup>
   </l-marker>
 </template>
 
 <script>
-import { LMarker, LPopup } from 'vue2-leaflet';
 import { icon } from 'leaflet';
+import { LMarker, LPopup } from 'vue2-leaflet';
 
 import iconHistory from '../assets/images/circle-o.svg';
 import iconPresent from '../assets/images/circle.svg';
@@ -25,32 +25,34 @@ export default {
     LPopup,
   },
   props: {
-    markerItem: {
+    event: {
       type: Object,
-      default: () => {},
-      required: true,
+      default: null,
     },
   },
   computed: {
-    selectedMarker() {
-      return this.markerItem.currentPosition ? this.currentMarker : this.pastMarker;
-    },
-    currentMarker() {
+    icon() {
       return icon({
-        iconUrl: iconPresent,
-        iconSize: [20, 20],
+        iconUrl: this.event.currentPosition ? iconPresent : iconHistory,
+        opacity: this.event.isFocused ? 1 : 0.4,
+        className: this.event.isFocused ? 'text-primary' : 'text-secondary',
+        iconSize: [14, 14],
+        popupAnchor: [0, 0],
       });
     },
-    pastMarker() {
-      return icon({
-        iconUrl: iconHistory,
-        iconSize: [14, 14],
+    popUpText() {
+      const labelName = this.event.currentPosition ? 'currentPositionDescription' : 'previousPositionDescription';
+      return this.$t(`map.${labelName}`, {
+        n: this.event.name,
+        country: this.event.country,
+        city: this.event.city,
+        username: this.event.user.name,
       });
     },
   },
   methods: {
-    openPath({ passengerId, currentPosition }) {
-      if (passengerId && currentPosition) {
+    focusOn({ passengerId, currentPosition, isFocused }) {
+      if (passengerId && currentPosition && !isFocused) {
         this.$router.push({ path: `/passenger/${passengerId}` });
       }
     },
@@ -91,5 +93,34 @@ export default {
   content: ' ';
   border: 1px solid white;
   border-radius: 50%;
+}
+
+.leaflet-container {
+  font: inherit !important;
+  font-size: inherit;
+  color: var(--primary);
+}
+
+.leaflet-popup {
+  border: 1px solid var(--primary);
+}
+
+.leaflet-popup-tip {
+  width: 8px !important;
+  height: 8px !important;
+  margin: -5px auto 0 !important;
+  color: var(--primary) !important;
+  border: 1px solid var(--primary);
+  box-shadow: none !important;
+}
+
+.leaflet-popup-content-wrapper {
+  color: var(--primary) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.leaflet-popup-close-button {
+  display: none;
 }
 </style>

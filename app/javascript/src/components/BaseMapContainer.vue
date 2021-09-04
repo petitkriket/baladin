@@ -14,17 +14,16 @@
       :tile-layer-class="tileLayerClass"
       :attribution="attribution"
       detect-retina
-      @ready="onTilesLoaded"
     />
 
     <!-- artwork journey -->
     <base-map-container-group
-      :markers="historyMarkers"
+      :events="historyMarkers"
       clustered
     />
 
     <!-- current artworks position TO REFACTOR -->
-    <base-map-container-group :markers="lastPositionMarkers" />
+    <base-map-container-group :events="lastPositionMarkers" />
 
     <l-control-zoom position="bottomleft" />
   </l-map>
@@ -36,9 +35,8 @@ import 'leaflet-swoopy';
 import 'leaflet.smoothwheelzoom';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl-leaflet';
-import 'mapbox-gl/dist/mapbox-gl.css';
-
 import { LMap, LTileLayer, LControlZoom } from 'vue2-leaflet';
+
 import BaseMapContainerGroup from './BaseMapContainerGroup.vue';
 
 const accessToken = process.env.MAPBOX_TOKEN;
@@ -104,26 +102,23 @@ export default {
     },
   },
   watch: {
+    historyMarkers(newValue) {
+      this.clearArrowPath();
+      if (!newValue?.length) return;
+
+      const bounds = newValue.map((item) => ([item.latitude, item.longitude]));
+      this.fitBoundsThenDrawPath(bounds);
+    },
     locale(value) {
       this.changeMapboxLabelsLocale(value);
     },
-    historyMarkers() {
-      this.drawArrowPath();
-    },
   },
   methods: {
-    onTilesLoaded() {
-      this.$emit('ready');
-      this.drawArrowPath();
-    },
-    drawArrowPath() {
-      this.clearArrowPath();
-
-      const coords = this.historyMarkers.map((item) => ([item.latitude, item.longitude]));
+    drawArrowPath(group) {
       const pairs = [];
-      coords.forEach((val, index) => {
-        if (index < (coords.length + 1)) {
-          pairs.push([val, coords[index + 1]]);
+      group.forEach((val, index) => {
+        if (index < (group.length + 1)) {
+          pairs.push([val, group[index + 1]]);
         }
       });
 
@@ -149,6 +144,13 @@ export default {
         if (layer._currentPathVisible) this.$refs.map.mapObject.removeLayer(layer);
       });
     },
+    fitBoundsThenDrawPath(group) {
+      const options = { padding: [150, 150] };
+      this.$refs.map.mapObject.flyToBounds(group, options);
+      this.$refs.map.mapObject.once('moveend', () => {
+        this.drawArrowPath(group);
+      });
+    },
     changeMapboxLabelsLocale(locale) {
       const { _glMap } = this.$refs.mapboxGlLayer.mapObject;
 
@@ -161,3 +163,6 @@ export default {
   },
 };
 </script>
+<style>
+@import "mapbox-gl/dist/mapbox-gl.css";
+</style>
