@@ -88,14 +88,15 @@
             </BNavItem>
 
             <BNavForm class="ml-lg-4">
-              <BButton
+              <BaseLoaderButton
                 size="sm"
-                variant="primary"
+                variant="warning"
                 pill
+                :loading="pendingForGeolocation"
                 @click="findNearestContribution"
               >
                 {{ $t('navbar.participate') }}
-              </BButton>
+              </BaseLoaderButton>
             </BNavForm>
           </BNavbarNav>
         </template>
@@ -107,7 +108,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import {
-  BNavbar, BNavbarNav, BNavbarBrand, BNavbarToggle, BNavItem, BNavText, BCollapse, BAvatar, BNavForm, BButton
+  BNavbar, BNavbarNav, BNavbarBrand, BNavbarToggle, BNavItem, BNavText, BCollapse, BAvatar, BNavForm, BButton,
 } from 'bootstrap-vue';
 
 import TheLocaleSwitcher from './TheLocaleSwitcher.vue';
@@ -115,6 +116,7 @@ import { IS_AUTHENTIFIED } from '../store/modules/user/getters';
 import { SIGN_OUT } from '../store/modules/user/actions-types';
 
 import findNearestContributionMixin from '../mixins/find-nearest-contribution';
+import BaseLoaderButton from './BaseLoaderButton.vue';
 
 export default {
   components: {
@@ -129,6 +131,7 @@ export default {
     BNavForm,
     BButton,
     TheLocaleSwitcher,
+    BaseLoaderButton,
   },
   mixins: [findNearestContributionMixin],
   computed: {

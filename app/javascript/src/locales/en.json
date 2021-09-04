@@ -60,6 +60,23 @@
     "save": "Save",
     "cancel": "Cancel"
   },
+  "contributionCreatePage": {
+    "registerYourContribution": "Register your contribution",
+    "aboutTheObject": "About the object",
+    "location": "An address or at least a zipcode",
+    "locationHelp": "The place where the Passenger will be located.",
+    "photo": "Passenger photo",
+    "photoHelp": "Add your own photo of the Passager, be creative !",
+    "aboutYou": "About you",
+    "name": "Name",
+    "email": "E-mail",
+    "emailHelp": "Your e-mail address will be used to contact you.",
+    "emailHelp2": "It will never be made public nor be shared to third parties.",
+    "password": "Password",
+    "passwordConfirmation": "Password confirmation",
+    "termsOfUse": "I accept the terms and use",
+    "register": "Register"
+  },
   "accountSettingsPage": {
     "accountSettings": "Account Settings",
     "email": "E-mail",
@@ -83,8 +100,38 @@
     "secondParagraph": "This site reports on their current situation, the history of their journey and allows you to take part in their transmission.",
     "confirm": "See the Passagers"
   },
-  "map": {
+  "claimModal": {
+    "claim": "Hand out request",
+    "help": "Arrange a meeting with {name}  in a location near {city} ({country}) to retrieve the Passenger.",
+    "name": "Name",
+    "email":"E-mail",
+    "emailHelp": "The passenger carrier will receive the message along with your email to reply to you.",
+    "message": "Message",
+    "firstParagraph": "Anyone who welcomes a Passenger agrees to: pass on this Passenger to any other person wishing to welcome him in turn; register their welcome on the project site using the address engraved on this Passenger.",
+    "secondParagraph": "By sending your message you accept the above conditions.",
+    "cancel": "Cancel",
+    "send": "Send",
+    "inProgress": "In progress",
+    "retry": "Retry",
+    "close": "Close",
+    "messageSent": "Your message has been sent to the passenger carrier.",
+    "messageFailed": "Your message could not be sent. Please try again later."
+  },
+  "mapPage": {
     "previousPositionDescription": "The Passenger #{n} was previously at {city} ({country}) with {username}",
-    "currentPositionDescription": "The Passenger #{n} is currently at {city} ({country}) with {username}"
+    "currentPositionDescription": "The Passenger #{n} is currently at {city} ({country}) with {username}",
+    "artworkDetail": {
+      "title": "Passenger #{n}",
+      "releaseDate": "Release date",
+      "currentLocation": "Current location",
+      "locationHelp": "The place where the Passenger is located.",
+      "carrier": "Current holder",
+      "photo": "Passenger photo",
+      "claimIt": "Claim it"
+    }
+  },
+  "notFoundPage":  {
+    "pageNotFound": "Page not found!",
+    "doesNotExist": "The page you were looking for does not exist."
   }
 }

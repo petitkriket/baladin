@@ -1,18 +1,24 @@
+import { mapMutations } from 'vuex';
+
 import eventService from '../api/models/event';
 
 export default {
   data() {
     return {
-      pollTimer: null,
-      visibilityChangeEventName: null,
+      pendingForGeolocation: false,
     };
   },
   methods: {
+    ...mapMutations('map', ['setUserPosition']),
     async findNearestContribution() {
+      this.pendingForGeolocation = true;
       const position = await this.getUserPosition();
       if (position?.coords) {
-        this.findUserNearestArtwork(position.coords);
+        const { latitude, longitude } = position.coords;
+        this.findUserNearestArtwork({ latitude, longitude });
+        this.setUserPosition({ latitude, longitude });
       }
+      this.pendingForGeolocation = false;
     },
     async getUserPosition() {
       return new Promise((resolve, reject) => {

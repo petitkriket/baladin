@@ -19,6 +19,11 @@ module Api
         render json: @passenger
       end
 
+      def find_by_shortcut
+        passenger = Passenger.find_by(shortcut: params[:shortcut])
+        render json: passenger
+      end
+
       def create
         passenger = Passenger.new(passenger_params)
         if passenger.save

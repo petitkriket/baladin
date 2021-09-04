@@ -21,12 +21,7 @@ module Api
       end
 
       def find
-        nearest_events = Event.published
-                              .includes([:user])
-                              .joins(:passenger)
-                              .select("passengers.id, count(1) as count_all")
-                              .group("passengers.id, events.id")
-                              .order('count_all desc')
+        nearest_events = Event.most_recent_by_passenger
                               .near([params[:latitude], params[:longitude]], params[:radius] || 50, units: params[:units] || :km)
                               .limit(5)
 

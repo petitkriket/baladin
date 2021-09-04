@@ -11,12 +11,14 @@ import DashboardPage from '../views/DashboardPage.vue';
 import ContributionsPage from '../views/ContributionsPage.vue';
 import AccountSettingsPage from '../views/AccountSettingsPage.vue';
 import ContributionEditPage from '../views/ContributionEditPage.vue';
+import ContributionPage from '../views/ContributionPage.vue';
+import NotFoundPage from '../views/NotFoundPage.vue';
 
 Vue.use(VueRouter);
 
 const router = new VueRouter({
   mode: 'history',
-  base: '/v3', // eventually process.env.BASE_URL
+  base: '/v3',
   routes: [
     {
       path: '/',
@@ -70,6 +72,16 @@ const router = new VueRouter({
           meta: { requiresAuthentification: true },
         },
       ],
+    },
+    {
+      path: '/:shortcode(\\w{3})',
+      name: 'Contribute',
+      component: ContributionPage,
+    },
+    {
+      path: '/*',
+      name: 'NotFound',
+      component: NotFoundPage,
     },
   ],
 });

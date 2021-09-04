@@ -25,6 +25,8 @@
     <!-- current artworks position TO REFACTOR -->
     <base-map-container-group :events="lastPositionMarkers" />
 
+    <base-map-marker-user :position="userPosition" />
+
     <l-control-zoom position="bottomleft" />
   </l-map>
 </template>
@@ -38,6 +40,7 @@ import 'mapbox-gl-leaflet';
 import { LMap, LTileLayer, LControlZoom } from 'vue2-leaflet';
 
 import BaseMapContainerGroup from './BaseMapContainerGroup.vue';
+import BaseMapMarkerUser from './BaseMapMarkerUser.vue';
 
 const accessToken = process.env.MAPBOX_TOKEN;
 window.mapboxgl = mapboxgl;
@@ -48,6 +51,7 @@ export default {
     LTileLayer,
     LControlZoom,
     BaseMapContainerGroup,
+    BaseMapMarkerUser,
   },
   props: {
     center: {
@@ -57,6 +61,10 @@ export default {
     zoom: {
       type: Number,
       default: 3,
+    },
+    userPosition: {
+      type: Object,
+      default: () => {},
     },
     lastPositionMarkers: {
       type: Array,
@@ -98,6 +106,7 @@ export default {
       return {
         height: 'calc(100vh - 41px)',
         width: '100%',
+        backgroundColor: '#ffffff',
       };
     },
   },
@@ -122,15 +131,31 @@ export default {
         }
       });
 
-      pairs.forEach(([latitude, longitude]) => {
+      pairs.forEach(([latitude, longitude], index) => {
         if (latitude && longitude) {
-          this.drawArrowItem(latitude, longitude);
+          const isLast = (pairs.length - 2) === index;
+          console.log(index, pairs.length);
+          if (isLast) {
+            this.drawArrowItemWithHead(latitude, longitude);
+          } else {
+            this.drawArrowItem(latitude, longitude);
+          }
         }
       });
     },
     drawArrowItem(latitude, longitude) {
       const options = {
-        iconAnchor: [20, 10],
+        color: '#ffc815',
+        weight: 1.6,
+        hideArrowHead: true,
+        opacity: 0.4,
+        factor: 0.8,
+      };
+      L.swoopyArrow(latitude, longitude, options)
+        .addTo(this.$refs.map.mapObject);
+    },
+    drawArrowItemWithHead(latitude, longitude) {
+      const options = {
         color: '#ffc815',
         weight: 1.6,
         factor: 0.8,

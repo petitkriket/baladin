@@ -16,6 +16,18 @@ const actions = {
 
     commit(MUTATIONS_TYPES.SET_LOCALE, localeCode);
   },
+
+  [ACTIONS_TYPES.SIGN_UP_AND_CONTRIBUTE](context, payload) {
+    const { userData, eventData } = payload;
+    return new Promise((resolve, reject) => {
+      authentificationService.signUpAndContribute(userData, eventData)
+        .then((response) => {
+          resolve(response.data);
+        }).catch((error) => {
+          reject(error);
+        });
+    });
+  },
   [ACTIONS_TYPES.SIGN_IN]({ commit }, user) {
     return new Promise((resolve, reject) => {
       authentificationService.signIn(user)

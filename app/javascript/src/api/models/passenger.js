@@ -10,6 +10,12 @@ const passengerService = {
   getOneEvents(id) {
     return api.get(`${path}/${resource}/${id}/events`);
   },
+  findByShortcut(shortcut) {
+    return api.get(`${path}/${resource}/find/${shortcut}`);
+  },
+  claim(id, claim) {
+    return api.post(`${path}/${resource}/${id}/claims`, claim);
+  },
 };
 
 export default passengerService;

@@ -60,6 +60,23 @@
     "save": "Enregistrer",
     "cancel": "Annuler"
   },
+  "contributionCreatePage": {
+    "registerYourContribution": "Enregistrer votre contribution",
+    "aboutTheObject": "A propos de l'objet",
+    "location": "Une adresse ou au minimum un code postal",
+    "locationHelp": "L'endroit où sera le Passager. Cet endroit sera affiché sur une carte accessible au public",
+    "photo": "Photo du Passager",
+    "photoHelp": "Ajoutez votre propre photo du Passager",
+    "aboutYou": "About you",
+    "name": "Nom",
+    "email": "E-mail",
+    "emailHelp": "Addresse e-mail utilisé pour vous contacter.",
+    "emailHelp2": "Elle ne sera jamais rendue publique ni partagée a des tierce parties.",
+    "password": "Mot de passe",
+    "passwordConfirmation": "Confirmation du mot de passe",
+    "termsOfUse": "J'accepte les termes de service",
+    "register": "S'inscrire"
+  },
   "accountSettingsPage": {
     "accountSettings": "Paramètres du compte",
     "email": "E-mail",
@@ -83,8 +100,38 @@
     "secondParagraph": "Ce site rend compte de leur situation actuelle, de l’historique de leur parcours et permet de prendre part à leur transmission.",
     "confirm": "Voir Les passagers"
   },
-    "map": {
+  "claimModal": {
+    "claim": "Demande de transmission",
+    "help": "Prenez rendez-vous avec {name} dans un lieu proche de {city}, ({country}) pour récupérer le Passager.",
+    "name": "Nom",
+    "email":"E-mail",
+    "emailHelp": "Le porteur du passager recevra le message accompagné de votre email pour vous répondre directement.",
+    "message": "Message",
+    "firstParagraph": "Toute personne qui accueille un Passager s’engage à : transmettre ce Passager à toute autre personne souhaitant l’accueillir à son tour ; enregistrer son accueil sur le site du projet via l’adresse gravée sur ce Passager.",
+    "secondParagraph": "En envoyant votre message vous acceptez les conditions ci-dessus.",
+    "cancel": "Annuler",
+    "send": "Envoyer",
+    "inProgress": "En cours",
+    "retry": "Réessayer",
+    "close": "Fermer",
+    "messageSent": "Votre message a été envoyé au porteur du Passager.",
+    "messageFailed": "Votre message n'a pas pu être envoyé. Veuillez réessayer."
+  },
+    "mapPage": {
     "previousPositionDescription": "Le Passager n°{n} était a {city} ({country}) avec {username}",
-    "currentPositionDescription": "Le Passager n°{n} est a {city} ({country}) avec {username}"
+    "currentPositionDescription": "Le Passager n°{n} est a {city} ({country}) avec {username}",
+    "artworkDetail": {
+      "title": "Passenger n°{n}",
+      "releaseDate": "Mise en circulation",
+      "currentLocation": "Position actuelle",
+      "locationHelp": "L'endroit où est le Passager",
+      "carrier": "Porteur",
+      "photo": "Photo du Passager",
+      "claimIt": "Faire une demande"
+    }
+  },
+    "notFoundPage":  {
+    "pageNotFound": "Page introuvable !",
+    "doesNotExist": "La page que vous cherchiez n'existe pas."
   }
 }
