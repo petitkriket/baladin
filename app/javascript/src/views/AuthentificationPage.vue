@@ -25,14 +25,15 @@
                 lg="4"
                 class="mt-sm-4 mt-lg-0"
               >
-                <BButton
+                <BaseLoaderButton
                   variant="outline-info"
                   size="sm"
                   pill
+                  :loading="pendingForGeolocation"
                   @click="findNearestContribution"
                 >
                   {{ $t('authentificationPage.findClosestArtwork') }}
-                </BButton>
+                </BaseLoaderButton>
               </BCol>
             </BRow>
           </BCol>
@@ -50,16 +51,18 @@
 
 <script>
 import { mapActions } from 'vuex';
-import { BCard, BButton } from 'bootstrap-vue';
+import { BCard } from 'bootstrap-vue';
 
 import { SIGN_IN } from '../store/modules/user/actions-types';
+
 import TheAuthentificationForm from '../components/TheAuthentificationForm.vue';
+import BaseLoaderButton from '../components/BaseLoaderButton.vue';
 import findNearestContributionMixin from '../mixins/find-nearest-contribution';
 
 export default {
   components: {
     BCard,
-    BButton,
+    BaseLoaderButton,
     TheAuthentificationForm,
   },
   mixins: [findNearestContributionMixin],

@@ -42,7 +42,7 @@ export default {
     },
     popUpText() {
       const labelName = this.event.currentPosition ? 'currentPositionDescription' : 'previousPositionDescription';
-      return this.$t(`map.${labelName}`, {
+      return this.$t(`mapPage.${labelName}`, {
         n: this.event.name,
         country: this.event.country,
         city: this.event.city,

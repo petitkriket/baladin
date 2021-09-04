@@ -36,9 +36,10 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 import { BImgLazy } from 'bootstrap-vue';
+import { mapState, mapActions } from 'vuex';
 
+import { FETCH_ARTWORKS } from '../store/modules/artworks/actions';
 import { formatDate } from '../filters/format-date';
 
 export default {
@@ -56,10 +57,21 @@ export default {
       'artworks', ['artworks'],
     ]),
   },
+  beforeMount() {
+    this.optionallyLoadArtworks();
+  },
+  methods: {
+    ...mapActions('artworks', [FETCH_ARTWORKS]),
+    optionallyLoadArtworks() {
+      if (this.artworks?.artworks.length === 0) {
+        this[FETCH_ARTWORKS]();
+      }
+    },
+  },
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 img.artwork-image {
   object-fit: cover;
   max-height: 140px;

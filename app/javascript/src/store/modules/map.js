@@ -6,6 +6,7 @@ export default {
   state: {
     center: latLng(0, 0),
     zoom: 3,
+    userPosition: null,
   },
 
   mutations: {
@@ -14,6 +15,9 @@ export default {
     },
     setZoom(state, payload) {
       state.zoom = payload;
+    },
+    setUserPosition(state, payload) {
+      state.userPosition = payload;
     },
   },
 };

@@ -29,7 +29,10 @@ Rails.application.routes.draw do
 
       resources :passengers do
         resources :events
+        resources :claims, only: %i[create]
       end
+      get 'passengers/find/:shortcut' , to: 'passengers#find_by_shortcut'
+
       devise_scope :user do
         get    '/contributions',to: 'events#contributions'
         post   '/signin',       to: 'sessions#create'

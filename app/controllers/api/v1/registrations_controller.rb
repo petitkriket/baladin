@@ -11,6 +11,11 @@ module Api
       def create
         user = User.new user_params
         if user.save
+          if event_params
+            event = Event.create(event_params)
+            event.user = user
+            event.save!
+          end
           render json: { user: user }, status: :ok
         else
           render json: { message: 'Something went wrong', user: {} }, status: :unprocessable_entity
@@ -50,6 +55,10 @@ module Api
 
       def user_params
         params.require(:user).permit(:email, :password, :password_confirmation, :name, :locale, :terms_of_use)
+      end
+
+      def event_params
+        params.require(:event).permit(:passenger_id, :address, :photo) if params[:event]
       end
 
       def ensure_params_exist

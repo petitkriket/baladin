@@ -5,7 +5,23 @@ class Event < ApplicationRecord
   belongs_to :passenger
   belongs_to :user, optional: true
   scope :published, -> { where(published: true) }
-
+  scope :most_recent_by_passenger, -> do
+    from(
+      <<~SQL
+        (
+          SELECT events.*
+          FROM events JOIN (
+             SELECT passenger_id, max(created_at) AS created_at
+             FROM events
+             WHERE published=true
+             GROUP BY passenger_id
+          ) latest_by_passenger
+          ON events.created_at = latest_by_passenger.created_at
+          AND events.passenger_id = latest_by_passenger.passenger_id
+        ) events
+      SQL
+    )
+  end
   # validations
   validates :address, presence: true
   validates :passenger_id, uniqueness: { scope: :user_id, message: I18n.t('event_already_registred_admin') }
