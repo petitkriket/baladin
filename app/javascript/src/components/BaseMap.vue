@@ -7,12 +7,20 @@
     overlay-tag="samp"
     no-fade
   >
+    <transition name="slide-fade">
+      <ArtworkCard
+        v-if="displayedArtwork"
+        :key="$route.params.id"
+        :artwork="displayedArtwork"
+      />
+    </transition>
     <BaseMapContainer
       :last-position-markers="activeArtworks"
       :history-markers="history.events"
       :locale="$i18n.locale"
       :center="map.center"
       :zoom="map.zoom"
+      :user-position="userPosition"
       @center="onCenterUpdate"
       @zoom="onZoomUpdate"
     />
@@ -32,9 +40,10 @@ import { FETCH_ARTWORKS, FETCH_ARTWORK_EVENTS } from '../store/modules/artworks/
 import { ARTWORKS_CURRENT_EVENTS } from '../store/modules/artworks/getters';
 
 import BaseMapContainer from './BaseMapContainer.vue';
+import ArtworkCard from './ArtworkCard.vue';
 
 export default {
-  components: { BOverlay, BaseMapContainer },
+  components: { BOverlay, BaseMapContainer, ArtworkCard },
   data() {
     return {
       timeout: null,
@@ -57,11 +66,24 @@ export default {
         return { ...obj, isFocused };
       });
     },
+    displayedArtwork() {
+      const { id } = this.$route.params;
+      if (id && this.artworks) {
+        return this.artworks.artworks.find((artwork) => artwork.id === Number(id));
+      }
+      return null;
+    },
     history() {
       const { id } = this.$route.params;
       if (typeof id === 'undefined') return [];
       return this.artworks.events
         .find((event) => event.id === Number(id)) || [];
+    },
+    userPosition() {
+      if (this.map.userPosition) {
+        return this.map.userPosition;
+      }
+      return null;
     },
   },
   watch: {
@@ -69,7 +91,6 @@ export default {
       immediate: true,
       deep: true,
       handler(route) {
-        this[FETCH_ARTWORKS]();
         const { id } = route.params;
         if (id) {
           this[FETCH_ARTWORK_EVENTS]({ id: Number(id) });
@@ -79,6 +100,9 @@ export default {
   },
   beforeMount() {
     this.displayIntroLoader();
+    if (this.artworks?.artworks.length === 0) {
+      this[FETCH_ARTWORKS]();
+    }
   },
   beforeDestroy() {
     this.clearTimeout();
@@ -120,5 +144,19 @@ export default {
 samp {
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
+}
+
+.slide-fade-enter-active {
+  transition: all 800ms ease;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter,
+.slide-fade-leave-to {
+  opacity: 0;
+  transform: translateX(50%);
 }
 </style>

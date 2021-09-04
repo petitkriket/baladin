@@ -2,6 +2,7 @@
   <div>
     <BFormInput
       v-model="location"
+      type="search"
       list="input-location-list"
       v-bind="$attrs"
       @change="onSelection"

@@ -1,3 +1,4 @@
+export const SIGN_UP_AND_CONTRIBUTE = 'SIGN_UP_AND_CONTRIBUTE';
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_OUT = 'SIGN_OUT';
 export const UPDATE_LOCALE = 'UPDATE_LOCALE';
