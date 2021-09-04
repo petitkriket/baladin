@@ -82,5 +82,9 @@
     "firstParagraph": "Les Passagers sont des œuvres d’arts nomades. Transmis sans contre partie d’une personne à une autre, ces objets se déplacent à travers le monde.",
     "secondParagraph": "Ce site rend compte de leur situation actuelle, de l’historique de leur parcours et permet de prendre part à leur transmission.",
     "confirm": "Voir Les passagers"
+  },
+    "map": {
+    "previousPositionDescription": "Le Passager n°{n} était a {city} ({country}) avec {username}",
+    "currentPositionDescription": "Le Passager n°{n} est a {city} ({country}) avec {username}"
   }
 }
