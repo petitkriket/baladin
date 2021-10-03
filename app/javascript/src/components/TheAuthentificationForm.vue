@@ -10,6 +10,7 @@
         v-model.trim="$v.form.email.$model"
         :state="validateInput('email')"
         type="email"
+        autocomplete="username"
         size="lg"
         :placeholder="$t('authentificationPage.email')"
       />
@@ -21,11 +22,26 @@
         v-model="$v.form.password.$model"
         :state="validateInput('password')"
         type="password"
-        size="lg"
         autocomplete="on"
+        size="lg"
         :placeholder="$t('authentificationPage.password')"
       />
     </BInputGroup>
+
+    <BLink to="/password-recovery">
+      <u>
+        {{ $t('authentificationPage.forgottenPassword') }}
+      </u>
+    </BLink>
+
+    <p
+      v-if="failed"
+      class="text-danger mt-2 mb-0"
+    >
+      {{ $t('authentificationPage.loginFailed') }}
+    </p>
+
+    <hr>
 
     <BButton
       variant="primary"
@@ -35,9 +51,6 @@
     >
       {{ $t('authentificationPage.signIn') }}
     </BButton>
-    <BLink v-if="false">
-      {{ $t('authentificationPage.forgottenPassword') }}
-    </BLink>
   </BForm>
 </template>
 
@@ -48,12 +61,19 @@ import {
 import { required, minLength, email } from 'vuelidate/lib/validators';
 
 export default {
+  name: 'TheAuthentificationForm',
   components: {
     BForm,
     BFormInput,
     BInputGroup,
     BButton,
     BLink,
+  },
+  props: {
+    failed: {
+      type: Boolean,
+      default: false,
+    },
   },
   validations: {
     form: {

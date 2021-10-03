@@ -39,7 +39,24 @@
     "reservedToParticipants": "Espace réservé aux personnes ayant déjà accueilli un Passager.",
     "email": "E-mail",
     "password": "Mot de passe",
-    "forgottenPassword": "Mot de passe oublié ?"
+    "forgottenPassword": "Mot de passe oublié ?",
+    "loginFailed": "Votre mot de passe ou votre adresse email étaient incorrects, veuillez réessayer"
+  },
+  "passwordRecoveryPage": {
+    "recoverPassword": "Récuperer votre mot de passe",
+    "itHappens": "Pas de souci, ca arrive ! Entrez l'email que vous pensez avoir utilisé, nous vous enverrons un lien pour définir un nouveau mot de passe",
+    "yourEmail": "Adresse e-mail",
+    "emailMe": "Envoyer le lien à cette adresse",
+    "confirmation": "Vérifiez votre boite mail et ouvrez le lien que nous vous avons envoyé pour continuer."
+  },
+  "passwordResetPage": {
+    "resetPassword": "Réinitialiser le mot de passe",
+    "requirements": "Le nouveau mot de passe doit contenir au moins 6 caractères",
+    "newPassword": "Nouveau mot de passe",
+    "confirmation": "Le mot de passe a été réinitialisé !",
+    "loginNow": "Connectez-vous maintenant",
+    "requestExpired": "Votre demande a expiré",
+    "makeRequest": "Faites une autre demande de réinitialisation de mot de passe"
   },
   "contributionsPage": {
     "yourContributions": "Votre contribution | Vos contributions",

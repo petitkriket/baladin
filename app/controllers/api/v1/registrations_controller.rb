@@ -32,13 +32,6 @@ module Api
         end
       end
 
-      def reset
-        user = User.find_by_email(user_params[:email])
-        user.send_reset_password_instructions if user.present?
-
-        render json: { message: 'E-mail sent to matching user if any was found.' }, status: :ok
-      end
-
       def destroy
         if @user.destroy
           render json: { user: {} }, status: :no_content

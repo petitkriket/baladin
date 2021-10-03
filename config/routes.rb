@@ -40,7 +40,8 @@ Rails.application.routes.draw do
         post   '/signup',       to: 'registrations#create'
         put    '/account',      to: 'registrations#update'
         delete '/account',      to: 'registrations#destroy'
-        post   '/reset',        to: 'registrations#reset'
+        post   '/reset',        to: 'passwords#reset'
+        patch  '/password',     to: 'passwords#update'
         # get    '/confirmation', to: 'devise/confirmations#show'
       end
     end
