@@ -7,6 +7,8 @@ import HomePage from '../views/HomePage.vue';
 import AboutPage from '../views/AboutPage.vue';
 import ArtworksPage from '../views/ArtworksPage.vue';
 import AuthentificationPage from '../views/AuthentificationPage.vue';
+import PasswordRecoveryPage from '../views/PasswordRecoveryPage.vue';
+import PasswordResetPage from '../views/PasswordResetPage.vue';
 import DashboardPage from '../views/DashboardPage.vue';
 import ContributionsPage from '../views/ContributionsPage.vue';
 import AccountSettingsPage from '../views/AccountSettingsPage.vue';
@@ -46,6 +48,17 @@ const router = new VueRouter({
       path: '/authentification',
       name: 'Authentification',
       component: AuthentificationPage,
+    },
+    {
+      path: '/password-recovery',
+      name: 'Password recovery',
+      component: PasswordRecoveryPage,
+    },
+    {
+      path: '/reset-password',
+      alias: '/users/password/edit',
+      name: 'Reset password',
+      component: PasswordResetPage,
     },
     {
       path: '/dashboard',

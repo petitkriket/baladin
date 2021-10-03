@@ -15,10 +15,7 @@
               {{ $t('authentificationPage.howToParticipate') }}
             </h2>
             <BRow>
-              <BCol
-                lg="7"
-                tag="p"
-              >
+              <BCol lg="7">
                 {{ $t('authentificationPage.askSomeone') }}
               </BCol>
               <BCol
@@ -41,7 +38,10 @@
           <hr class="w-75 mx-auto">
 
           <BCol>
-            <TheAuthentificationForm @submit="handleAuthentification" />
+            <TheAuthentificationForm
+              :failed="loginHasFailed"
+              @submit="handleAuthentification"
+            />
           </BCol>
         </BCard>
       </Bcol>
@@ -60,6 +60,7 @@ import BaseLoaderButton from '../components/BaseLoaderButton.vue';
 import findNearestContributionMixin from '../mixins/find-nearest-contribution';
 
 export default {
+  name: 'AuthentificationPage',
   components: {
     BCard,
     BaseLoaderButton,
@@ -71,12 +72,28 @@ export default {
       title: this.$t('authentificationPage.signIn'),
     };
   },
+  data() {
+    return {
+      form: {
+        email: null,
+      },
+      loginHasFailed: false,
+    };
+  },
+  beforeDestroy() {
+    this.resetLoginStatus();
+  },
   methods: {
     ...mapActions('user', [SIGN_IN]),
+    resetLoginStatus() {
+      this.loginHasFailed = false;
+    },
     handleAuthentification(authentificationData) {
       const payload = { user: { ...authentificationData } };
       this[SIGN_IN](payload).then(() => {
         this.$router.push('/dashboard/contributions');
+      }).catch(() => {
+        this.loginHasFailed = true;
       });
     },
   },

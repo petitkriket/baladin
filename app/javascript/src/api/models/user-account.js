@@ -10,6 +10,12 @@ const userAccountService = {
   delete() {
     return api.delete(`${path}/${resource}`);
   },
+  reset(user) {
+    return api.post(`${path}/reset`, user);
+  },
+  resetPassword(user) {
+    return api.patch(`${path}/password`, user);
+  },
 };
 
 export default userAccountService;

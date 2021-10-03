@@ -214,7 +214,7 @@ en:
         confirm_button: "Confirm your account and access your personal space"
       reset_password_instructions:
         subject: "Reset your password | The Passengers"
-        welcome_user: "Bonjour %{name} !"
+        welcome_user: "Hello %{name} !"
         request:  "Someone has requested a link to change your password. You can do this through the link below."
         change: "Change my password"
         notme: "If you didn't request this, please ignore this email."

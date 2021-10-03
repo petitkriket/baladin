@@ -39,7 +39,24 @@
     "reservedToParticipants": "Space reserved for people who have participated.",
     "email": "E-mail",
     "password": "Password",
-    "forgottenPassword": "Forgotten password?"
+    "forgottenPassword": "Forgotten password?",
+    "loginFailed": "Your password or email were wrong, please retry"
+  },
+  "passwordRecoveryPage": {
+    "recoverPassword": "Recover password",
+    "itHappens": "Don't worry, it happens! Enter the email you think you used, we will send you a link to set a new password",
+    "yourEmail": "E-mail address",
+    "emailMe": "Send link to email",
+    "confirmation": "Check your mail box and open the link we sent to continue."
+  },
+  "passwordResetPage": {
+    "resetPassword": "Reset password",
+    "requirements": "New password must contain at least 6 characters",
+    "newPassword": "New password",
+    "confirmation": "Password was reset!",
+    "loginNow": "Login now",
+    "requestExpired": "Your request expired",
+    "makeRequest": "Make another password reset request"
   },
   "contributionsPage": {
     "yourContributions": "Your contribution | Your contributions",
