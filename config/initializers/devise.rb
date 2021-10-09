@@ -259,7 +259,8 @@ Devise.setup do |config|
     jwt.secret = Rails.application.credentials.dig(:secret_key_base)
     jwt.dispatch_requests = [
       ['POST', %r{^/api/v1/signup$}],
-      ['POST', %r{^/api/v1/signin$}]
+      ['POST', %r{^/api/v1/signin$}],
+      ['GET', %r{^/api/v1/confirmation$}]
     ]
     jwt.revocation_requests = [
       ['DELETE', %r{^/api/signout$}]

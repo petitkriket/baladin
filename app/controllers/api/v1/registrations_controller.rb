@@ -15,6 +15,7 @@ module Api
             event = Event.create(event_params)
             event.user = user
             event.save!
+            User.where(role: 'admin').each {|admin| NotifMailer.registration_email(user, admin).deliver }
           end
           render json: { user: user }, status: :ok
         else
@@ -24,7 +25,6 @@ module Api
 
       def update
         if @user.update(user_params.except(:terms_of_use))
-          # Sign in the user by passing validation in case their password changed
           bypass_sign_in(@user)
           render json: { user: @user }, status: :ok
         else
