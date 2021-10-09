@@ -4,6 +4,9 @@ const path = '/api/v1';
 const resource = 'account';
 
 const userAccountService = {
+  confirm(params) {
+    return api.get(`${path}/confirmation`, { params });
+  },
   update(user) {
     return api.put(`${path}/${resource}`, user);
   },

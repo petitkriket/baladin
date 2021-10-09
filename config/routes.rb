@@ -33,16 +33,17 @@ Rails.application.routes.draw do
       end
       get 'passengers/find/:shortcut' , to: 'passengers#find_by_shortcut'
 
+      # should use out of the box devise_for :users instead
       devise_scope :user do
         get    '/contributions',to: 'events#contributions'
         post   '/signin',       to: 'sessions#create'
         delete '/signout',      to: 'sessions#destroy'
         post   '/signup',       to: 'registrations#create'
+        get    '/confirmation', to: 'confirmations#confirm'
         put    '/account',      to: 'registrations#update'
         delete '/account',      to: 'registrations#destroy'
         post   '/reset',        to: 'passwords#reset'
         patch  '/password',     to: 'passwords#update'
-        # get    '/confirmation', to: 'devise/confirmations#show'
       end
     end
   end

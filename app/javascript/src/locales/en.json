@@ -42,6 +42,11 @@
     "forgottenPassword": "Forgotten password?",
     "loginFailed": "Your password or email were wrong, please retry"
   },
+  "confirmAccountPage": {
+    "accountConfirmation": "Account confirmation",
+    "confirmed": "Thank you for confirming your account",
+    "alreadyConfirmed": "Your account has already been confirmed, please log in"
+  },
   "passwordRecoveryPage": {
     "recoverPassword": "Recover password",
     "itHappens": "Don't worry, it happens! Enter the email you think you used, we will send you a link to set a new password",

@@ -42,6 +42,11 @@
     "forgottenPassword": "Mot de passe oublié ?",
     "loginFailed": "Votre mot de passe ou votre adresse email étaient incorrects, veuillez réessayer"
   },
+  "confirmAccountPage": {
+    "accountConfirmation": "Confirmation du compte",
+    "confirmed": "Merci d'avoir confirmé votre compte !",
+    "alreadyConfirmed": "Votre compte a déjà été confirmé, veuillez vous connecter directement."
+  },
   "passwordRecoveryPage": {
     "recoverPassword": "Récuperer votre mot de passe",
     "itHappens": "Pas de souci, ca arrive ! Entrez l'email que vous pensez avoir utilisé, nous vous enverrons un lien pour définir un nouveau mot de passe",

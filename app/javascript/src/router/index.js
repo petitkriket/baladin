@@ -6,6 +6,7 @@ import store from '../store';
 import HomePage from '../views/HomePage.vue';
 import AboutPage from '../views/AboutPage.vue';
 import ArtworksPage from '../views/ArtworksPage.vue';
+import ConfirmAccountPage from '../views/ConfirmAccountPage.vue';
 import AuthentificationPage from '../views/AuthentificationPage.vue';
 import PasswordRecoveryPage from '../views/PasswordRecoveryPage.vue';
 import PasswordResetPage from '../views/PasswordResetPage.vue';
@@ -48,6 +49,12 @@ const router = new VueRouter({
       path: '/authentification',
       name: 'Authentification',
       component: AuthentificationPage,
+    },
+    {
+      path: '/confirmation',
+      alias: '/users/confirmation',
+      name: 'Confirm account',
+      component: ConfirmAccountPage,
     },
     {
       path: '/password-recovery',
