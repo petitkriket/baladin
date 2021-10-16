@@ -1,15 +1,17 @@
 <template>
   <div>
     <BFormInput
-      v-model="location"
+      v-model="model"
+      v-bind="$attrs"
       type="search"
       list="input-location-list"
-      v-bind="$attrs"
-      @change="onSelection"
     />
-    <datalist id="input-location-list">
+    <datalist
+      v-if="suggestions.length"
+      id="input-location-list"
+    >
       <option
-        v-for="(result, index) in searchResults"
+        v-for="(result, index) in suggestions"
         :key="index"
       >
         {{ result }}
@@ -21,54 +23,64 @@
 <script>
 import { BFormInput } from 'bootstrap-vue';
 
-const { GOOGLE_MAPS_JS_KEY } = process.env;
 export default {
+  name: 'BaseLocationInput',
   components: { BFormInput },
   props: {
-    user: {
-      type: Object,
-      default: () => {},
+    value: {
+      type: String,
+      default: '',
     },
   },
   data() {
     return {
-      location: '',
-      searchResults: [],
-      service: null,
+      suggestions: [],
+      geolocateAPI: null,
     };
   },
-  metaInfo() {
-    return {
-      script: [{
-        src: `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_JS_KEY}&libraries=places`,
-        async: true,
-        defer: true,
-        callback: () => this.initializeAPI(),
-      }],
-    };
+  computed: {
+    model: {
+      get() {
+        return this.value;
+      },
+      set(value) {
+        this.$emit('input', value);
+      },
+    },
   },
   watch: {
-    location(newValue) {
-      if (!newValue) return;
-      this.service.getPlacePredictions({
-        input: this.location,
-        types: ['geocode'],
-      }, this.handleSuggestions);
+    value(newValue, oldValue) {
+      const validInput = newValue && newValue !== oldValue && this.geolocateAPI;
+      if (validInput) {
+        this.getSuggestions(newValue);
+      }
     },
+  },
+  created() {
+    this.initializeAPI();
   },
   methods: {
     initializeAPI() {
-      this.service = new window.google.maps.places.AutocompleteService();
+      if (this.geolocateAPI) return;
+      this.geolocateAPI = new window.google.maps.places.AutocompleteService();
     },
-    handleSuggestions(predictions, status) {
+    getSuggestions(input) {
+      if (!this.geolocateAPI) return;
+      this.geolocateAPI
+        .getPlacePredictions({
+          input,
+          types: ['geocode'],
+        }, this.formatResults);
+    },
+    formatResults(results, status) {
       if (status !== window.google.maps.places.PlacesServiceStatus.OK) {
-        this.searchResults = [];
+        this.suggestions = [];
         return;
       }
-      this.searchResults = predictions.map((prediction) => prediction.description);
-    },
-    onSelection() {
-      this.$emit('input', this.location);
+
+      this.suggestions = results
+        .filter((result) => result.description !== this.value)
+        .map((result) => result.description);
     },
   },
 };

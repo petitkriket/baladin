@@ -1,7 +1,7 @@
 <template>
   <BCol>
     <h1 class="py-4">
-      {{ $tc('contributionEditPage.title', passengerName) }}
+      {{ $t('contributionEditPage.title', { name: passengerName }) }}
     </h1>
 
     <BCard
@@ -10,6 +10,7 @@
     >
       <ContributionEditForm
         ref="form"
+        :contribution="contribution"
         @submission="handleContributionSubmission"
       />
     </Bcard>
@@ -30,7 +31,7 @@
         variant="outline-secondary"
         size="lg"
         class="ml-2"
-        @click="cancelEdition"
+        @click="toContributions"
       >
         {{ $t('contributionEditPage.cancel') }}
       </BButton>
@@ -46,25 +47,24 @@ import { UPDATE_USER_CONTRIBUTION } from '../store/modules/user/actions-types';
 import ContributionEditForm from '../components/ContributionEditForm.vue';
 
 export default {
+  name: 'ContributionEditPage',
   components: {
     BCard, BButton, ContributionEditForm,
   },
   metaInfo() {
     return {
-      titleTemplate: null,
       title: this.$t('contributionsPage.edition'),
     };
   },
   computed: {
     ...mapState(['user', ['contributions']]),
+    contribution() {
+      const { id } = this.$route.params;
+      return this.user.contributions
+        .find((contribution) => contribution.id === Number(id));
+    },
     passengerName() {
-      const { id: contributionId } = this.$route.params;
-      const event = this.user.contributions
-        .find((obj) => obj.id === Number(contributionId));
-
-      const passengerName = event?.passenger?.name;
-
-      return passengerName || null;
+      return this.contribution?.passenger?.name;
     },
   },
   methods: {
@@ -75,10 +75,25 @@ export default {
     handleContributionSubmission(contribution) {
       const { id } = this.$route.params;
       const event = { id, ...contribution };
-      this[UPDATE_USER_CONTRIBUTION](event);
+      this[UPDATE_USER_CONTRIBUTION](event).then(() => {
+        this.confirmEdition();
+      }).catch((err) => {
+        this.handleFailure(err);
+      });
     },
-    cancelEdition() {
+    toContributions() {
       this.$router.push({ name: 'Contribution List' });
+    },
+    confirmEdition() {
+      // circumvent bug: toast not displayed if route and toast are triggered at same time
+      const delayInMs = 1;
+      this.toContributions();
+      setTimeout(() => {
+        this.$bvToast.toast(this.$t('contributionEditPage.editsSaved'), { variant: 'success' });
+      }, delayInMs);
+    },
+    handleFailure(err) {
+      this.$bvToast.toast(err, { variant: 'danger' });
     },
   },
 };

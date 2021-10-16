@@ -36,9 +36,11 @@ import { mapState, mapActions } from 'vuex';
 import { BCard, BButton } from 'bootstrap-vue';
 
 import { UPDATE_USER_ACCOUNT, DELETE_USER_ACCOUNT } from '../store/modules/user/actions-types';
+
 import AccountSettingsForm from '../components/AccountSettingsForm.vue';
 
 export default {
+  name: 'AccountSettingsPage',
   components: {
     BCard,
     BButton,
@@ -61,7 +63,21 @@ export default {
     ...mapActions('user', [UPDATE_USER_ACCOUNT, DELETE_USER_ACCOUNT]),
     handleUserEdit(form) {
       const user = { user: { ...form } };
-      this[UPDATE_USER_ACCOUNT](user);
+      const userHasChangedEmail = form.email && this.user?.user?.email
+      && form.email !== this.user.user.email;
+
+      this[UPDATE_USER_ACCOUNT](user).then(() => {
+        this.$bvToast.toast(this.$t('accountSettingsPage.settingsSaved'), { variant: 'success' });
+        if (userHasChangedEmail) {
+          this.$bvToast.toast(this.$t('accountSettingsPage.pleaseConfirmEmail'), { variant: 'warning' });
+        }
+        const delayInMs = 1500;
+        setTimeout(() => {
+          this.$router.push('/dashboard/contributions');
+        }, delayInMs);
+      }).catch(() => {
+        this.$bvToast.toast(this.$t('accountSettingsPage.failedToSaveSettings'), { variant: 'danger' });
+      });
     },
     onDeletionRequest() {
       this.$bvModal.msgBoxConfirm(this.$t('accountSettingsPage.deleteAccountWarning'), {
@@ -79,9 +95,14 @@ export default {
     },
     deleteUserAccount() {
       this[DELETE_USER_ACCOUNT]().then(() => {
+        this.$bvToast.toast(this.$t('accountSettingsPage.accountDeleted'), { variant: 'success' });
         this.$router.push('/');
-      }).catch((err) => {
-        console.log(err);
+      }).catch(() => {
+        this.$bvToast.toast(this.$t('accountSettingsPage.couldNotDeleteAccount'), {
+          variant: 'danger',
+          noAutoHide: true,
+          href: 'mailto:contact@francoismaurin.com',
+        });
       });
     },
   },

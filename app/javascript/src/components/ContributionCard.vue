@@ -16,7 +16,7 @@
       />
       <BCol>
         <p class="font-weight-bold m-0">
-          {{ $tc('artworksPage.name', contribution.passenger.name) }}
+          {{ $t('artworksPage.name', { name: contribution.passenger.name }) }}
         </p>
         <p class="m-0">
           {{ $t('contributionsPage.localisation') }}

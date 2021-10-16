@@ -3,9 +3,7 @@
     v-if="position"
     :icon="icon"
     :lat-lng="[position.latitude, position.longitude]"
-  >
-    ici
-  </LMarker>
+  />
 </template>
 
 <script>
@@ -13,6 +11,7 @@ import { LMarker } from 'vue2-leaflet';
 import { divIcon } from 'leaflet';
 
 export default {
+  name: 'BaseMapMarkerUser',
   components: {
     LMarker,
   },
@@ -49,7 +48,7 @@ export default {
 
   100% {
     opacity: 0;
-    transform: scale(1.2);
+    transform: scale(0.6);
   }
 }
 
@@ -71,9 +70,9 @@ export default {
   display: block;
   width: 100px;
   height: 100px;
-  background: rgba(5, 124, 255, 0.6);
+  background: rgba(5, 124, 255, 0.3);
   border-radius: 50%;
   opacity: 0;
-  animation: pulsate 2400ms ease-out infinite;
+  animation: pulsate 3000ms ease-out infinite;
 }
 </style>

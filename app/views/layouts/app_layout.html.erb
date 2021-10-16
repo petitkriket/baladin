@@ -8,6 +8,7 @@
     <%= javascript_pack_tag 'application' %>
     <%= stylesheet_pack_tag 'application', media: 'all' %>
     <%= csrf_meta_tags %>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=<%= Rails.application.credentials.dig(Rails.env.to_sym, :google, :gmaps_js_api_key) %>"></script>
   </head>
   <body>
     <%= yield %>

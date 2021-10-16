@@ -9,10 +9,18 @@
     >
       <BaseLocationInput
         id="input-location"
-        v-model.trim="$v.form.address.$model"
+        v-model.trim="form.address"
         :state="validateInput('address')"
         size="lg"
+        @input="setAddress"
       />
+      <b-form-invalid-feedback :state="!!$v.form.address.minLength">
+        {{ $t('contributionEditPage.locationTooShort') }}
+      </b-form-invalid-feedback>
+
+      <b-form-invalid-feedback :state="!!$v.form.address.required">
+        {{ $t('contributionEditPage.locationRequired') }}
+      </b-form-invalid-feedback>
     </BFormGroup>
 
     <BFormGroup
@@ -34,7 +42,9 @@
 </template>
 
 <script>
-import { BForm, BFormGroup, BFormFile } from 'bootstrap-vue';
+import {
+  BForm, BFormGroup, BFormFile, BFormInvalidFeedback,
+} from 'bootstrap-vue';
 import { required, minLength } from 'vuelidate/lib/validators';
 
 import BaseLocationInput from './BaseLocationInput.vue';
@@ -45,6 +55,7 @@ export default {
     BFormGroup,
     BFormFile,
     BaseLocationInput,
+    BFormInvalidFeedback,
   },
   props: {
     contribution: {
@@ -60,7 +71,7 @@ export default {
     form: {
       address: {
         required,
-        minLength: minLength(3),
+        minLength: minLength(6),
       },
     },
   },
@@ -76,12 +87,14 @@ export default {
     contribution: {
       immediate: true,
       deep: true,
-      handler(contributionObject) {
-        const isContributionFetched = contributionObject
-        && Object.keys(contributionObject).length !== 0
-        && contributionObject.constructor === Object;
+      handler(contribution) {
+        const shouldBeFilled = contribution
+        && Object.keys(contribution).length !== 0
+        && contribution.constructor === Object;
 
-        if (isContributionFetched) this.loadExistingContribution();
+        if (!shouldBeFilled) return;
+
+        this.loadExistingContribution(contribution);
       },
     },
   },
@@ -103,9 +116,13 @@ export default {
         this.$v.$reset();
       });
     },
-    loadExistingContribution() {
-      const { address } = this.contribution;
+    loadExistingContribution(contribution) {
+      const { address } = contribution;
       this.form.address = address;
+    },
+    setAddress(value) {
+      this.form.address = value;
+      this.$v.form.address.$touch();
     },
     handleNativeSubmit(event) {
       event.preventDefault();

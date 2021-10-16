@@ -19,7 +19,7 @@
           fluid
         />
         <h4 class="m-4">
-          {{ $tc('mapPage.artworkDetail.title', artwork.name) }}
+          {{ $t('mapPage.artworkDetail.title', { name: artwork.name }) }}
         </h4>
 
         <BButton
@@ -80,6 +80,7 @@ import { formatDate } from '../filters/format-date';
 import ArtworkModalClaim from './ArtworkModalClaim.vue';
 
 export default {
+  name: 'ArtworkCard',
   filters: { formatDate },
   components: { BImgLazy, BButton, ArtworkModalClaim },
   props: {

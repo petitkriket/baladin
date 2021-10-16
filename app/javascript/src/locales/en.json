@@ -28,7 +28,7 @@
   },
   "artworksPage": {
     "objects": "Objects",
-    "name": "Passenger #{n}"
+    "name": "Passenger #{name}"
   },
   "authentificationPage": {
     "signIn": "Sign In",
@@ -40,6 +40,7 @@
     "email": "E-mail",
     "password": "Password",
     "forgottenPassword": "Forgotten password?",
+    "changePassword": "Wish to change your password?",
     "loginFailed": "Your password or email were wrong, please retry"
   },
   "confirmAccountPage": {
@@ -73,14 +74,17 @@
     "pendingValidation": "Your contribution is awaiting validation"
   },
   "contributionEditPage": {
-    "title": "Contribution to Passenger #{n} journey",
+    "title": "Contribution to Passenger #{name} journey",
     "location": "Location",
     "locationPlaceholder": "An address or a distinctive place near your location",
     "locationHelp": "The position where the Passenger will be located on the site map during your welcome.",
+    "locationTooShort": "Entered address is too short",
+    "locationRequired": "Address is required",
     "photo": "Passenger photo",
     "photoHelp": "It will appear on the site, under Creative Commons License CC-BY-NC-SA",
+    "cancel": "Cancel",
     "save": "Save",
-    "cancel": "Cancel"
+    "editsSaved": "Your contribution have been edited"
   },
   "contributionCreatePage": {
     "registerYourContribution": "Register your contribution",
@@ -115,7 +119,16 @@
     "deleteAccount": "Delete account",
     "deleteAccountWarning": "Are you sure you want to delete your account? This action cannot be undone.",
     "confirmDelete": "Delete",
-    "cancelDelete": "Cancel"
+    "cancelDelete": "Cancel",
+    "settingsSaved": "Your settings have been saved.",
+    "failedToSaveSettings": "Your settings could not be saved, please retry.",
+    "pleaseConfirmEmail": "Please, go to your inbox to confirm your new email.",
+    "accountDeleted": "Your account was deleted. Thank you for your participation!",
+    "couldNotDeleteAccount": "Could not delete your account, please send an email to contact@francoismaurin.com",
+    "fieldIsRequired": "Field is required",
+    "emailIsInvalid": "E-mail is invalid",
+    "passwordTooShort": "Password is too short",
+    "passwordIsDifferent": "Password do not match"
   },
   "introductionModal": {
     "firstParagraph": "The Passengers are nomadic works of art. Transmitted without counterpart from one person to another, these objects move around the world.",
@@ -143,7 +156,7 @@
     "previousPositionDescription": "The Passenger #{n} was previously at {city} ({country}) with {username}",
     "currentPositionDescription": "The Passenger #{n} is currently at {city} ({country}) with {username}",
     "artworkDetail": {
-      "title": "Passenger #{n}",
+      "title": "Passenger #{name}",
       "releaseDate": "Release date",
       "currentLocation": "Current location",
       "locationHelp": "The place where the Passenger is located.",

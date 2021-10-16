@@ -27,8 +27,8 @@
     "colophon": "Colophon"
   },
   "artworksPage": {
-    "objects": "Objets",
-    "name": "Passager n°{n}"
+    "objects": "Les objets",
+    "name": "Passager n°{name}"
   },
   "authentificationPage": {
     "signIn": "Se connecter",
@@ -40,7 +40,8 @@
     "email": "E-mail",
     "password": "Mot de passe",
     "forgottenPassword": "Mot de passe oublié ?",
-    "loginFailed": "Votre mot de passe ou votre adresse email étaient incorrects, veuillez réessayer"
+    "changePassword": "Souhaitez-vous changer de mot de passe ?",
+    "loginFailed": "Votre mot de passe ou adresse email étaient incorrects, veuillez réessayer"
   },
   "confirmAccountPage": {
     "accountConfirmation": "Confirmation du compte",
@@ -73,14 +74,17 @@
     "pendingValidation": "Votre contribution est en attente de validation"
   },
   "contributionEditPage": {
-    "title": "Contribution au voyage du passager #{n}",
+    "title": "Contribution au voyage du passager #{name}",
     "location": "Lieu",
     "locationPlaceholder": "Une addresse ou un lieu",
     "locationHelp": "La position où sera localisé le Passager sur la carte du site pendant votre accueil.",
+    "locationTooShort": "L'adresse est trop courte",
+    "locationRequired": "L'adresse est requise",
     "photo": "Photo du Passager",
     "photoHelp": "Elle apparaitra sur le site, sous Licence Creative Commons CC-BY-NC-SA",
+    "cancel": "Annuler",
     "save": "Enregistrer",
-    "cancel": "Annuler"
+    "editsSaved": "Votre contribution a bien été modifiée"
   },
   "contributionCreatePage": {
     "registerYourContribution": "Enregistrer votre contribution",
@@ -115,7 +119,16 @@
     "deleteAccount": "Supprimer mon compte",
     "deleteAccountWarning": "Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est définitive.",
     "confirmDelete": "Supprimer",
-    "cancelDelete": "Annuler"
+    "cancelDelete": "Annuler",
+    "settingsSaved": "Vos paramètres ont été sauvegardés",
+    "failedToSaveSettings": "Vos paramètres n'ont pas pu être sauvegardés",
+    "pleaseConfirmEmail": "Merci d'aller dans votre boîte mail pour confirmer votre nouvel e-mail.",
+    "accountDeleted": "Votre compte a été supprimé. Merci pour votre participation !",
+    "couldNotDeleteAccount": "Impossible de supprimer votre compte, veuillez envoyer un e-mail a contact@francoismaurin.com",
+    "fieldIsRequired": "Le champ est requis",
+    "emailIsInvalid": "L'email est invalide",
+    "passwordTooShort": "Le mot de passe est trop court",
+    "passwordIsDifferent": "Le mot de passe entré ne correspond"
   },
   "introductionModal": {
     "firstParagraph": "Les Passagers sont des œuvres d’arts nomades. Transmis sans contre partie d’une personne à une autre, ces objets se déplacent à travers le monde.",
@@ -143,7 +156,7 @@
     "previousPositionDescription": "Le Passager n°{n} était a {city} ({country}) avec {username}",
     "currentPositionDescription": "Le Passager n°{n} est a {city} ({country}) avec {username}",
     "artworkDetail": {
-      "title": "Passenger n°{n}",
+      "title": "Passenger n°{name}",
       "releaseDate": "Mise en circulation",
       "currentLocation": "Position actuelle",
       "locationHelp": "L'endroit où est le Passager",

@@ -10,11 +10,16 @@
       <BFormInput
         id="input-1"
         v-model="form.name"
+        :state="validateInput('name')"
+        :placeholder="$t('accountSettingsPage.name')"
         size="lg"
-        placeholder="Enter name"
         required
         trim
       />
+
+      <b-form-invalid-feedback :state="!!$v.form.name.required">
+        {{ $t('accountSettingsPage.fieldIsRequired') }}
+      </b-form-invalid-feedback>
     </BFormGroup>
 
     <BFormGroup
@@ -26,6 +31,7 @@
       <BFormInput
         id="input-2"
         v-model="form.email"
+        :state="validateInput('email')"
         type="email"
         size="lg"
         autocomplete="username"
@@ -40,6 +46,14 @@
       <BFormText id="input-2-help-2">
         {{ $t('accountSettingsPage.emailHelp2') }}
       </BFormText>
+
+      <b-form-invalid-feedback :state="!!$v.form.email.required">
+        {{ $t('accountSettingsPage.fieldIsRequired') }}
+      </b-form-invalid-feedback>
+
+      <b-form-invalid-feedback :state="!!$v.form.email.email">
+        {{ $t('accountSettingsPage.emailIsInvalid') }}
+      </b-form-invalid-feedback>
     </BFormGroup>
 
     <BFormGroup
@@ -67,11 +81,16 @@
       <BFormInput
         id="input-4"
         v-model="form.password"
+        :state="validateInput('password')"
         type="password"
         size="lg"
         autocomplete="new-password"
         :placeholder="$t('accountSettingsPage.password')"
       />
+
+      <b-form-invalid-feedback :state="!!$v.form.password.minLength">
+        {{ $t('accountSettingsPage.passwordTooShort') }}
+      </b-form-invalid-feedback>
     </BFormGroup>
 
     <BFormGroup
@@ -81,11 +100,16 @@
       <BFormInput
         id="input-5"
         v-model="form.passwordConfirmation"
+        :state="validateInput('passwordConfirmation')"
         type="password"
         size="lg"
         autocomplete="new-password"
         :placeholder="$t('accountSettingsPage.passwordConfirmation')"
       />
+
+      <b-form-invalid-feedback :state="!!$v.form.passwordConfirmation.sameAsPassword">
+        {{ $t('accountSettingsPage.passwordIsDifferent') }}
+      </b-form-invalid-feedback>
     </BFormGroup>
 
     <BButton
@@ -99,14 +123,18 @@
 
 <script>
 import {
-  BForm, BFormInput, BFormText, BFormSelect, BButton, BFormGroup,
+  BForm, BFormInput, BFormText, BFormSelect, BButton, BFormGroup, BFormInvalidFeedback,
 } from 'bootstrap-vue';
+import {
+  required, email, minLength, sameAs,
+} from 'vuelidate/lib/validators';
 
 export default {
   components: {
     BForm,
     BFormGroup,
     BFormInput,
+    BFormInvalidFeedback,
     BFormText,
     BFormSelect,
     BButton,
@@ -121,11 +149,28 @@ export default {
       default: false,
     },
   },
+  validations: {
+    form: {
+      name: {
+        required,
+      },
+      email: {
+        required,
+        email,
+      },
+      password: {
+        minLength: minLength(6),
+      },
+      passwordConfirmation: {
+        sameAsPassword: sameAs('password'),
+      },
+    },
+  },
   data() {
     return {
       form: {
-        email: null,
         name: null,
+        email: null,
         locale: null,
         password: null,
         passwordConfirmation: null,
@@ -149,18 +194,38 @@ export default {
         && Object.keys(userObject).length !== 0
         && userObject.constructor === Object;
 
-        if (isUserFetched) this.loadExistingUser();
+        if (isUserFetched) this.fillForm();
       },
     },
   },
+  beforeDestroy() {
+    this.resetForm();
+  },
   methods: {
+    fillForm() {
+      const { user: { email: userEmail, name, locale } } = this;
+      this.form = { email: userEmail, name, locale };
+    },
+    validateInput(name) {
+      const { $dirty, $error } = this.$v.form[name];
+      return $dirty ? !$error : null;
+    },
     onSubmit(event) {
       event.preventDefault();
+      this.$v.form.$touch();
+      if (this.$v.form.$anyError) {
+        return;
+      }
       this.$emit('submission', this.form);
     },
-    loadExistingUser() {
-      const { user: { email, name, locale } } = this;
-      this.form = { email, name, locale };
+    resetForm() {
+      this.form = {
+        name: null, email: null, locale: null, password: null, passwordConfirmation: null,
+      };
+
+      this.$nextTick(() => {
+        this.$v.$reset();
+      });
     },
   },
 };

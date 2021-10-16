@@ -7,8 +7,7 @@
     <BInputGroup class="my-4">
       <BFormInput
         id="email"
-        v-model.trim="$v.form.email.$model"
-        :state="validateInput('email')"
+        v-model.trim="form.email"
         type="email"
         autocomplete="username"
         size="lg"
@@ -19,8 +18,7 @@
     <BInputGroup class="my-4">
       <BFormInput
         id="password"
-        v-model="$v.form.password.$model"
-        :state="validateInput('password')"
+        v-model="form.password"
         type="password"
         autocomplete="on"
         size="lg"
@@ -29,13 +27,11 @@
     </BInputGroup>
 
     <BLink to="/password-recovery">
-      <u>
-        {{ $t('authentificationPage.forgottenPassword') }}
-      </u>
+      <u>{{ recoverLinkLabel }}</u>
     </BLink>
 
     <p
-      v-if="failed"
+      v-show="failed"
       class="text-danger mt-2 mb-0"
     >
       {{ $t('authentificationPage.loginFailed') }}
@@ -58,7 +54,6 @@
 import {
   BForm, BFormInput, BInputGroup, BButton, BLink,
 } from 'bootstrap-vue';
-import { required, minLength, email } from 'vuelidate/lib/validators';
 
 export default {
   name: 'TheAuthentificationForm',
@@ -75,18 +70,6 @@ export default {
       default: false,
     },
   },
-  validations: {
-    form: {
-      email: {
-        required,
-        email,
-      },
-      password: {
-        required,
-        minLength: minLength(6),
-      },
-    },
-  },
   data() {
     return {
       form: {
@@ -95,26 +78,18 @@ export default {
       },
     };
   },
-  methods: {
-    validateInput(name) {
-      const { $dirty, $error } = this.$v.form[name];
-      return $dirty ? !$error : null;
+  computed: {
+    recoverLinkLabel() {
+      return this.failed ? this.$t('authentificationPage.changePassword') : this.$t('authentificationPage.forgottenPassword');
     },
+  },
+  methods: {
     onSubmit(event) {
       event.preventDefault();
-      this.$v.form.$touch();
-      if (this.$v.form.$anyError) {
-        return;
-      }
-
       this.$emit('submit', this.form);
     },
     handleFormReset() {
       this.form = { email: null, password: null };
-
-      this.$nextTick(() => {
-        this.$v.$reset();
-      });
     },
   },
 };
