@@ -15,18 +15,21 @@
         cols="4"
         class="pb-3"
       >
-        <BImgLazy
-          :src="artwork.photo.medium.url"
-          class="artwork-image"
-          :width="210"
-          :height="140"
-          blank-color="#f2f2f2"
-          fluid
-          blank
-        />
-        <p class="font-weight-bold mb-0">
-          {{ $tc('artworksPage.name', artwork.name) }}
-        </p>
+        <BLink :to="{ name: 'Passenger', params: { id: artwork.id } }">
+          <BImgLazy
+            :src="artwork.photo.medium.url"
+            class="artwork-image"
+            :width="210"
+            :height="140"
+            blank-color="#f2f2f2"
+            fluid
+            blank
+          />
+          <p class="font-weight-bold mb-0">
+            {{ $t('artworksPage.name', { name: artwork.name }) }}
+          </p>
+        </BLink>
+
         <span class="small">
           {{ artwork.createdAt | formatDate('YYYY') }}
         </span>
@@ -36,16 +39,18 @@
 </template>
 
 <script>
-import { BImgLazy } from 'bootstrap-vue';
+import { BImgLazy, BLink } from 'bootstrap-vue';
 import { mapState, mapActions } from 'vuex';
 
 import { FETCH_ARTWORKS } from '../store/modules/artworks/actions';
 import { formatDate } from '../filters/format-date';
 
 export default {
+  name: 'ArtworksPage',
   filters: { formatDate },
   components: {
     BImgLazy,
+    BLink,
   },
   metaInfo() {
     return {
@@ -74,6 +79,7 @@ export default {
 <style lang="scss" scoped>
 img.artwork-image {
   object-fit: cover;
+  min-height: 140px;
   max-height: 140px;
 }
 </style>

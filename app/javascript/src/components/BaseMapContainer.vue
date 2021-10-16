@@ -15,6 +15,7 @@
       :attribution="attribution"
       detect-retina
     />
+    <base-map-marker-user :position="userPosition" />
 
     <!-- artwork journey -->
     <base-map-container-group
@@ -24,8 +25,6 @@
 
     <!-- current artworks position TO REFACTOR -->
     <base-map-container-group :events="lastPositionMarkers" />
-
-    <base-map-marker-user :position="userPosition" />
 
     <l-control-zoom position="bottomleft" />
   </l-map>
@@ -46,6 +45,7 @@ const accessToken = process.env.MAPBOX_TOKEN;
 window.mapboxgl = mapboxgl;
 
 export default {
+  name: 'BaseMapContainer',
   components: {
     LMap,
     LTileLayer,
@@ -134,7 +134,6 @@ export default {
       pairs.forEach(([latitude, longitude], index) => {
         if (latitude && longitude) {
           const isLast = (pairs.length - 2) === index;
-          console.log(index, pairs.length);
           if (isLast) {
             this.drawArrowItemWithHead(latitude, longitude);
           } else {
