@@ -5,16 +5,8 @@ Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
-  # Legacy Rails frontend
-  scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
-    root to: 'passengers#index'
-    resources :events
-    resources :contacts, only: %i[new create]
-    resources :passengers
+  scope do
     devise_for :users, controllers: { registrations: 'users/registrations', confirmations: 'users/confirmations' }
-    resources :users
-    get ':shortcut' => redirect('/users/sign_up?t=%{shortcut}'), constraints: ->(request) { Passenger.where(shortcut: request[:shortcut]).any? }, id: :shortcut
-    get 'a9' => redirect('/users/sign_up?t=a9')
   end
 
   # Rails API
@@ -50,6 +42,6 @@ Rails.application.routes.draw do
   end
 
   # Vue frontend
-  get '/v3', to: 'home#index'
-  get '/v3/*path', to: 'home#index', format: false
+  root to: 'home#index'
+  get '/*path', to: 'home#index', format: false
 end
