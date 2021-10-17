@@ -21,7 +21,7 @@ Vue.use(VueRouter);
 
 const router = new VueRouter({
   mode: 'history',
-  base: '/v3',
+  base: '/',
   routes: [
     {
       path: '/',
