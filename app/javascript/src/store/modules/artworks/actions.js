@@ -1,6 +1,5 @@
 import passengerService from '../../../api/models/passenger';
 import { SET_ARTWORKS, ADD_ARTWORK_EVENTS, UPDATE_ARTWORK_EVENTS } from './mutations';
-import { setErrorServer } from '../../utils';
 
 export const FETCH_ARTWORKS = 'FETCH_ARTWORKS';
 export const FETCH_ARTWORK_EVENTS = 'FETCH_ARTWORK_EVENTS';
@@ -13,7 +12,7 @@ export const actions = {
           commit(SET_ARTWORKS, response.data);
           resolve(response.data);
         }).catch((error) => {
-          reject(setErrorServer(error));
+          reject(error);
         });
     });
   },
@@ -31,7 +30,7 @@ export const actions = {
           }
           resolve(payload);
         }).catch((error) => {
-          reject(setErrorServer(error));
+          reject(error);
         });
     });
   },

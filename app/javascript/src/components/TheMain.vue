@@ -4,7 +4,7 @@
       name="fade"
       mode="out-in"
     >
-      <keep-alive>
+      <keep-alive :include="['HomePage','BaseMap']">
         <router-view />
       </keep-alive>
     </transition>

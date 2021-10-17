@@ -40,6 +40,7 @@ Rails.application.routes.draw do
         delete '/signout',      to: 'sessions#destroy'
         post   '/signup',       to: 'registrations#create'
         get    '/confirmation', to: 'confirmations#confirm'
+        get    '/account',      to: 'registrations#show'
         put    '/account',      to: 'registrations#update'
         delete '/account',      to: 'registrations#destroy'
         post   '/reset',        to: 'passwords#reset'

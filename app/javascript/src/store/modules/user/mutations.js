@@ -13,7 +13,7 @@ const mutations = {
   [MUTATIONS_TYPES.SET_CONTRIBUTIONS](state, payload) {
     state.contributions = payload;
   },
-  [MUTATIONS_TYPES.SET_CONTRIBUTION](state, payload) {
+  [MUTATIONS_TYPES.EDIT_CONTRIBUTION](state, payload) {
     const index = state.contributions.findIndex((event) => (event.id === payload.id));
     state.contributions.splice(index, 1, payload);
   },
