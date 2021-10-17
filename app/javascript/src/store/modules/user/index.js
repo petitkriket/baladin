@@ -5,7 +5,7 @@ import mutations from './mutations';
 
 const state = {
   user: {},
-  token: null,
+  token: localStorage.getItem('user-token') || null,
   settings: {
     locale: selectedLocale,
   },

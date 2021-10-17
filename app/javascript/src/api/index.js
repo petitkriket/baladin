@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 import { transformResponse, transformRequest } from './utils/parsers';
-import { exceptionHandler, successHandler } from './utils/exception-handling';
 
 const api = axios.create({
   withCredentials: true,
@@ -10,13 +9,13 @@ const api = axios.create({
 });
 
 api.interceptors.request.use(
-  (response) => {
-    successHandler(response);
-    return Promise.resolve(response);
-  },
-  (error) => {
-    exceptionHandler(error);
-    return Promise.reject(error);
+  (config) => {
+    const token = localStorage.getItem('user-token');
+    if (token) {
+      // eslint-disable-next-line no-param-reassign
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
   },
 );
 

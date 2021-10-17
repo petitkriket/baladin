@@ -35,7 +35,7 @@
 import { mapState, mapActions } from 'vuex';
 import { BCard, BButton } from 'bootstrap-vue';
 
-import { UPDATE_USER_ACCOUNT, DELETE_USER_ACCOUNT } from '../store/modules/user/actions-types';
+import { FETCH_USER_ACCOUNT, UPDATE_USER_ACCOUNT, DELETE_USER_ACCOUNT } from '../store/modules/user/actions-types';
 
 import AccountSettingsForm from '../components/AccountSettingsForm.vue';
 
@@ -59,8 +59,17 @@ export default {
   computed: {
     ...mapState(['user', ['user']]),
   },
+  created() {
+    this.loadUserDetails();
+  },
   methods: {
-    ...mapActions('user', [UPDATE_USER_ACCOUNT, DELETE_USER_ACCOUNT]),
+    ...mapActions('user', [FETCH_USER_ACCOUNT, UPDATE_USER_ACCOUNT, DELETE_USER_ACCOUNT]),
+    loadUserDetails() {
+      const isUserLoaded = !!Object.values(this.user.user).length;
+      if (isUserLoaded) return;
+
+      this[FETCH_USER_ACCOUNT]();
+    },
     handleUserEdit(form) {
       const user = { user: { ...form } };
       const userHasChangedEmail = form.email && this.user?.user?.email

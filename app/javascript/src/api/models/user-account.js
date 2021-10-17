@@ -7,6 +7,9 @@ const userAccountService = {
   confirm(params) {
     return api.get(`${path}/confirmation`, { params });
   },
+  get() {
+    return api.get(`${path}/${resource}`);
+  },
   update(user) {
     return api.put(`${path}/${resource}`, user);
   },

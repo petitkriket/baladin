@@ -6,7 +6,7 @@ module Api
       skip_before_action :verify_authenticity_token
       before_action :ensure_params_exist, only: :create
       before_action :authenticate_user!, only: %i[update destroy]
-      before_action :set_user, only: %i[update destroy]
+      before_action :set_user, only: %i[show update destroy]
 
       def create
         user = User.new user_params
@@ -29,6 +29,14 @@ module Api
           render json: { user: @user }, status: :ok
         else
           render json: { user: {} }, status: :unprocessable_entity
+        end
+      end
+
+      def show
+        if @user
+          render json: { user: @user }, status: :ok
+        else
+          render json: { user: {} }, status: :forbidden
         end
       end
 
