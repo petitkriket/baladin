@@ -5,11 +5,6 @@ Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
-  scope do
-    devise_for :users, controllers: { registrations: 'users/registrations', confirmations: 'users/confirmations' }
-  end
-
-  # Rails API
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :events, only: [:create]
@@ -41,7 +36,7 @@ Rails.application.routes.draw do
     end
   end
 
-  # Vue frontend
   root to: 'home#index'
   get '/*path', to: 'home#index', format: false
+  devise_for :users, path: 'legacy_users', controllers: { registrations: 'users/registrations', confirmations: 'users/confirmations' }
 end

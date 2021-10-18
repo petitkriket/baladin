@@ -40,11 +40,16 @@
     >
       <BFormFile
         id="input-2"
+        ref="fileInput"
         v-model="form.photo"
+        :state="isPhotoValid"
         accept="image/jpeg, image/png, image/gif"
         size="lg"
         capture
       />
+      <b-form-invalid-feedback :state="isPhotoValid">
+        {{ $t('contributionCreatePage.fileSizeError') }}
+      </b-form-invalid-feedback>
     </BFormGroup>
 
     <h2 class="py-4">
@@ -123,7 +128,7 @@
 
 <script>
 import {
-  BForm, BFormGroup, BFormInput, BFormFile, BFormCheckbox, BButton,
+  BForm, BFormGroup, BFormInput, BFormInvalidFeedback, BFormFile, BFormCheckbox, BButton,
 } from 'bootstrap-vue';
 import {
   required, maxLength, minLength, email, sameAs,
@@ -137,6 +142,7 @@ export default {
     BForm,
     BFormGroup,
     BFormInput,
+    BFormInvalidFeedback,
     BaseLocationInput,
     BFormFile,
     BFormCheckbox,
@@ -182,7 +188,15 @@ export default {
         passwordConfirmation: null,
         termsOfUse: false,
       },
+      isPhotoValid: null,
     };
+  },
+  watch: {
+    'form.photo': function (newVal) {
+      if (newVal) {
+        this.validateFile(newVal);
+      }
+    },
   },
   methods: {
     validateInput(name) {
@@ -215,10 +229,27 @@ export default {
         password: null,
         passwordConfirmation: null,
       };
+      this.isPhotoValid = null;
 
+      this.clearFile();
       this.$nextTick(() => {
         this.$v.$reset();
       });
+    },
+    clearFile() {
+      this.$refs.fileInput.reset();
+    },
+    validateFile(file) {
+      const maxFileSize = 8378122; // 8MB
+      const minFileSize = 102400; // 100KB
+      const fileSize = file?.size;
+      if (!fileSize) return;
+
+      if (fileSize > maxFileSize || fileSize < minFileSize) {
+        this.isPhotoValid = false;
+      } else {
+        this.isPhotoValid = true;
+      }
     },
   },
 };

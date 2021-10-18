@@ -98,6 +98,7 @@
     "email": "E-mail",
     "emailHelp": "Addresse e-mail utilisé pour vous contacter.",
     "emailHelp2": "Elle ne sera jamais rendue publique ni partagée a des tierce parties.",
+    "fileSizeError": "La photo doit peser entre 100ko and 8Mo",
     "password": "Mot de passe",
     "passwordConfirmation": "Confirmation du mot de passe",
     "termsOfUse": "J'accepte les termes de service",
