@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApiController < ActionController::Base
-  include Concerns::AuthenticateStaging
+    # include Concerns::AuthenticateStaging
   protect_from_forgery with: :null_session, only: Proc.new { |c| c.request.format.json? }
   before_action :set_raven_context
 
