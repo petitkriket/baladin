@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  include Concerns::AuthenticateStaging
+    # include Concerns::AuthenticateStaging
   before_action :set_raven_context
 
   private
