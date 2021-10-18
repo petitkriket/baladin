@@ -98,6 +98,7 @@
     "email": "E-mail",
     "emailHelp": "Your e-mail address will be used to contact you.",
     "emailHelp2": "It will never be made public nor be shared to third parties.",
+    "fileSizeError": "File size must be between 100ko and 8Mb",
     "password": "Password",
     "passwordConfirmation": "Password confirmation",
     "termsOfUse": "I accept the terms and use",

@@ -10,16 +10,13 @@ module Api
 
       def create
         user = User.new user_params
-        if user.save
-          if event_params
-            event = Event.create(event_params)
-            event.user = user
-            event.save!
-            User.where(role: 'admin').each {|admin| NotifMailer.registration_email(user, admin).deliver }
-          end
-          render json: { user: user }, status: :ok
+        event = Event.new event_params
+        event.user = user if user.valid?
+        if event.save && user.save
+          User.where(role: 'admin').each {|admin| NotifMailer.registration_email(user, admin).deliver }
+          render json: { user: user, event: event }, status: :ok
         else
-          render json: { message: 'Something went wrong', user: {} }, status: :unprocessable_entity
+          render json: { user: user.errors, event: event.errors }, status: :unprocessable_entity
         end
       end
 

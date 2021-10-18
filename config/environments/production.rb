@@ -105,7 +105,7 @@ Rails.application.configure do
     }
   end
 
-  mailer_host = Rails.env.staging? ? ENV['HEROKU_APP_NAME'] + '.herokuapp.com' : Rails.application.credentials.dig(:domain_name_short)
+  mailer_host = Rails.env.staging? ? ENV['HEROKU_APP_NAME'] + '.herokuapp.com' : Rails.application.credentials.dig(:domain_name)
   config.action_mailer.default_url_options = { protocol: 'https', host: mailer_host }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true

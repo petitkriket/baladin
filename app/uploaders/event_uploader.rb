@@ -27,7 +27,7 @@ class EventUploader < CarrierWave::Uploader::Base
   # def scale(width, height)
   #   # do something
   def size_range
-    200.kilobytes..8.megabytes
+    100.kilobytes..8.megabytes
   end
 
   def fix_exif_rotation # this is my attempted solution
