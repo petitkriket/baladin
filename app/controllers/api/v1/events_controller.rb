@@ -5,7 +5,7 @@ module Api
     class EventsController < ApiController
       before_action :set_event, only: %i[show update destroy]
       before_action :is_user_admin?, only: %i[destroy]
-      before_action :is_user_signed_in?, only: %i[contributions]
+      before_action :is_user_signed_in?, only: %i[contributions create]
       before_action :check_owner, only: %i[update]
 
       def index
@@ -34,13 +34,8 @@ module Api
 
       def create
         passenger = Passenger.find_by(passenger_params)
-        user = User.find_by(user_params)
         event = if passenger && current_user
                   Event.new(event_params_create.merge(passenger_id: passenger.id, user_id: current_user.id))
-                elsif passenger && user
-                  Event.new(event_params_create.merge(passenger_id: passenger.id, user_id: user.id))
-                else
-                  Event.new(event_params_create)
                 end
 
         if event&.save

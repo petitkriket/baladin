@@ -19,7 +19,9 @@ export default {
   metaInfo() {
     return {
       titleTemplate: `%s | ${this.$t('projectTitle')}`,
-      title: '',
+      meta: [
+        { property: 'og:image', content: 'https://www.francoismaurin.com/wp-content/uploads/affinites-13.jpg' },
+      ],
     };
   },
   components: {

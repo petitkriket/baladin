@@ -5,6 +5,7 @@
       v-bind="$attrs"
       type="search"
       list="input-location-list"
+      @blur="autoSelect"
     />
     <datalist
       v-if="suggestions.length"
@@ -81,6 +82,12 @@ export default {
       this.suggestions = results
         .filter((result) => result.description !== this.value)
         .map((result) => result.description);
+    },
+    autoSelect() {
+      const firstSuggestion = this.suggestions[0];
+      if (firstSuggestion) {
+        this.$emit('input', firstSuggestion);
+      }
     },
   },
 };

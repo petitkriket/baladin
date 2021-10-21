@@ -1,16 +1,6 @@
 <template>
   <BForm @submit="onSubmit">
-    <BFormGroup
-      id="input-group-0"
-      size="lg"
-    >
-      <TheLocaleSelect
-        id="input-group-0"
-        size="lg"
-      />
-    </BFormGroup>
-
-    <h2 class="py-4">
+    <h2 class="py-2">
       {{ $t('contributionCreatePage.aboutTheObject') }}
     </h2>
 
@@ -52,7 +42,7 @@
       </b-form-invalid-feedback>
     </BFormGroup>
 
-    <h2 class="py-4">
+    <h2 class="py-2">
       {{ $t('contributionCreatePage.aboutYou') }}
     </h2>
 
@@ -121,7 +111,7 @@
       size="lg"
       block
     >
-      {{ $t('contributionCreatePage.register') }}
+      {{ $t('contributionCreatePage.signUpAndContribute') }}
     </BButton>
   </BForm>
 </template>
@@ -135,7 +125,6 @@ import {
 } from 'vuelidate/lib/validators';
 
 import BaseLocationInput from './BaseLocationInput.vue';
-import TheLocaleSelect from './TheLocaleSelect.vue';
 
 export default {
   components: {
@@ -147,7 +136,6 @@ export default {
     BFormFile,
     BFormCheckbox,
     BButton,
-    TheLocaleSelect,
   },
   validations: {
     form: {

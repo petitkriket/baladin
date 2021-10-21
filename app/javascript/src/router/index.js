@@ -10,11 +10,14 @@ import ConfirmAccountPage from '../views/ConfirmAccountPage.vue';
 import AuthentificationPage from '../views/AuthentificationPage.vue';
 import PasswordRecoveryPage from '../views/PasswordRecoveryPage.vue';
 import PasswordResetPage from '../views/PasswordResetPage.vue';
+
 import DashboardPage from '../views/DashboardPage.vue';
 import ContributionsPage from '../views/ContributionsPage.vue';
 import AccountSettingsPage from '../views/AccountSettingsPage.vue';
 import ContributionEditPage from '../views/ContributionEditPage.vue';
 import ContributionPage from '../views/ContributionPage.vue';
+import ContributionNewPage from '../views/ContributionNewPage.vue';
+
 import NotFoundPage from '../views/NotFoundPage.vue';
 
 Vue.use(VueRouter);
@@ -86,6 +89,12 @@ const router = new VueRouter({
           meta: { requiresAuthentification: true },
         },
         {
+          path: 'contributions/new',
+          name: 'Contribution New',
+          component: ContributionNewPage,
+          meta: { requiresAuthentification: true },
+        },
+        {
           path: 'account-settings',
           name: 'Account settings',
           component: AccountSettingsPage,
@@ -113,7 +122,7 @@ router.beforeEach((to, from, next) => {
       next();
       return;
     }
-    next({ name: 'Authentification', query: { redirectTo: to.path } });
+    next({ name: 'Authentification', query: { redirectTo: to.fullPath } });
   }
   next();
 });

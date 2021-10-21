@@ -17,6 +17,9 @@ const mutations = {
     const index = state.contributions.findIndex((event) => (event.id === payload.id));
     state.contributions.splice(index, 1, payload);
   },
+  [MUTATIONS_TYPES.ADD_CONTRIBUTION](state, payload) {
+    state.contributions.push(payload);
+  },
 };
 
 export default mutations;

@@ -130,6 +130,18 @@ const actions = {
         });
     });
   },
+
+  [ACTIONS_TYPES.CREATE_USER_CONTRIBUTION]({ commit }, event) {
+    return new Promise((resolve, reject) => {
+      eventService.create(event)
+        .then((response) => {
+          commit(MUTATIONS_TYPES.ADD_CONTRIBUTION, response.data.event);
+          resolve(response.data);
+        }).catch((error) => {
+          reject(error);
+        });
+    });
+  },
 };
 
 export default actions;

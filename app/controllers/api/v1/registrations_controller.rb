@@ -10,13 +10,15 @@ module Api
 
       def create
         user = User.new user_params
-        event = Event.new event_params
-        event.user = user if user.valid?
-        if event.save && user.save
+        geocoded_address = Geocoder.search(event_params[:address])
+        if geocoded_address.present? && event_params[:passenger_id] && user.save
+          event = Event.create(event_params)
+          event.user = user
+          event.save!
           User.where(role: 'admin').each {|admin| NotifMailer.registration_email(user, admin).deliver }
-          render json: { user: user, event: event }, status: :ok
+          render json: { user: user }, status: :ok
         else
-          render json: { user: user.errors, event: event.errors }, status: :unprocessable_entity
+          render json: { message: 'Something went wrong', user: {} }, status: :unprocessable_entity
         end
       end
 
