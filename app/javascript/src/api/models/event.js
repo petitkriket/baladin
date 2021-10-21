@@ -17,6 +17,15 @@ const eventService = {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
   },
+  create({ event, passenger }) {
+    const formData = new FormData();
+    Object.entries(event).forEach(([key, value]) => formData.append(decamelize(`event[${key}]`), value));
+    Object.entries(passenger).forEach(([key, value]) => formData.append(decamelize(`passenger[${key}]`), value));
+
+    return api.post(`${path}/${resource}`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+  },
 };
 
 export default eventService;

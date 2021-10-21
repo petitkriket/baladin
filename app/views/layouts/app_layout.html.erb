@@ -3,7 +3,20 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="robots" content="noindex" />
+    <meta name="description" content="<%= t('social_desc') %>">
+    <meta name="keywords" content="<%= t('keywords') %>">
+    <meta property="og:title" content="<%= t('site_title') %>" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="<%= request.original_url %>" />
+    <meta property="og:description" content="<%= t('social_desc') %>" />
+    <meta property="og:site_name" content="<%= t('site_title') %>" />
+    <meta property="fb:app_id" content="<%= Rails.application.credentials.dig(:facebook_id) %>" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<%= t('site_title') %>">
+    <meta name="twitter:description" content="<%= t('social_desc') %>">
+    <meta name="theme-color" content="#181818">
+    <meta name="msapplication-navbutton-color" content="#181818">
+    <meta name="apple-mobile-web-app-capable" content="yes">    
     <title>Les Passagers</title>
     <%= javascript_pack_tag 'application' %>
     <%= stylesheet_pack_tag 'application', media: 'all' %>

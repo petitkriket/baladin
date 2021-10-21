@@ -24,7 +24,8 @@ class Event < ApplicationRecord
   end
   # validations
   validates :address, presence: true
-  validates :passenger_id, uniqueness: { scope: :user_id, message: I18n.t('event_already_registred_admin') }
+  validates :user_id, presence: true
+  validates :passenger_id,  presence: true, uniqueness: { scope: :user_id }
 
   # misc
   mount_uploader :photo, EventUploader

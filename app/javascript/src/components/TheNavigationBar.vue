@@ -33,6 +33,14 @@
             {{ $t('navbar.contributions') }}
           </BNavItem>
 
+          <!-- <BNavItem
+            to="/dashboard/contributions/new"
+            exact
+            exact-active-class="active"
+          >
+            {{ $t('navbar.addContribution') }}
+          </BNavItem> -->
+
           <BNavItem
             to="/dashboard/account-settings"
             exact
@@ -108,7 +116,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import {
-  BNavbar, BNavbarNav, BNavbarBrand, BNavbarToggle, BNavItem, BNavText, BCollapse, BAvatar, BNavForm, BButton,
+  BNavbar, BNavbarNav, BNavbarBrand, BNavbarToggle, BNavItem, BNavText, BCollapse, BAvatar, BNavForm,
 } from 'bootstrap-vue';
 
 import TheLocaleSwitcher from './TheLocaleSwitcher.vue';
@@ -129,7 +137,6 @@ export default {
     BCollapse,
     BAvatar,
     BNavForm,
-    BButton,
     TheLocaleSwitcher,
     BaseLoaderButton,
   },

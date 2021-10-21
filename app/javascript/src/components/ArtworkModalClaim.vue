@@ -176,7 +176,7 @@ export default {
 
       this.isLoading = true;
 
-      passengerService.claim(Number(id) + 100, claim)
+      passengerService.claim(id, claim)
         .then(() => {
           this.claimWasSuccess = true;
           this.refs.form.cleanForm();
@@ -186,7 +186,7 @@ export default {
           setTimeout(() => {
             this.claimWasMade = true;
             this.isLoading = false;
-          }, 2000);
+          }, 500);
         });
     },
   },

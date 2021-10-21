@@ -91,7 +91,7 @@ export default {
     handleAuthentification(authentificationData) {
       const payload = { user: { ...authentificationData } };
       this[SIGN_IN](payload).then(() => {
-        this.$router.push('/dashboard/contributions');
+        this.$router.push(this.$route.query.redirectTo || '/dashboard/contributions');
       }).catch(() => {
         this.loginHasFailed = true;
       });
