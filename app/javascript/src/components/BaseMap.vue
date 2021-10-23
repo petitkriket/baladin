@@ -12,6 +12,10 @@
         v-if="displayedArtwork"
         :key="$route.params.id"
         :artwork="displayedArtwork"
+        :minimized="minimizedArtwork"
+        @previous="cycleArtwork('previous')"
+        @next="cycleArtwork('next')"
+        @minimized="toggleArtworkCard"
       />
     </transition>
     <BaseMapContainer
@@ -48,6 +52,7 @@ export default {
     return {
       timeout: null,
       isLoading: true,
+      minimizedArtwork: false,
     };
   },
   computed: {
@@ -134,6 +139,25 @@ export default {
     },
     onZoomUpdate(value) {
       this.setZoom(value);
+    },
+    toggleArtworkCard() {
+      this.minimizedArtwork = !this.minimizedArtwork;
+    },
+    cycleArtwork(direction) {
+      const ids = this.artworks.artworks.map(({ id }) => id);
+      const artworksCount = ids.length;
+      const currentArtworkIndex = ids.findIndex((id) => id === Number(this.$route.params.id));
+
+      const previous = ids[(currentArtworkIndex + artworksCount - 1) % artworksCount];
+      const next = ids[(currentArtworkIndex + 1) % artworksCount];
+
+      if (direction === 'previous' && previous) {
+        this.$router.push({ path: `/passenger/${previous}` });
+      }
+
+      if (direction === 'next' && next) {
+        this.$router.push({ path: `/passenger/${next}` });
+      }
     },
   },
 };
