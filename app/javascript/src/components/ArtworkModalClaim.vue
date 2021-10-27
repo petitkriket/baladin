@@ -40,14 +40,6 @@
       @submission="onValidClaimSubmission"
     />
 
-    <p class="small  text-muted">
-      {{ $t('claimModal.firstParagraph') }}
-    </p>
-
-    <p class="small  text-muted">
-      {{ $t('claimModal.secondParagraph') }}
-    </p>
-
     <template #modal-footer>
       <div class="d-flex">
         <b-button
