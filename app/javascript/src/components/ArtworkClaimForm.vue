@@ -36,12 +36,29 @@
         :placeholder="$t('claimModal.message')"
       />
     </BFormGroup>
+
+    <p class="small">
+      {{ $t('claimModal.firstParagraph') }}
+    </p>
+
+    <BFormGroup class="my-4">
+      <BFormCheckbox
+        id="terms-of-use"
+        v-model="$v.form.termsOfUse.$model"
+        :state="validateInput('termsOfUse')"
+        :value="true"
+        :unchecked-value="false"
+        name="terms-of-use"
+      >
+        {{ $t('claimModal.secondParagraph') }}
+      </BFormCheckbox>
+    </BFormGroup>
   </BForm>
 </template>
 
 <script>
 import {
-  BForm, BFormGroup, BFormInput, BFormTextarea,
+  BForm, BFormGroup, BFormInput, BFormTextarea, BFormCheckbox,
 } from 'bootstrap-vue';
 import {
   required, minLength, maxLength, email,
@@ -53,6 +70,7 @@ export default {
     BFormGroup,
     BFormInput,
     BFormTextarea,
+    BFormCheckbox,
   },
   props: {
     pending: {
@@ -76,6 +94,9 @@ export default {
         minLength: minLength(10),
         maxLength: maxLength(5000),
       },
+      termsOfUse: {
+        required,
+      },
     },
   },
   data() {
@@ -84,6 +105,7 @@ export default {
         name: null,
         email: null,
         message: null,
+        termsOfUse: null,
       },
     };
   },
@@ -100,6 +122,7 @@ export default {
         name: null,
         email: null,
         message: null,
+        termsOfUse: null,
       };
 
       this.$nextTick(() => {
@@ -117,6 +140,8 @@ export default {
       }
 
       const { form } = this;
+      delete form.termsOfUse;
+
       Object
         .keys(this.form)
         .forEach((key) => (form[key] === null ? delete form[key] : {}));
