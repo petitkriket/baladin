@@ -34,6 +34,7 @@ CarrierWave.configure do |config|
     }
     config.fog_directory = Rails.application.credentials.dig(Rails.env.to_sym, :aws, :s3_bucket)
     config.fog_public = false
+    config.fog_authenticated_url_expiration = 60 * 60 * 24 * 7 # 1 week
 
     CarrierWave.configure do |config|
       config.storage = :fog
