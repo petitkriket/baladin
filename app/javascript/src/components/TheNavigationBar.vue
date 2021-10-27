@@ -116,7 +116,9 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import {
-  BNavbar, BNavbarNav, BNavbarBrand, BNavbarToggle, BNavItem, BNavText, BCollapse, BAvatar, BNavForm,
+  BNavbar, BNavbarNav, BNavbarBrand,
+  BNavbarToggle, BNavItem, BNavText,
+  BCollapse, BAvatar, BNavForm,
 } from 'bootstrap-vue';
 
 import TheLocaleSwitcher from './TheLocaleSwitcher.vue';
@@ -158,7 +160,7 @@ export default {
         type: isDashboardZone ? 'dark' : 'light',
         style: { borderBottom: '2px solid', transition: 'background 150ms ease' },
         fixed: 'top',
-        toggleable: 'lg',
+        toggleable: 'md',
         class: `border-${accent}`,
       };
     },

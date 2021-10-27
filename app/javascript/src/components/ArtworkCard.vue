@@ -1,6 +1,6 @@
 <template>
   <BCol
-    sm="12"
+    cols="10"
     md="5"
     lg="4"
     xl="3"
@@ -13,12 +13,13 @@
     >
       <div class="position-relative">
         <BImgLazy
+          v-hammer:swipe="onSwipe"
           :src="artwork.photo.large.url"
           :alt="$t('mapPage.artworkDetail.photo')"
-          blank-color="#f2f2f2"
           :blank-height="250"
           :height="250"
           fluid
+          blank-color="#f7f7f7"
           class="rounded-top w-100"
         />
         <div class="position-absolute fixed-bottom">
@@ -70,22 +71,22 @@
 
       <div
         v-show="!minimized"
-        class="text-center"
+        class="text-center bg-light border-top"
       >
         <h4 class="mt-4">
           {{ $t('mapPage.artworkDetail.title', { name: artwork.name }) }}
         </h4>
 
         <BButton
-          class="mx-4 mb-4"
           variant="primary"
           pill
+          class="mx-4 mb-4 shadow-lg"
           @click="showClaimModal"
         >
           {{ $t('mapPage.artworkDetail.claimIt') }}
         </BButton>
 
-        <div class="bg-light p-2 border-top font-weight-light">
+        <div class="bg-light p-2 border-top">
           <p class="mb-1 d-flex justify-content-between align-items-center px-2">
             <span>
               {{ $t('mapPage.artworkDetail.releaseDate') }}
