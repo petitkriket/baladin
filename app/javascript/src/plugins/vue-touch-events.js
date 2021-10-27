@@ -1,6 +1,9 @@
 import Vue from 'vue';
-import Vue2TouchEvents from 'vue2-touch-events';
+import { VueHammer } from 'vue2-hammer';
 
-Vue.use(Vue2TouchEvents, {
-  swipeTolerance: 5,
-});
+Vue.use(VueHammer);
+
+VueHammer.config.swipe = {
+  threshold: 5,
+  velocity: 0.1,
+};
