@@ -10,6 +10,9 @@ export default {
   components: {
     BaseMap,
   },
+  activated() {
+    window.scrollTo(0, 0);
+  },
   metaInfo() {
     return {
       title: this.$t('homePage.home'),

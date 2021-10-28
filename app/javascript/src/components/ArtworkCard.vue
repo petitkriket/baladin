@@ -1,7 +1,8 @@
 <template>
   <BCol
-    cols="10"
-    md="5"
+    cols="8"
+    sm="5"
+    md="4"
     lg="4"
     xl="3"
     class="position-absolute artwork-detail"
@@ -194,6 +195,10 @@ export default {
   top: 15px;
   right: 0;
   z-index: 401;
+
+  @media (max-width: 575.98px) {
+    top: 46px;
+  }
 
   img {
     object-fit: cover;
