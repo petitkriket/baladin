@@ -235,6 +235,7 @@ export default {
 
       if (fileSize > maxFileSize || fileSize < minFileSize) {
         this.isPhotoValid = false;
+        this.clearFile();
       } else {
         this.isPhotoValid = true;
       }
