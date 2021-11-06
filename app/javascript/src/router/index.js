@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 
 import store from '../store';
 
+import LandingPage from '../views/LandingPage.vue';
 import HomePage from '../views/HomePage.vue';
 import AboutPage from '../views/AboutPage.vue';
 import ArtworksPage from '../views/ArtworksPage.vue';
@@ -28,6 +29,12 @@ const router = new VueRouter({
   routes: [
     {
       path: '/',
+      name: 'LandingPage',
+      component: LandingPage,
+      meta: { isFullwidth: true },
+    },
+    {
+      path: '/passenger',
       name: 'Home',
       component: HomePage,
       meta: { isFullwidth: true },
