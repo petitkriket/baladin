@@ -2,4 +2,4 @@
 
 <%= t('.participation', passenger_name: @passenger.name, name: @passenger.events.last.user.name) %>
 <%= t('.view') %><%= t('.link') %>:
-<%= url_for(passenger_url(locale, @event.passenger_id)) %>
+    <%= "https://#{Rails.application.credentials.dig(:domain_name)}/passenger/#{@event.passenger_id}" %>
