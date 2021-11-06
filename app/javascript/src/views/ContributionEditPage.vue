@@ -43,7 +43,7 @@
 import { mapActions, mapState } from 'vuex';
 import { BCard, BButton } from 'bootstrap-vue';
 
-import { UPDATE_USER_CONTRIBUTION } from '../store/modules/user/actions-types';
+import { FETCH_USER_CONTRIBUTIONS, UPDATE_USER_CONTRIBUTION } from '../store/modules/user/actions-types';
 import ContributionEditForm from '../components/ContributionEditForm.vue';
 
 export default {
@@ -67,8 +67,11 @@ export default {
       return this.contribution?.passenger?.name;
     },
   },
+  created() {
+    this[FETCH_USER_CONTRIBUTIONS]();
+  },
   methods: {
-    ...mapActions('user', [UPDATE_USER_CONTRIBUTION]),
+    ...mapActions('user', [UPDATE_USER_CONTRIBUTION, FETCH_USER_CONTRIBUTIONS]),
     triggerSubmission() {
       this.$refs.form.emitSubmission();
     },

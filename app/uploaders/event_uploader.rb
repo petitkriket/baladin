@@ -21,13 +21,8 @@ class EventUploader < CarrierWave::Uploader::Base
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
 
-  # Process files as they are uploaded:
-  # process scale: [200, 300]
-  #
-  # def scale(width, height)
-  #   # do something
   def size_range
-    100.kilobytes..8.megabytes
+    1.byte..12.megabytes
   end
 
   def fix_exif_rotation # this is my attempted solution
@@ -36,30 +31,22 @@ class EventUploader < CarrierWave::Uploader::Base
     end
   end
 
-  process quality: 50
+  process quality: 75
+  process :fix_exif_rotation
 
-  # Create different versions of your uploaded files:
   version :marker do
-    process :fix_exif_rotation
-    process quality: 50
     process resize_to_fill: [32, 32]
   end
 
   version :thumb do
-    process :fix_exif_rotation
-    process quality: 50
     process resize_to_fit: [150, 150]
   end
 
   version :medium do
-    process :fix_exif_rotation
-    process quality: 50
     process resize_to_fit: [300, 300]
   end
 
   version :facebook do
-    process :fix_exif_rotation
-    process quality: 50
     process resize_to_fit: [1200, 630]
   end
 
