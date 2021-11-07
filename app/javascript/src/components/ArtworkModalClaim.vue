@@ -37,7 +37,7 @@
 
     <ArtworkClaimForm
       ref="form"
-      @submission="onValidClaimSubmission"
+      @submission="handleClaim"
     />
 
     <template #modal-footer>
@@ -56,7 +56,6 @@
           :loading="isLoading"
           size="lg"
           v-on="buttonProps.on"
-          @click="triggerFormValidation"
         >
           {{ buttonProps.label }}
         </BaseLoaderButton>
@@ -132,7 +131,7 @@ export default {
           variant: this.isLoading ? 'success' : 'primary',
           label: this.isLoading ? this.$t('claimModal.inProgress') : this.$t('claimModal.send'),
           on: {
-            click: this.triggerFormValidation,
+            click: this.triggerForm,
           },
         };
       }
@@ -146,7 +145,7 @@ export default {
         variant: 'danger',
         label: this.$t('claimModal.retry'),
         on: {
-          click: this.triggerFormValidation,
+          click: this.triggerForm,
         },
       };
     },
@@ -159,10 +158,10 @@ export default {
       this.$emit('closed');
       this.$refs['artwork-claim-modal'].hide();
     },
-    triggerFormValidation() {
+    triggerForm() {
       this.$refs.form.emitSubmission();
     },
-    onValidClaimSubmission(formData) {
+    handleClaim(formData) {
       const { id } = this.$route.params;
       const claim = { ...formData };
 
